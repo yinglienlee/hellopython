@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>print 進階</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+	<script type="text/javascript" src="js/script.js"></script>
+	<!-- Prism.js CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css">
+    <!-- Prism.js Line Numbers CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
+    <!-- Prism.js Syntax Highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <!-- Prism.js Line Numbers Plugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+	<script>
+		document.addEventListener("DOMContentLoaded", (event) => {
+			includeHTML(highlightItem);	
+			document.getElementById("toggleNav").addEventListener("click", navClick);
+			enableAnswerRevealer();
+		});
+	</script>	
+</head>
+<body>
+	<div class="d-flex">
+		<!-- Floating Button -->
+		<button id="toggleNav" class="btn btn-primary">&#8212;</button>
+        <nav id="sidebar" class="bg-light border-end" style="display: block;">
+            <div>
+				<div w3-include-html="navigation.html"></div>
+            </div>
+        </nav>
+        <main class="flex-grow-1">
+			<header>
+				<h1>print 進階</h1>
+			</header>
+			<section>
+				<h2>學習導覽</h2>
+				<p>本章將帶你深入了解 <code>print()</code> 函式的進階用法，不僅限於基本的文字輸出，還包括如何格式化輸出、控制換行、以及使用自訂分隔符號等技巧。掌握這些技能，能讓你的程式更具表現力！</p>
+				<ul>
+					<li>學會使用 <code>sep</code> 和 <code>end</code> 參數。</li>
+					<li>了解如何使用特殊字元（如換行符號和定位符號）。</li>
+					<li>掌握格式化輸出的方法，讓輸出內容更加美觀。</li>
+				</ul>
+			</section>
+
+			<section>
+
+				<h2>探索 print 函式的進階功能</h2>
+				<h3>使用 <code>end</code> 控制行結尾</h3>
+				<p>預設情況下，<code>print()</code> 會在每次輸出後自動換行。但你可以使用 <code>end</code> 參數自訂行結尾，例如：</p>
+				<pre class="line-numbers"><code class="language-python">print("Hello", end=" ")
+print("World!")</code></pre>
+				<p>輸出結果：<br><code>Hello World!</code></p>
+
+				<h3>使用 <code>sep</code> 自訂分隔符號</h3>
+				<p>當你想一次輸出多個值時，可以用 <code>sep</code> 參數自訂它們之間的分隔符號：</p>
+				<pre class="line-numbers"><code class="language-python">print("Python", "is", "fun", sep=" - ")</code></pre>
+				<p>輸出結果：<br><code>Python - is - fun</code></p>
+
+				<h3>加入特殊字元 - Escape Sequence</h3>
+				<p>你可以在輸出中使用一種稱為 Escape Sequence 的特殊字元來控制格式，例如換行符號 <code>\n</code> 和定位符號 <code>\t</code>：</p>
+				<pre class="line-numbers"><code class="language-python">print("第一行\n第二行")
+print("A\tB\tC")</code></pre>
+				<p>輸出結果：<br>第一行<br>第二行<br>A&nbsp;&nbsp;&nbsp;&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;C</p>
+			</section>
+
+			<section>
+				<h2>了解 Escape Sequence</h2>
+				<p>Escape sequence 是一組以反斜線（<code>\</code>）開頭的特殊字符，用於在字串中表示一些特殊的動作或字元，例如換行、定位或插入引號。這些對於格式化輸出非常重要。</p>
+				<h3>常見的 Escape Sequence</h3>
+				<ul>
+					<li><code>\n</code>：換行符號</li>
+					<li><code>\t</code>：定位符號</li>
+					<li><code>\\</code>：插入反斜線</li>
+					<li><code>\'</code>：插入單引號</li>
+					<li><code>\"</code>：插入雙引號</li>
+				</ul>
+				<h3>範例</h3>
+				<p>以下是一些常見的 Escape Sequence 用法範例：</p>
+				<pre class="line-numbers"><code class="language-python">print("第一行\n第二行") # 使用換行符號
+print("A\tB\tC")     # 使用定位符號
+print("She said, \"Hello!\"") # 插入雙引號</code></pre>
+    <p>輸出結果：</p>
+    <pre class="line-numbers"><code class="language-python">第一行
+第二行
+A       B       C
+She said, "Hello!"</code></pre>				
+			</section>
+
+
+
+			<section>
+				<h2>常見問題與解答</h2>
+				<h3>問題 1：如何避免輸出後自動換行？</h3>
+				<p>使用 <code>end</code> 參數。例如：</p>
+				<pre class="line-numbers"><code class="language-python">print("這裡", end=" ")
+print("不換行")</code></pre>
+				<p>輸出結果：<br><code>這裡 不換行</code></p>
+
+				<h3>問題 2：如何在輸出中加入換行或定位符號？</h3>
+				<p>使用特殊字元，例如：</p>
+				<pre class="line-numbers"><code class="language-python">print("第一行\n第二行")
+print("A\tB\tC")</code></pre>
+
+				<h3>問題 3：輸出多個值時，能否自訂分隔符號？</h3>
+				<p>可以使用 <code>sep</code> 參數，例如：</p>
+				<pre class="line-numbers"><code class="language-python">print("Apple", "Banana", "Cherry", sep=" | ")</code></pre>
+			</section>
+
+			<section>
+				<h2>挑戰題目</h2>
+				    <h3 class="caption">挑戰 1：使用 <code>print()</code> 繪製一個矩形 <span class="icon">🛈</span></h3>
+    <p>輸出如下圖案：</p>
+    <pre class="line-numbers"><code class="language-python">****
+****
+****
+****</code></pre>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+for _ in range(4):
+    print("****")</code></pre>
+    </div>
+
+				<h3 class="caption">挑戰 2：創建進度條 <span class="icon">🛈</span></h3>
+    <p>讓程式輸出類似以下的進度條：</p>
+    <pre class="line-numbers"><code class="language-python">1/5 -> 2/5 -> 3/5 -> 4/5 -> 5/5 -> 完成!</code></pre>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+for i in range(1, 6):
+    print(f"{i}/5", end=" -> ")
+print("完成!")</code></pre>
+    </div>
+
+				<h3 class="caption">挑戰 3：格式化日期輸出 <span class="icon">🛈</span></h3>
+    <p>設計程式輸出以下格式的日期：<br><code>今天是：2025/01/04</code></p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+from datetime import date
+today = date.today()
+year = today.year
+month = today.month
+day = today.day
+print("今天是：", year, "/", month, "/", day, sep="")</code></pre>
+    </div>
+
+
+				<h3 class="caption">挑戰 4：多行輸出 <span class="icon">🛈</span></h3>
+    <p>設計程式輸出以下格式的內容，使用 <code>\n</code> 實現換行：</p>
+    <pre class="line-numbers"><code class="language-python">Hello
+Python
+World</code></pre>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+print("Hello\nPython\nWorld")</code></pre>
+    </div>
+
+				<h3 class="caption">挑戰 5：自訂分隔符號 <span class="icon">🛈</span></h3>
+    <p>讓程式輸出以下內容，使用 <code>sep</code> 參數自訂分隔符號：</p>
+    <pre class="line-numbers"><code class="language-python">Apple | Banana | Cherry</code></pre>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+print("Apple", "Banana", "Cherry", sep=" | ")</code></pre>
+    </div>
+
+				<h3 class="caption">挑戰 6：使用定位符號格式化輸出 <span class="icon">🛈</span></h3>
+    <p>設計程式輸出以下對齊的內容，使用 <code>\t</code> 格式化：</p>
+	<pre><code>Name	Age	City
+Alice	25	New York
+Bob	30	San Francisco</code></pre>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+print("Name\tAge\tCity")
+print("Alice\t25\tNew York")
+print("Bob\t30\tSan Francisco")</code></pre>
+    </div>
+
+				<h3 class="caption">挑戰 7：顯示引號 <span class="icon">🛈</span></h3>
+    <p>讓程式輸出以下內容，使用 Escape Sequence 插入雙引號：</p>
+    <pre class="line-numbers"><code class="language-python">She said, "Hello, World!"</code></pre>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+print("She said, \"Hello, World!\"")</code></pre>
+    </div>
+
+				<h3 class="caption">挑戰 8：綜合使用 <code>end</code> 和 <code>sep</code></h3>
+    <p>讓程式輸出以下內容，使用 <code>sep</code> 設置分隔符號，並用 <code>end</code> 控制行尾：</p>
+    <pre class="line-numbers"><code class="language-python">Apple - Banana - Cherry !</code></pre>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+print("Apple", "Banana", "Cherry", sep=" - ", end=" !")</code></pre>
+    </div>
+
+			</section>
+
+			<section>
+				<h2>結語</h2>
+				<p>透過本章的學習，你已掌握了 <code>print()</code> 的進階技巧，將有助於提升程式的可讀性。請繼續練習，並嘗試將這些技巧應用於你的程式中！</p>
+			</section>
+		</main>
+    </div>			
+</body>
+</html>

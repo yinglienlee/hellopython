@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>切片</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+	<!-- Prism.js CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css">
+    <!-- Prism.js Line Numbers CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
+    <!-- Prism.js Syntax Highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <!-- Prism.js Line Numbers Plugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", (event) => {
+            includeHTML(highlightItem);
+            document.getElementById("toggleNav").addEventListener("click", navClick);
+			enableAnswerRevealer();
+        });
+    </script>
+</head>
+<body>
+    <div class="d-flex">
+        <!-- Floating Button -->
+        <button id="toggleNav" class="btn btn-primary">&#8212;</button>
+        <nav id="sidebar" class="bg-light border-end" style="display: block;">
+            <div>
+                <div w3-include-html="navigation.html"></div>
+            </div>
+        </nav>
+        <main class="flex-grow-1">
+            <header>
+                <h1>切片</h1>
+            </header>
+            <section>
+                <h2>學習導覽</h2>
+                <p>在這一章中，我們將深入學習切片 (slicing) 的概念。切片是 Python 中非常有用的功能，允許我們從字串或串列中擷取特定部分的資料。</p>
+                <ul>
+                    <li>了解切片的基本語法。</li>
+                    <li>學習如何使用切片擷取字串的子字串。</li>
+                    <li>探索切片在串列中的應用。</li>
+                    <li>使用切片控制步進與方向。</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>切片的基本語法</h2>
+                <p>切片的基本語法為 <code>start:end:step</code>，<code>start</code> 是起始索引，<code>end</code> 是結束索引 (不包含在內)，<code>step</code> 是步進值。</p>
+                <pre class="line-numbers"><code class="language-python"># 基本範例
+text = "Hello, World!"
+print(text[0:5])  # 輸出：Hello
+
+# 使用步進
+print(text[0:5:2])  # 輸出：Hlo</code></pre>
+
+                <h3>在字串中的應用</h3>
+                <p>透過切片可以輕鬆取得字串的特定部分：</p>
+                <pre class="line-numbers"><code class="language-python"># 擷取子字串
+text = "Python Programming"
+print(text[7:18])  # 輸出：Programming
+
+# 反轉字串
+print(text[::-1])  # 輸出：gnimmargorP nohtyP</code></pre>
+
+                <h3>在串列中的應用</h3>
+                <p>切片也適用於串列，可以擷取子串列：</p>
+                <pre class="line-numbers"><code class="language-python"># 擷取子串列
+numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+print(numbers[2:6])  # 輸出：[2, 3, 4, 5]
+
+# 每隔一個取值
+print(numbers[::2])  # 輸出：[0, 2, 4, 6, 8]</code></pre>
+            </section>
+
+            <section>
+                <h2>常見問題與解答</h2>
+                <h3>問題 1：如果省略切片中的 <code>start</code> 或 <code>end</code>，會發生什麼事？</h3>
+                <p>省略 <code>start</code> 時，預設從索引 0 開始；省略 <code>end</code> 時，預設到結尾。</p>
+                <pre class="line-numbers"><code class="language-python"># 省略範例
+text = "Hello, World!"
+print(text[:5])  # 輸出：Hello
+print(text[7:])  # 輸出：World!</code></pre>
+
+                <h3>問題 2：切片的索引可以是負數嗎？</h3>
+                <p>可以，負數索引表示從結尾開始計算，例如 -1 是最後一個元素。</p>
+                <pre class="line-numbers"><code class="language-python"># 負數索引範例
+print(text[-6:])  # 輸出：World!</code></pre>
+
+                <h3>問題 3：如何複製整個串列或字串？</h3>
+                <p>使用切片 <code>[:]</code> 可以輕鬆複製整個序列：</p>
+                <pre class="line-numbers"><code class="language-python"># 複製範例
+numbers = [1, 2, 3, 4, 5]
+copy_numbers = numbers[:]
+print(copy_numbers)  # 輸出：[1, 2, 3, 4, 5]</code></pre>
+            </section>
+
+            <section>
+                <h2>挑戰題目</h2>
+				<h3 class="caption">挑戰 1：字串切片 <span class="icon">🛈</span></h3>
+    <p>讓使用者輸入一段文字，擷取該文字的前 5 個字元與最後 5 個字元。</p>
+    <pre class="line-numbers"><code class="language-python"># 範例輸入
+text = "Hello, Python World!"
+# 預期輸出
+前 5 個字元：Hello
+最後 5 個字元：orld!</code></pre>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+text = "Hello, Python World!"
+print(f"前 5 個字元：{text[:5]}")
+print(f"最後 5 個字元：{text[-5:]}")</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 2：串列的奇偶數分離 <span class="icon">🛈</span></h3>
+    <p>設計一個程式，將一個包含整數的串列分離為奇數與偶數兩個串列。</p>
+    <pre class="line-numbers"><code class="language-python"># 範例輸入
+numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+# 預期輸出
+奇數：[1, 3, 5, 7, 9]
+偶數：[2, 4, 6, 8]</code></pre>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+odds = [n for n in numbers if n % 2 != 0]
+evens = [n for n in numbers if n % 2 == 0]
+print(f"奇數：{odds}")
+print(f"偶數：{evens}")</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 3：步進值應用 <span class="icon">🛈</span></h3>
+    <p>建立一個程式，讓使用者輸入一個字串，並以步進值 2 輸出該字串的每隔一個字元。</p>
+    <pre class="line-numbers"><code class="language-python"># 範例輸入
+text = "Python Programming"
+# 預期輸出
+"Pto rgamn"</code></pre>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+text = "Python Programming"
+result = text[::2]
+print(result)  # 輸出：Pto rgamn</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 4：反轉串列 <span class="icon">🛈</span></h3>
+    <p>設計一個程式，使用切片將一個串列的元素順序反轉，並輸出結果。</p>
+    <pre class="line-numbers"><code class="language-python"># 範例輸入
+numbers = [1, 2, 3, 4, 5]
+# 預期輸出
+[5, 4, 3, 2, 1]</code></pre>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+numbers = [1, 2, 3, 4, 5]
+reversed_numbers = numbers[::-1]
+print(reversed_numbers)  # 輸出：[5, 4, 3, 2, 1]</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 5：字串中每個單詞反轉 <span class="icon">🛈</span></h3>
+    <p>撰寫一個程式，讓使用者輸入一段文字，並將每個單詞的字母順序反轉，但保持單詞的順序不變。</p>
+    <pre class="line-numbers"><code class="language-python"># 範例輸入
+text = "Hello World Python"
+# 預期輸出
+"olleH dlroW nohtyP"</code></pre>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+text = "Hello World Python"
+reversed_words = " ".join(word[::-1] for word in text.split())
+print(reversed_words)</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 6：切分字串為固定長度 <span class="icon">🛈</span></h3>
+    <p>設計一個函式，將一段文字切分為每段固定長度的子字串，並將結果存入串列。</p>
+    <pre class="line-numbers"><code class="language-python"># 範例輸入
+text = "ABCDEFGHIJK"
+length = 3
+# 預期輸出
+['ABC', 'DEF', 'GHI', 'JK']</code></pre>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+def split_text(text, length):
+    return [text[i:i+length] for i in range(0, len(text), length)]
+
+text = "ABCDEFGHIJK"
+length = 3
+print(split_text(text, length))</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 7：移除串列的邊界元素 <span class="icon">🛈</span></h3>
+    <p>讓使用者輸入一個串列，移除串列的第一個與最後一個元素，並輸出剩餘的子串列。</p>
+    <pre class="line-numbers"><code class="language-python"># 範例輸入
+numbers = [10, 20, 30, 40, 50]
+# 預期輸出
+[20, 30, 40]</code></pre>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+numbers = [10, 20, 30, 40, 50]
+trimmed_numbers = numbers[1:-1]
+print(trimmed_numbers)  # 輸出：[20, 30, 40]</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 8：奇數索引提取 <span class="icon">🛈</span></h3>
+    <p>撰寫程式，從一個串列中提取所有奇數索引的元素，並輸出結果。</p>
+    <pre class="line-numbers"><code class="language-python"># 範例輸入
+numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+# 預期輸出
+[1, 3, 5, 7, 9]</code></pre>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+odd_index_elements = numbers[1::2]
+print(odd_index_elements)  # 輸出：[1, 3, 5, 7, 9]</code></pre>
+    </div>
+				
+				
+            </section>
+
+            <section>
+                <h2>結語</h2>
+                <p>切片是一個非常靈活且強大的工具，適用於字串與串列的操作。透過本章的學習，你將能夠輕鬆地處理各種資料擷取需求，並有效提升程式的可讀性與效率。</p>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>區域變數與全域變數</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+	<!-- Prism.js CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css">
+    <!-- Prism.js Line Numbers CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
+    <!-- Prism.js Syntax Highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <!-- Prism.js Line Numbers Plugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", (event) => {
+            includeHTML(highlightItem);
+            document.getElementById("toggleNav").addEventListener("click", navClick);
+			enableAnswerRevealer();
+        });
+    </script>
+</head>
+<body>
+    <div class="d-flex">
+        <!-- Floating Button -->
+        <button id="toggleNav" class="btn btn-primary">&#8212;</button>
+        <nav id="sidebar" class="bg-light border-end" style="display: block;">
+            <div>
+                <div w3-include-html="navigation.html"></div>
+            </div>
+        </nav>
+        <main class="flex-grow-1">
+            <header>
+                <h1>區域變數與全域變數</h1>
+            </header>
+            <section>
+                <h2>學習導覽</h2>
+                <p>在這一章中，我們將探討 Python 的變數範疇 (scope) 概念，特別是區域變數與全域變數之間的差異。理解這些範疇是撰寫穩定程式碼的基石。</p>
+                <ul>
+                    <li>了解區域變數與全域變數的定義。</li>
+                    <li>學習如何正確地使用變數範疇。</li>
+                    <li>掌握 <code>global</code> 與 <code>nonlocal</code> 的用法。</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>區域變數與全域變數的差異</h2>
+                <h3>1. 區域變數</h3>
+                <p>區域變數是定義在函式內部的變數，僅能在該函式內使用。</p>
+                <pre class="line-numbers"><code class="language-python">def my_function():
+    local_var = 10  # 區域變數
+    print(local_var)
+
+my_function()
+# print(local_var)  # 會出現錯誤訊息，因為 local_var 不在範疇內</code></pre>
+
+                <h3>2. 全域變數</h3>
+                <p>全域變數是定義在函式外部的變數，可在程式的任何地方存取。</p>
+                <pre class="line-numbers"><code class="language-python">global_var = 20  # 全域變數
+
+def my_function():
+    print(global_var)
+
+my_function()  # 輸出：20</code></pre>
+
+                <h3>3. 修改全域變數</h3>
+                <p>若要在函式內修改全域變數，需使用 <code>global</code> 關鍵字：</p>
+                <pre class="line-numbers"><code class="language-python">counter = 0
+
+def increment():
+    global counter
+    counter += 1
+
+increment()
+print(counter)  # 輸出：1</code></pre>
+
+                <h3>4. nonlocal 關鍵字</h3>
+                <p><code>nonlocal</code> 用於巢狀函式內，指向外層但非全域的變數：</p>
+                <pre class="line-numbers"><code class="language-python">def outer():
+    x = 10
+    
+    def inner():
+        nonlocal x
+        x += 5
+    
+    inner()
+    print(x)
+
+outer()  # 輸出：15</code></pre>
+            </section>
+
+            <section>
+                <h2>常見問題與解答</h2>
+                <h3>問題 1：區域變數與全域變數有什麼區別？</h3>
+                <p>區域變數只能在函式內使用，而全域變數可在程式的任何地方存取。</p>
+
+                <h3>問題 2：為什麼不推薦大量使用全域變數？</h3>
+                <p>大量使用全域變數會使程式難以維護，且可能導致意外的值修改。</p>
+
+                <h3>問題 3：函式內可以直接存取全域變數嗎？</h3>
+                <p>可以，但若要修改，需使用 <code>global</code> 關鍵字。</p>
+            </section>
+
+            <section>
+                <h2>挑戰題目</h2>
+				
+				<h3 class="caption">挑戰 1：計數器功能 <span class="icon">🛈</span></h3>
+				<p>設計一個簡單的計數器程式：</p>
+				<ol>
+					<li>定義一個全域變數 <code>counter</code>，初始值為 0。</li>
+					<li>撰寫一個名為 <code>increment_counter()</code> 的函式，該函式：
+						<ul>
+							<li>將 <code>counter</code> 的值加 1。</li>
+							<li>輸出當前值，例如：<code>Counter: 1</code>。</li>
+						</ul>
+					</li>
+					<li>測試：連續呼叫 <code>increment_counter()</code> 三次，檢查輸出是否正確。</li>
+				</ol>
+				<div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+counter = 0  # 全域變數
+
+def increment_counter():
+    global counter
+    counter += 1
+    print(f"Counter: {counter}")
+
+increment_counter()  # Counter: 1
+increment_counter()  # Counter: 2
+increment_counter()  # Counter: 3</code></pre>
+    </div>
+
+
+				<h3 class="caption">挑戰 2：巢狀函式 <span class="icon">🛈</span></h3>
+				<p>撰寫一個能修改外層變數的巢狀函式程式：</p>
+				<ol>
+					<li>撰寫一個名為 <code>outer_function()</code> 的函式，內部定義一個變數 <code>value</code>，初始值為 10。</li>
+					<li>在 <code>outer_function()</code> 中定義另一個函式 <code>inner_function()</code>：
+						<ul>
+							<li>使用 <code>nonlocal</code> 關鍵字修改 <code>value</code>。</li>
+							<li>將 <code>value</code> 加 5，並輸出結果，例如：<code>Updated value: 15</code>。</li>
+						</ul>
+					</li>
+					<li>測試：呼叫 <code>outer_function()</code>，檢查輸出是否正確。</li>
+				</ol>
+				<div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+def outer_function():
+    value = 10
+    
+    def inner_function():
+        nonlocal value
+        value += 5
+        print(f"Updated value: {value}")
+    
+    inner_function()
+
+outer_function()  # Updated value: 15</code></pre>
+    </div>
+
+				<h3 class="caption">挑戰 3：全域變數與區域變數互動 <span class="icon">🛈</span></h3>
+				<p>撰寫一個程式，展示全域與區域變數如何互動：</p>
+				<ol>
+					<li>定義一個全域變數 <code>total</code>，初始值為 50。</li>
+					<li>撰寫一個名為 <code>modify_total()</code> 的函式：
+						<ul>
+							<li>定義一個區域變數 <code>total</code>，初始值為 20。</li>
+							<li>輸出區域變數的值，例如：<code>Local total: 20</code>。</li>
+							<li>使用 <code>global</code> 關鍵字將全域變數 <code>total</code> 修改為 100，並輸出結果，例如：<code>Global total updated to: 100</code>。</li>
+						</ul>
+					</li>
+					<li>測試：在呼叫前後分別輸出全域變數 <code>total</code>，檢查變化。</li>
+				</ol>
+				<div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+total = 50  # 全域變數
+
+def modify_total():
+    total = 20  # 區域變數
+    print(f"Local total: {total}")
+    global total
+    total = 100
+    print(f"Global total updated to: {total}")
+
+print(f"Before function call: {total}")
+modify_total()
+print(f"After function call: {total}")</code></pre>
+    </div>
+				
+				<h3 class="caption">挑戰 4：函式呼叫次數 <span class="icon">🛈</span></h3>
+				<p>撰寫一個記錄函式被呼叫次數的程式：</p>
+				<ol>
+					<li>定義一個全域變數 <code>call_count</code>，初始值為 0。</li>
+					<li>撰寫一個名為 <code>track_calls()</code> 的函式：
+						<ul>
+							<li>每次呼叫時將 <code>call_count</code> 加 1。</li>
+							<li>輸出訊息，例如：<code>Function called 3 times</code>。</li>
+						</ul>
+					</li>
+					<li>測試：連續呼叫 <code>track_calls()</code> 五次，確認輸出是否正確。</li>
+				</ol>
+				<div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+call_count = 0  # 全域變數
+
+def track_calls():
+    global call_count
+    call_count += 1
+    print(f"Function called {call_count} times")
+
+track_calls()  # Function called 1 times
+track_calls()  # Function called 2 times
+track_calls()  # Function called 3 times</code></pre>
+    </div>
+
+				<h3 class="caption">挑戰 5：函式內修改串列 <span class="icon">🛈</span></h3>
+				<p>撰寫一個程式，展示如何在函式內修改串列內容：</p>
+				<ol>
+					<li>定義一個全域變數 <code>my_list</code>，初始值為空串列。</li>
+					<li>撰寫一個名為 <code>add_to_list()</code> 的函式：
+						<ul>
+							<li>將一個傳入的值加入到 <code>my_list</code>。</li>
+							<li>輸出當前串列內容，例如：<code>Current list: [5, 10]</code>。</li>
+						</ul>
+					</li>
+					<li>測試：呼叫 <code>add_to_list()</code> 多次，檢查串列內容是否正確。</li>
+				</ol>	
+				<div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+my_list = []  # 全域變數
+
+def add_to_list(value):
+    my_list.append(value)
+    print(f"Current list: {my_list}")
+
+add_to_list(5)  # Current list: [5]
+add_to_list(10)  # Current list: [5, 10]</code></pre>
+    </div>
+							
+				<h3 class="caption">挑戰 6：區域與全域變數的範圍實驗 <span class="icon">🛈</span></h3>
+				<p>撰寫一個程式來測試區域變數與全域變數的範圍：</p>
+				<ol>
+					<li>定義一個全域變數 <code>test_var</code>，初始值為 100。</li>
+					<li>撰寫一個名為 <code>scope_experiment()</code> 的函式：
+						<ul>
+							<li>在函式內定義一個相同名稱的區域變數 <code>test_var</code>，初始值為 50。</li>
+							<li>輸出區域變數的值。</li>
+							<li>在函式外輸出全域變數的值，檢查是否被影響。</li>
+						</ul>
+					</li>
+					<li>測試：呼叫 <code>scope_experiment()</code>，觀察輸出結果。</li>
+				</ol>
+				<div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+test_var = 100  # 全域變數
+
+def scope_experiment():
+    test_var = 50  # 區域變數
+    print(f"Local test_var: {test_var}")
+
+print(f"Global test_var before function: {test_var}")
+scope_experiment()
+print(f"Global test_var after function: {test_var}")</code></pre>
+    </div>
+
+				<h3 class="caption">挑戰 7：動態範圍測試 <span class="icon">🛈</span></h3>
+				<p>撰寫一個程式，展示如何在函式間傳遞值並進行動態範圍測試：</p>
+				<ol>
+					<li>撰寫一個名為 <code>function_a()</code> 的函式，內部定義一個變數 <code>shared_var</code>，初始值為 30。</li>
+					<li>撰寫另一個函式 <code>function_b()</code>：
+						<ul>
+							<li>接收 <code>shared_var</code> 作為參數並將其值加倍。</li>
+							<li>輸出加倍後的結果，例如：<code>Doubled value: 60</code>。</li>
+						</ul>
+					</li>
+					<li>測試：在 <code>function_a()</code> 中呼叫 <code>function_b()</code> 並傳遞變數，檢查結果是否正確。</li>
+				</ol>
+				<div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+def function_a():
+    shared_var = 30
+    function_b(shared_var)
+
+def function_b(value):
+    value *= 2
+    print(f"Doubled value: {value}")
+
+function_a()  # Doubled value: 60</code></pre>
+    </div>
+
+				<h3 class="caption">挑戰 8：使用預設參數值 <span class="icon">🛈</span></h3>
+				<p>撰寫一個程式，展示如何使用函式的預設參數值：</p>
+				<ol>
+					<li>撰寫一個名為 <code>greet_user()</code> 的函式，該函式有兩個參數：
+						<ul>
+							<li><code>name</code>（預設值為 <code>Guest</code>）。</li>
+							<li><code>greeting</code>（預設值為 <code>Hello</code>）。</li>
+						</ul>
+					</li>
+					<li>函式應輸出一個訊息，例如：<code>Hello, Guest!</code> 或 <code>Hi, Alice!</code>。</li>
+					<li>測試：呼叫函式時使用預設值與提供自訂值，檢查輸出是否正確。</li>
+				</ol>
+				<div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+def greet_user(name="Guest", greeting="Hello"):
+    print(f"{greeting}, {name}!")
+
+greet_user()  # Hello, Guest!
+greet_user("Alice")  # Hello, Alice!
+greet_user("Alice", "Hi")  # Hi, Alice!</code></pre>
+    </div>
+							
+            </section>
+
+            <section>
+                <h2>結語</h2>
+                <p>理解區域變數與全域變數是撰寫穩健程式的關鍵。適當地使用這些範疇概念，將有助於避免變數衝突並提升程式的可讀性與可維護性。</p>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

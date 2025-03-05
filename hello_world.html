@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello, World!</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+	<script type="text/javascript" src="js/script.js"></script>
+	<!-- Prism.js CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css">
+    <!-- Prism.js Line Numbers CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
+    <!-- Prism.js Syntax Highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <!-- Prism.js Line Numbers Plugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+	<script>
+		document.addEventListener("DOMContentLoaded", (event) => {
+			includeHTML(highlightItem);			
+			document.getElementById("toggleNav").addEventListener("click", navClick);		
+			enableAnswerRevealer();
+		});
+	</script>	
+</head>
+<body>
+	<div class="d-flex">
+		<!-- Floating Button -->
+		<button id="toggleNav" class="btn btn-primary">&#8212;</button>
+        <nav id="sidebar" class="bg-light border-end" style="display: block;">
+            <div>
+				<div w3-include-html="navigation.html"></div>
+            </div>
+        </nav>
+        <main class="flex-grow-1">
+			<header>
+				<h1>Hello, World!</h1>
+			</header>
+			<section>
+				<h2>學習導覽</h2>
+				<p>這一章是你學習 Python 程式設計的起點。我們將引導你完成以下目標：</p>
+				<ul>
+					<li>認識並安裝適合初學者的開發工具 Thonny</li>
+					<li>撰寫並執行你的第一個 Python 程式</li>
+					<li>了解程式碼的基本組成部分，例如 <code>print()</code></li>
+					<li>學會如何使用註解提升程式的可讀性</li>
+					<li>解決常見的程式執行問題</li>
+				</ul>
+			</section>
+
+			<section>
+				<h2>什麼是 Python？</h2>
+				<p>Python 是一種高階、直譯式程式設計語言，由 Guido van Rossum 在 1991 年發表。其設計理念是<strong>簡單、易讀和高效率</strong>，非常適合初學者以及專業開發者。</p>
+				<p>Python 的應用非常廣泛，涵蓋以下領域：</p>
+				<ul>
+					<li><strong>資料分析與科學計算</strong>：支援工具如 Pandas、NumPy 和 Matplotlib。</li>
+					<li><strong>人工智慧與機器學習</strong>：廣泛使用 TensorFlow、PyTorch 等框架。</li>
+					<li><strong>網頁開發</strong>：使用 Django 和 Flask 開發動態網站。</li>
+					<li><strong>自動化任務</strong>：撰寫腳本自動完成重複性工作。</li>
+					<li><strong>遊戲開發</strong>：使用 Pygame 等模組開發簡單遊戲。</li>
+				</ul>
+			</section>
+
+			<section>
+				<h2>為什麼學習 Python 是個好的選擇？</h2>
+				<p>以下是 Python 的主要優勢，使其成為學習程式設計的理想選擇：</p>
+				<ul>
+					<li><strong>易於學習：</strong> Python 語法簡潔直觀，接近自然語言，非常適合初學者快速上手。</li>
+					<li><strong>跨平台支援：</strong> 無論是 Windows、Mac 還是 Linux，Python 都能執行 Python 程式。</li>
+					<li><strong>社群支持：</strong> Python 擁有龐大的開發者社群，提供豐富的學習資源和第三方模組。</li>
+					<li><strong>多功能性：</strong> 從資料科學到網頁開發，Python 幾乎可以應用於任何領域。</li>
+					<li><strong>快速開發：</strong> 使用 Python 可以以更少的程式碼完成複雜的任務，提高生產力。</li>
+				</ul>
+				<p>無論你是對資料分析、人工智慧還是網頁開發感興趣，Python 都能幫助你實現目標。</p>
+			</section>
+
+
+			<section>
+
+				<h2>什麼是Thonny？</h2>
+				<p>Thonny 是一款專為初學者設計的Python編輯器。它簡單易用，但同時擁有許多強大的功能，可以幫助你快速上手程式設計。</p>
+				<p>如果你還沒有安裝Thonny，請按照以下步驟操作：</p>
+				<ol>
+					<li>到 <a href="https://thonny.org" target="_blank">Thonny 官方網站</a> 下載適合你作業系統的版本。</li>
+					<li>依照指示安裝Thonny。</li>
+					<li>打開Thonny，你會看到一個簡潔的介面，準備好迎接你的第一行程式碼！</li>
+				</ol>
+
+				<h2>撰寫第一個Python程式</h2>
+				<p>我們的目標是讓電腦顯示出經典的 "Hello, World!" 字串，這是許多程式設計語言的傳統起點。</p>
+
+				<h3>步驟 1：建立新檔案</h3>
+				<ol>
+					<li>在Thonny中，點擊左上角的 <strong>File</strong> 選單，選擇 <strong>New</strong>。</li>
+					<li>一個空白的編輯器視窗將會出現，這就是你撰寫程式碼的地方。</li>
+				</ol>
+
+				<h3>步驟 2：輸入程式碼</h3>
+				<p>在空白的編輯器視窗中，輸入以下程式碼：</p>
+				<pre class="line-numbers"><code class="language-python">print("Hello, World!")</code></pre>
+				<p>現在，讓我們來分解這行程式碼：</p>
+				<ul>
+					<li><strong>print</strong>：這是一個Python的內建函式，用來在螢幕上顯示文字或其他內容。</li>
+					<li><strong>("Hello, World!")</strong>：括號中的內容是我們想顯示的字串。字串需要用雙引號（"）或單引號（'）包裹起來。</li>
+					<li><strong>"Hello, World!"</strong>：這是我們的訊息，會被顯示在螢幕上。</li>
+				</ul>
+
+				<h3>步驟 3：儲存檔案</h3>
+				<ol>
+					<li>點擊左上角的 <strong>File</strong> 選單，選擇 <strong>Save As</strong>。</li>
+					<li>選擇一個資料夾，並為你的檔案取一個名稱，例如 <code>hello_world.py</code>。</li>
+					<li>點擊 <strong>Save</strong> 按鈕。</li>
+				</ol>
+
+				<h3>步驟 4：執行程式</h3>
+				<ol>
+					<li>在Thonny中，點擊編輯器上方的 <strong>Run</strong> 按鈕（綠色三角形）。</li>
+					<li>或者，按下鍵盤上的 <strong>F5</strong> 快捷鍵。</li>
+					<li>程式將執行，你會在下方的 <strong>Shell</strong> 視窗中看到：</li>
+				</ol>
+				<pre class="line-numbers"><code class="language-python">Hello, World!</code></pre>
+				<p>恭喜！你已經成功撰寫並執行了你的第一個Python程式。</p>
+
+				<h2>使用註解</h2>
+				<p>在程式碼中加入註解是非常重要的，它可以幫助你記錄程式邏輯，並方便其他人理解你的程式。</p>
+				<p>Python 的註解有以下幾種用法：</p>
+				<ul>
+					<li><strong>單行註解</strong>：使用井字號（<code>#</code>）來標註，例如：</li>
+				</ul>
+				<pre class="line-numbers"><code class="language-python"># 這是一個註解，Python 不會執行這行文字
+print("Hello, World!")  # 這是另一個註解</code></pre>
+				<ul>
+					<li><strong>多行註解</strong>：雖然 Python 沒有專門的多行註解語法，但可以使用多行字串來模擬，例如：</li>
+				</ul>
+				<pre class="line-numbers"><code class="language-python">"""
+這是一個多行註解
+適合用來說明程式碼的邏輯
+或其他詳細資訊
+"""
+print("Hello, World!")</code></pre>
+				<p>記得善用註解來提升程式的可讀性，特別是在撰寫複雜的程式時！</p>
+			</section>
+
+			<section>
+
+				<h2>常見問題與解答</h2>
+				<h3>問題 1：執行程式時，沒有看到任何輸出？</h3>
+				<ul>
+					<li>確保你已儲存檔案，並且點擊了 <strong>Run</strong> 按鈕。</li>
+					<li>確保你的程式碼完全正確，包括引號與括號。</li>
+				</ul>
+
+				<h3>問題 2：輸出錯誤訊息 "SyntaxError: unterminated string literal (detected at line 1)"？</h3>
+				<p>這通常是因為字串沒有正確關閉。例如：</p>
+				<pre class="line-numbers"><code class="language-python">print("Hello, World!)  # 缺少結束的引號</code></pre>
+				<p>確認每個字串都用配對的引號包起來。</p>
+
+				<h3>問題 3：輸出錯誤訊息 "IndentationError: unexpected indent"？</h3>
+				<p>這是因為程式碼的縮排不正確。例如：</p>
+				<pre class="line-numbers"><code class="language-python"> print("Hello, World!")  # 不應該多一個空格</code></pre>
+				<p>確保程式碼的每一行左邊都沒有多餘的空格。</p>
+
+				<h3>問題 4：執行程式後出現 "NameError: name 'pritn' is not defined"？</h3>
+				<p>這是因為打錯了函式名稱，例如：</p>
+				<pre class="line-numbers"><code class="language-python">pritn("Hello, World!")  # 應該是 print</code></pre>
+				<p>確認函式名稱正確無誤。</p>
+				
+				<h3>問題 5：輸出錯誤訊息 "TypeError: 'str' object is not callable"？</h3>
+				<p>這是因為不小心將內建函式名稱重新定義為字串，例如：</p>
+				<pre class="line-numbers"><code class="language-python">print = "Hello"  # 將內建函式覆蓋
+print("World")  # 會出錯</code></pre>
+				<p>避免重新定義內建函式名稱。</p>
+			</section>
+
+			<section>
+
+				<h2>挑戰</h2>
+				<h3 class="caption">挑戰 1：自訂你的訊息 <span class="icon">🛈</span></h3>
+				<p>試著修改 "Hello, World!" 的內容，顯示其他訊息。</p>
+				<div class="answer">
+                <pre class="line-numbers"><code class="language-python"># 自訂訊息範例
+print("Welcome to Python programming!")</code></pre>
+				</div>
+				
+
+				<h3 class="caption">挑戰 2：加入多行輸出 <span class="icon">🛈</span></h3>
+				<p>試試看如何讓程式輸出多行訊息：</p>
+				<div class="answer">
+                <pre class="line-numbers"><code class="language-python"># 多行輸出範例
+print("Hello, Python!")
+print("This is your second line.")
+print("Happy coding!")</code></pre>
+				</div>
+
+				<h3 class="caption">挑戰 3：使用變數顯示訊息 <span class="icon">🛈</span></h3>
+				<p>嘗試定義一個變數，然後使用變數來顯示訊息：</p>
+				<div class="answer">
+                <pre class="line-numbers"><code class="language-python"># 使用變數範例
+message = "Hello from a variable!"
+print(message)</code></pre>
+				</div>
+
+				<h3 class="caption">挑戰 4：探索不同類型的字串 <span class="icon">🛈</span></h3>
+				<p>試試看單引號和雙引號是否可以混用，並觀察會發生什麼。</p>
+				<div class="answer">
+                <pre class="line-numbers"><code class="language-python"># 單引號與雙引號範例
+print('This is a single-quoted string.')
+print("This is a double-quoted string.")
+
+# 混用引號
+print("She said, 'Hello!'")
+print('She said, "Hello!"')
+
+multi_line_str1 = '''這是一個
+多行字串
+可以跨越多行'''
+print(multi_line_str1)
+
+multi_line_str2 = """這也是一個
+多行字串
+用雙引號也可以"""
+print(multi_line_str2)
+
+multi_line_str = "這是一個換行的字串，\
+但它不會真的換行，\
+因為它使用了反斜線"
+print(multi_line_str)
+</code></pre>
+				</div>
+        
+				
+				<h3 class="caption">挑戰 5：加入註解解釋程式 <span class="icon">🛈</span></h3>
+				<p>在程式碼中為每一行加入註解，解釋它的功能。</p>
+				<div class="answer">
+                <pre class="line-numbers"><code class="language-python"># 使用 print 函式輸出訊息
+print("Hello, World!")  # 這是經典的程式設計起點
+
+# 輸出歡迎訊息
+print("Welcome to Python!")</code></pre>
+				</div>
+
+				<h3 class="caption">挑戰 6：嘗試縮排錯誤 <span class="icon">🛈</span></h3>
+				<p>故意在程式碼中加入不正確的縮排，觀察 Python 提示的錯誤訊息，然後修正錯誤。</p>
+				<div class="answer">
+				<pre class="line-numbers"><code class="language-python"># 範例程式碼
+# 錯誤縮排
+  print("This line has incorrect indentation.")  # 會產生 IndentationError
+# 修正縮排
+print("This line is correctly indented.")</code></pre>
+				</div>
+
+				<h3 class="caption">挑戰 7：新增空行與多行註解 <span class="icon">🛈</span></h3>
+				<p>在程式中加入多行註解，描述程式的功能和目標。</p>
+				<div class="answer">
+				<pre class="line-numbers"><code class="language-python">"""
+這是一個多行註解的範例
+用於說明程式的功能與目標
+"""
+
+# 輸出兩行訊息
+print("This is the first message.")
+print("This is the second message.")</code></pre>
+				</div>
+				
+				<h3 class="caption">挑戰 8：使用反斜線讓程式碼換行 <span class="icon">🛈</span></h3>
+				<p>請修改以下 Python 程式，使它在不影響輸出結果的情況下，使用反斜線讓程式碼換行。</p>
+				<pre class="line-numbers"><code class="language-python"># 原始程式碼
+result = 10 * 2 + 30 * 3 + 40 * 4 + 50 * 5 + 60 * 6 + 70 * 7
+print("計算結果:", result)</code></pre>
+				<div class="answer">
+				<pre class="line-numbers"><code class="language-python"># 使用反斜線讓程式碼換行
+result = 10 * 2 + \
+         30 * 3 + \
+         40 * 4 + \
+         50 * 5 + \
+         60 * 6 + \
+         70 * 7
+
+print("計算結果:", result)</code></pre>
+				</div>
+
+			</section>
+
+			<section>
+
+
+				<h2>結語</h2>
+				<p>透過這一章，你學到了如何使用Thonny撰寫與執行Python程式，並理解了程式碼的基本組成部分。在接下來的章節，我們將深入探索Python的更多功能，讓你能夠撰寫更有趣的程式。加油！</p>
+			</section>
+		</main>
+    </div>
+</body>
+</html>

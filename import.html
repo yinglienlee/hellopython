@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>匯入模組</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+	<!-- Prism.js CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css">
+    <!-- Prism.js Line Numbers CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
+    <!-- Prism.js Syntax Highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <!-- Prism.js Line Numbers Plugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", (event) => {
+            includeHTML(highlightItem);
+            document.getElementById("toggleNav").addEventListener("click", navClick);
+			enableAnswerRevealer();
+        });
+    </script>
+</head>
+<body>
+    <div class="d-flex">
+        <!-- Floating Button -->
+        <button id="toggleNav" class="btn btn-primary">&#8212;</button>
+        <nav id="sidebar" class="bg-light border-end" style="display: block;">
+            <div>
+                <div w3-include-html="navigation.html"></div>
+            </div>
+        </nav>
+        <main class="flex-grow-1">
+            <header>
+                <h1>匯入模組</h1>
+            </header>
+            <section>
+                <h2>學習導覽</h2>
+                <p>在這一章，我們將學習如何使用 <code>import</code> 關鍵字來匯入模組。模組是 Python 的重要組成部分，允許我們將程式碼分為多個檔案，並重複使用已有的功能。</p>
+                <ul>
+                    <li>什麼是模組？</li>
+                    <li>如何匯入內建模組。</li>
+                    <li>如何匯入外部模組。</li>
+                    <li>如何匯入自訂模組。</li>
+                    <li>學會使用 <code>from ... import ...</code> 的進階用法。</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>模組的基本用法</h2>
+                <h3>1. 什麼是模組？</h3>
+                <p>模組是一個包含 Python 程式碼的檔案，其副檔名為 <code>.py</code>。透過匯入模組，我們可以使用其定義的函式、類別和變數。</p>
+
+                <h3>2. 匯入內建模組</h3>
+                <p>Python 提供了許多內建模組，例如 <code>math</code> 和 <code>random</code>：</p>
+                <pre class="line-numbers"><code class="language-python">import math
+
+# 使用 math 模組的函式
+print(math.sqrt(16))  # 輸出：4.0</code></pre>
+
+                <h3>3. 匯入外部模組</h3>
+                <p>外部模組通常需要透過 <code>pip</code> 安裝，例如 <code>requests</code>：</p>
+                <pre class="line-numbers"><code class="language-python"># 安裝 requests 模組
+# pip install requests
+
+import requests
+
+response = requests.get("https://www.example.com")
+print(response.status_code)</code></pre>
+
+				<p>Thonny 也提供便捷的安裝方式</p>
+                <ol>
+                    <li>打開 Thonny 開發環境。</li>
+                    <li>點擊選單中的 <strong>工具 (Tools)</strong>，然後選擇 <strong>管理套件 (Manage Packages)</strong>。</li>
+                    <li>在彈出的視窗中，於搜索框輸入 <code>requests</code>。</li>
+                    <li>點擊 <strong>安裝 (Install)</strong> 按鈕，等待安裝完成。</li>
+                </ol>
+
+                <h3>4. 匯入自訂模組</h3>
+                <p>我們可以匯入自己定義的模組。例如，有一個名為 <code>mymodule.py</code> 的檔案：</p>
+                <pre class="line-numbers"><code class="language-python"># mymodule.py
+def greet(name):
+    return f"Hello, {name}!"
+
+# 匯入自訂模組
+import mymodule
+
+print(mymodule.greet("Alice"))</code></pre>
+
+                <h3>5. 使用 <code>from ... import ...</code></h3>
+                <p>可以只匯入模組中的特定部分：</p>
+                <pre class="line-numbers"><code class="language-python">from math import pi, sqrt
+
+print(pi)  # 輸出：3.141592653589793
+print(sqrt(16))  # 輸出：4.0</code></pre>
+
+				<h3>6. 重新命名模組（Alias）</code></h3>
+                <p>有時候模組名稱較長或希望使用簡潔的名稱，可以使用 <code>as</code> 關鍵字來重新命名模組（alias）。這對於簡化程式碼或解決名稱衝突非常有用。</p>
+                <pre class="line-numbers"><code class="language-python">import math as m
+
+# 使用重新命名後的模組 m
+print(m.sqrt(16))  # 輸出：4.0</code></pre>
+            </section>
+
+            <section>
+                <h2>常見問題與解答</h2>
+                <h3>問題 1：匯入模組時為什麼會出錯？</h3>
+                <p>確保模組已安裝且位於 Python 的模組路徑中。</p>
+
+                <h3>問題 2：如何檢查安裝的外部模組？</h3>
+                <p>可以使用 <code>pip list</code> 查看已安裝的模組。</p>
+
+                <h3>問題 3：匯入自訂模組時為什麼找不到檔案？</h3>
+                <p>以下方法都可以確保 Python 能正確地找到並匯入你的自訂模組。
+					<ul>
+						<li>同一目錄： 將自訂模組與執行的程式放在同一個資料夾內。</li>
+						<li>修改 sys.path： 在程式中使用 sys.path.append() 將模組路徑加入搜尋清單。</li>
+						<li>設定 PYTHONPATH： 在作業系統中設定環境變數，讓 Python 自動搜尋指定路徑。</li>
+					</ul>
+				</p>
+				
+            </section>
+
+            <section>
+                <h2>挑戰題目</h2>
+				
+<h3 class="caption">挑戰 1：計算圓的面積 <span class="icon">🛈</span></h3>
+<p>撰寫一個程式，匯入 <code>math</code> 模組，要求使用者輸入半徑，並計算圓的面積。</p>
+<pre class="line-numbers"><code class="language-python"># 範例輸入
+# 半徑：5
+# 預期輸出
+圓的面積為：78.54</code></pre>
+<div class="answer">
+
+<pre class="line-numbers"><code class="language-python"># 解答
+import math
+
+# 要求使用者輸入半徑
+radius = float(input("請輸入圓的半徑："))
+# 計算圓的面積
+area = math.pi * (radius ** 2)
+print(f"圓的面積為：{area:.2f}")</code></pre>
+</div>
+
+<h3 class="caption">挑戰 2：下載網頁內容 <span class="icon">🛈</span></h3>
+<p>使用 <code>requests</code> 模組，建立一個程式，下載並顯示特定網址的內容。</p>
+<pre class="line-numbers"><code class="language-python"># 範例輸入
+# 網址：https://www.example.com
+# 預期輸出
+網站內容：
+<!DOCTYPE html>
+<html>
+  ...
+</html></code></pre>
+<div class="answer">
+
+<pre class="line-numbers"><code class="language-python"># 解答
+import requests
+
+# 輸入網址
+url = input("請輸入網址：")
+# 發送請求並獲取響應
+response = requests.get(url)
+# 顯示網站內容
+print("網站內容：")
+print(response.text)</code></pre>
+</div>
+
+<h3 class="caption">挑戰 3：建立與匯入自訂模組 <span class="icon">🛈</span></h3>
+<p>建立一個包含函式的自訂模組，該函式接收數字串列並回傳其平均值，然後在主程式中匯入並使用此模組。</p>
+<pre class="line-numbers"><code class="language-python"># 範例輸入
+# 自訂模組：utils/math_utils.py
+def calculate_average(numbers):
+    return sum(numbers) / len(numbers)
+
+# 主程式
+from utils.math_utils import calculate_average
+
+numbers = [10, 20, 30]
+print(f"平均值：{calculate_average(numbers)}")</code></pre>
+<div class="answer">
+
+<pre class="line-numbers"><code class="language-python"># 解答
+# utils/math_utils.py
+def calculate_average(numbers):
+    return sum(numbers) / len(numbers)
+
+# 主程式 main.py
+from utils.math_utils import calculate_average
+
+# 輸入數字串列
+numbers = [float(num) for num in input("請輸入數字串列（以逗號分隔）：").split(",")]
+# 計算並輸出平均值
+print(f"平均值：{calculate_average(numbers):.2f}")</code></pre>
+</div>
+
+<h3 class="caption">挑戰 4：匯入 <code>datetime</code> 模組 <span class="icon">🛈</span></h3>
+<p>設計一個程式，匯入 <code>datetime</code> 模組，並輸出當前的日期與時間。</p>
+<pre class="line-numbers"><code class="language-python"># 範例輸入
+# 匯入 datetime 模組
+from datetime import datetime
+
+# 預期輸出
+當前日期與時間：2025-01-20 10:30:45</code></pre>
+<div class="answer">
+
+<pre class="line-numbers"><code class="language-python"># 解答
+from datetime import datetime
+
+# 獲取當前日期與時間
+current_datetime = datetime.now()
+# 輸出結果
+print(f"當前日期與時間：{current_datetime.strftime('%Y-%m-%d %H:%M:%S')}")</code></pre>
+</div>
+
+<h3 class="caption">挑戰 5：匯入與重命名模組 <span class="icon">🛈</span></h3>
+<p>匯入 <code>math</code> 模組並使用別名，例如 <code>m</code>，計算兩個數字的平方根之和。</p>
+<pre class="line-numbers"><code class="language-python"># 範例輸入
+數字 9 和 16
+# 預期輸出
+平方根之和為：7.0</code></pre>
+<div class="answer">
+
+<pre class="line-numbers"><code class="language-python"># 解答
+import math as m
+
+# 定義數字
+num1, num2 = 9, 16
+# 計算平方根之和
+result = m.sqrt(num1) + m.sqrt(num2)
+# 輸出結果
+print(f"平方根之和為：{result}")</code></pre>
+</div>
+
+<h3 class="caption">挑戰 6：檢查外部模組版本 <span class="icon">🛈</span></h3>
+<p>撰寫程式，使用 <code>requests</code> 模組並顯示其版本。</p>
+<pre class="line-numbers"><code class="language-python"># 預期輸出
+requests 模組版本：2.26.0</code></pre>
+<div class="answer">
+
+<pre class="line-numbers"><code class="language-python"># 解答
+import requests
+
+# 獲取並顯示版本
+print(f"requests 模組版本：{requests.__version__}")</code></pre>
+</div>
+
+<h3 class="caption">挑戰 7：使用 <code>os</code> 模組操作檔案 <span class="icon">🛈</span></h3>
+<p>設計一個程式，匯入 <code>os</code> 模組，並列出當前目錄中的所有檔案與資料夾。</p>
+<pre class="line-numbers"><code class="language-python"># 預期輸出
+當前目錄內容：['file1.txt', 'file2.txt', 'folder1']</code></pre>
+<div class="answer">
+
+<pre class="line-numbers"><code class="language-python"># 解答
+import os
+
+# 獲取當前目錄內容
+contents = os.listdir(".")
+# 輸出結果
+print(f"當前目錄內容：{contents}")</code></pre>
+</div>
+
+<h3 class="caption">挑戰 8：建立與匯入多層模組 <span class="icon">🛈</span></h3>
+<p>建立多層目錄結構，匯入模組並使用其中的函式。例如，建立 <code>utils/math_utils.py</code>，實現一個加法函式。</p>
+<pre class="line-numbers"><code class="language-python"># 範例輸入
+# utils/math_utils.py
+def add(a, b):
+    return a + b
+
+# 主程式
+from utils.math_utils import add
+
+# 預期輸出
+加法結果：7</code></pre>
+<div class="answer">
+
+<pre class="line-numbers"><code class="language-python"># 解答
+# utils/math_utils.py
+def add(a, b):
+    return a + b
+
+# 主程式 main.py
+from utils.math_utils import add
+
+# 使用加法函式
+result = add(3, 4)
+print(f"加法結果：{result}")</code></pre>
+</div>
+				
+            </section>
+
+            <section>
+                <h2>結語</h2>
+                <p>模組是 Python 提供的強大功能之一，能夠提升程式的模組化與重用性。透過本章的學習，你將能靈活運用內建、外部和自訂模組，撰寫更高效的程式。</p>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

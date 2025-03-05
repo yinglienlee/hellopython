@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>綜合練習：Hering Illusion</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+	<!-- Prism.js CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css">
+    <!-- Prism.js Line Numbers CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
+    <!-- Prism.js Syntax Highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <!-- Prism.js Line Numbers Plugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", (event) => {
+            includeHTML(highlightItem);
+            document.getElementById("toggleNav").addEventListener("click", navClick);
+			enableAnswerRevealer();
+        });
+    </script>
+</head>
+<body>
+    <div class="d-flex">
+        <!-- Floating Button -->
+        <button id="toggleNav" class="btn btn-primary">&#8212;</button>
+        <nav id="sidebar" class="bg-light border-end" style="display: block;">
+            <div>
+                <div w3-include-html="navigation.html"></div>
+            </div>
+        </nav>
+        <main class="flex-grow-1">
+            <header>
+                <h1>綜合練習：Hering Illusion</h1>
+            </header>
+            <section>
+                <h2>學習導覽</h2>
+                <p>在這一章中，我們將學習如何使用 <code>pygame</code> 模組設計一個互動式的 Hering Illusion 範例。此範例將幫助你了解如何處理鍵盤輸入、動態繪圖，以及基礎的幾何計算。</p>
+                <ul>
+                    <li>如何捕捉鍵盤事件。</li>
+                    <li>繪製幾何圖形以形成錯覺效果。</li>
+                    <li>動態調整參數觀察錯覺變化。</li>
+                </ul>
+                <p>完成本章後，你將能夠創建具有互動性的視覺錯覺展示。</p>
+            </section>
+
+            <section>
+                <h2>完整範例程式碼</h2>
+                <pre class="line-numbers"><code class="language-python">import pygame
+import math
+import sys
+
+# 初始化 pygame
+pygame.init()
+
+# 設定視窗大小
+WIDTH, HEIGHT = 800, 600
+screen = pygame.display.set_mode((WIDTH, HEIGHT))
+pygame.display.set_caption("Hering Illusion")
+
+# 顏色定義
+BLACK = (0, 0, 0)
+WHITE = (255, 255, 255)
+GRAY = (200, 200, 200)
+
+# Function to draw radiating lines
+def draw_radiating_lines(screen, center, spacing):
+    for angle in range(-90, 91, spacing):
+        x1 = center[0] + WIDTH * math.cos(math.radians(angle))
+        y1 = center[1] + WIDTH * math.sin(math.radians(angle))
+        x2 = center[0] - WIDTH * math.cos(math.radians(angle))
+        y2 = center[1] - WIDTH * math.sin(math.radians(angle))
+        pygame.draw.aaline(screen, GRAY, (x1, y1), (x2, y2))
+
+# Function to draw parallel lines
+def draw_parallel_lines(screen, center, offset):
+    pygame.draw.line(screen, BLACK, (center[0] - 300, center[1] - offset), (center[0] + 300, center[1] - offset), 2)
+    pygame.draw.line(screen, BLACK, (center[0] - 300, center[1] + offset), (center[0] + 300, center[1] + offset), 2)
+
+# Main loop
+center = (WIDTH // 2, HEIGHT // 2)
+spacing = 10  # Spacing between radiating lines
+line_offset = 50  # Distance of parallel lines from the center
+
+running = True
+while running:
+    screen.fill(WHITE)
+
+    # Event handling
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+
+        # Adjust spacing and line offset interactively
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_UP:
+                line_offset += 5
+            elif event.key == pygame.K_DOWN:
+                line_offset -= 5
+            elif event.key == pygame.K_RIGHT:
+                spacing += 1
+            elif event.key == pygame.K_LEFT:
+                spacing = max(1, spacing - 1)
+
+    # Draw the illusion
+    draw_radiating_lines(screen, center, spacing)
+    draw_parallel_lines(screen, center, line_offset)
+
+    # Display instructions
+    font = pygame.font.SysFont(None, 24)
+    instructions = font.render("Arrow Keys: Adjust lines and spacing", True, BLACK)
+    screen.blit(instructions, (10, 10))
+
+    pygame.display.flip()
+
+# Quit Pygame
+pygame.quit()
+sys.exit()</code></pre>
+            </section>
+
+            <section>
+                <h2>詳細方法與函式說明</h2>
+
+                <h3>1. <code>pygame.init()</code></h3>
+                <p>初始化所有 <code>pygame</code> 模組，這是使用 <code>pygame</code> 時的必要步驟。</p>
+                <pre class="line-numbers"><code class="language-python">pygame.init()</code></pre>
+
+                <h3>2. <code>pygame.display.set_mode()</code></h3>
+                <p>用於設置遊戲視窗的大小及其他顯示屬性。</p>
+                <pre class="line-numbers"><code class="language-python">screen = pygame.display.set_mode((WIDTH, HEIGHT))</code></pre>
+
+                <h3>3. <code>math.cos()</code> 和 <code>math.sin()</code></h3>
+                <p>這些方法用來計算角度對應的三角函數值，並用於繪製放射線。</p>
+                <pre class="line-numbers"><code class="language-python"># 計算角度的餘弦與正弦值
+x = math.cos(math.radians(angle))
+y = math.sin(math.radians(angle))</code></pre>
+
+                <h3>4. <code>draw_radiating_lines</code> 函式</h3>
+                <p>負責繪製錯覺中的放射線。這些線條會產生深度與透視感，誘發錯覺效果。</p>
+                <pre class="line-numbers"><code class="language-python">def draw_radiating_lines(screen, center, spacing):
+    for angle in range(-90, 91, spacing):
+        x1 = center[0] + WIDTH * math.cos(math.radians(angle))
+        y1 = center[1] + WIDTH * math.sin(math.radians(angle))
+        x2 = center[0] - WIDTH * math.cos(math.radians(angle))
+        y2 = center[1] - WIDTH * math.sin(math.radians(angle))
+        pygame.draw.aaline(screen, GRAY, (x1, y1), (x2, y2))</code></pre>
+
+                <h3>5. <code>draw_parallel_lines</code> 函式</h3>
+                <p>負責繪製錯覺中的平行線，這些平行線會受到背景放射線的影響，顯得彎曲。</p>
+                <pre class="line-numbers"><code class="language-python">def draw_parallel_lines(screen, center, offset):
+    pygame.draw.line(screen, BLACK, (center[0] - 300, center[1] - offset), (center[0] + 300, center[1] - offset), 2)
+    pygame.draw.line(screen, BLACK, (center[0] - 300, center[1] + offset), (center[0] + 300, center[1] + offset), 2)</code></pre>
+
+                <h3>6. <code>pygame.KEYDOWN</code></h3>
+                <p>捕捉鍵盤按下事件，用於交互式調整錯覺參數。</p>
+                <pre class="line-numbers"><code class="language-python">if event.type == pygame.KEYDOWN:
+    if event.key == pygame.K_UP:
+        line_offset += 5
+    elif event.key == pygame.K_DOWN:
+        line_offset -= 5</code></pre>
+            </section>
+
+            <section>
+                <h2>挑戰題目</h2>
+                <h3 class="caption">挑戰 1：改變放射線顏色 <span class="icon">🛈</span></h3>
+    <p>讓每條放射線根據角度有不同的顏色。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+import pygame
+import math
+
+pygame.init()
+WIDTH, HEIGHT = 800, 600
+screen = pygame.display.set_mode((WIDTH, HEIGHT))
+pygame.display.set_caption("改變放射線顏色")
+
+WHITE = (255, 255, 255)
+center = (WIDTH // 2, HEIGHT // 2)
+
+def draw_radiating_lines_with_colors(screen, center, spacing):
+    for angle in range(-90, 91, spacing):
+        color = (abs(angle * 2) % 256, 100, 200)  # 動態設定顏色
+        x1 = center[0] + WIDTH * math.cos(math.radians(angle))
+        y1 = center[1] + WIDTH * math.sin(math.radians(angle))
+        x2 = center[0] - WIDTH * math.cos(math.radians(angle))
+        y2 = center[1] - WIDTH * math.sin(math.radians(angle))
+        pygame.draw.aaline(screen, color, (x1, y1), (x2, y2))
+
+running = True
+while running:
+    screen.fill(WHITE)
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+
+    draw_radiating_lines_with_colors(screen, center, 10)
+    pygame.display.flip()
+
+pygame.quit()
+</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 2：增加更多平行線 <span class="icon">🛈</span></h3>
+    <p>讓畫面中顯示更多組平行線，觀察錯覺效果如何改變。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+import pygame
+
+pygame.init()
+WIDTH, HEIGHT = 800, 600
+screen = pygame.display.set_mode((WIDTH, HEIGHT))
+pygame.display.set_caption("增加更多平行線")
+
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
+center = (WIDTH // 2, HEIGHT // 2)
+
+def draw_multiple_parallel_lines(screen, center, spacing, count):
+    for i in range(-count, count + 1):
+        offset = i * spacing
+        pygame.draw.line(screen, BLACK, (center[0] - 300, center[1] + offset), (center[0] + 300, center[1] + offset), 2)
+
+running = True
+while running:
+    screen.fill(WHITE)
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+
+    draw_multiple_parallel_lines(screen, center, 20, 5)
+    pygame.display.flip()
+
+pygame.quit()
+</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 3：添加動態背景 <span class="icon">🛈</span></h3>
+    <p>設計一個背景，讓放射線隨時間旋轉，增加錯覺的動態視覺效果。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+import pygame
+import math
+import time
+
+pygame.init()
+WIDTH, HEIGHT = 800, 600
+screen = pygame.display.set_mode((WIDTH, HEIGHT))
+pygame.display.set_caption("動態背景")
+
+WHITE = (255, 255, 255)
+GRAY = (200, 200, 200)
+center = (WIDTH // 2, HEIGHT // 2)
+
+def draw_rotating_lines(screen, center, spacing, angle_offset):
+    for angle in range(-90, 91, spacing):
+        angle += angle_offset
+        x1 = center[0] + WIDTH * math.cos(math.radians(angle))
+        y1 = center[1] + WIDTH * math.sin(math.radians(angle))
+        x2 = center[0] - WIDTH * math.cos(math.radians(angle))
+        y2 = center[1] - WIDTH * math.sin(math.radians(angle))
+        pygame.draw.aaline(screen, GRAY, (x1, y1), (x2, y2))
+
+running = True
+angle_offset = 0
+while running:
+    screen.fill(WHITE)
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+
+    draw_rotating_lines(screen, center, 10, angle_offset)
+    angle_offset += 1  # 動態旋轉
+    pygame.display.flip()
+    time.sleep(0.03)
+
+pygame.quit()
+</code></pre>
+    </div>
+            </section>
+
+            <section>
+                <h2>結語</h2>
+                <p>透過這個專案，你學會了如何使用 <code>pygame</code> 模組設計一個互動式視覺錯覺展示。希望你能從中探索更多有趣的錯覺效果！</p>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

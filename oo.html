@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>類別與物件</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+	<!-- Prism.js CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css">
+    <!-- Prism.js Line Numbers CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
+    <!-- Prism.js Syntax Highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <!-- Prism.js Line Numbers Plugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", (event) => {
+            includeHTML(highlightItem);
+            document.getElementById("toggleNav").addEventListener("click", navClick);
+			enableAnswerRevealer();
+        });
+    </script>
+</head>
+<body>
+    <div class="d-flex">
+        <!-- Floating Button -->
+        <button id="toggleNav" class="btn btn-primary">&#8212;</button>
+        <nav id="sidebar" class="bg-light border-end" style="display: block;">
+            <div>
+                <div w3-include-html="navigation.html"></div>
+            </div>
+        </nav>
+        <main class="flex-grow-1">
+            <header>
+                <h1>類別與物件</h1>
+            </header>
+            <section>
+                <h2>學習導覽</h2>
+                <p>在這一章，我們將學習 Python 中的類別 (Class) 與物件 (Object)。類別與物件是物件導向程式設計的基礎概念，幫助我們更有效地組織與管理程式碼。</p>
+                <ul>
+                    <li>什麼是類別與物件？</li>
+                    <li>如何定義類別與建立物件。</li>
+                    <li>類別的屬性與方法。</li>
+                    <li>物件的使用與操作。</li>
+                    <li>類別的繼承與擴展。</li>
+                    <li>物件的刪除與資源釋放。</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>類別與物件的基本概念</h2>
+                <h3>1. 什麼是類別？</h3>
+                <p>類別是一個藍圖或模板，用於定義物件的屬性和行為。例如，類別可以定義「汽車」的顏色、型號等屬性，以及啟動、煞車等行為。</p>
+
+                <h3>2. 什麼是物件？</h3>
+                <p>物件是根據類別建立的實例 (instance)。每個物件都有自己的屬性值，可以使用類別定義的行為。</p>
+
+                <h3>3. 定義類別與建立物件</h3>
+                <pre class="line-numbers"><code class="language-python"># 定義類別
+class Car:
+    def __init__(self, brand, color):
+        self.brand = brand
+        self.color = color
+
+    def start(self):
+        print(f"{self.color} {self.brand} 開始行駛！")
+
+# 建立物件
+my_car = Car("Toyota", "紅色")
+my_car.start()  # 輸出：紅色 Toyota 開始行駛！</code></pre>
+
+                <h3>4. __init__ 與 self 的解釋</h3>
+                <p>在 Python 中，<code>__init__</code> 是建構式方法，會在建立物件時自動執行。它的主要用途是初始化物件屬性。</p>
+                <p><code>self</code> 是一個特殊參數，指向當前物件本身，讓我們可以在類別中存取或設定物件的屬性與方法。</p>
+                <pre class="line-numbers"><code class="language-python"># __init__ 與 self 範例
+class Person:
+    def __init__(self, name, age):
+        self.name = name  # 使用 self 存取屬性
+        self.age = age
+
+    def greet(self):
+        print(f"你好，我是 {self.name}，我今年 {self.age} 歲。")
+
+# 建立物件
+p = Person("Alice", 30)
+p.greet()  # 輸出：你好，我是 Alice，我今年 30 歲。</code></pre>
+            </section>
+
+            <section>
+                <h2>物件刪除與 __del__</h2>
+                <h3>1. 什麼是 __del__ 方法？</h3>
+                <p>在 Python 中，<code>__del__</code> 是解構式方法，會在物件被刪除時自動執行。它的主要用途是釋放資源或進行清理工作，例如解除資料庫連線或釋放佔用的記憶體。</p>
+
+                <h3>2. __del__ 的範例</h3>
+                <pre class="line-numbers"><code class="language-python">class Example:
+    def __init__(self, name):
+        self.name = name
+        print(f"物件 {self.name} 已建立。")
+
+    def __del__(self):
+        print(f"物件 {self.name} 已刪除。")
+
+# 建立與刪除物件
+obj = Example("測試物件")
+del obj  # 輸出：物件 測試物件 已刪除。</code></pre>
+
+                <h3>3. 注意事項</h3>
+                <p><code>__del__</code> 的執行時間由 Python 的垃圾回收機制決定，當物件的引用計數為 0 時會被清理，但具體執行時間可能不確定。因此，對於需要即時釋放的資源，建議使用 <code>try</code>/<code>finally</code> 或 <code>with</code> 語法來手動管理。</p>
+				
+				<h4>使用 <code>try/finally</code></h4>
+				<p>在此方法中，我們利用 <code>try/finally</code> 區塊來保證無論是否發生例外，物件都會被明確地刪除（或呼叫其他清理方法），進而釋放資源：</p>
+				<pre class="line-numbers"><code class="language-python"># 建立物件
+obj = Example("測試物件")
+
+try:
+    print("在 try 區塊內使用 obj")
+    # 模擬一些操作，例如呼叫物件的方法
+    # 例如：result = obj.do_something()
+finally:
+    # 無論 try 區塊內是否發生錯誤，finally 區塊都會被執行
+    print("進入 finally 區塊，進行資源清理")
+    del obj  # 明確刪除物件，呼叫 __del__ 方法</code></pre>
+
+				<h4>使用 <code>with</code> 語法</h4>
+				<p>要使用 with 語法管理資源，需要修改 Example 類別，使其支援「上下文管理器」協議，也就是實作 __enter__ 和 __exit__ 方法。修改後的類別如下：</p>
+				<pre class="line-numbers"><code class="language-python">class Example:
+    def __init__(self, name):
+        self.name = name
+        print(f"物件 {self.name} 已建立。")
+    
+    def __enter__(self):
+        # 在 with 區塊開始時回傳物件本身
+        return self
+    
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        # 在離開 with 區塊時自動呼叫此方法進行資源清理
+        print(f"物件 {self.name} 正在退出 with 區塊，進行資源清理。")
+        # 此處可以加入釋放資源的程式碼，例如關閉檔案、釋放連線等
+        
+    def __del__(self):
+        print(f"物件 {self.name} 已刪除。")
+		
+		
+with Example("測試物件") as obj:
+    print("在 with 區塊內使用 obj")
+    # 在此處可安全使用 obj 執行各種操作
+
+# 離開 with 區塊後，自動執行 __exit__ 方法進行清理，
+# 而 __del__ 的呼叫時間則仍由垃圾回收決定，但資源已經透過 __exit__ 及時處理。</code></pre>
+
+            </section>
+
+            <section>
+                <h2>類別的繼承</h2>
+                <h3>1. 什麼是繼承？</h3>
+                <p>繼承允許我們從一個類別 (父類別) 派生出新的類別 (子類別)，子類別可以繼承父類別的屬性與方法，並可進行擴展或修改。</p>
+
+                <h3>2. 定義子類別</h3>
+                <p>以下是一個範例，展示如何定義子類別並覆寫父類別的方法：</p>
+                <pre class="line-numbers"><code class="language-python"># 定義父類別
+class Animal:
+    def __init__(self, name):
+        self.name = name
+
+    def speak(self):
+        print(f"{self.name} 發出聲音。")
+
+# 定義子類別
+class Dog(Animal):
+    def speak(self):
+        print(f"{self.name} 說：汪汪！")
+
+# 使用繼承
+my_dog = Dog("Buddy")
+my_dog.speak()  # 輸出：Buddy 說：汪汪！</code></pre>
+
+                <h3>3. 使用 super()</h3>
+                <p><code>super()</code> 用於呼叫父類別的方法或建構式：</p>
+                <pre class="line-numbers"><code class="language-python">class Cat(Animal):
+    def __init__(self, name, color):
+        super().__init__(name)
+        self.color = color
+
+    def describe(self):
+        print(f"{self.name} 是一隻 {self.color} 的貓。")
+
+my_cat = Cat("Kitty", "白色")
+my_cat.describe()  # 輸出：Kitty 是一隻 白色 的貓。</code></pre>
+            </section>
+
+            <section>
+                <h2>常見問題與解答</h2>
+                <h3>問題 1：子類別可以有自己的屬性與方法嗎？</h3>
+                <p>可以，子類別可以新增自己的屬性與方法，並繼承父類別的功能。</p>
+				<pre class="line-numbers"><code class="language-python"># 定義父類別
+class Animal:
+    def __init__(self, name):
+        self.name = name
+
+    def speak(self):
+        print(f"{self.name} 發出聲音。")
+
+# 定義子類別，繼承自 Animal，並新增自己的屬性與方法
+class Dog(Animal):
+    def __init__(self, name, breed):
+        # 呼叫父類別的 __init__ 初始化 name 屬性
+        super().__init__(name)
+        # 新增子類別專屬的屬性
+        self.breed = breed
+
+    # 覆寫父類別的 speak 方法
+    def speak(self):
+        print(f"{self.name} 說：汪汪！")
+
+    # 子類別新增自己的方法
+    def wag_tail(self):
+        print(f"{self.name} 正在搖尾巴。")
+
+# 使用子類別
+my_dog = Dog("Buddy", "拉布拉多")
+my_dog.speak()     # 輸出：Buddy 說：汪汪！
+my_dog.wag_tail()  # 輸出：Buddy 正在搖尾巴。</code></pre>
+
+
+                <h3>問題 2：可以多重繼承嗎？</h3>
+                <p>Python 支援多重繼承，但需要小心處理潛在的名稱衝突與 MRO (方法解析順序)。</p>
+				<pre class="line-numbers"><code class="language-python"># 定義第一個父類別：可以飛行的能力
+class Flyer:
+    def move(self):
+        print("我可以飛行！")
+
+# 定義第二個父類別：可以游泳的能力
+class Swimmer:
+    def move(self):
+        print("我可以游泳！")
+
+# 定義子類別，同時繼承 Flyer 與 Swimmer
+class Duck(Flyer, Swimmer):
+    pass
+
+# 使用子類別
+d = Duck()
+d.move()</code></pre>
+				<p>如果要做到所有父類別的動作，可透過以下方式。</p>
+				<pre class="line-numbers"><code class="language-python"># 定義子類別，同時繼承 Flyer 與 Swimmer
+class Duck(Flyer, Swimmer):
+    def move(self):
+        Flyer.move(self)
+        Swimmer.move(self)</code></pre>
+
+                <h3>問題 3：什麼是覆寫 (Override)？</h3>
+                <p>覆寫是指在子類別中重新定義父類別的方法，以實現不同的行為。</p>
+				<pre class="line-numbers"><code class="language-python"># 定義父類別
+class Animal:
+    def speak(self):
+        print("動物發出聲音。")
+
+# 定義子類別，並覆寫父類別的 speak 方法
+class Dog(Animal):
+    def speak(self):
+        print("狗說：汪汪！")
+
+# 建立 Dog 物件並呼叫 speak 方法
+my_dog = Dog()
+my_dog.speak()  # 輸出：狗說：汪汪！</code></pre>
+
+
+                <h3>問題 4：__del__ 方法何時執行？</h3>
+                <p>當物件的引用計數為 0 且垃圾回收機制啟動時，<code>__del__</code> 方法會被呼叫。</p>
+            </section>
+
+            <section>
+    <h2>挑戰題目</h2>
+    <h3 class="caption">挑戰 1：建立動物類別 <span class="icon">🛈</span></h3>
+    <p>建立一個動物類別，並從中繼承建立貓與狗的類別，實作不同的聲音方法。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+class Animal:
+    def __init__(self, name):
+        self.name = name
+
+    def speak(self):
+        print(f"{self.name} 發出聲音。")
+
+class Cat(Animal):
+    def speak(self):
+        print(f"{self.name} 說：喵喵！")
+
+class Dog(Animal):
+    def speak(self):
+        print(f"{self.name} 說：汪汪！")
+
+cat = Cat("Kitty")
+dog = Dog("Buddy")
+cat.speak()  # 輸出：Kitty 說：喵喵！
+dog.speak()  # 輸出：Buddy 說：汪汪！
+</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 2：擴展父類別 <span class="icon">🛈</span></h3>
+    <p>設計一個人類類別，包含名字與年齡的屬性，並從中繼承建立學生類別，增加班級與成績的屬性。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+class Human:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+class Student(Human):
+    def __init__(self, name, age, grade, class_name):
+        super().__init__(name, age)
+        self.grade = grade
+        self.class_name = class_name
+
+    def introduce(self):
+        print(f"我是 {self.name}，今年 {self.age} 歲，就讀 {self.class_name}，成績是 {self.grade} 分。")
+
+student = Student("Alice", 16, 90, "高一")
+student.introduce()  # 輸出：我是 Alice，今年 16 歲，就讀 高一，成績是 90 分。
+</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 3：使用 super() <span class="icon">🛈</span></h3>
+    <p>撰寫一個程式，使用 <code>super()</code> 初始化父類別的屬性，並在子類別中擴展其功能。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+class Vehicle:
+    def __init__(self, brand):
+        self.brand = brand
+
+class Car(Vehicle):
+    def __init__(self, brand, color):
+        super().__init__(brand)
+        self.color = color
+
+    def describe(self):
+        print(f"這是一輛 {self.color} 的 {self.brand} 汽車。")
+
+car = Car("Toyota", "紅色")
+car.describe()  # 輸出：這是一輛 紅色 的 Toyota 汽車。
+</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 4：利用 __del__ 清理資源 <span class="icon">🛈</span></h3>
+    <p>設計一個類別，當物件刪除時，顯示一段自訂訊息，模擬資源清理。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+class Resource:
+    def __init__(self, name):
+        self.name = name
+        print(f"資源 {self.name} 已建立。")
+
+    def __del__(self):
+        print(f"資源 {self.name} 已清理。")
+
+resource = Resource("測試資源")
+del resource  # 輸出：資源 測試資源 已清理。
+</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 5：建立一個類別的屬性與方法 <span class="icon">🛈</span></h3>
+    <p>設計一個包含多個屬性的類別，例如「書籍」類別，包含標題、作者和價格，並提供一個方法來計算打折後的價格。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+class Book:
+    def __init__(self, title, author, price):
+        self.title = title
+        self.author = author
+        self.price = price
+
+    def discounted_price(self, discount):
+        return self.price * (1 - discount)
+
+book = Book("Python Guide", "John Doe", 500)
+print(f"原價：{book.price} 元，打 8 折後價格：{book.discounted_price(0.2)} 元。")
+</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 6：子類別的擴展 <span class="icon">🛈</span></h3>
+    <p>建立一個基本的「交通工具」類別，然後從中繼承建立「汽車」和「自行車」類別，並為每個子類別添加獨特的方法。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+class Vehicle:
+    def __init__(self, name):
+        self.name = name
+
+class Car(Vehicle):
+    def start_engine(self):
+        print(f"{self.name} 的引擎已啟動。")
+
+class Bike(Vehicle):
+    def ring_bell(self):
+        print(f"{self.name} 的鈴鐺響起了！")
+
+car = Car("Toyota")
+bike = Bike("Giant")
+car.start_engine()  # 輸出：Toyota 的引擎已啟動。
+bike.ring_bell()  # 輸出：Giant 的鈴鐺響起了！
+</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 7：實現覆寫行為 <span class="icon">🛈</span></h3>
+    <p>設計一個「動物」類別及其子類別「鳥」和「魚」，覆寫「移動方式」方法來分別展示飛行和游泳的行為。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+class Animal:
+    def move(self):
+        print("移動中。")
+
+class Bird(Animal):
+    def move(self):
+        print("我在飛行！")
+
+class Fish(Animal):
+    def move(self):
+        print("我在游泳！")
+
+bird = Bird()
+fish = Fish()
+bird.move()  # 輸出：我在飛行！
+fish.move()  # 輸出：我在游泳！
+</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 8：使用多重繼承 <span class="icon">🛈</span></h3>
+    <p>設計兩個類別「可飛行的」和「可游泳的」，然後建立一個同時具有這兩個能力的「鴨子」類別。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+class Flyable:
+    def fly(self):
+        print("我會飛！")
+
+class Swimmable:
+    def swim(self):
+        print("我會游泳！")
+
+class Duck(Flyable, Swimmable):
+    pass
+
+duck = Duck()
+duck.fly()  # 輸出：我會飛！
+duck.swim()  # 輸出：我會游泳！
+</code></pre>
+    </div>
+</section>
+
+			<section>
+				<h2>結語</h2>
+				<p>本章介紹了 Python 類別與物件的核心概念，包含物件的建構、
+            </section>
+        </main>
+    </div>
+</body>
+</html>

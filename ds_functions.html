@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>四大資料結構建構式</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+	<!-- Prism.js CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css">
+    <!-- Prism.js Line Numbers CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
+    <!-- Prism.js Syntax Highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <!-- Prism.js Line Numbers Plugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", (event) => {
+            includeHTML(highlightItem);
+            document.getElementById("toggleNav").addEventListener("click", navClick);
+			enableAnswerRevealer();
+        });
+    </script>
+</head>
+<body>
+    <div class="d-flex">
+        <!-- Floating Button -->
+        <button id="toggleNav" class="btn btn-primary">&#8212;</button>
+        <nav id="sidebar" class="bg-light border-end" style="display: block;">
+            <div>
+                <div w3-include-html="navigation.html"></div>
+            </div>
+        </nav>
+        <main class="flex-grow-1">
+            <header>
+                <h1>四大資料結構建構式</h1>
+            </header>
+            <section>
+                <h2>學習導覽</h2>
+                <p>本章節將介紹 Python 中四種常見的資料結構：<code>list</code>、<code>set</code>、<code>tuple</code> 和 <code>dict</code>，並說明它們的建構式與基本用法。</p>
+                <ul>
+                    <li>什麼是 <code>list</code>、<code>set</code>、<code>tuple</code> 和 <code>dict</code>？</li>
+                    <li>如何使用建構式建立這些資料結構。</li>
+                    <li>各種資料結構的適用場景。</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>資料結構建構式的基本概念</h2>
+                <h3>1. <code>list</code> 建構式</h3>
+                <p>使用 <code>list()</code> 或方括號建立可變的有序資料集合：</p>
+                <pre class="line-numbers"><code class="language-python"># 使用 list 建構式
+my_list = list([1, 2, 3])
+print(my_list)  # 輸出：[1, 2, 3]
+
+# 使用方括號
+my_list2 = [4, 5, 6]
+print(my_list2)  # 輸出：[4, 5, 6]</code></pre>
+
+                <h3>2. <code>set</code> 建構式</h3>
+                <p>使用 <code>set()</code> 建立無序且不重複的資料集合：</p>
+                <pre class="line-numbers"><code class="language-python"># 使用 set 建構式
+my_set = set([1, 2, 2, 3])
+print(my_set)  # 輸出：{1, 2, 3}</code></pre>
+
+                <h3>3. <code>tuple</code> 建構式</h3>
+                <p>使用 <code>tuple()</code> 或小括號建立不可變的有序資料集合：</p>
+                <pre class="line-numbers"><code class="language-python"># 使用 tuple 建構式
+my_tuple = tuple([1, 2, 3])
+print(my_tuple)  # 輸出：(1, 2, 3)
+
+# 使用小括號
+my_tuple2 = (4, 5, 6)
+print(my_tuple2)  # 輸出：(4, 5, 6)</code></pre>
+
+                <h3>4. <code>dict</code> 建構式</h3>
+                <p>使用 <code>dict()</code> 或大括號建立鍵值組的資料結構：</p>
+                <pre class="line-numbers"><code class="language-python"># 使用 dict 建構式
+my_dict = dict([("a", 1), ("b", 2)])
+print(my_dict)  # 輸出：{"a": 1, "b": 2}
+
+# 使用大括號
+my_dict2 = {"x": 10, "y": 20}
+print(my_dict2)  # 輸出：{"x": 10, "y": 20}</code></pre>
+            </section>
+
+            <section>
+                <h2>常見問題與解答</h2>
+                <h3>問題 1：什麼時候使用 <code>list</code>？</h3>
+                <p>當需要儲存可變的有序資料時，例如多個數字或字串。</p>
+
+                <h3>問題 2：為什麼 <code>set</code> 中沒有重複元素？</h3>
+                <p><code>set</code> 是無序且不重複的集合，會自動去除重複值。</p>
+
+                <h3>問題 3：<code>tuple</code> 和 <code>list</code> 有什麼不同？</h3>
+                <p><code>tuple</code> 是不可變的，適合儲存固定內容，而 <code>list</code> 是可變的。</p>
+            </section>
+
+            <section>
+                <h2>挑戰題目</h2>
+				<h3 class="caption">挑戰 1：建立資料集合 <span class="icon">🛈</span></h3>
+    <p>建立一個包含五個數字的 <code>list</code>、<code>set</code> 和 <code>tuple</code>，並列印它們。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 建立 list、set 和 tuple
+list_data = [1, 2, 3, 4, 5]
+set_data = {1, 2, 3, 4, 5}
+tuple_data = (1, 2, 3, 4, 5)
+
+print("List:", list_data)
+print("Set:", set_data)
+print("Tuple:", tuple_data)</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 2：操作鍵值組 <span class="icon">🛈</span></h3>
+    <p>建立一個 <code>dict</code>，包含三個鍵值組，並嘗試新增、更新與刪除鍵值。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 操作字典
+dict_data = {"name": "Alice", "age": 25, "city": "Taipei"}
+
+# 新增
+dict_data["job"] = "Engineer"
+
+# 更新
+dict_data["age"] = 26
+
+# 刪除
+del dict_data["city"]
+
+print("Updated Dict:", dict_data)</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 3：結合多種資料結構 <span class="icon">🛈</span></h3>
+    <p>設計一個結構，使用 <code>list</code> 存儲多個 <code>dict</code>，每個 <code>dict</code> 表示一位學生的資料（例如姓名與年齡）。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 存儲多位學生的資料
+students = [
+    {"name": "Alice", "age": 20},
+    {"name": "Bob", "age": 22},
+    {"name": "Charlie", "age": 19}
+]
+
+print("Students Data:", students)</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 4：轉換資料結構 <span class="icon">🛈</span></h3>
+    <p>給定一個 <code>list</code>，將其轉換為 <code>set</code> 和 <code>tuple</code>，並列印轉換後的結果。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 原始列表
+original_list = [1, 2, 2, 3, 4, 4, 5]
+
+# 轉換為 set 和 tuple
+converted_set = set(original_list)
+converted_tuple = tuple(original_list)
+
+print("Original List:", original_list)
+print("Converted Set:", converted_set)
+print("Converted Tuple:", converted_tuple)</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 5：移除重複元素 <span class="icon">🛈</span></h3>
+    <p>設計一個程式，將一個包含重複元素的 <code>list</code> 轉換為不包含重複元素的 <code>set</code>，再轉回 <code>list</code> 並保持原順序。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 原始列表
+original_list = [1, 2, 2, 3, 4, 4, 5]
+
+# 移除重複並保持順序
+unique_list = list(dict.fromkeys(original_list))
+
+print("Unique List:", unique_list)</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 6：合併與更新字典 <span class="icon">🛈</span></h3>
+    <p>給定兩個 <code>dict</code>，將它們合併，若有相同的鍵，保留較大的值。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 合併兩個字典
+dict1 = {"a": 1, "b": 2}
+dict2 = {"b": 3, "c": 4}
+
+merged_dict = {key: max(dict1.get(key, float('-inf')), dict2.get(key, float('-inf'))) for key in dict1.keys() | dict2.keys()}
+
+print("Merged Dict:", merged_dict)</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 7：排序元組中的數字 <span class="icon">🛈</span></h3>
+    <p>給定一個由多個數字組成的 <code>tuple</code>，將其排序後轉換為 <code>list</code> 並列印。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 原始元組
+unsorted_tuple = (34, 12, 56, 78, 1)
+
+# 排序並轉換為列表
+sorted_list = sorted(unsorted_tuple)
+
+print("Sorted List:", sorted_list)</code></pre>
+    </div>
+
+				
+	<h3 class="caption">挑戰 8：統計字母出現次數 <span class="icon">🛈</span></h3>
+    <p>設計一個程式，讓使用者輸入一段文字，計算每個字母（a-z）的出現次數，並以字母順序列印結果，忽略大小寫與非字母字元。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 讓使用者輸入文字
+text = input("請輸入一段文字: ").lower()  # 轉換為小寫
+
+# 建立字母計數字典
+letter_counts = {}
+
+for char in text:
+    if 'a' <= char <= 'z':  # 只計算英文字母
+        letter_counts[char] = letter_counts.get(char, 0) + 1
+
+# 依照字母順序排序並輸出
+print("字母出現次數：")
+for letter in sorted(letter_counts):
+    print(f"{letter}: {letter_counts[letter]}")</code></pre>
+    </div>				
+
+            </section>
+
+            <section>
+                <h2>結語</h2>
+                <p>透過本章的學習，你將掌握 Python 中四種常見資料結構的建構式與基本操作，這是進一步進行資料處理與分析的基礎。</p>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>集合容器</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+	<!-- Prism.js CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css">
+    <!-- Prism.js Line Numbers CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
+    <!-- Prism.js Syntax Highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <!-- Prism.js Line Numbers Plugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", (event) => {
+            includeHTML(highlightItem);
+            document.getElementById("toggleNav").addEventListener("click", navClick);
+			enableAnswerRevealer();
+        });
+    </script>
+</head>
+<body>
+    <div class="d-flex">
+        <!-- Floating Button -->
+        <button id="toggleNav" class="btn btn-primary">&#8212;</button>
+        <nav id="sidebar" class="bg-light border-end" style="display: block;">
+            <div>
+                <div w3-include-html="navigation.html"></div>
+            </div>
+        </nav>
+        <main class="flex-grow-1">
+            <header>
+                <h1>集合容器</h1>
+            </header>
+            <section>
+                <h2>學習導覽</h2>
+                <p>在這一章中，我們將探索集合 (set)，這是一種無序且不重複的資料結構，適合用來處理需要快速查詢的資料集合。</p>
+                <ul>
+                    <li>了解如何建立集合。</li>
+                    <li>學習集合的基本操作，如新增、刪除與查詢。</li>
+                    <li>熟悉集合的數學操作，例如交集、聯集與差集。</li>
+                    <li>探索集合在去除重複資料中的應用。</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>集合的基本操作</h2>
+                <h3>1. 建立集合</h3>
+                <p>可以使用大括號 <code>{}</code> 或 <code>set()</code> 函數建立集合：</p>
+                <pre class="line-numbers"><code class="language-python"># 使用大括號建立集合
+my_set = {1, 2, 3, 4, 5}
+
+# 使用 set 函數建立集合
+another_set = set([3, 4, 5, 6, 7])</code></pre>
+
+                <h3>2. 新增與刪除元素</h3>
+                <p>使用 <code>add()</code> 新增元素，使用 <code>remove()</code> 或 <code>discard()</code> 刪除元素：</p>
+                <pre class="line-numbers"><code class="language-python"># 新增元素
+my_set.add(6)
+print(my_set)  # 輸出：{1, 2, 3, 4, 5, 6}
+
+# 刪除元素
+my_set.remove(3)
+print(my_set)  # 輸出：{1, 2, 4, 5, 6}</code></pre>
+
+                <h3>3. 集合運算</h3>
+                <p>集合支援數學運算，如交集、聯集與差集：</p>
+                <pre class="line-numbers"><code class="language-python"># 交集
+print(my_set & another_set)  # 輸出：{4, 5, 6}
+
+# 聯集
+print(my_set | another_set)  # 輸出：{1, 2, 3, 4, 5, 6, 7}
+
+# 差集
+print(my_set - another_set)  # 輸出：{1, 2}</code></pre>
+
+                <h3>4. 集合的其他方法</h3>
+                <p>例如檢查元素是否存在於集合中：</p>
+                <pre class="line-numbers"><code class="language-python"># 檢查元素是否存在
+print(2 in my_set)  # 輸出：True
+print(10 in my_set)  # 輸出：False</code></pre>
+            </section>
+
+            <section>
+                <h2>常見問題與解答</h2>
+                <h3>問題 1：為什麼集合中的元素是無序的？</h3>
+                <p>集合使用雜湊表來儲存資料，因此元素的順序不可預測。</p>
+
+                <h3>問題 2：如何去除串列中的重複元素？</h3>
+                <p>可以將串列轉換為集合，再轉回串列：</p>
+                <pre class="line-numbers"><code class="language-python"># 去除重複元素
+my_list = [1, 2, 2, 3, 4, 4, 5]
+unique_list = list(set(my_list))
+print(unique_list)  # 輸出：[1, 2, 3, 4, 5]</code></pre>
+
+                <h3>問題 3：集合是否允許包含可變的資料類型？</h3>
+                <p>集合中的元素必須是不可變的，因此像串列這樣的可變資料類型不能作為集合的元素。</p>
+            </section>
+
+            <section>
+                <h2>挑戰題目</h2>
+                <h3 class="caption">挑戰 1：統計唯一字母數量 <span class="icon">🛈</span></h3>
+    <p>讓使用者輸入一段文字，統計該文字中包含的唯一字母數量（忽略大小寫）。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+text = input("請輸入一段文字: ").lower()
+unique_letters = set(char for char in text if char.isalpha())
+print("唯一字母數量:", len(unique_letters))</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 2：好友名單比對 <span class="icon">🛈</span></h3>
+    <p>設計一個程式，讓使用者輸入兩組好友名單，輸出共同好友、只屬於第一組的好友，以及只屬於第二組的好友。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+friends1 = set(input("請輸入第一組好友名單（以空格分隔）: ").split())
+friends2 = set(input("請輸入第二組好友名單（以空格分隔）: ").split())
+print("共同好友:", friends1 & friends2)
+print("只屬於第一組的好友:", friends1 - friends2)
+print("只屬於第二組的好友:", friends2 - friends1)</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 3：集合運算模擬 <span class="icon">🛈</span></h3>
+    <p>模擬集合的聯集、交集與差集操作，並將結果以人性化的方式輸出。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+set1 = set(input("請輸入第一組集合元素（以空格分隔）: ").split())
+set2 = set(input("請輸入第二組集合元素（以空格分隔）: ").split())
+print("聯集:", set1 | set2)
+print("交集:", set1 & set2)
+print("差集（第一組 - 第二組）:", set1 - set2)</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 4：單字頻率統計 <span class="icon">🛈</span></h3>
+    <p>設計一個程式，讓使用者輸入一段文字，統計每個單字出現的次數，並以降序顯示頻率最高的單字。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+text = input("請輸入一段文字: ")
+
+# Define characters to remove
+punctuation = ".,!?;:\"'()[]{}"
+
+# Process input text: remove punctuation and split into words
+words = [word.strip(punctuation) for word in text.split()]
+
+# Manually count word occurrences
+word_counts = {}
+for word in words:
+    if word:  # Ignore empty strings after stripping
+        word_counts[word] = word_counts.get(word, 0) + 1
+
+# Sort words by frequency in descending order
+sorted_words = sorted(word_counts.items(), key=lambda x: x[1], reverse=True)
+
+# Print results
+print("單字頻率:")
+for word, count in sorted_words:
+    print(f"{word}: {count}")
+
+</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 5：集合相等性檢查 <span class="icon">🛈</span></h3>
+    <p>讓使用者輸入兩組數字，檢查這兩組是否包含完全相同的元素，並輸出結果。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+set1 = set(input("請輸入第一組數字（以空格分隔）: ").split())
+set2 = set(input("請輸入第二組數字（以空格分隔）: ").split())
+print("集合相等:" if set1 == set2 else "集合不相等")</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 6：移除多餘元素 <span class="icon">🛈</span></h3>
+    <p>設計一個程式，讓使用者輸入一組數字，移除其中的重複元素，並以升序輸出結果。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+numbers = list(map(int, input("請輸入一組數字（以空格分隔）: ").split()))
+unique_numbers = sorted(set(numbers))
+print("移除重複後的數字:", unique_numbers)</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 7：英文字母缺失檢查 <span class="icon">🛈</span></h3>
+    <p>讓使用者輸入一段文字，檢查該文字是否包含所有 26 個英文字母，並輸出缺失的字母。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+text = input("請輸入一段文字: ").lower()
+
+# Define lowercase alphabet manually
+alphabet = "abcdefghijklmnopqrstuvwxyz"
+
+# Get missing letters by checking which ones are not in the input
+missing_letters = {letter for letter in alphabet if letter not in text}
+
+# Print results
+print("缺失的字母:", missing_letters if missing_letters else "無缺失")
+</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 8：電影收藏分析 <span class="icon">🛈</span></h3>
+    <p>設計一個程式，讓使用者輸入兩組電影收藏，輸出這兩組電影的共同收藏、僅屬於第一組的收藏，及僅屬於第二組的收藏。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+movies1 = set(input("請輸入第一組電影收藏（以空格分隔）: ").split())
+movies2 = set(input("請輸入第二組電影收藏（以空格分隔）: ").split())
+print("共同收藏:", movies1 & movies2)
+print("僅屬於第一組的收藏:", movies1 - movies2)
+print("僅屬於第二組的收藏:", movies2 - movies1)</code></pre>
+    </div>
+				
+            </section>
+
+            <section>
+                <h2>結語</h2>
+                <p>集合是一種強大的工具，能幫助我們快速處理無序且不重複的資料。透過本章學習，你將能夠運用集合處理多種情境，並提升程式的效率與可讀性。</p>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

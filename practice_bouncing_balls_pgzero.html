@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>綜合練習：Bouncing Balls 模擬</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+	<!-- Prism.js CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css">
+    <!-- Prism.js Line Numbers CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
+    <!-- Prism.js Syntax Highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <!-- Prism.js Line Numbers Plugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", (event) => {
+            includeHTML(highlightItem);
+            document.getElementById("toggleNav").addEventListener("click", navClick);
+            enableAnswerRevealer();
+        });
+    </script>
+</head>
+<body>
+    <div class="d-flex">
+        <!-- Floating Button -->
+        <button id="toggleNav" class="btn btn-primary">&#8212;</button>
+        <nav id="sidebar" class="bg-light border-end" style="display: block;">
+            <div>
+                <div w3-include-html="navigation.html"></div>
+            </div>
+        </nav>
+        <main class="flex-grow-1">
+            <header>
+                <h1>綜合練習：Bouncing Balls 模擬</h1>
+            </header>
+            <section>
+                <h2>學習導覽</h2>
+                <p>本教學將引導你實作一個互動式 Bouncing Balls 模擬，使用 <code>pygame zero</code> 進行設計，並涵蓋以下主題：</p>
+                <ul>
+                    <li>如何使用滑鼠點擊與拖曳來創建小球並設定初始速度。</li>
+                    <li>讓小球在邊界與其他小球碰撞並進行彈性反彈。</li>
+                    <li>實現小球的隨機顏色與大小。</li>
+                </ul>
+                <p>完成本教學後，你將能夠設計基於物理邏輯的互動遊戲或模擬器。</p>
+            </section>
+
+<section>
+    <h2>程式碼詳細說明</h2>
+
+    <h3>1. 模組與全域變數定義</h3>
+    <pre class="line-numbers"><code class="language-python">import random
+import math
+import pgzrun
+
+WIDTH = 800
+HEIGHT = 600
+
+balls = []  # 儲存所有的小球資訊
+dragged_ball = None  # 目前被拖曳的小球</code></pre>
+    <p>匯入必要的模組，設定畫布尺寸，並初始化存放小球資訊的列表和拖曳中的小球變數。</p>
+
+    <h3>2. 繪製畫面</h3>
+    <pre class="line-numbers"><code class="language-python">def draw():
+    screen.fill("black")  # 設定背景顏色為黑色
+    for ball in balls:
+        screen.draw.filled_circle((ball["x"], ball["y"]), ball["radius"], ball["color"])
+    screen.draw.text(
+        "Click to add a ball. Drag mouse to set velocity.",
+        (10, 10),
+        fontsize=24,
+        color="white"
+    )</code></pre>
+    <p>清空畫布後，繪製所有小球並顯示操作提示文字。</p>
+
+    <h3>3. 更新小球狀態</h3>
+    <pre class="line-numbers"><code class="language-python">def update():
+    for i, ball in enumerate(balls):
+        ball["x"] += ball["vx"]
+        ball["y"] += ball["vy"]
+
+        # 檢查邊界碰撞
+        if ball["x"] - ball["radius"] < 0 or ball["x"] + ball["radius"] > WIDTH:
+            ball["vx"] = -ball["vx"]
+        if ball["y"] - ball["radius"] < 0 or ball["y"] + ball["radius"] > HEIGHT:
+            ball["vy"] = -ball["vy"]
+
+        # 檢查與其他小球的碰撞
+        for j, other in enumerate(balls):
+            if i != j:
+                dx = ball["x"] - other["x"]
+                dy = ball["y"] - other["y"]
+                distance = math.sqrt(dx**2 + dy**2)
+                if distance < ball["radius"] + other["radius"]:
+                    # 處理彈性碰撞
+                    nx, ny = dx / distance, dy / distance
+                    p = ball["vx"] * nx + ball["vy"] * ny - other["vx"] * nx - other["vy"] * ny
+                    ball["vx"] -= p * nx
+                    ball["vy"] -= p * ny
+                    other["vx"] += p * nx
+                    other["vy"] += p * ny</code></pre>
+    <p>更新每個小球的位置，檢查是否與邊界或其他小球碰撞，並處理相應的反彈邏輯。</p>
+	<p>以下是碰撞偵測中使用的主要變數及其角色：</p>
+    <ul>
+        <li>
+            <strong>x, y：</strong>每顆球的當前位置座標，分別表示水平和垂直位置。
+            這些座標會根據球的速度 (vx, vy) 持續更新，以模擬球的運動。
+        </li>
+        <li>
+            <strong>vx, vy：</strong>每顆球的速度向量，分別表示水平方向和垂直方向的速度。
+            當發生碰撞或與牆壁接觸時，這些值會被調整以模擬真實的物理反應。
+        </li>
+        <li>
+            <strong>nx, ny：</strong>碰撞軸的單位向量，表示從其中一顆球指向另一顆球的方向。
+            <ul>
+                <li>
+                    計算方式為：<code>nx = dx / distance, ny = dy / distance</code>，其中
+                    <code>dx</code> 和 <code>dy</code> 為兩顆球位置的水平與垂直距離差，
+                    <code>distance</code> 則為兩顆球中心的距離。
+                </li>
+                <li>該向量用於確定碰撞作用力的方向。</li>
+            </ul>
+        </li>
+        <li>
+            <strong>p：</strong>相對速度在碰撞軸上的投影，表示兩顆球之間速度差的大小。
+            <ul>
+                <li>
+                    計算方式為：
+                    <code>p = ball["vx"] * nx + ball["vy"] * ny - other["vx"] * nx - other["vy"] * ny</code>。
+                </li>
+                <li>
+                    <code>p</code> 決定了速度在碰撞軸上的交換量，從而模擬動量守恆。
+                </li>
+            </ul>
+        </li>
+    </ul>
+
+    <h3>4. 滑鼠事件處理</h3>
+    <h4>4.1 點擊新增小球</h4>
+    <pre class="line-numbers"><code class="language-python">def on_mouse_down(pos):
+    global dragged_ball
+    new_ball = {
+        "x": pos[0],
+        "y": pos[1],
+        "vx": 0,
+        "vy": 0,
+        "radius": random.randint(10, 30),
+        "color": (random.randint(100, 255), random.randint(100, 255), random.randint(100, 255)),
+    }
+    balls.append(new_ball)
+    dragged_ball = new_ball</code></pre>
+    <p>在滑鼠點擊處新增一個隨機大小和顏色的小球，並標記為拖曳中的小球。</p>
+
+    <h4>4.2 拖曳設定速度</h4>
+    <pre class="line-numbers"><code class="language-python">def on_mouse_move(pos):
+    global dragged_ball
+    if dragged_ball:
+        dragged_ball["vx"] = (pos[0] - dragged_ball["x"]) / 10
+        dragged_ball["vy"] = (pos[1] - dragged_ball["y"]) / 10</code></pre>
+    <p>根據滑鼠的拖曳距離設定拖曳中小球的速度。</p>
+
+    <h4>4.3 釋放小球</h4>
+    <pre class="line-numbers"><code class="language-python">def on_mouse_up():
+    global dragged_ball
+    dragged_ball = None</code></pre>
+    <p>當滑鼠釋放時，停止拖曳小球。</p>
+
+    <h3>5. 啟動程式</h3>
+    <pre class="line-numbers"><code class="language-python">pgzrun.go()</code></pre>
+    <p>啟動 <code>pgzrun</code> 主迴圈，開始運行程式。</p>
+</section>
+      
+
+            <section>
+                <h2>完整範例程式碼</h2>
+                <pre class="line-numbers"><code class="language-python">import random
+import math
+import pgzrun
+
+WIDTH = 800
+HEIGHT = 600
+
+# List to store all the balls
+balls = []
+dragged_ball = None
+
+def draw():
+    screen.fill("black")  # Set background color
+    for ball in balls:
+        screen.draw.filled_circle((ball["x"], ball["y"]), ball["radius"], ball["color"])
+    screen.draw.text(
+        "Click to add a ball. Drag mouse to set velocity.",
+        (10, 10),
+        fontsize=24,
+        color="white"
+    )
+
+def update():
+    for i, ball in enumerate(balls):
+        # Update ball position
+        ball["x"] += ball["vx"]
+        ball["y"] += ball["vy"]
+
+        # Check for wall collisions
+        if ball["x"] - ball["radius"] < 0 or ball["x"] + ball["radius"] > WIDTH:
+            ball["vx"] = -ball["vx"]
+        if ball["y"] - ball["radius"] < 0 or ball["y"] + ball["radius"] > HEIGHT:
+            ball["vy"] = -ball["vy"]
+
+        # Check for collisions with other balls
+        for j, other in enumerate(balls):
+            if i != j:
+                dx = ball["x"] - other["x"]
+                dy = ball["y"] - other["y"]
+                distance = math.sqrt(dx**2 + dy**2)
+                if distance < ball["radius"] + other["radius"]:
+                    # Handle elastic collision
+                    nx, ny = dx / distance, dy / distance
+                    p = ball["vx"] * nx + ball["vy"] * ny - other["vx"] * nx - other["vy"] * ny
+                    ball["vx"] -= p * nx
+                    ball["vy"] -= p * ny
+                    other["vx"] += p * nx
+                    other["vy"] += p * ny
+
+def on_mouse_down(pos):
+    global dragged_ball
+    # Create a new ball at the mouse position
+    new_ball = {
+        "x": pos[0],
+        "y": pos[1],
+        "vx": 0,
+        "vy": 0,
+        "radius": random.randint(10, 30),
+        "color": (random.randint(100, 255), random.randint(100, 255), random.randint(100, 255)),
+    }
+    balls.append(new_ball)
+    dragged_ball = new_ball
+
+def on_mouse_move(pos):
+    global dragged_ball
+    if dragged_ball:
+        # Set the velocity based on the drag distance
+        dragged_ball["vx"] = (pos[0] - dragged_ball["x"]) / 10
+        dragged_ball["vy"] = (pos[1] - dragged_ball["y"]) / 10
+
+def on_mouse_up():
+    global dragged_ball
+    dragged_ball = None
+
+pgzrun.go()
+</code></pre>
+            </section>
+
+            <section>
+                <h2>挑戰題目</h2>
+
+    <h3 class="caption">挑戰 1：處理球重疊時產生的怪異現象 <span class="icon">🛈</span></h3>
+    <p>如果生成球時距離很近，球會以怪異的方式移動，嘗試解決這個問題。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+def update():
+    for i, ball in enumerate(balls):
+        # Update ball position
+        ball["x"] += ball["vx"]
+        ball["y"] += ball["vy"]
+
+        # Check for wall collisions
+        if ball["x"] - ball["radius"] < 0 or ball["x"] + ball["radius"] > WIDTH:
+            ball["vx"] = -ball["vx"]
+        if ball["y"] - ball["radius"] < 0 or ball["y"] + ball["radius"] > HEIGHT:
+            ball["vy"] = -ball["vy"]
+
+        # Check for collisions with other balls
+        for j, other in enumerate(balls):
+            if i != j:
+                dx = ball["x"] - other["x"]
+                dy = ball["y"] - other["y"]
+                distance = math.sqrt(dx**2 + dy**2)
+                min_distance = ball["radius"] + other["radius"]
+
+                if distance < min_distance:
+                    # Separate the balls
+                    overlap = min_distance - distance
+                    nx, ny = dx / distance, dy / distance
+                    ball["x"] += nx * (overlap / 2)
+                    ball["y"] += ny * (overlap / 2)
+                    other["x"] -= nx * (overlap / 2)
+                    other["y"] -= ny * (overlap / 2)
+
+                    # Handle elastic collision
+                    relative_vx = ball["vx"] - other["vx"]
+                    relative_vy = ball["vy"] - other["vy"]
+                    dot_product = relative_vx * nx + relative_vy * ny
+                    if dot_product > 0:  # Ensure balls are moving apart
+                        continue
+
+                    impulse = 2 * dot_product / 2
+                    ball["vx"] -= impulse * nx
+                    ball["vy"] -= impulse * ny
+                    other["vx"] += impulse * nx
+                    other["vy"] += impulse * ny</code></pre>
+					
+    <p>以下是程式中處理球重疊時使用的新增變數及其功能解釋：</p>
+    <ul>
+        <li>
+            <strong>min_distance：</strong>兩顆球之間的最小距離，等於兩顆球的半徑之和。
+            <ul>
+                <li>當球心距離小於 <code>min_distance</code> 時，表示兩顆球發生了重疊，需要進行分離。</li>
+            </ul>
+        </li>
+        <li>
+            <strong>overlap：</strong>重疊的距離，表示兩顆球超出其最小距離的部分。
+            <ul>
+                <li>計算方式為：<code>overlap = min_distance - distance</code>，其中 <code>distance</code> 為兩顆球的中心距離。</li>
+                <li>該值用於計算每顆球需要移動的距離，以分離重疊部分。</li>
+            </ul>
+        </li>
+        <li>
+            <strong>relative_vx, relative_vy：</strong>兩顆球的相對速度分量，分別表示在水平方向和垂直方向上的相對速度。
+            <ul>
+                <li>計算方式為：<code>relative_vx = ball["vx"] - other["vx"]</code> 和 <code>relative_vy = ball["vy"] - other["vy"]</code>。</li>
+                <li>這些變數用於計算兩顆球沿碰撞軸方向的相對運動情況。</li>
+            </ul>
+        </li>
+        <li>
+            <strong>dot_product：</strong>兩顆球速度向量在碰撞軸方向上的內積。
+            <ul>
+                <li>計算方式為：<code>dot_product = relative_vx * nx + relative_vy * ny</code>。</li>
+                <li>內積值用於判斷兩顆球是否正在相互接近（<code>dot_product > 0</code> 表示接近，否則表示遠離）。</li>
+            </ul>
+        </li>
+        <li>
+            <strong>impulse：</strong>表示碰撞時速度交換的衝量，基於動量守恆計算。
+            <ul>
+                <li>計算方式為：<code>impulse = 2 * dot_product / 2</code>。</li>
+                <li>該值用於調整兩顆球的速度，使其在碰撞後沿碰撞軸方向分離。</li>
+            </ul>
+        </li>
+    </ul>
+
+					
+					
+    </div>
+
+
+    <h3 class="caption">挑戰 2：增加重力效果 <span class="icon">🛈</span></h3>
+    <p>在程式中加入重力，使小球在畫布內受到重力影響，並在碰到地面時反彈。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+GRAVITY = 0.5  # 定義重力加速度
+
+def update():
+    for ball in balls:
+        ball["vy"] += GRAVITY  # 將重力影響加入 y 方向速度
+        ball["x"] += ball["vx"]
+        ball["y"] += ball["vy"]
+
+        # 邊界檢測與反彈
+        if ball["x"] - ball["radius"] < 0 or ball["x"] + ball["radius"] > WIDTH:
+            ball["vx"] = -ball["vx"]
+        if ball["y"] + ball["radius"] > HEIGHT:  # 碰到地面時反彈
+            ball["vy"] = -ball["vy"] * 0.9  # 速度衰減，模擬能量損失
+            ball["y"] = HEIGHT - ball["radius"]  # 防止穿透地面
+</code></pre>
+
+<p>以下是程式中模擬重力效果時使用的主要變數及其角色：</p>
+    <ul>
+        <li>
+            <strong>GRAVITY：</strong>重力加速度，影響球在垂直方向（y 軸）的速度變化。
+            <ul>
+                <li>定義為 <code>GRAVITY = 0.5</code>，表示每幀球的 y 軸速度增加 0.5。</li>
+                <li>模擬現實中物體受到重力影響時的加速運動，使球自然落下。</li>
+            </ul>
+        </li>
+        <li>
+            <strong>ball["vy"]：</strong>球在 y 軸的速度，受到重力影響而逐漸增加。
+            <ul>
+                <li>每次更新時，<code>ball["vy"] += GRAVITY</code>，讓球在垂直方向加速下降。</li>
+                <li>當球碰到地面時，<code>ball["vy"]</code> 會反轉並乘以 0.9（能量損失係數），模擬彈跳時能量損失。現實中，每次彈跳時球的動能會減少，因此在程式中減少 y 軸速度，以逐漸減弱彈跳高度。</li>
+            </ul>
+        </li>        
+    </ul>
+    </div>
+
+    <h3 class="caption">挑戰 3：顯示速度向量 <span class="icon">🛈</span></h3>
+    <p>在小球上繪製其速度向量，顯示當前運動方向與速度大小。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+def draw():
+    screen.fill("black")
+    for ball in balls:
+        # 繪製小球
+        screen.draw.filled_circle((ball["x"], ball["y"]), ball["radius"], ball["color"])
+        # 繪製速度向量
+        end_x = ball["x"] + ball["vx"] * 10
+        end_y = ball["y"] + ball["vy"] * 10
+        screen.draw.line((ball["x"], ball["y"]), (end_x, end_y), "white")
+    screen.draw.text(
+        "Click to add a ball. Drag mouse to set velocity.",
+        (10, 10),
+        fontsize=24,
+        color="white"
+    )
+</code></pre>
+
+	<p>在繪製過程中，以下變數用於顯示小球及其速度向量：</p>
+    <ul>
+        <li>
+            <strong>end_x, end_y：</strong>速度向量的終點座標，計算方式如下：
+            <ul>
+                <li><code>end_x = ball["x"] + ball["vx"] * 10</code></li>
+                <li><code>end_y = ball["y"] + ball["vy"] * 10</code></li>
+                <li>這些值決定了速度向量的長度，乘以 10 以提高可視化效果。</li>
+            </ul>
+        </li>
+    </ul>
+    </div>
+
+            </section>
+
+            <section>
+                <h2>結語</h2>
+                <p>本次教學帶你完成了一個完整的 Bouncing Balls 模擬，結合互動性與物理邏輯設計。希望你能基於此範例進一步探索遊戲開發的可能性！</p>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

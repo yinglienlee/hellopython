@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>檔案操作</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+	<!-- Prism.js CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css">
+    <!-- Prism.js Line Numbers CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
+    <!-- Prism.js Syntax Highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <!-- Prism.js Line Numbers Plugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", (event) => {
+            includeHTML(highlightItem);
+            document.getElementById("toggleNav").addEventListener("click", navClick);
+			enableAnswerRevealer();
+        });
+    </script>
+</head>
+<body>
+    <div class="d-flex">
+        <!-- Floating Button -->
+        <button id="toggleNav" class="btn btn-primary">&#8212;</button>
+        <nav id="sidebar" class="bg-light border-end" style="display: block;">
+            <div>
+                <div w3-include-html="navigation.html"></div>
+            </div>
+        </nav>
+        <main class="flex-grow-1">
+            <header>
+                <h1>檔案操作</h1>
+            </header>
+            <section>
+                <h2>學習導覽</h2>
+                <p>在這一章中，我們將學習如何使用 Python 進行檔案操作。這些技巧可以幫助你處理檔案的讀取、寫入和管理。</p>
+                <ul>
+                    <li>如何開啟和關閉檔案。</li>
+                    <li>讀取檔案內容的方法。</li>
+                    <li>寫入資料到檔案的方法。</li>
+                    <li>檔案操作的例外處理。</li>
+                </ul>
+                <p>完成這一章後，你將能夠輕鬆處理日常的檔案操作需求。</p>
+            </section>
+
+            <section>
+                <h2>基本檔案操作</h2>
+                <h3>1. 開啟檔案</h3>
+                <p>使用 <code>open()</code> 函式開啟檔案：</p>
+                <pre class="line-numbers"><code class="language-python"># 開啟檔案進行讀取
+file = open("example.txt", "r")
+# 執行檔案操作
+file.close()  # 關閉檔案</code></pre>
+
+                <h3>2. 自動管理檔案的開啟與關閉</h3>
+                <p>建議使用 <code>with</code> 語法來自動管理檔案：</p>
+                <pre class="line-numbers"><code class="language-python">with open("example.txt", "r") as file:
+    content = file.read()
+    print(content)</code></pre>
+				<p>如果不關閉檔案，可能會導致以下問題：
+					<ul>
+						<li>資源浪費：檔案在開啟時會佔用系統資源（例如檔案描述符），若不及時關閉，這些資源會一直被占用。當開啟的檔案數量達到系統上限時，將無法再打開新的檔案。</li>
+						<li>資料遺失或不一致：在寫入檔案時，資料通常先被存放在緩衝區，等到檔案關閉時才真正寫入磁碟。如果不關閉檔案，緩衝區中的資料可能無法正確寫入，導致資料遺失或檔案內容不一致。</li>
+						<li>檔案鎖定：某些作業系統或應用程式在檔案開啟後會鎖定該檔案，若不關閉，其他程式可能無法讀取或寫入這個檔案。</li>
+						<li>程式不穩定：長期未關閉檔案可能會導致程式內部的資源管理出現問題，進而引發記憶體洩漏或其他意料之外的錯誤，影響程式穩定性。</li>
+					</ul>
+				</p>
+
+                <h3>3. 檔案模式</h3>
+                <p><code>open()</code> 的模式參數決定了檔案的操作方式：</p>
+                <ul>
+                    <li><code>"r"</code>：唯讀模式。</li>
+                    <li><code>"w"</code>：寫入模式，會清空檔案內容。</li>
+                    <li><code>"a"</code>：附加模式，將內容寫入檔案末尾。</li>
+                    <li><code>"rb"</code>、<code>"wb"</code>：以二進位模式讀寫。</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>讀取檔案</h2>
+                <h3>1. 使用 <code>read()</code></h3>
+                <p>讀取檔案的所有內容：</p>
+                <pre class="line-numbers"><code class="language-python">with open("example.txt", "r") as file:
+    content = file.read()
+    print(content)</code></pre>
+
+                <h3>2. 使用 <code>readline()</code></h3>
+                <p>一次讀取一行：</p>
+                <pre class="line-numbers"><code class="language-python">with open("example.txt", "r") as file:
+    line = file.readline()
+    while line:
+        print(line.strip())
+        line = file.readline()</code></pre>
+
+                <h3>3. 使用 <code>readlines()</code></h3>
+                <p>讀取所有行並回傳串列：</p>
+                <pre class="line-numbers"><code class="language-python">with open("example.txt", "r") as file:
+    lines = file.readlines()
+    for line in lines:
+        print(line.strip())</code></pre>
+            </section>
+
+            <section>
+                <h2>寫入檔案</h2>
+                <h3>1. 使用 <code>write()</code></h3>
+                <p>將內容寫入檔案：</p>
+                <pre class="line-numbers"><code class="language-python">with open("example.txt", "w") as file:
+    file.write("Hello, World!\n")</code></pre>
+
+                <h3>2. 使用 <code>writelines()</code></h3>
+                <p>寫入多行內容：</p>
+                <pre class="line-numbers"><code class="language-python">lines = ["Line 1\n", "Line 2\n", "Line 3\n"]
+with open("example.txt", "w") as file:
+    file.writelines(lines)</code></pre>
+            </section>
+
+            <section>
+                <h2>例外處理</h2>
+                <h3>1. 檔案操作中的例外</h3>
+                <p>處理檔案時可能會遇到例外，例如檔案不存在或無法寫入。</p>
+                <pre class="line-numbers"><code class="language-python">try:
+    with open("nonexistent.txt", "r") as file:
+        content = file.read()
+except FileNotFoundError:
+    print("檔案不存在！")</code></pre>
+
+                <h3>2. 確保檔案正確關閉</h3>
+                <p>雖然 <code>with</code> 語法通常能自動處理，但也可以使用 <code>finally</code> 確保檔案被關閉：</p>
+                <pre class="line-numbers"><code class="language-python">file = None
+try:
+    file = open("example.txt", "r")
+    content = file.read()
+finally:
+    if file:
+        file.close()</code></pre>
+            </section>
+
+			<section>
+				<h2>不同平台的換行符號</h2>
+				<p>在檔案操作中，換行符號的使用因操作系統而異。這些差異可能會影響到檔案的可讀性或跨平台的相容性，因此了解它們非常重要。</p>
+
+				<h3>1. 常見的換行符號</h3>
+				<ul>
+					<li><code>\n</code>（LF, Line Feed）：用於 Unix/Linux 和 macOS 系統。</li>
+					<li><code>\r\n</code>（CRLF, Carriage Return + Line Feed）：用於 Windows 系統。</li>
+					<li><code>\r</code>（CR, Carriage Return）：舊版的 macOS 使用，但現已被 LF 替代。</li>
+				</ul>
+
+				<h3>2. 範例</h3>
+				<p>以下範例展示了不同平台的換行符號對檔案輸出的影響：</p>
+				<pre class="line-numbers"><code class="language-python"># Windows 系統換行符號
+with open("example_windows.txt", "w", newline="\r\n") as file:
+	file.write("第一行\n第二行")
+
+# Unix/Linux/macOS 系統換行符號
+with open("example_unix.txt", "w", newline="\n") as file:
+	file.write("第一行\n第二行")</code></pre>
+
+				<h3>3. 跨平台注意事項</h3>
+				<p>在處理檔案時，建議使用 Python 的內建功能來自動處理換行符號，以確保跨平台的相容性：</p>
+				<pre class="line-numbers"><code class="language-python">with open("example.txt", "w", newline=None) as file:
+	file.write("第一行\n第二行")</code></pre>
+				<p>上述程式會根據操作系統自動應用適當的換行符號。</p>
+
+				<h3>4. 常見問題</h3>
+				<p><strong>問題：</strong>為什麼在不同平台上打開相同檔案時，換行符號顯示不同？</p>
+				<p><strong>解答：</strong>因為不同系統對換行的定義不同。例如，Windows 使用 <code>\r\n</code> 作為換行符號，而 Unix/Linux 使用 <code>\n</code>。</p>
+			</section>
+
+
+
+            <section>
+                <h2>常見問題與解答</h2>
+                <h3>問題 1：可以同時讀取和寫入檔案嗎？</h3>
+                <p>可以，使用模式 <code>"r+"</code> 即可同時讀寫檔案。</p>
+
+                <h3>問題 2：如何檢查檔案是否存在？</h3>
+                <p>可以使用 <code>os.path.exists()</code>：</p>
+                <pre class="line-numbers"><code class="language-python">import os
+
+if os.path.exists("example.txt"):
+    print("檔案存在！")
+else:
+    print("檔案不存在！")</code></pre>
+            </section>
+
+            <section>
+                <h2>挑戰題目</h2>
+				<h3 class="caption">挑戰 1：檔案複製 <span class="icon">🛈</span></h3>
+    <p>撰寫程式，將一個檔案的內容複製到另一個檔案。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+source_file = "source.txt"
+destination_file = "destination.txt"
+
+with open(source_file, "r") as src:
+    content = src.read()
+
+with open(destination_file, "w") as dest:
+    dest.write(content)
+
+print(f"檔案 {source_file} 已複製到 {destination_file}。")</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 2：日誌系統 <span class="icon">🛈</span></h3>
+    <p>設計一個簡易的日誌系統，將使用者的輸入記錄到檔案中。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+log_file = "log.txt"
+
+while True:
+    entry = input("請輸入日誌內容（輸入 'exit' 結束）：")
+    if entry.lower() == "exit":
+        break
+    with open(log_file, "a") as file:
+        file.write(entry + "\n")
+
+print("日誌記錄已完成。")</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 3：檔案統計 <span class="icon">🛈</span></h3>
+    <p>撰寫程式，統計一個文字檔案中的行數、單字數和字元數。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+file_name = "example.txt"
+
+with open(file_name, "r") as file:
+    lines = file.readlines()
+
+line_count = len(lines)
+word_count = sum(len(line.split()) for line in lines)
+char_count = sum(len(line) for line in lines)
+
+print(f"行數：{line_count}, 單字數：{word_count}, 字元數：{char_count}")</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 4：搜尋檔案中的關鍵字 <span class="icon">🛈</span></h3>
+    <p>撰寫程式，讓使用者輸入關鍵字，並搜尋檔案中是否包含該關鍵字，輸出該關鍵字所在的行數。</p>
+    <pre class="line-numbers"><code class="language-python"># 範例輸入
+# example.txt 檔案內容：
+# Hello, this is a test file.
+# Python is great.
+# File operations are useful.
+
+keyword = "Python"
+# 預期輸出
+關鍵字 "Python" 出現在第 2 行。</code></pre>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+file_name = "example.txt"
+keyword = input("請輸入關鍵字：")
+
+with open(file_name, "r") as file:
+    for line_number, line in enumerate(file, start=1):
+        if keyword in line:
+            print(f"關鍵字 \"{keyword}\" 出現在第 {line_number} 行。")</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 5：合併多個檔案 <span class="icon">🛈</span></h3>
+    <p>設計一個程式，將多個文字檔案的內容合併為一個新檔案。</p>
+    <pre class="line-numbers"><code class="language-python"># 範例輸入
+# file1.txt 和 file2.txt 的內容分別為：
+# file1.txt: Hello
+# file2.txt: World
+# 預期輸出
+# 合併後的新檔案內容：
+# Hello
+# World</code></pre>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+files_to_merge = ["file1.txt", "file2.txt"]
+output_file = "merged.txt"
+
+with open(output_file, "w") as outfile:
+    for file_name in files_to_merge:
+        with open(file_name, "r") as infile:
+            outfile.write(infile.read() + "\n")
+
+print(f"檔案已合併為 {output_file}。")</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 6：檢查檔案大小 <span class="icon">🛈</span></h3>
+    <p>撰寫程式，檢查指定檔案的大小，並輸出檔案大小（以 KB 為單位）。</p>
+    <pre class="line-numbers"><code class="language-python"># 範例輸入
+file_name = "example.txt"
+# 預期輸出
+檔案大小：1.23 KB</code></pre>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+import os
+
+file_name = "example.txt"
+file_size = os.path.getsize(file_name) / 1024  # KB
+print(f"檔案大小：{file_size:.2f} KB")</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 7：移除檔案中的空行 <span class="icon">🛈</span></h3>
+    <p>設計一個程式，讀取文字檔案，移除所有的空行，並將結果存入新檔案。</p>
+    <pre class="line-numbers"><code class="language-python"># 範例輸入
+# example.txt 原內容：
+# Line 1
+#
+# Line 2
+#
+# 預期輸出（新檔案內容）：
+# Line 1
+# Line 2</code></pre>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+input_file = "example.txt"
+output_file = "cleaned.txt"
+
+with open(input_file, "r") as infile, open(output_file, "w") as outfile:
+    for line in infile:
+        if line.strip():
+            outfile.write(line)
+
+print(f"空行已移除，結果存入 {output_file}。")</code></pre>
+    </div>
+	
+	<h3 class="caption">挑戰 8：檔案加密與解密 <span class="icon">🛈</span></h3>
+<p>撰寫一個簡單的程式，將檔案中的內容進行加密（如每個字母移位 3 個位置），並能將加密內容解密回原文。</p>
+<pre class="line-numbers"><code class="language-python"># 範例輸入
+# 原內容：
+# Hello
+# 加密後內容：
+# Khoor
+# 解密後內容：
+# Hello</code></pre>
+
+<div class="answer">
+<pre class="line-numbers"><code class="language-python"># 解答
+# 加密函式
+def encrypt(text, shift):
+    encrypted = ""
+    for char in text:
+        if char.isalpha():  # 只處理字母
+            base = ord('A') if char.isupper() else ord('a')
+            encrypted += chr((ord(char) - base + shift) % 26 + base)
+        else:
+            encrypted += char
+    return encrypted
+
+# 解密函式
+def decrypt(text, shift):
+    return encrypt(text, -shift)
+
+# 範例檔案加密
+with open("example.txt", "r") as file:
+    original_content = file.read()
+
+encrypted_content = encrypt(original_content, 3)
+with open("encrypted.txt", "w") as file:
+    file.write(encrypted_content)
+
+# 範例檔案解密
+with open("encrypted.txt", "r") as file:
+    encrypted_content = file.read()
+
+decrypted_content = decrypt(encrypted_content, 3)
+print("加密後內容：", encrypted_content)
+print("解密後內容：", decrypted_content)</code></pre>
+</div>
+					
+				
+            </section>
+
+            <section>
+                <h2>結語</h2>
+                <p>掌握檔案操作是 Python 程式設計的重要技能之一。無論是讀取資料、儲存結果，還是進行資料處理，這些技巧都能大大提高你的程式設計能力。</p>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

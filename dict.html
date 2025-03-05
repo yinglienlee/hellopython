@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>字典容器</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+	<!-- Prism.js CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css">
+    <!-- Prism.js Line Numbers CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
+    <!-- Prism.js Syntax Highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <!-- Prism.js Line Numbers Plugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", (event) => {
+            includeHTML(highlightItem);
+            document.getElementById("toggleNav").addEventListener("click", navClick);
+			enableAnswerRevealer();
+        });
+    </script>
+</head>
+<body>
+    <div class="d-flex">
+        <!-- Floating Button -->
+        <button id="toggleNav" class="btn btn-primary">&#8212;</button>
+        <nav id="sidebar" class="bg-light border-end" style="display: block;">
+            <div>
+                <div w3-include-html="navigation.html"></div>
+            </div>
+        </nav>
+        <main class="flex-grow-1">
+            <header>
+                <h1>字典容器</h1>
+            </header>
+            <section>
+                <h2>學習導覽</h2>
+                <p>在這一章中，我們將學習字典 (dictionary)，這是一種用於儲存鍵值組 (key-value pairs) 的資料結構，適合快速查詢與組織資料。</p>
+                <ul>
+                    <li>了解如何建立字典。</li>
+                    <li>學習如何存取與修改字典中的值。</li>
+                    <li>探索字典的常用方法。</li>
+                    <li>學習如何迭代字典。</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>字典的基本操作</h2>
+                <h3>1. 建立字典</h3>
+                <p>字典使用大括號 <code>{}</code> 表示，鍵和值之間使用冒號分隔：</p>
+                <pre class="line-numbers"><code class="language-python"># 建立空字典
+empty_dict = {}
+
+# 建立包含鍵值組的字典
+person = {
+    "name": "Alice",
+    "age": 25,
+    "city": "Taipei"
+}</code></pre>
+
+                <h3>2. 存取與修改值</h3>
+                <p>使用鍵存取字典中的值，並可以直接修改：</p>
+                <pre class="line-numbers"><code class="language-python"># 存取值
+print(person["name"])  # 輸出：Alice
+
+# 修改值
+person["age"] = 26
+print(person)  # 輸出：{'name': 'Alice', 'age': 26, 'city': 'Taipei'}</code></pre>
+
+                <h3>3. 新增與刪除鍵值組</h3>
+                <p>可以直接新增或使用 <code>del</code> 刪除鍵值組：</p>
+                <pre class="line-numbers"><code class="language-python"># 新增鍵值組
+person["job"] = "Engineer"
+print(person)  # 輸出：{'name': 'Alice', 'age': 26, 'city': 'Taipei', 'job': 'Engineer'}
+
+# 刪除鍵值組
+del person["city"]
+print(person)  # 輸出：{'name': 'Alice', 'age': 26, 'job': 'Engineer'}</code></pre>
+
+                <h3>4. 字典的常用方法</h3>
+                <p>以下是一些常見的方法：</p>
+                <pre class="line-numbers"><code class="language-python"># 獲取所有鍵
+print(person.keys())  # 輸出：dict_keys(['name', 'age', 'job'])
+
+# 獲取所有值
+print(person.values())  # 輸出：dict_values(['Alice', 26, 'Engineer'])
+
+# 獲取所有鍵值組
+print(person.items())  # 輸出：dict_items([('name', 'Alice'), ('age', 26), ('job', 'Engineer')])</code></pre>
+            </section>
+
+            <section>
+                <h2>常見問題與解答</h2>
+                <h3>問題 1：字典的鍵有什麼限制？</h3>
+                <p>字典的鍵必須是不可變的，例如數字、字串或元組，但不能是串列或集合。</p>
+
+                <h3>問題 2：如何避免存取不存在的鍵時發生錯誤？</h3>
+                <p>可以使用 <code>get()</code> 方法，指定預設值：</p>
+                <pre class="line-numbers"><code class="language-python">print(person.get("country", "Unknown"))  # 輸出：Unknown</code></pre>
+
+                <h3>問題 3：如何合併兩個字典？</h3>
+                <p>在 Python 3.9+ 中可以使用 <code>|</code> 運算符：</p>
+                <pre class="line-numbers"><code class="language-python"># 合併字典
+dict1 = {"a": 1, "b": 2}
+dict2 = {"b": 3, "c": 4}
+combined = dict1 | dict2
+print(combined)  # 輸出：{'a': 1, 'b': 3, 'c': 4}</code></pre>
+            </section>
+
+            <section>
+                <h2>挑戰題目</h2>
+                <h3 class="caption">挑戰 1：學生成績管理 <span class="icon">🛈</span></h3>
+                <p>設計一個程式，讓使用者輸入多位學生的名字與成績，儲存於字典中，並輸出所有學生的平均成績。</p>
+				<div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+students = {}
+while True:
+    name = input("請輸入學生姓名（輸入 '結束' 結束）：")
+    if name == "結束":
+        break
+    score = int(input(f"請輸入{name}的成績："))
+    students[name] = score
+
+average_score = sum(students.values()) / len(students)
+print("學生平均成績：", average_score)</code></pre>
+    </div>
+
+                <h3 class="caption">挑戰 2：單字翻譯 <span class="icon">🛈</span></h3>
+                <p>建立一個字典儲存英文單字與中文翻譯，讓使用者輸入英文單字並查詢對應的中文翻譯。</p>
+				<div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+dictionary = {"apple": "蘋果", "banana": "香蕉", "orange": "橘子"}
+word = input("請輸入英文單字：")
+translation = dictionary.get(word, "該單字不存在於字典中")
+print(f"{word} 的翻譯是：{translation}")</code></pre>
+    </div>
+
+                <h3 class="caption">挑戰 3：購物清單 <span class="icon">🛈</span></h3>
+                <p>設計一個購物清單程式，讓使用者新增商品與數量，並列出完整的購物清單與總數量。</p>
+				<div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+shopping_list = {}
+while True:
+    item = input("請輸入商品名稱（輸入 '結束' 結束）：")
+    if item == "結束":
+        break
+    quantity = int(input(f"請輸入{item}的數量："))
+    shopping_list[item] = shopping_list.get(item, 0) + quantity
+
+total_quantity = sum(shopping_list.values())
+print("購物清單：", shopping_list)
+print("總數量：", total_quantity)</code></pre>
+    </div>
+				
+				<h3 class="caption">挑戰 4：熱門單字統計 <span class="icon">🛈</span></h3>
+				<p>給定一段文字，計算其中每個單字出現的次數，並使用字典儲存結果。</p>
+				<pre class="line-numbers"><code class="language-python"># 範例輸入
+text = "apple banana apple orange apple banana"
+# 預期輸出
+{'apple': 3, 'banana': 2, 'orange': 1}</code></pre>
+				<div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+text = "apple banana apple orange apple banana"
+words = text.split()
+word_count = {}
+for word in words:
+    word_count[word] = word_count.get(word, 0) + 1
+print(word_count)</code></pre>
+    </div>
+
+				<h3 class="caption">挑戰 5：電話簿管理 <span class="icon">🛈</span></h3>
+				<p>設計一個程式，允許使用者新增聯絡人（姓名與電話），查詢聯絡人電話，並列出所有聯絡人。</p>
+				<pre class="line-numbers"><code class="language-python"># 範例輸入
+add_contact("Alice", "12345678")
+get_contact("Alice")  # 輸出：12345678
+list_contacts()        # 輸出：{'Alice': '12345678'}</code></pre>
+				<div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+phone_book = {}
+
+def add_contact(name, phone):
+    phone_book[name] = phone
+    print(f"已新增聯絡人：{name}")
+
+def get_contact(name):
+    print(phone_book.get(name, "聯絡人不存在"))
+
+def list_contacts():
+    print("電話簿：", phone_book)
+
+add_contact("Alice", "12345678")
+get_contact("Alice")
+list_contacts()</code></pre>
+    </div>
+
+				<h3 class="caption">挑戰 6：反轉鍵值 <span class="icon">🛈</span></h3>
+				<p>給定一個字典，將其鍵與值進行交換，並輸出結果。</p>
+				<pre class="line-numbers"><code class="language-python"># 範例輸入
+original = {"a": 1, "b": 2, "c": 3}
+# 預期輸出
+{1: 'a', 2: 'b', 3: 'c'}</code></pre>
+				<div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+original = {"a": 1, "b": 2, "c": 3}
+reversed_dict = {v: k for k, v in original.items()}
+print(reversed_dict)</code></pre>
+    </div>
+
+				<h3 class="caption">挑戰 7：成績排名 <span class="icon">🛈</span></h3>
+				<p>給定一個包含學生名字與成績的字典，將學生按成績從高到低排序並輸出結果。</p>
+				<pre class="line-numbers"><code class="language-python"># 範例輸入
+grades = {"Alice": 85, "Bob": 92, "Charlie": 88}
+# 預期輸出
+[('Bob', 92), ('Charlie', 88), ('Alice', 85)]</code></pre>
+				<div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+grades = {"Alice": 85, "Bob": 92, "Charlie": 88}
+sorted_grades = sorted(grades.items(), key=lambda x: x[1], reverse=True)
+print(sorted_grades)</code></pre>
+    </div>
+
+				<h3 class="caption">挑戰 8：合併字典 <span class="icon">🛈</span></h3>
+				<p>給定兩個字典，將它們合併，若有重複的鍵則保留較大的值。</p>
+				<pre class="line-numbers"><code class="language-python"># 範例輸入
+dict1 = {"a": 1, "b": 2}
+dict2 = {"b": 3, "c": 4}
+# 預期輸出
+{'a': 1, 'b': 3, 'c': 4}</code></pre>			
+				<div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+dict1 = {"a": 1, "b": 2}
+dict2 = {"b": 3, "c": 4}
+merged = {k: max(dict1.get(k, 0), dict2.get(k, 0)) for k in dict1.keys() | dict2.keys()}
+print(merged)</code></pre>
+    </div>
+				
+            </section>
+
+            <section>
+                <h2>結語</h2>
+                <p>字典是 Python 中強大且靈活的資料結構，適合用於快速查詢與儲存結構化資料。透過本章的學習與練習，你將能夠熟練掌握字典的基本用法並將其應用於實際專案中。</p>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

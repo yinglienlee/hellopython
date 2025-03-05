@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>指定、多重指定、打包與解包</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+	<!-- Prism.js CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css">
+    <!-- Prism.js Line Numbers CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
+    <!-- Prism.js Syntax Highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <!-- Prism.js Line Numbers Plugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", (event) => {
+            includeHTML(highlightItem);
+            document.getElementById("toggleNav").addEventListener("click", navClick);
+			enableAnswerRevealer();
+        });
+    </script>
+</head>
+<body>
+    <div class="d-flex">
+		<!-- Floating Button -->
+        <button id="toggleNav" class="btn btn-primary">&#8212;</button>
+        <nav id="sidebar" class="bg-light border-end" style="display: block;">
+            <div>
+                <div w3-include-html="navigation.html"></div>
+            </div>
+        </nav>
+        <main class="flex-grow-1">
+            <header>
+                <h1>指定、多重指定、打包與解包</h1>
+            </header>
+            <section>
+                <h2>學習導覽</h2>
+                <p>在這一章，我們將學習 Python 中的指定、多重指定、打包與解包，並探索它們在函式參數中的應用。</p>
+                <ul>
+                    <li>瞭解變數的基本指定。</li>
+                    <li>學習如何使用多重指定為多個變數指定值。</li>
+                    <li>探索打包和解包操作及其應用。</li>
+                    <li>了解如何在函式中使用這些技巧。</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>指定與多重指定</h2>
+                <h3>1. 基本指定</h3>
+                <pre class="line-numbers"><code class="language-python"># 基本指定
+x = 10
+y = "Hello"
+print(x, y)  # 輸出：10 Hello</code></pre>
+
+                <h3>2. 多重指定</h3>
+                <pre class="line-numbers"><code class="language-python"># 多重指定
+a = b = c = 5
+print(a, b, c)  # 輸出：5 5 5
+
+x, y, z = 1, 2, 3
+print(x, y, z)  # 輸出：1 2 3</code></pre>
+            </section>
+
+            <section>
+                <h2>打包與解包</h2>                
+                <p>在 Python 中，使用 <code>*</code> 可以將多個值打包到一個變數中，例如元組或串列。</p>
+                <pre class="line-numbers"><code class="language-python"># 打包成元組
+packed_tuple = 1, 2, 3, 4
+print(packed_tuple)  # 輸出：(1, 2, 3, 4)
+
+# 解包成串列
+*unpacked_list, = [1, 2, 3, 4]
+print(unpacked_list)  # 輸出：[1, 2, 3, 4]</code></pre>
+				<p>
+				在第一例中為什麼不需要星號 ? 這是 Python 的語法特性，逗號自動生成元組。
+				</p>
+				<p>在第二例中星號表示將多個值收集成一個串列，而逗號表示這是解包操作的一部分，即使只有一個變數，也需要用逗號來告知 Python 是解包而非一般指定。雖然此例也可直接寫成 <code>unpacked_list = [1, 2, 3, 4]</code>，但解包的寫法更具彈性。在 Python 中，<code>*</code> 運算符可以用來解包任何可迭代物件（如 <code>list</code>、<code>tuple</code>、<code>set</code>、<code>range</code>、<code>map</code>、<code>generator</code>），而 <code>unpacked_list = [...]</code> 只適用於 <code>list</code>。</p>
+				
+				<pre class="line-numbers"><code class="language-python">*unpacked_list, = range(5)  # range(5) 產生 0,1,2,3,4
+print(unpacked_list)  # [0, 1, 2, 3, 4]
+
+*unpacked_list, = map(int, ["1", "2", "3", "4"])
+print(unpacked_list)  # [1, 2, 3, 4]</code></pre>
+
+                <p>解包也可用在多個變數的指定上。</p>
+				
+                <pre class="line-numbers"><code class="language-python"># 解包元組
+data = (10, 20, 30)
+a, b, c = data
+print(a, b, c)  # 輸出：10 20 30
+
+# 動態解包
+data = [1, 2, 3, 4, 5]
+a, *b, c = data
+print(a, b, c)  # 輸出：1 [2, 3, 4] 5</code></pre>
+            </section>
+
+            <section>
+                <h2>參數中的打包與解包</h2>
+                <h3>1. 函式中的基本參數</h3>
+                <pre class="line-numbers"><code class="language-python"># 函式基本參數
+def greet(name="Guest"):
+    print(f"Hello, {name}!")
+
+greet()  # 輸出：Hello, Guest!
+greet("Alice")  # 輸出：Hello, Alice!</code></pre>
+
+                <h3>2. 可變參數（打包）</h3>
+                <p>使用 <code>*args</code> 將多個位置參數打包為元組傳遞給函式。</p>
+                <pre class="line-numbers"><code class="language-python"># 可變參數
+def add_numbers(*args):
+    print(f"數字總和：{sum(args)}")
+
+add_numbers(1, 2, 3)  # 輸出：數字總和：6</code></pre>
+
+                <h3>3. 解包參數</h3>
+                <p>使用 <code>*</code> 或 <code>**</code> 解包資料傳遞給函式。</p>
+                <pre class="line-numbers"><code class="language-python"># 解包位置參數
+def multiply(a, b, c):
+    return a * b * c
+
+numbers = (2, 3, 4)
+print(multiply(*numbers))  # 輸出：24
+
+# 解包關鍵字參數
+def display_info(name, age, city):
+    print(f"{name} is {age} years old and lives in {city}.")
+
+person_info = {"name": "Alice", "age": 30, "city": "Taipei"}
+display_info(**person_info)
+# 輸出：Alice is 30 years old and lives in Taipei.</code></pre>
+            </section>
+
+            <section>
+                <h2>挑戰題目</h2>
+
+				<h3 class="caption">挑戰 1：基礎多重指定 <span class="icon">🛈</span></h3>
+    <p>一次為三個變數賦值，並輸出這些變數的值。</p>
+    <pre class="line-numbers"><code class="language-python"># 範例輸入
+x, y, z = 10, 20, 30
+# 預期輸出
+x: 10, y: 20, z: 30</code></pre>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+x, y, z = 10, 20, 30
+print(f"x: {x}, y: {y}, z: {z}")</code></pre>
+    </div>
+
+				<h3 class="caption">挑戰 2：動態解包與剩餘收集 <span class="icon">🛈</span></h3>
+    <p>使用動態解包將第一個值賦給 <code>a</code>，最後一個值賦給 <code>b</code>，其餘值收集到 <code>middle</code> 中，並分別輸出它們。</p>
+    <pre class="line-numbers"><code class="language-python"># 範例輸入
+data = [5, 10, 15, 20, 25]
+# 預期輸出
+a: 5, middle: [10, 15, 20], b: 25</code></pre>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+data = [5, 10, 15, 20, 25]
+a, *middle, b = data
+print(f"a: {a}, middle: {middle}, b: {b}")</code></pre>
+    </div>
+
+				<h3 class="caption">挑戰 3：解包與元素交換 <span class="icon">🛈</span></h3>
+    <p>使用多重指定與解包交換兩個變數的值，並輸出交換後的結果。</p>
+    <pre class="line-numbers"><code class="language-python"># 範例輸入
+x, y = 1, 2
+# 預期輸出
+x: 2, y: 1</code></pre>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+x, y = 1, 2
+x, y = y, x
+print(f"x: {x}, y: {y}")</code></pre>
+    </div>
+
+				<h3 class="caption">挑戰 4：函式參數中的打包與解包 <span class="icon">🛈</span></h3>
+    <p>撰寫一個函式接收可變參數，計算所有參數的平均值，並輸出結果。</p>
+    <pre class="line-numbers"><code class="language-python"># 範例輸入
+def calculate_average(*args):
+    pass
+
+calculate_average(10, 20, 30, 40)
+# 預期輸出
+平均值：25.0</code></pre>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+def calculate_average(*args):
+    avg = sum(args) / len(args)
+    print(f"平均值：{avg}")
+
+calculate_average(10, 20, 30, 40)</code></pre>
+    </div>
+
+				<h3 class="caption">挑戰 5：解包字典參數 <span class="icon">🛈</span></h3>
+    <p>定義一個函式，接受不定數量的參數，並使用解包傳遞元組和字典給函式。</p>
+    <pre class="line-numbers"><code class="language-python"># 範例輸入
+def display_info(name, age, city, job):
+    pass
+
+# 定義元組與字典
+person_data = ("Alice", 25)
+person_details = {"city": "Taipei", "job": "Engineer"}
+# 預期輸出
+# Name: Alice, Age: 25, City: Taipei, Job: Engineer</code></pre>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+def display_info(name, age, city, job):
+    print(f"Name: {name}, Age: {age}, City: {city}, Job: {job}")
+
+# 定義元組與字典
+person_data = ("Alice", 25)
+person_details = {"city": "Taipei", "job": "Engineer"}
+
+# 使用解包傳遞參數
+display_info(*person_data, **person_details)
+</code></pre>
+    </div>
+
+				<h3 class="caption">挑戰 6：計算座標距離 <span class="icon">🛈</span></h3>
+    <p>使用解包從元組中提取座標，並撰寫程式計算兩點之間的距離。</p>
+    <pre class="line-numbers"><code class="language-python"># 範例輸入
+point1 = (3, 4)
+point2 = (0, 0)
+# 預期輸出
+距離：5.0</code></pre>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+import math
+
+point1 = (3, 4)
+point2 = (0, 0)
+x1, y1 = point1
+x2, y2 = point2
+distance = math.sqrt((x2 - x1)**2 + (y2 - y1)**2)
+print(f"距離：{distance:.1f}")</code></pre>
+    </div>
+
+				<h3 class="caption">挑戰 7：合併與打包 <span class="icon">🛈</span></h3>
+    <p>將兩個元組進行合併，並使用打包操作將結果存入一個變數。</p>
+    <pre class="line-numbers"><code class="language-python"># 範例輸入
+tuple1 = (1, 2, 3)
+tuple2 = (4, 5, 6)
+# 預期輸出
+合併結果：(1, 2, 3, 4, 5, 6)</code></pre>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+tuple1 = (1, 2, 3)
+tuple2 = (4, 5, 6)
+merged_tuple = (*tuple1, *tuple2)
+print(f"合併結果：{merged_tuple}")</code></pre>
+    </div>
+
+				<h3 class="caption">挑戰 8：分組與解包 <span class="icon">🛈</span></h3>
+    <p>將一個包含多個數字的串列分組，每組包含兩個元素，並解包每組輸出結果。</p>
+    <pre class="line-numbers"><code class="language-python"># 範例輸入
+numbers = [1, 2, 3, 4, 5, 6]
+# 預期輸出
+組 1: 1, 2
+組 2: 3, 4
+組 3: 5, 6</code></pre>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+numbers = [1, 2, 3, 4, 5, 6]
+groups = [numbers[i:i+2] for i in range(0, len(numbers), 2)]
+for i, (a, b) in enumerate(groups, start=1):
+    print(f"組 {i}: {a}, {b}")</code></pre>
+    </div>
+
+            </section>
+
+            <section>
+                <h2>結語</h2>
+                <p>指定、多重指定、打包與解包操作是 Python 中的重要技巧，能夠提升程式的簡潔性與靈活性，特別是在處理函式參數時非常實用。</p>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

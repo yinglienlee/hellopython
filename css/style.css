@@ -1,0 +1,205 @@
+body {
+	font-size: x-large;
+	font-family: Arial, sans-serif;
+	line-height: 1.6;
+	background-color: #f9f9f9;
+	color: #333;
+	margin: 0;
+	padding: 0;
+}
+
+header {
+	background: #005a9e;
+	color: white;	
+	text-align: center;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;	
+	border-bottom: 1px solid #ddd;
+	padding: 1rem;
+	padding-left: 250px;
+	transition: padding-left 0.3s ease;
+	z-index: 10;
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+	margin: 20px 0;
+}
+table, th, td {
+	border: 1px solid #ddd;
+}
+th, td {
+	padding: 12px;
+	text-align: left;
+}
+th {
+	background-color: #f4f4f4;
+}
+
+main {
+    flex-grow: 1 !important;
+    transition: margin-left 0.3s ease; /* Smooth transition */
+    width: calc(100% - 250px); /* Dynamically adjust width */
+	margin-top: 90px; /* Space for the fixed header */	
+	overflow: auto;
+	padding-bottom: 60px;
+}
+main.hidden {
+    margin-left: 0;
+    width: 100%; /* Full width when sidebar is hidden */
+}
+
+header h1 {
+	color: white;
+}
+section {
+	max-width: 1024px;
+	width: 90%;
+	margin: 2rem auto;
+	background: white;
+	padding: 2rem;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	border-radius: 8px;
+}
+h1, h2, h3 {
+	color: #007acc;
+}
+
+h2, h3 {
+	padding-top: 10px;
+}
+h2 {
+	padding-bottom: 10px;
+}
+code {
+	background: #f4f4f4;
+	border-radius: 4px;
+	padding-top: 2px;
+}
+pre {
+	background: #f4f4f4;
+	padding: 1rem;
+	border-radius: 8px;
+	overflow-x: auto;
+	
+	/* white-space: pre-line; */
+}
+.nav-column {
+    display: grid;
+}
+.nav-column > li:hover {
+  background-color: #f0f0f0; /* Changes background color on hover */
+  color: #007BFF; /* Changes text color on hover */
+  transform: scale(1.05); /* Slightly enlarges the element */
+  cursor: pointer; /* Changes cursor to pointer */
+}
+.flex-column > li:hover {
+  background-color: #f0f0f0; /* Changes background color on hover */
+  color: #007BFF; /* Changes text color on hover */
+  border-color: #007BFF; /* Adds a visible border on hover */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow effect */
+  cursor: pointer; /* Changes cursor to pointer */
+}
+
+.d-flex {
+    display: flex;
+    height: 100vh; /* Ensure the full viewport height is used */
+    overflow: hidden; /* Prevent overflow issues */
+	padding-bottom: 60px;
+}
+
+#sidebar {	
+    width: 250px;    
+    position: sticky;
+    top: 0px;
+    overflow-y: auto;
+    font-size: large;
+    padding-top: 0px;
+    margin-top: 90px;
+	transition: transform 0.3s ease;
+    flex-shrink: 0; /* Prevent the sidebar from shrinking */	
+}
+#sidebar.hidden {
+	transform: translateX(-250px);
+}
+
+#toggleNav {
+	position: fixed;
+	font-size: 1rem;
+    top: 97px;
+    left: 190px;
+    z-index: 1000;
+	color: black;
+    background: transparent;
+    border: 0px;	
+	transition: left 0.3s ease;
+}
+#toggleNav:hover {
+	background: lightgray;
+    color: white;
+}
+
+.answer {
+	display: none;
+	margin-top: 10px;
+	margin-bottom: 20px;
+	padding: 10px;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	background-color: #f8f9fa;
+}
+
+.caption {
+    display: flex;
+    align-items: center;
+}
+
+.caption .icon {
+    font-size: 32px;
+    margin-left: 5px;
+    color: #007bff;
+    transition: transform 0.2s ease, color 0.2s ease;
+	cursor: pointer;
+}
+
+.caption .icon.revealed, .caption .icon.revealed:hover {
+    color: red; /* Change this color as needed */
+    font-weight: bold;
+	animation: pulse 0.8s infinite alternate;
+}
+
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.2);
+    }
+}
+
+.caption .icon:hover {
+    transform: scale(1.2);
+    color: #0056b3;
+}
+
+/* Hide answers by default */
+.answer {
+    display: none;
+    margin-top: 10px;
+	border: 2px dotted red;
+	background: aliceblue;
+}
+
+.answer pre {
+    background: aliceblue !important;
+}
+
+
+/* Show answers when parent has 'active' class */
+.caption.active + .answer {
+    display: block;
+}

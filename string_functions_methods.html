@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>字串方法與函式</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+	<!-- Prism.js CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css">
+    <!-- Prism.js Line Numbers CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
+    <!-- Prism.js Syntax Highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <!-- Prism.js Line Numbers Plugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", (event) => {
+            includeHTML(highlightItem);
+            document.getElementById("toggleNav").addEventListener("click", navClick);
+			enableAnswerRevealer();
+        });
+    </script>
+</head>
+<body>
+    <div class="d-flex">
+        <!-- Floating Button -->
+        <button id="toggleNav" class="btn btn-primary">&#8212;</button>
+        <nav id="sidebar" class="bg-light border-end" style="display: block;">
+            <div>
+                <div w3-include-html="navigation.html"></div>
+            </div>
+        </nav>
+        <main class="flex-grow-1">
+            <header>
+                <h1>字串方法與函式</h1>
+            </header>
+            <section>
+                <h2>學習導覽</h2>
+                <p>在這一章，我們將深入探討 Python 提供的字串方法與函式。這些方法與函式能讓我們更有效率地操作字串，完成各種常見的字串處理需求。</p>
+                <ul>
+                    <li>什麼是字串方法與函式？</li>
+                    <li>常見的字串方法，例如 <code>split()</code>、<code>join()</code> 和 <code>strip()</code>。</li>
+                    <li>如何使用內建函式處理字串，例如 <code>len()</code>。</li>
+                    <li>搭配實例練習與範例程式。</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>字串方法</h2>
+                <h3>1. <code>split()</code> 方法</h3>
+                <p>將字串依指定分隔符拆分為串列：</p>
+                <pre class="line-numbers"><code class="language-python">text = "Hello,World,Python"
+words = text.split(",")
+print(words)  # 輸出：["Hello", "World", "Python"]</code></pre>
+
+                <h3>2. <code>join()</code> 方法</h3>
+                <p>用指定的分隔符將串列合併為字串：</p>
+                <pre class="line-numbers"><code class="language-python">words = ["Hello", "World", "Python"]
+result = ",".join(words)
+print(result)  # 輸出：Hello,World,Python</code></pre>
+
+                <h3>3. <code>strip()</code> 方法</h3>
+                <p>移除字串首尾的空格或指定字元：</p>
+                <pre class="line-numbers"><code class="language-python">text = "   Hello World   "
+cleaned = text.strip()
+print(cleaned)  # 輸出：Hello World</code></pre>
+
+                <h3>4. <code>replace()</code> 方法</h3>
+                <p>替換字串中的指定子串：</p>
+                <pre class="line-numbers"><code class="language-python">text = "I love Python"
+new_text = text.replace("Python", "coding")
+print(new_text)  # 輸出：I love coding</code></pre>
+
+                <h3>5. <code>format()</code> 方法</h3>
+                <p>用於格式化字串：</p>
+                <pre class="line-numbers"><code class="language-python">name = "Alice"
+age = 25
+message = "My name is {} and I am {} years old.".format(name, age)
+print(message)  # 輸出：My name is Alice and I am 25 years old.</code></pre>
+            </section>
+
+            <section>
+                <h2>字串函式</h2>
+                <h3>1. <code>len()</code> 函式</h3>
+                <p>取得字串的長度：</p>
+                <pre class="line-numbers"><code class="language-python">text = "Hello"
+length = len(text)
+print(length)  # 輸出：5</code></pre>
+
+                <h3>2. <code>ord()</code> 與 <code>chr()</code> 函式</h3>
+                <p>轉換字元與 Unicode 編碼：</p>
+                <pre class="line-numbers"><code class="language-python">print(ord("A"))  # 輸出：65
+print(chr(65))  # 輸出：A</code></pre>
+            </section>
+
+            <section>
+                <h2>常見問題與解答</h2>
+                <h3>問題 1：<code>split()</code> 能處理多種分隔符嗎號？</h3>
+                <p>可以結合正規表達式模組 <code>re</code> 處理多種分隔符號。</p>
+				<pre class="line-numbers"><code class="language-python">import re
+
+text = "apple, banana;cherry|grape orange"
+result = re.split(r"[ ,;|]", text)  # 使用 , ; | 和空格作為分隔符
+print(result)</code></pre>
+
+                <h3>問題 2：如何讓 <code>join()</code> 忽略空元素？</h3>
+                <p>可以在使用 <code>join()</code> 前過濾串列，例如使用串列推導式。</p>
+				<pre class="line-numbers"><code class="language-python">words = ["apple", "", "banana", None, "cherry", " "]
+result = " - ".join([word.strip() for word in words if word and word.strip()])
+print(result)</code></pre>
+
+                <h3>問題 3：<code>len()</code> 函式會包含空格嗎？</h3>
+                <p>是的，<code>len()</code> 計算的長度包含所有字符，包括空格。</p>
+
+                <h3>問題 4：<code>format()</code> 方法的替代方案是什麼？</h3>
+                <p>可以使用 Python 3.6 引入的 <code>f-string</code>，它更簡潔易讀：</p>
+                <pre class="line-numbers"><code class="language-python">name = "Alice"
+age = 25
+message = f"My name is {name} and I am {age} years old."
+print(message)</code></pre>
+            </section>
+
+            <section>
+                <h2>挑戰題目</h2>
+                <h3 class="caption">挑戰 1：處理字串串列 <span class="icon">🛈</span></h3>
+    <p>撰寫程式，將一段以逗號分隔的字串拆分為串列，並重新組合為以空格分隔的字串。</p>
+    <pre class="line-numbers"><code class="language-python"># 範例輸入
+text = "apple,banana,cherry"
+# 預期輸出
+"apple banana cherry"</code></pre>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+text = "apple,banana,cherry"
+words = text.split(",")
+result = " ".join(words)
+print(result)  # 輸出：apple banana cherry</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 2：統計字元頻率 <span class="icon">🛈</span></h3>
+    <p>設計一個函式，接收一段文字，計算並輸出每個字元出現的次數。</p>
+    <pre class="line-numbers"><code class="language-python"># 範例輸入
+text = "hello"
+# 預期輸出
+{'h': 1, 'e': 1, 'l': 2, 'o': 1}</code></pre>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+def count_characters(text):
+    freq = {}
+    for char in text:
+        freq[char] = freq.get(char, 0) + 1
+    return freq
+
+text = "hello"
+print(count_characters(text))</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 3：格式化輸出 <span class="icon">🛈</span></h3>
+    <p>撰寫程式，使用 <code>format()</code> 或 <code>f-string</code> 動態生成介紹自己的句子。</p>
+    <pre class="line-numbers"><code class="language-python"># 範例輸入
+name = "Alice"
+age = 25
+# 預期輸出
+"My name is Alice and I am 25 years old."</code></pre>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+name = "Alice"
+age = 25
+message = f"My name is {name} and I am {age} years old."
+print(message)</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 4：去除重複的空白 <span class="icon">🛈</span></h3>
+    <p>撰寫一個函式，將輸入的字串中多餘的空白移除，只保留單個空格作為間隔。</p>
+    <pre class="line-numbers"><code class="language-python"># 範例輸入
+text = "This   is   a   test."
+# 預期輸出
+"This is a test."</code></pre>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+def remove_extra_spaces(text):
+    return " ".join(text.split())
+
+text = "This   is   a   test."
+print(remove_extra_spaces(text))</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 5：檢查回文 <span class="icon">🛈</span></h3>
+    <p>設計一個函式，判斷給定的字串是否為回文（正讀與反讀相同）。忽略大小寫與空格。</p>
+    <pre class="line-numbers"><code class="language-python"># 範例輸入
+text = "人人為我、我為人人"
+# 預期輸出
+True</code></pre>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+def is_palindrome(text):
+    cleaned = "".join(c for c in text if c.isalnum()).lower()
+    return cleaned == cleaned[::-1]
+
+text = "人人為我、我為人人"
+print(is_palindrome(text))</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 6：大寫轉小寫 <span class="icon">🛈</span></h3>
+    <p>撰寫程式，將一段包含大小寫字母的文字轉換為全小寫，並移除所有標點符號。</p>
+    <pre class="line-numbers"><code class="language-python"># 範例輸入
+text = "Hello, World!"
+# 預期輸出
+"hello world"</code></pre>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+import string
+
+def to_lowercase(text):
+    return "".join(c for c in text.lower() if c not in string.punctuation)
+
+text = "Hello, World!"
+print(to_lowercase(text))</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 7：字串中的最大字元 <span class="icon">🛈</span></h3>
+    <p>設計一個程式，找出字串中 Unicode 編碼值最大的字元。</p>
+    <pre class="line-numbers"><code class="language-python"># 範例輸入
+text = "Python123"
+# 預期輸出
+"y"</code></pre>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+text = "Python123"
+max_char = max(text)
+print(max_char)  # 輸出：y</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 8：反轉單詞順序 <span class="icon">🛈</span></h3>
+    <p>撰寫一個函式，將字串中的單詞順序反轉，但保持單詞內的字母順序不變。</p>
+    <pre class="line-numbers"><code class="language-python"># 範例輸入
+text = "Hello World Python"
+# 預期輸出
+"Python World Hello"</code></pre>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+def reverse_word_order(text):
+    words = text.split()
+    return " ".join(reversed(words))
+
+text = "Hello World Python"
+print(reverse_word_order(text))</code></pre>
+    </div>
+				
+				
+            </section>
+
+            <section>
+                <h2>結語</h2>
+                <p>掌握字串方法與函式是 Python 程式設計的基本技能，能夠顯著提升文字處理的效率。繼續練習，發揮創意，將這些技能應用到實際問題中吧！</p>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

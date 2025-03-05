@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>串列容器</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+	   <!-- Prism.js CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css">
+    <!-- Prism.js Line Numbers CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
+    <!-- Prism.js Syntax Highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <!-- Prism.js Line Numbers Plugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", (event) => {
+            includeHTML(highlightItem);
+            document.getElementById("toggleNav").addEventListener("click", navClick);
+			enableAnswerRevealer();
+        });
+    </script>
+</head>
+<body>
+    <div class="d-flex">
+        <!-- Floating Button -->
+        <button id="toggleNav" class="btn btn-primary">&#8212;</button>
+        <nav id="sidebar" class="bg-light border-end" style="display: block;">
+            <div>
+                <div w3-include-html="navigation.html"></div>
+            </div>
+        </nav>
+        <main class="flex-grow-1">
+            <header>
+                <h1>串列容器</h1>
+            </header>
+            <section>
+                <h2>學習導覽</h2>
+                <p>在這一章中，我們將學習 Python 中最常用的資料結構之一：串列 (list)。串列是一種有序、可變的資料集合，能夠儲存多種類型的元素。</p>
+                <ul>
+                    <li>了解如何建立串列。</li>
+                    <li>學習如何存取、修改、刪除串列中的元素。</li>
+                    <li>熟悉常用的串列方法，例如 <code>append</code>、<code>remove</code> 和 <code>sort</code>。</li>
+                    <li>探索串列的切片與迴圈操作。</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>串列的基本操作</h2>
+                <h3>1. 建立串列</h3>
+                <p>串列可以用方括號 <code>[]</code> 表示，並以逗號分隔元素：</p>
+                <pre class="line-numbers"><code class="language-python"># 建立空串列
+empty_list = []
+
+# 建立包含整數的串列
+numbers = [1, 2, 3, 4, 5]
+
+# 建立包含多種類型的串列
+mixed_list = ["Python", 3.14, True]</code></pre>
+
+                <h3>2. 存取與修改元素</h3>
+                <p>透過索引值存取或修改串列的元素：</p>
+                <pre class="line-numbers"><code class="language-python"># 存取第一個元素
+print(numbers[0])  # 輸出：1
+
+# 修改第三個元素
+numbers[2] = 99
+print(numbers)  # 輸出：[1, 2, 99, 4, 5]</code></pre>
+
+                <h3>3. 刪除元素</h3>
+                <p>可以使用 <code>del</code> 或 <code>remove</code> 刪除元素：</p>
+                <pre class="line-numbers"><code class="language-python"># 使用 del 刪除
+del numbers[1]
+print(numbers)  # 輸出：[1, 99, 4, 5]
+
+# 使用 remove 刪除
+numbers.remove(99)
+print(numbers)  # 輸出：[1, 4, 5]</code></pre>
+
+                <h3>4. 常用串列方法</h3>
+                <p>以下是一些常見的串列方法：</p>
+                <pre class="line-numbers"><code class="language-python"># 新增元素到串列末端
+numbers.append(6)
+
+# 插入元素到指定位置
+numbers.insert(1, 99)
+
+# 排序串列
+numbers.sort()</code></pre>
+            </section>
+
+			<section>
+				<h2>進階語法：串列推導式</h2>
+				<p>串列推導式（List Comprehension）是 Python 提供的一種簡潔語法，用於生成新的串列。它的基本語法結構如下：</p>
+				<pre class="line-numbers"><code class="language-python">[expression for item in iterable if condition]</code></pre>
+				<p>解析語法：</p>
+				<ul>
+					<li><code>expression</code>：定義新串列中每個元素的值。</li>
+					<li><code>item</code>：來自可迭代物件的元素。</li>
+					<li><code>iterable</code>：任何可迭代物件（例如串列、範圍、字串）。</li>
+					<li><code>condition</code>（可選）：篩選條件，僅包含滿足條件的元素。</li>
+				</ul>
+				<p>舉例：</p>
+				<pre class="line-numbers"><code class="language-python"># 範例 1：生成 0 到 4 的平方
+squares = [x**2 for x in range(5)]
+print(squares)  # 輸出：[0, 1, 4, 9, 16]
+
+# 範例 2：過濾偶數並平方
+evens_squared = [x**2 for x in range(10) if x % 2 == 0]
+print(evens_squared)  # 輸出：[0, 4, 16, 36, 64]</code></pre>
+
+				<h3>串列推導式的實際應用</h3>
+				<p>以下是串列推導式在篩選及處理串列中的實際應用：</p>
+				<pre class="line-numbers"><code class="language-python"># 範例：從顏色串列中生成與某顏色不同的中文字串列
+COLORS = ["red", "blue", "green", "yellow"]
+WORDS = ["紅色", "藍色", "綠色", "黃色"]
+color = "red"
+filtered_words = [WORDS[COLORS.index(w)] for w in COLORS if w != color]
+print(filtered_words)  # 輸出：['藍色', '綠色', '黃色']</code></pre>
+				<p>解析：</p>
+				<ul>
+					<li><code>WORDS[COLORS.index(w)]</code>：根據顏色串列 <code>COLORS</code> 找到其對應的中文名稱。</li>
+					<li><code>for w in COLORS</code>：依次遍歷 <code>COLORS</code> 串列中的每個元素。</li>
+					<li><code>if w != color</code>：只包含與指定顏色（如 <code>red</code>）不同的項目。</li>
+				</ul>
+				<p>這種語法適合快速生成串列，避免使用多行迴圈代碼。</p>
+			</section>
+
+            <section>
+                <h2>常見問題與解答</h2>
+                <h3>問題 1：如何檢查串列中是否包含某個元素？</h3>
+                <p>可以使用 <code>in</code> 運算符：</p>
+                <pre class="line-numbers"><code class="language-python">print(3 in numbers)  # 若包含則回傳 True</code></pre>
+
+                <h3>問題 2：串列與元組有什麼區別？</h3>
+                <p>串列是可變的，元組是不可變的，這意味著串列可以修改，而元組一旦建立就無法更改。</p>
+
+                <h3>問題 3：如何取得串列的長度？</h3>
+                <p>可以使用內建函數 <code>len()</code>：</p>
+                <pre class="line-numbers"><code class="language-python">print(len(numbers))  # 輸出串列中的元素數量</code></pre>
+            </section>
+
+            <section>
+                <h2>挑戰題目</h2>
+                <h3 class="caption">挑戰 1：建立自己的購物清單 <span class="icon">🛈</span></h3>
+    <p>讓使用者輸入多個商品名稱，將這些商品存入串列，最後輸出完整的購物清單。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+shopping_list = []
+while True:
+    item = input("請輸入商品名稱（輸入 '結束' 結束輸入）: ")
+    if item == "結束":
+        break
+    shopping_list.append(item)
+print("購物清單:", shopping_list)</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 2：排序分數 <span class="icon">🛈</span></h3>
+    <p>讓使用者輸入多個分數，將這些分數存入串列並進行排序，輸出由高到低的排序結果。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+scores = list(map(int, input("請輸入多個分數（用空格分隔）: ").split()))
+scores.sort(reverse=True)
+print("由高到低排序的分數:", scores)</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 3：串列去除重複 <span class="icon">🛈</span></h3>
+    <p>設計一個程式，讓使用者輸入含有重複元素的串列，輸出一個不包含重複元素的新串列。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+numbers = list(map(int, input("請輸入多個數字（用空格分隔）: ").split()))
+unique_numbers = list(set(numbers))
+print("不包含重複元素的串列:", unique_numbers)</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 4：計算平均分數 <span class="icon">🛈</span></h3>
+    <p>讓使用者輸入多個分數，將這些分數存入串列，計算並輸出這些分數的平均值。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+scores = list(map(int, input("請輸入多個分數（用空格分隔）: ").split()))
+average = sum(scores) / len(scores) if scores else 0
+print(f"平均分數: {average:.2f}")</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 5：翻轉字串串列 <span class="icon">🛈</span></h3>
+    <p>讓使用者輸入多個字串，將這些字串存入串列，然後輸出每個字串翻轉後的新串列。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+strings = input("請輸入多個字串（用空格分隔）: ").split()
+reversed_strings = [s[::-1] for s in strings]
+print("翻轉後的字串串列:", reversed_strings)</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 6：合併並排序串列 <span class="icon">🛈</span></h3>
+    <p>讓使用者輸入兩個數字串列，將它們合併成一個新串列，並將新串列按從小到大的順序排序後輸出。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+list1 = list(map(int, input("請輸入第一組數字（用空格分隔）: ").split()))
+list2 = list(map(int, input("請輸入第二組數字（用空格分隔）: ").split()))
+merged_list = sorted(list1 + list2)
+print("合併並排序的串列:", merged_list)</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 7：篩選奇數 <span class="icon">🛈</span></h3>
+    <p>讓使用者輸入一串數字，將這些數字存入串列，並篩選出其中的奇數，輸出包含奇數的新串列。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+numbers = list(map(int, input("請輸入多個數字（用空格分隔）: ").split()))
+odd_numbers = [n for n in numbers if n % 2 != 0]
+print("包含奇數的串列:", odd_numbers)</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 8：計算字串長度 <span class="icon">🛈</span></h3>
+    <p>讓使用者輸入多個字串，將這些字串存入串列，然後輸出每個字串的長度。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+strings = input("請輸入多個字串（用空格分隔）: ").split()
+lengths = [len(s) for s in strings]
+print("每個字串的長度:", lengths)</code></pre>
+    </div>
+				
+            </section>
+
+            <section>
+                <h2>結語</h2>
+                <p>學習串列資料結構能幫助你處理多個相關資料項目，並提升程式的靈活性與可讀性。試著將所學應用到你的專案中，進一步熟悉這項強大的工具！</p>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>自訂函式</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+	<!-- Prism.js CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css">
+    <!-- Prism.js Line Numbers CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
+    <!-- Prism.js Syntax Highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <!-- Prism.js Line Numbers Plugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", (event) => {
+            includeHTML(highlightItem);
+            document.getElementById("toggleNav").addEventListener("click", navClick);
+			enableAnswerRevealer();
+        });
+    </script>
+</head>
+<body>
+    <div class="d-flex">
+        <!-- Floating Button -->
+        <button id="toggleNav" class="btn btn-primary">&#8212;</button>
+        <nav id="sidebar" class="bg-light border-end" style="display: block;">
+            <div>
+                <div w3-include-html="navigation.html"></div>
+            </div>
+        </nav>
+        <main class="flex-grow-1">
+            <header>
+                <h1>自訂函式</h1>
+            </header>
+            <section>
+                <h2>學習導覽</h2>
+                <p>本章節將介紹如何定義與使用 Python 自訂函式。函式是程式設計的基礎單位，能夠提升程式碼的重用性與可讀性。</p>
+                <ul>
+                    <li>什麼是函式？</li>
+                    <li>如何定義與呼叫函式。</li>
+                    <li>函式的參數與回傳值。</li>
+                    <li>瞭解匿名函式 <code>lambda</code> 的用途。</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>自訂函式的基本概念</h2>
+                <h3>1. 什麼是函式？</h3>
+                <p>函式是一段具名的程式碼區塊，可以接收輸入（參數），執行特定任務，並選擇性地回傳輸出（回傳值）。</p>
+
+                <h3>2. 定義與呼叫函式</h3>
+                <pre class="line-numbers"><code class="language-python"># 定義函式
+def greet(name):
+    print(f"你好, {name}!")
+
+# 呼叫函式
+greet("Alice")  # 輸出：你好, Alice!</code></pre>
+
+                <h3>3. 函式的參數與回傳值</h3>
+                <pre class="line-numbers"><code class="language-python"># 帶有回傳值的函式
+def add(a, b):
+    return a + b
+
+result = add(3, 5)
+print(result)  # 輸出：8</code></pre>
+
+                <h3>4. 匿名函式 (Lambda)</h3>
+                <p>匿名函式是沒有名稱的簡單函式，使用 <code>lambda</code> 關鍵字定義。</p>
+                <pre class="line-numbers"><code class="language-python"># 使用 lambda 定義函式
+square = lambda x: x ** 2
+print(square(4))  # 輸出：16</code></pre>
+
+
+				<h3>5. 使用 Lambda 作為排序鍵</h3>
+				<p>Lambda 常用於傳遞簡單的函式作為其他函式的參數，例如用於排序列表中的元素。</p>
+				<pre class="line-numbers"><code class="language-python">words = ["apple", "banana", "cherry", "date"]
+words.sort(key=lambda word: len(word))
+print(words)  # 輸出：['date', 'apple', 'banana', 'cherry']</code></pre>
+				<h3>解釋：</h3>
+				<ul>
+					<li><code>lambda word: len(word)</code> 是一個匿名函式，接收一個字串並返回其長度。</li>
+					<li><code>sort</code> 方法使用這個匿名函式來決定排序順序，因此列表按照字串長度從小到大排序。</li>
+				</ul>
+				<p>這種用法在需要簡單且一次性函式的情況下非常實用，例如排序、篩選或轉換資料時。</p>
+
+
+            </section>
+
+            <section>
+                <h2>常見問題與解答</h2>
+                <h3>問題 1：函式可以沒有回傳值嗎？</h3>
+                <p>可以，若函式未指定回傳值，則預設返回 <code>None</code>。</p>
+
+                <h3>問題 2：如何設定函式參數的預設值？</h3>
+                <p>在參數名稱後面指定預設值，例如 <code>def greet(name="訪客")</code>。</p>
+
+                <h3>問題 3：可以在函式內呼叫其他函式嗎？</h3>
+                <p>可以，這是模組化程式設計的常見做法。</p>
+            </section>
+
+            <section>
+                <h2>挑戰題目</h2>
+				<h3 class="caption">挑戰 1：計算矩形面積 <span class="icon">🛈</span></h3>
+    <p>撰寫一個函式，接收長與寬作為參數，並回傳矩形的面積。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+def rectangle_area(length, width):
+    return length * width
+
+print(rectangle_area(5, 10))  # 輸出：50</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 2：溫度轉換 <span class="icon">🛈</span></h3>
+    <p>設計一個函式，將攝氏溫度轉換為華氏溫度，並回傳結果。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+def celsius_to_fahrenheit(celsius):
+    return celsius * 9/5 + 32
+
+print(celsius_to_fahrenheit(25))  # 輸出：77.0</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 3：應用 Lambda 函式 <span class="icon">🛈</span></h3>
+    <p>使用 <code>lambda</code> 函式，實現一個功能，接收圓的半徑，並返回圓的面積。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+circle_area = lambda radius: 3.14159 * radius ** 2
+print(circle_area(5))  # 輸出：78.53975</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 4：應用 Lambda 函式 <span class="icon">🛈</span></h3>
+    <p>給定一組數字 <code>numbers = [5, -10, 3, -1, 7]</code>，使用 <code>sorted</code> 函式和 <code>lambda</code>，將數字按照它們的絕對值進行排序，並輸出排序結果。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+numbers = [5, -10, 3, -1, 7]
+sorted_numbers = sorted(numbers, key=lambda x: abs(x))
+print(sorted_numbers)  # 輸出：[3, -1, 5, 7, -10]</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 5：判斷閏年 <span class="icon">🛈</span></h3>
+    <p>撰寫一個函式，接收一個年份作為參數，並回傳該年份是否為閏年。若未提供年份，則預設為 2025。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+def is_leap_year(year=2025):
+    return (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0)
+
+print(is_leap_year(2024))  # 輸出：True</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 6：清單中的最大值 <span class="icon">🛈</span></h3>
+    <p>撰寫一個函式，接收一個數字清單，並回傳該清單中的最大值。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+def max_in_list(numbers):
+    return max(numbers)
+
+print(max_in_list([10, 20, 5, 30]))  # 輸出：30</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 7：使用 Lambda 過濾清單 <span class="icon">🛈</span></h3>
+    <p>給定一個數字清單 <code>numbers = [10, -5, 15, -20, 30]</code>，使用 <code>filter</code> 和 <code>lambda</code>，篩選出清單中所有大於 0 的數字，並輸出結果。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+numbers = [10, -5, 15, -20, 30]
+positive_numbers = list(filter(lambda x: x > 0, numbers))
+print(positive_numbers)  # 輸出：[10, 15, 30]</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 8：計算多個矩形的面積 <span class="icon">🛈</span></h3>
+    <p>撰寫一個函式，接收多個矩形的長與寬（作為一個清單），並回傳所有矩形面積的總和。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+def total_area(rectangles):
+    return sum(length * width for length, width in rectangles)
+
+print(total_area([(5, 10), (3, 4), (2, 6)]))  # 輸出：62</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 9：應用 Lambda 進行資料轉換 <span class="icon">🛈</span></h3>
+    <p>設計一段程式碼，使用 <code>map</code> 和 <code>lambda</code> 將一組攝氏溫度清單 <code>[0, 20, 37, 100]</code> 轉換為華氏溫度，並輸出結果。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+celsius_list = [0, 20, 37, 100]
+fahrenheit_list = list(map(lambda c: c * 9/5 + 32, celsius_list))
+print(fahrenheit_list)  # 輸出：[32.0, 68.0, 98.6, 212.0]</code></pre>
+    </div>
+				
+
+
+				
+            </section>
+
+            <section>
+                <h2>結語</h2>
+                <p>自訂函式是 Python 中提升程式碼可讀性與重用性的關鍵技術。透過學習與實作，你將能更靈活地運用函式來解決各種問題。</p>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

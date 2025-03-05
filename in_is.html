@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>身分與成員運算符號</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+	<!-- Prism.js CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css">
+    <!-- Prism.js Line Numbers CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
+    <!-- Prism.js Syntax Highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <!-- Prism.js Line Numbers Plugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", (event) => {
+            includeHTML(highlightItem);
+            document.getElementById("toggleNav").addEventListener("click", navClick);
+			enableAnswerRevealer();
+        });
+    </script>
+</head>
+<body>
+    <div class="d-flex">
+        <!-- Floating Button -->
+        <button id="toggleNav" class="btn btn-primary">&#8212;</button>
+        <nav id="sidebar" class="bg-light border-end" style="display: block;">
+            <div>
+                <div w3-include-html="navigation.html"></div>
+            </div>
+        </nav>
+        <main class="flex-grow-1">
+            <header>
+                <h1>身分與成員運算符號</h1>
+            </header>
+            <section>
+                <h2>學習導覽</h2>
+                <p>在本章中，我們將深入探討 Python 中的身分與成員運算符號，這些工具可以幫助我們檢查物件的唯一性及其內容。</p>
+                <ul>
+                    <li>身分運算符號：<code>is</code> 和 <code>is not</code>。</li>
+                    <li>成員運算符號：<code>in</code> 和 <code>not in</code>。</li>
+                </ul>
+                <p>理解這些運算符號的用法，將幫助你更靈活地進行條件判斷與物件操作。</p>
+            </section>
+
+            <section>
+                <h2>身分運算符號</h2>
+                <h3><code>is</code> 和 <code>is not</code></h3>
+                <p>身分運算符號用於比較兩個物件的記憶體位址是否相同。</p>
+                <pre class="line-numbers"><code class="language-python">a = [1, 2, 3]
+b = a
+c = [1, 2, 3]
+
+print(a is b)  # 輸出 True，因為 a 和 b 是同一物件
+print(a is c)  # 輸出 False，因為 a 和 c 雖然內容相同，但不是同一物件
+print(a is not c)  # 輸出 True</code></pre>
+                <p>請注意，<code>is</code> 與 <code>==</code> 的功能不同：<code>is</code> 檢查物件身分，而 <code>==</code> 檢查物件值是否相等。</p>
+            </section>
+
+            <section>
+                <h2>成員運算符號</h2>
+                <h3><code>in</code> 和 <code>not in</code></h3>
+                <p>成員運算符號用於檢查一個值是否存在於容器中，例如串列、字典或字串。</p>
+                <pre class="line-numbers"><code class="language-python">numbers = [1, 2, 3, 4]
+
+print(3 in numbers)  # 輸出 True，因為 3 在 numbers 中
+print(5 not in numbers)  # 輸出 True，因為 5 不在 numbers 中</code></pre>
+
+                <p>這些運算符號同樣適用於字串：</p>
+                <pre class="line-numbers"><code class="language-python">text = "hello world"
+
+print("hello" in text)  # 輸出 True
+print("Python" not in text)  # 輸出 True</code></pre>
+            </section>
+
+            <section>
+                <h2>常見問題與解答</h2>
+                <h3>問題 1：什麼時候應該使用 <code>is</code> 而不是 <code>==</code>？</h3>
+                <p><code>is</code> 用於比較物件身分，適用於檢查是否為同一物件；<code>==</code> 則用於比較物件值。</p>
+
+                <h3>問題 2：<code>in</code> 是否能檢查字典的值？</h3>
+                <p><code>in</code> 檢查的是字典的鍵，若需檢查值，可以使用 <code>value in dictionary.values()</code>。</p>
+                <pre class="line-numbers"><code class="language-python">data = {"name": "Alice", "age": 25}
+
+print("name" in data)  # 輸出 True
+print("Alice" in data.values())  # 輸出 True</code></pre>
+            </section>
+
+            <section>
+                <h2>挑戰題目</h2>
+				<h3 class="caption">挑戰 1：檢查物件身分 <span class="icon">🛈</span></h3>
+    <p>撰寫程式，建立兩個串列並檢查它們是否為同一物件。</p>
+    <pre class="line-numbers"><code class="language-python"># 範例輸入
+list1 = [1, 2, 3]
+list2 = [1, 2, 3]
+# 預期輸出
+list1 is list2：False</code></pre>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+list1 = [1, 2, 3]
+list2 = [1, 2, 3]
+print(f"list1 is list2：{list1 is list2}")</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 2：檢查成員 <span class="icon">🛈</span></h3>
+    <p>撰寫程式，檢查一個字串是否包含某些特定單詞。</p>
+    <pre class="line-numbers"><code class="language-python"># 範例輸入
+text = "The quick brown fox"
+word = "quick"
+# 預期輸出
+"quick" 是否存在：True</code></pre>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+text = "The quick brown fox"
+word = "quick"
+print(f'"{word}" 是否存在：{word in text}')</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 3：條件篩選 <span class="icon">🛈</span></h3>
+    <p>設計程式，從一個串列中篩選出所有偶數，並檢查特定值是否在結果中。</p>
+    <pre class="line-numbers"><code class="language-python"># 範例輸入
+numbers = [1, 2, 3, 4, 5, 6]
+value = 4
+# 預期輸出
+篩選後的偶數：[2, 4, 6]
+4 是否存在：True</code></pre>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+numbers = [1, 2, 3, 4, 5, 6]
+value = 4
+evens = [num for num in numbers if num % 2 == 0]
+print(f"篩選後的偶數：{evens}")
+print(f"{value} 是否存在：{value in evens}")</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 4：檢查字典中的鍵與值 <span class="icon">🛈</span></h3>
+    <p>設計一個程式，檢查一個字典中是否存在特定的鍵與值。</p>
+    <pre class="line-numbers"><code class="language-python"># 範例輸入
+data = {"name": "Alice", "age": 30}
+# 預期輸出
+"name" 是否為鍵：True
+"Alice" 是否為值：True</code></pre>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+data = {"name": "Alice", "age": 30}
+print(f'"name" 是否為鍵：{"name" in data}')
+print(f'"Alice" 是否為值：{"Alice" in data.values()}')</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 5：比較物件身分與內容 <span class="icon">🛈</span></h3>
+    <p>建立兩個內容相同但記憶體位置不同的串列，使用 <code>is</code> 和 <code>==</code> 比較它們，並解釋結果。</p>
+    <pre class="line-numbers"><code class="language-python"># 範例輸入
+a = [1, 2, 3]
+b = [1, 2, 3]
+# 預期輸出
+a == b：True
+a is b：False</code></pre>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+a = [1, 2, 3]
+b = [1, 2, 3]
+print(f"a == b：{a == b}")
+print(f"a is b：{a is b}")</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 6：判斷成員的多層結構 <span class="icon">🛈</span></h3>
+    <p>給定一個巢狀串列，檢查某個值是否存在於其中的任何一層。</p>
+    <pre class="line-numbers"><code class="language-python"># 範例輸入
+nested_list = [1, [2, [3, 4]], 5]
+# 預期輸出
+3 是否存在：True</code></pre>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+def check_nested(nested, value):
+    if type(nested) == list:  # Check if `nested` is a list
+        for item in nested:
+            if check_nested(item, value):  # Recursively search inside nested lists
+                return True
+        return False
+    return nested == value  # Direct comparison for non-list elements
+
+nested_list = [1, [2, [3, 4]], 5]
+value = 3
+print(f"{value} 是否存在：{check_nested(nested_list, value)}")</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 7：清單去重並檢查成員 <span class="icon">🛈</span></h3>
+    <p>給定一個包含重複元素的串列，移除重複後檢查某個值是否仍然存在。</p>
+    <pre class="line-numbers"><code class="language-python"># 範例輸入
+data = [1, 2, 2, 3, 4, 4, 5]
+# 預期輸出
+清單去重後：{1, 2, 3, 4, 5}
+5 是否存在：True</code></pre>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+data = [1, 2, 2, 3, 4, 4, 5]
+unique_data = set(data)
+value = 5
+print(f"清單去重後：{unique_data}")
+print(f"{value} 是否存在：{value in unique_data}")</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 8：檢查字串中的模式 <span class="icon">🛈</span></h3>
+    <p>撰寫一個程式，檢查字串中是否包含某個子字串（區分大小寫與否）。</p>
+    <pre class="line-numbers"><code class="language-python"># 範例輸入
+text = "Hello Python World"
+# 預期輸出
+"Python" 是否存在：True
+"python" 是否存在：False</code></pre>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+text = "Hello Python World"
+substring1 = "Python"
+substring2 = "python"
+print(f'"{substring1}" 是否存在：{substring1 in text}')
+print(f'"{substring2}" 是否存在：{substring2 in text}')</code></pre>
+    </div>
+				
+            </section>
+
+            <section>
+                <h2>結語</h2>
+                <p>掌握身分與成員運算符號是 Python 程式設計的基本技能之一，能幫助你更高效地進行邏輯判斷與資料操作。透過練習這些概念，你將能更熟練地處理各種程式設計挑戰！</p>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

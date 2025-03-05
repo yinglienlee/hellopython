@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>條件判斷</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+	<script type="text/javascript" src="js/script.js"></script>
+	<!-- Prism.js CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css">
+    <!-- Prism.js Line Numbers CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
+    <!-- Prism.js Syntax Highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <!-- Prism.js Line Numbers Plugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+	<script>
+		document.addEventListener("DOMContentLoaded", (event) => {
+			includeHTML(highlightItem);			
+			document.getElementById("toggleNav").addEventListener("click", navClick);	
+			enableAnswerRevealer();			
+		});
+	</script>	
+</head>
+<body>
+	<div class="d-flex">
+		<!-- Floating Button -->
+		<button id="toggleNav" class="btn btn-primary">&#8212;</button>
+        <nav id="sidebar" class="bg-light border-end" style="display: block;">
+            <div>
+				<div w3-include-html="navigation.html"></div>
+            </div>
+        </nav>
+        <main class="flex-grow-1">
+			<header>
+				<h1>條件判斷</h1>
+			</header>
+			<section>
+				<h2>學習導覽</h2>
+				<p>條件判斷是 Python 程式設計的基礎之一。它讓程式能夠根據不同的情況執行不同的指令，從而使程式更加靈活和智能。本章內容將涵蓋：</p>
+				<ul>
+					<li>使用 <code>if</code>、<code>elif</code> 和 <code>else</code> 關鍵字。</li>
+					<li>理解條件判斷的邏輯結構。</li>
+					<li>巢狀條件判斷的使用方式。</li>
+					<li>學會處理常見的條件判斷問題。</li>
+				</ul>
+			</section>
+
+			<section>
+				<h2>條件判斷語法</h2>
+				<h3>1. 使用 <code>if</code></h3>
+				<p><code>if</code> 是條件判斷的核心，用來檢查條件是否成立：</p>
+				<pre class="line-numbers"><code class="language-python">x = 10
+if x > 5:
+    print("x 大於 5")</code></pre>
+				<p>如果條件 <code>x > 5</code> 為真，將輸出：<br><code>x 大於 5</code></p>
+
+				<h3>2. 使用 <code>elif</code></h3>
+				<p><code>elif</code>（縮寫自 "else if"）用於檢查額外的條件：</p>
+				<pre class="line-numbers"><code class="language-python">x = 10
+if x > 15:
+    print("x 大於 15")
+elif x > 5:
+    print("x 大於 5 但小於等於 15")</code></pre>
+				<p>當 <code>x > 15</code> 不成立，但 <code>x > 5</code> 成立時，輸出：<br><code>x 大於 5 但小於等於 15</code></p>
+
+				<h3>3. 使用 <code>else</code></h3>
+				<p><code>else</code> 用於處理所有未被上述條件涵蓋的情況：</p>
+				<pre class="line-numbers"><code class="language-python">x = 3
+if x > 5:
+    print("x 大於 5")
+else:
+    print("x 小於或等於 5")</code></pre>
+				<p>當 <code>x > 5</code> 不成立時，輸出：<br><code>x 小於或等於 5</code></p>
+
+				<h3>4. 巢狀條件判斷</h3>
+				<p>可以在條件內再巢狀另一個條件判斷：</p>
+				<pre class="line-numbers"><code class="language-python">x = 10
+if x > 5:
+    if x % 2 == 0:
+        print("x 是一個偶數且大於 5")</code></pre>
+				<p>如果條件全部成立，輸出：<br><code>x 是一個偶數且大於 5</code></p>
+			</section>
+
+			<section>
+				<h2>常見問題與解答</h2>
+				<h3>問題 1：為什麼條件內的程式碼要縮排？</h3>
+				<p>Python 使用縮排來區分條件判斷內的程式碼。如果忘記縮排，會出現 <code>IndentationError</code>。</p>
+				<pre class="line-numbers"><code class="language-python"># 正確
+if True:
+    print("這是正確的縮排")
+
+# 錯誤
+if True:
+print("這會導致錯誤")</code></pre>
+
+				<h3>問題 2：可以同時檢查多個條件嗎？</h3>
+				<p>可以使用邏輯運算符號 <code>and</code> 和 <code>or</code>：</p>
+				<pre class="line-numbers"><code class="language-python">x = 10
+if x > 5 and x < 15:
+    print("x 在 5 和 15 之間")</code></pre>
+
+				<h3>問題 3：如何簡化單行條件判斷？</h3>
+				<p>可以使用單行格式：</p>
+				<pre class="line-numbers"><code class="language-python">print("x 大於 5") if x > 5 else print("x 小於或等於 5")</code></pre>
+			</section>
+
+			<section>
+				<h2>挑戰題目</h2>
+				<h3 class="caption">挑戰 1：判斷奇偶數 <span class="icon">🛈</span></h3>
+    <p>寫一個程式，輸入一個數字並判斷它是奇數還是偶數。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+number = int(input("請輸入一個數字："))
+if number % 2 == 0:
+    print(f"{number} 是偶數")
+else:
+    print(f"{number} 是奇數")</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 2：多條件檢查 <span class="icon">🛈</span></h3>
+    <p>設計一個程式，檢查一個數字是否：</p>
+    <ul>
+        <li>小於 0</li>
+        <li>在 0 到 100 之間</li>
+        <li>大於 100</li>
+    </ul>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+number = int(input("請輸入一個數字："))
+if number < 0:
+    print("數字小於 0")
+elif 0 <= number <= 100:
+    print("數字在 0 到 100 之間")
+else:
+    print("數字大於 100")</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 3：巢狀條件 <span class="icon">🛈</span></h3>
+    <p>撰寫一個程式，輸入三個數字並找出最大值。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+num1 = int(input("請輸入第一個數字："))
+num2 = int(input("請輸入第二個數字："))
+num3 = int(input("請輸入第三個數字："))
+
+if num1 >= num2:
+    if num1 >= num3:
+        print(f"最大值是 {num1}")
+    else:
+        print(f"最大值是 {num3}")
+else:
+    if num2 >= num3:
+        print(f"最大值是 {num2}")
+    else:
+        print(f"最大值是 {num3}")</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 4：判斷分數等級 <span class="icon">🛈</span></h3>
+    <p>設計一個程式，讓使用者輸入分數，並根據以下規則判斷等級：</p>
+    <ul>
+        <li>90 分以上為 A 級</li>
+        <li>80 分到 89 分為 B 級</li>
+        <li>70 分到 79 分為 C 級</li>
+        <li>60 分到 69 分為 D 級</li>
+        <li>60 分以下為 F 級</li>
+    </ul>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+score = int(input("請輸入分數："))
+if score >= 90:
+    print("A 級")
+elif score >= 80:
+    print("B 級")
+elif score >= 70:
+    print("C 級")
+elif score >= 60:
+    print("D 級")
+else:
+    print("F 級")</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 5：簡單的計算機 <span class="icon">🛈</span></h3>
+    <p>撰寫一個程式，讓使用者輸入兩個數字和一個運算符號（+、-、*、/），然後根據使用者的輸入進行相應的運算，並輸出結果。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+num1 = float(input("請輸入第一個數字："))
+num2 = float(input("請輸入第二個數字："))
+operator = input("請輸入運算符號（+、-、*、/）：")
+
+if operator == "+":
+    print(f"結果是：{num1 + num2}")
+elif operator == "-":
+    print(f"結果是：{num1 - num2}")
+elif operator == "*":
+    print(f"結果是：{num1 * num2}")
+elif operator == "/":
+    if num2 != 0:
+        print(f"結果是：{num1 / num2}")
+    else:
+        print("錯誤：除數不能為 0")
+else:
+    print("無效的運算符號")</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 6：檢查三角形 <span class="icon">🛈</span></h3>
+    <p>設計一個程式，讓使用者輸入三邊長，檢查它們是否能構成一個有效的三角形（任意兩邊之和大於第三邊）。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+a = float(input("請輸入第一邊長："))
+b = float(input("請輸入第二邊長："))
+c = float(input("請輸入第三邊長："))
+
+if a + b > c and a + c > b and b + c > a:
+    print("可以構成三角形")
+else:
+    print("不能構成三角形")</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 7：閏年判斷 <span class="icon">🛈</span></h3>
+    <p>撰寫一個程式，讓使用者輸入年份，判斷是否為閏年（能被 4 整除但不能被 100 整除，或者能被 400 整除）。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+year = int(input("請輸入年份："))
+
+if (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0):
+    print(f"{year} 是閏年")
+else:
+    print(f"{year} 不是閏年")</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 8：巢狀條件 - 找最小值 <span class="icon">🛈</span></h3>
+    <p>設計一個程式，讓使用者輸入三個數字，使用巢狀條件判斷並輸出最小值。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+num1 = int(input("請輸入第一個數字："))
+num2 = int(input("請輸入第二個數字："))
+num3 = int(input("請輸入第三個數字："))
+
+if num1 <= num2:
+    if num1 <= num3:
+        print(f"最小值是 {num1}")
+    else:
+        print(f"最小值是 {num3}")
+else:
+    if num2 <= num3:
+        print(f"最小值是 {num2}")
+    else:
+        print(f"最小值是 {num3}")</code></pre>
+    </div>
+				
+				
+			</section>
+
+			<section>
+				<h2>結語</h2>
+				<p>條件判斷讓你的程式能夠根據不同情況做出相應的反應。熟練掌握 <code>if</code>、<code>elif</code> 和 <code>else</code>，將使你的程式邏輯更加靈活強大。現在試著完成挑戰題目，進一步加強你的條件判斷技能吧！</p>
+			</section>
+		</main>
+    </div>			
+</body>
+</html>

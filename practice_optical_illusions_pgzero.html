@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>綜合練習：Hering Illusion</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+	<!-- Prism.js CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css">
+    <!-- Prism.js Line Numbers CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
+    <!-- Prism.js Syntax Highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <!-- Prism.js Line Numbers Plugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", (event) => {
+            includeHTML(highlightItem);
+            document.getElementById("toggleNav").addEventListener("click", navClick);
+            enableAnswerRevealer();
+        });
+    </script>
+</head>
+<body>
+    <div class="d-flex">
+        <!-- Floating Button -->
+        <button id="toggleNav" class="btn btn-primary">&#8212;</button>
+        <nav id="sidebar" class="bg-light border-end" style="display: block;">
+            <div>
+                <div w3-include-html="navigation.html"></div>
+            </div>
+        </nav>
+        <main class="flex-grow-1">
+            <header>
+                <h1>綜合練習：Hering Illusion</h1>
+            </header>
+            <section>
+                <h2>學習導覽</h2>
+                <p>在這一章中，我們將學習如何使用 <code>pgzero</code> 模組設計一個互動式的 Hering Illusion 範例。此範例將幫助你了解如何處理鍵盤輸入、動態繪圖，以及基礎的幾何計算。</p>
+                <ul>
+                    <li>如何捕捉鍵盤事件。</li>
+                    <li>繪製幾何圖形以形成錯覺效果。</li>
+                    <li>動態調整參數觀察錯覺變化。</li>
+                </ul>
+                <p>完成本章後，你將能夠創建具有互動性的視覺錯覺展示。</p>
+            </section>
+
+<section>
+            <h2>程式碼說明</h2>
+            <p>以下是程式碼的詳細分解與說明：</p>
+
+            <h3>1. 全域參數與顏色定義</h3>
+            <pre class="line-numbers"><code class="language-python">WIDTH = 800
+HEIGHT = 600
+
+BLACK = (0, 0, 0)
+WHITE = (255, 255, 255)
+GRAY = (200, 200, 200)</code></pre>
+            <p>定義了畫布的寬度、高度以及常用顏色，作為後續繪圖的基礎。</p>
+
+            <h3>2. 核心變數與預設值</h3>
+            <pre class="line-numbers"><code class="language-python">center = (WIDTH // 2, HEIGHT // 2)
+spacing = 10  # 放射線的間距
+line_offset = 50  # 平行線的偏移距離
+show_radiating_lines = False # 是否顯示放射線</code></pre>
+            <p>這些變數確定了放射線的間距和平行線的初始位置，並提供動態調整的基礎，以及放射線顯示與否的控制。</p>
+
+            <h3>3. 主繪圖函式</h3>
+            <pre class="line-numbers"><code class="language-python">def draw():
+    screen.fill(WHITE)
+    if show_radiating_lines:
+		draw_radiating_lines(center, spacing)
+    draw_parallel_lines(center, line_offset)
+    screen.draw.text(
+        "Arrow Keys: Adjust lines and spacing",
+        (10, 10),
+        fontsize=24,
+        color=BLACK
+    )
+	
+    screen.draw.text("Spacing: " + str(spacing), (10, 40), fontsize=24, color=BLACK)
+    screen.draw.text("Line Offset: " + str(line_offset), (10, 70), fontsize=24, color=BLACK)</code></pre>
+            <p>此函式負責填充背景、繪製放射線和平行線，並在畫布上顯示操作提示文字及當前設定值。</p>
+
+            <h3>4. 更新函式</h3>
+            <pre class="line-numbers"><code class="language-python">def update():
+    pass</code></pre>
+            <p>目前留空，保留用於未來擴展功能的入口。</p>
+
+            <h3>5. 鍵盤事件監聽函式</h3>
+            <pre class="line-numbers"><code class="language-python">def on_key_down(key):
+    global spacing, line_offset, show_radiating_lines
+    if key == keys.UP:
+        line_offset += 5
+    elif key == keys.DOWN:
+        line_offset -= 5
+    elif key == keys.RIGHT:
+        spacing += 1
+    elif key == keys.LEFT:
+        spacing = max(1, spacing - 1)
+	elif key == keys.T:
+        show_radiating_lines = not show_radiating_lines</code></pre>
+            <p>用戶可以使用方向鍵調整平行線偏移距離和放射線的間距。</p>
+
+            <h3>6. 放射線繪製函式</h3>
+            <pre class="line-numbers"><code class="language-python">def draw_radiating_lines(center, spacing):
+    for angle in range(-90, 91, spacing):
+        x1 = center[0] + WIDTH * math.cos(math.radians(angle))
+        y1 = center[1] + WIDTH * math.sin(math.radians(angle))
+        x2 = center[0] - WIDTH * math.cos(math.radians(angle))
+        y2 = center[1] - WIDTH * math.sin(math.radians(angle))
+        screen.draw.line((x1, y1), (x2, y2), GRAY)</code></pre>
+            <p>此函式利用數學公式計算每條放射線的起點與終點，並進行繪製。</p>
+
+            <h3>7. 平行線繪製函式</h3>
+            <pre class="line-numbers"><code class="language-python">def draw_parallel_lines(center, offset):
+    screen.draw.line(
+        (center[0] - 300, center[1] - offset), (center[0] + 300, center[1] - offset), BLACK)
+    screen.draw.line(
+        (center[0] - 300, center[1] + offset), (center[0] + 300, center[1] + offset), BLACK)</code></pre>
+            <p>根據偏移距離計算平行線的位置，並將其繪製於畫布上。</p>
+
+            <h3>8. 啟動程式</h3>
+            <pre class="line-numbers"><code class="language-python">pgzrun.go()</code></pre>
+            <p>這一行啟動 Pygame Zero，進入程式的事件循環。</p>
+        </section>
+
+
+
+            <section>
+                <h2>完整範例程式碼</h2>
+                <pre class="line-numbers"><code class="language-python">import math
+import pgzrun
+
+WIDTH = 800
+HEIGHT = 600
+
+# 顏色定義
+BLACK = (0, 0, 0)
+WHITE = (255, 255, 255)
+GRAY = (200, 200, 200)
+
+center = (WIDTH // 2, HEIGHT // 2)
+spacing = 10  # Spacing between radiating lines
+line_offset = 50  # Distance of parallel lines from the center
+show_radiating_lines = False # Visibility of radiating lines
+
+def draw():
+    screen.fill(WHITE)
+
+    # 繪製放射線
+	if show_radiating_lines:
+		draw_radiating_lines(center, spacing)
+
+    # 繪製平行線
+    draw_parallel_lines(center, line_offset)
+
+    # 顯示說明文字
+    screen.draw.text(
+        "Arrow Keys: Adjust lines and spacing",
+        (10, 10),
+        fontsize=24,
+        color=BLACK
+    )
+	
+    # 顯示 spacing 與 line_offset 數值
+    screen.draw.text("Spacing: " + str(spacing), (10, 40), fontsize=24, color=BLACK)
+    screen.draw.text("Line Offset: " + str(line_offset), (10, 70), fontsize=24, color=BLACK)
+	
+
+def update():
+    pass
+
+def on_key_down(key):
+    global spacing, line_offset, show_radiating_lines
+    if key == keys.UP:
+        line_offset += 5
+    elif key == keys.DOWN:
+        line_offset -= 5
+    elif key == keys.RIGHT:
+        spacing += 1
+    elif key == keys.LEFT:
+        spacing = max(1, spacing - 1)
+	elif key == keys.T:
+        show_radiating_lines = not show_radiating_lines
+
+def draw_radiating_lines(center, spacing):
+    for angle in range(-90, 91, spacing):
+        x1 = center[0] + WIDTH * math.cos(math.radians(angle))
+        y1 = center[1] + WIDTH * math.sin(math.radians(angle))
+        x2 = center[0] - WIDTH * math.cos(math.radians(angle))
+        y2 = center[1] - WIDTH * math.sin(math.radians(angle))
+        screen.draw.line((x1, y1), (x2, y2), GRAY)
+
+def draw_parallel_lines(center, offset):
+    screen.draw.line(
+        (center[0] - 300, center[1] - offset), (center[0] + 300, center[1] - offset), BLACK)
+    screen.draw.line(
+        (center[0] - 300, center[1] + offset), (center[0] + 300, center[1] + offset), BLACK)
+
+pgzrun.go()
+</code></pre>
+            </section>    
+
+
+            <section>
+    <h2>挑戰題目</h2>
+    <h3 class="caption">挑戰 1：改變放射線顏色 <span class="icon">🛈</span></h3>
+    <p>讓每條放射線根據角度有不同的顏色。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+def draw_radiating_lines(center, spacing):
+    for angle in range(-90, 91, spacing):
+        # 根據角度生成顏色
+        color = (abs(angle * 2) % 256, (abs(angle) * 3) % 256, 200)
+        x1 = center[0] + WIDTH * math.cos(math.radians(angle))
+        y1 = center[1] + WIDTH * math.sin(math.radians(angle))
+        x2 = center[0] - WIDTH * math.cos(math.radians(angle))
+        y2 = center[1] - WIDTH * math.sin(math.radians(angle))
+        screen.draw.line((x1, y1), (x2, y2), color)
+</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 2：增加更多平行線 <span class="icon">🛈</span></h3>
+    <p>讓畫面中顯示更多組平行線，觀察錯覺效果如何改變。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+def draw_parallel_lines(center, offset, count):
+    for i in range(-count, count + 1):
+        offset_y = i * offset
+        screen.draw.line(
+            (center[0] - 300, center[1] + offset_y), 
+            (center[0] + 300, center[1] + offset_y), 
+            BLACK
+        )
+</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 3：添加動態背景 <span class="icon">🛈</span></h3>
+    <p>設計一個背景，讓放射線隨時間旋轉，增加錯覺的動態視覺效果。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+angle_offset = 0
+
+def draw_radiating_lines(center, spacing, angle_offset):
+    for angle in range(-90, 91, spacing):
+        rotated_angle = angle + angle_offset
+        x1 = center[0] + WIDTH * math.cos(math.radians(rotated_angle))
+        y1 = center[1] + WIDTH * math.sin(math.radians(rotated_angle))
+        x2 = center[0] - WIDTH * math.cos(math.radians(rotated_angle))
+        y2 = center[1] - WIDTH * math.sin(math.radians(rotated_angle))
+        screen.draw.line((x1, y1), (x2, y2), GRAY)
+
+def update():
+    global angle_offset
+	
+    angle_offset += 1  # 每幀旋轉
+</code></pre>
+    </div>
+</section>
+
+
+            <section>
+                <h2>結語</h2>
+                <p>透過這份教材，你學會了如何使用 Pygame Zero 設計互動式視覺錯覺。你可以進一步探索其他視覺效果，打造更有趣的專案！</p>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

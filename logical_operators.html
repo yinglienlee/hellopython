@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>邏輯與比較運算符號</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+	<script type="text/javascript" src="js/script.js"></script>
+	<!-- Prism.js CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css">
+    <!-- Prism.js Line Numbers CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
+    <!-- Prism.js Syntax Highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <!-- Prism.js Line Numbers Plugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+	<script>
+		document.addEventListener("DOMContentLoaded", (event) => {
+			includeHTML(highlightItem);			
+			document.getElementById("toggleNav").addEventListener("click", navClick);
+			enableAnswerRevealer();			
+		});
+	</script>	
+</head>
+<body>
+	<div class="d-flex">
+		<!-- Floating Button -->
+		<button id="toggleNav" class="btn btn-primary">&#8212;</button>
+        <nav id="sidebar" class="bg-light border-end" style="display: block;">
+            <div>            
+				<div w3-include-html="navigation.html"></div>
+            </div>
+        </nav>
+        <main class="flex-grow-1">
+			<header>
+				<h1>邏輯與比較運算符號</h1>
+			</header>
+			<section>
+				<h2>學習導覽</h2>
+				<p>邏輯與比較運算符號是 Python 中不可或缺的工具，用於處理條件判斷和邏輯推理。在本章中，我們將學習兩大類運算符號及其應用：</p>
+				
+				<h3>比較運算符號</h3>
+                <ul>
+                    <li><code>==</code>：檢查兩個值是否相等。</li>
+                    <li><code>!=</code>：檢查兩個值是否不相等。</li>
+                    <li><code>&lt;</code>：檢查左邊的值是否小於右邊的值。</li>
+                    <li><code>&gt;</code>：檢查左邊的值是否大於右邊的值。</li>
+                    <li><code>&lt;=</code>：檢查左邊的值是否小於或等於右邊的值。</li>
+                    <li><code>&gt;=</code>：檢查左邊的值是否大於或等於右邊的值。</li>
+                </ul>
+                
+                <h3>邏輯運算符號</h3>
+				<ul>
+					<li><code>and</code>：當所有條件都為真時，結果為真。</li>
+					<li><code>or</code>：只要有一個條件為真，結果即為真。</li>
+					<li><code>not</code>：反轉條件的真值。</li>
+				</ul>
+
+				
+				<p>通過這些運算符號，你可以輕鬆地構建複雜的邏輯條件。</p>
+			</section>
+
+			<section>
+				<h2>比較運算符號詳解</h2>
+				<h3>1. <code>==</code> 相等運算符號</h3>
+				<p><code>==</code> 用於檢查兩個值是否相等：</p>
+				<pre class="line-numbers"><code class="language-python">a = 5
+b = 5
+print(a == b)  # 輸出 True
+
+c = 5
+d = '5'
+print(c == d)  # 輸出 False，因為類型不同</code></pre>
+				<p>需要注意的是，<code>==</code> 會比較值的相等性，而不是記憶體地址。</p>
+
+				<h3>2. <code>!=</code> 不等運算符號</h3>
+				<p><code>!=</code> 用於檢查兩個值是否不相等：</p>
+				<pre class="line-numbers"><code class="language-python">a = 5
+b = 10
+print(a != b)  # 輸出 True
+
+c = 5
+d = 5
+print(c != d)  # 輸出 False</code></pre>
+				<p>當兩個值不相等時，結果為 <code>True</code>。</p>
+
+				<h3>3. <code>&lt;</code> 小於運算符號</h3>
+				<p><code>&lt;</code> 用於檢查左邊的值是否小於右邊的值：</p>
+				<pre class="line-numbers"><code class="language-python">a = 5
+b = 10
+print(a < b)  # 輸出 True
+
+c = 10
+d = 5
+print(c < d)  # 輸出 False</code></pre>
+				<p>當左邊的值小於右邊的值時，結果為 <code>True</code>。</p>
+
+				<h3>4. <code>&gt;</code> 大於運算符號</h3>
+				<p><code>&gt;</code> 用於檢查左邊的值是否大於右邊的值：</p>
+				<pre class="line-numbers"><code class="language-python">a = 10
+b = 5
+print(a > b)  # 輸出 True
+
+c = 5
+d = 10
+print(c > d)  # 輸出 False</code></pre>
+				<p>當左邊的值大於右邊的值時，結果為 <code>True</code>。</p>
+
+				<h3>5. <code>&lt;=</code> 小於或等於運算符號</h3>
+				<p><code>&lt;=</code> 用於檢查左邊的值是否小於或等於右邊的值：</p>
+				<pre class="line-numbers"><code class="language-python">a = 5
+b = 10
+print(a <= b)  # 輸出 True
+
+c = 5
+d = 5
+print(c <= d)  # 輸出 True
+
+e = 10
+f = 5
+print(e <= f)  # 輸出 False</code></pre>
+				<p>當左邊的值小於或等於右邊的值時，結果為 <code>True</code>。</p>
+
+				<h3>6. <code>&gt;=</code> 大於或等於運算符號</h3>
+				<p><code>&gt;=</code> 用於檢查左邊的值是否大於或等於右邊的值：</p>
+				<pre class="line-numbers"><code class="language-python">a = 10
+b = 5
+print(a >= b)  # 輸出 True
+
+c = 5
+d = 5
+print(c >= d)  # 輸出 True
+
+e = 5
+f = 10
+print(e >= f)  # 輸出 False</code></pre>
+				<p>當左邊的值大於或等於右邊的值時，結果為 <code>True</code>。</p>
+
+                <h3>7. <code>is</code> 身份運算符號</h3>
+				<p><code>is</code> 用於檢查兩個變數是否引用同一個物件（即記憶體地址是否相同）：</p>
+				<pre class="line-numbers"><code class="language-python">a = [1, 2, 3]
+b = [1, 2, 3]
+c = a
+print(a is b)  # 輸出 False，因為a和b引用不同的列表物件
+print(a is c)  # 輸出 True，因為a和c引用相同的列表物件</code></pre>
+				<p><code>is</code> 與 <code>==</code> 不同，<code>is</code> 比較的是對象的身份（記憶體地址），而 <code>==</code> 比較的是值的相等性。</p>
+
+                <h3>8. <code>is not</code> 身份運算符號</h3>
+				<p><code>is not</code> 用於檢查兩個變數是否不引用同一個物件：</p>
+				<pre class="line-numbers"><code class="language-python">a = [1, 2, 3]
+b = [1, 2, 3]
+c = a
+print(a is not b)  # 輸出 True，因為a和b引用不同的列表物件
+print(a is not c)  # 輸出 False，因為a和c引用相同的列表物件</code></pre>
+				<p>當兩個變數不引用同一個物件時，結果為 <code>True</code>。</p>
+
+                <h3>9. 特殊情況：連續比較</h3>
+				<p>Python 支援連續比較，使條件判斷更加簡潔：</p>
+				<pre class="line-numbers"><code class="language-python">a = 5
+print(1 < a < 10)  # 輸出 True，等價於 1 < a and a < 10
+
+x = 20
+print(10 <= x <= 30)  # 輸出 True，等價於 10 <= x and x <= 30</code></pre>
+				<p>這種語法在檢查一個值是否在某個範圍內時特別有用。</p>
+			</section>
+
+
+			<section>
+				<h2>邏輯運算符號詳解</h2>
+				<h3>1. <code>and</code> 運算符號</h3>
+				<p><code>and</code> 用於檢查多個條件是否同時成立：</p>
+				<pre class="line-numbers"><code class="language-python">a = True
+b = False
+print(a and b)  # 輸出 False</code></pre>
+				<p>只有當 <code>a</code> 和 <code>b</code> 都為 <code>True</code> 時，結果才為 <code>True</code>。</p>
+
+				<h3>2. <code>or</code> 運算符號</h3>
+				<p><code>or</code> 用於檢查是否至少有一個條件成立：</p>
+				<pre class="line-numbers"><code class="language-python">a = True
+b = False
+print(a or b)  # 輸出 True</code></pre>
+				<p>只要有一個條件為 <code>True</code>，結果就為 <code>True</code>。</p>
+
+				<h3>3. <code>not</code> 運算符號</h3>
+				<p><code>not</code> 用於反轉條件的真值：</p>
+				<pre class="line-numbers"><code class="language-python">a = True
+print(not a)  # 輸出 False</code></pre>
+				<p>如果 <code>a</code> 為 <code>True</code>，那麼 <code>not a</code> 就為 <code>False</code>，反之亦然。</p>
+			</section>
+
+			<section>
+				<h2>綜合運用邏輯與比較運算符號</h2>
+                <p>在實際撰寫程式過程中，我們經常需要結合邏輯與比較運算符號來處理複雜的條件判斷：</p>
+                <pre class="line-numbers"><code class="language-python"># 檢查一個數字是否在某個範圍內
+number = 25
+is_in_range = 20 <= number <= 30
+print(is_in_range)  # 輸出 True
+
+# 檢查年齡是否符合青少年條件（13-19歲）
+age = 15
+is_teenager = 13 <= age <= 19
+print(is_teenager)  # 輸出 True
+
+# 複雜條件：檢查一個人是否符合某項活動的參加資格
+age = 25
+has_membership = True
+lives_locally = False
+can_participate = age >= 18 and has_membership and (lives_locally or age < 30)
+print(can_participate)  # 輸出 True</code></pre>
+                <p>組合使用這些運算符號可以幫助我們構建精確的條件判斷。</p>
+            </section>
+
+
+			<section>
+				<h2>常見問題與解答</h2>
+				<h3>問題 1：如何組合多個邏輯運算符號？</h3>
+				<p>可以直接組合使用，例如：</p>
+				<pre class="line-numbers"><code class="language-python">a = True
+b = False
+c = True
+print(a and (b or c))  # 輸出 True</code></pre>
+
+				<h3>問題 2：邏輯運算符號的運算順序是什麼？</h3>
+				<p>Python 的邏輯運算符號遵循以下優先順序：<code>not</code> > <code>and</code> > <code>or</code>。</p>
+				<p>如果不確定順序，可以使用括號提高可讀性和控制運算順序。</p>
+
+				<h3>問題 3：邏輯運算符號是否只能用於布林值？</h3>
+				<p>不一定，Python 中的邏輯運算符號也適用於非布林值。例如：</p>
+				<pre class="line-numbers"><code class="language-python">print(0 or 42)  # 輸出 42
+print(0 and 42)  # 輸出 0</code></pre>
+				<p>Python 會根據 "真值" 的概念返回第一個能決定結果的值。</p>
+
+            
+				<h3>問題 4：True 與 False 以數值表示是什麼？</h3>
+				<p>在 Python 中，<code>True</code> 等價於數值 <code>1</code>，而 <code>False</code> 等價於數值 <code>0</code>。它們可以直接參與數值運算。</p>
+<pre class="line-numbers"><code class="language-python">print(True == 1)   # 輸出 True
+print(False == 0)  # 輸出 True
+print(True + 1)    # 輸出 2
+print(False + 1)   # 輸出 1</code></pre>
+			
+				<h3>問題 5：數值如何判斷為 True 或 False？</h3>
+				<p>在 Python 中，非零數值（如整數或浮點數）會被視為 <code>True</code>，而零值（如 <code>0</code> 或 <code>0.0</code>）會被視為 <code>False</code>。</p>
+				<pre class="line-numbers"><code class="language-python">print(bool(42))    # 輸出 True
+print(bool(0))     # 輸出 False
+print(bool(-3.14)) # 輸出 True</code></pre>
+
+				<h3>問題 6：字串是否會被視為 True 或 False？</h3>
+				<p>非空字串（即字串中包含文字或空白字元）會被視為 <code>True</code>，而空字串（<code>""</code>）會被視為 <code>False</code>。</p>
+				<pre class="line-numbers"><code class="language-python">print(bool("Hello"))   # 輸出 True
+print(bool(""))        # 輸出 False
+print(bool(" "))       # 輸出 True</code></pre>
+
+				<h3>問題 7：物件如何判斷為 True 或 False？</h3>
+				<p>非空物件（如列表、字典、集合）會被視為 <code>True</code>，而空物件（如空列表 <code>[]</code> 或空字典 <code>{}</code>）與特殊值 <code>None</code> 會被視為 <code>False</code>。</p>
+				<pre class="line-numbers"><code class="language-python">print(bool([1, 2, 3]))   # 輸出 True
+print(bool([]))          # 輸出 False
+print(bool(None))        # 輸出 False</code></pre>
+
+				<h3>問題 8：<code>==</code> 與 <code>is</code> 有什麼區別？</h3>
+                <p><code>==</code> 比較的是值是否相等，而 <code>is</code> 比較的是對象的身份（記憶體地址）是否相同：</p>
+                <pre class="line-numbers"><code class="language-python">a = [1, 2, 3]
+b = [1, 2, 3]
+print(a == b)  # 輸出 True，因為兩個列表的值相等
+print(a is b)  # 輸出 False，因為它們是不同的對象
+
+# 常見的陷阱：比較None時應該使用is而不是==
+value = None
+print(value is None)  # 推薦的寫法
+print(value == None)  # 不推薦的寫法</code></pre>
+                <p>在比較 <code>None</code> 時，建議使用 <code>is</code> 而不是 <code>==</code>。</p>
+
+                <h3>問題 9：比較運算符的優先順序是什麼？</h3>
+                <p>在 Python 中，比較運算符的優先順序高於邏輯運算符。完整的優先順序如下：</p>
+                <ol>
+                    <li>算術運算符（如 <code>+</code>、<code>-</code>、<code>*</code>、<code>/</code>）</li>
+                    <li>比較運算符（如 <code>==</code>、<code>!=</code>、<code>&lt;</code>、<code>&gt;</code>）</li>
+                    <li>邏輯運算符（<code>not</code>、<code>and</code>、<code>or</code>）</li>
+                </ol>
+                <pre class="line-numbers"><code class="language-python"># 例子
+print(2 + 3 > 1 * 4 and 10 / 2 >= 5)  # 計算過程：(2+3) > (1*4) and (10/2) >= 5
+                                       # 即：5 > 4 and 5 >= 5
+                                       # 即：True and True
+                                       # 結果：True</code></pre>
+                <p>如果不確定運算優先順序，可以使用括號來明確指定。</p>
+
+				
+			</section>
+
+			<section>
+				<h2>挑戰題目</h2>
+				<h3 class="caption">挑戰 1：檢查條件成立 <span class="icon">🛈</span></h3>
+    <p>寫一段程式碼，檢查一個數字是否同時為偶數且大於 10。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+number = int(input("請輸入一個數字："))
+if number % 2 == 0 and number > 10:
+    print("該數字是偶數且大於 10")
+else:
+    print("條件不成立")</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 2：實現複雜邏輯判斷 <span class="icon">🛈</span></h3>
+    <p>設計一個程式，檢查一個數字是否在範圍 [10, 20] 內，或者是否為負數。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+number = int(input("請輸入一個數字："))
+if (10 <= number <= 20) or number < 0:
+    print("該數字在範圍內或為負數")
+else:
+    print("條件不成立")
+	
+# 另解
+number = int(input("請輸入一個數字："))
+if (10 <= number and number <= 20) or number < 0:
+    print("該數字在範圍內或為負數")
+else:
+    print("條件不成立")</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 3：模擬登入系統 <span class="icon">🛈</span></h3>
+    <p>定義兩個變數 <code>username</code> 和 <code>password</code>，並設計一段程式，只有當兩者同時正確時，輸出 "登入成功"。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+username = input("請輸入使用者名稱：")
+password = input("請輸入密碼：")
+
+if username == "admin" and password == "1234":
+    print("登入成功")
+else:
+    print("登入失敗")</code></pre>
+    </div>
+   
+    <h3 class="caption">挑戰 4：布林值運算 <span class="icon">🛈</span></h3>
+    <p>定義三個布林值變數 <code>a</code>、<code>b</code> 和 <code>c</code>，計算以下邏輯表達式的結果，並輸出：<br><code>a and not b or c</code></p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+a = True
+b = False
+c = True
+
+result = a and not b or c
+print(f"結果：{result}")</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 5：綜合布林運算 <span class="icon">🛈</span></h3>
+    <p>模擬一個抽獎程式，當使用者已註冊（<code>is_registered = True</code>）且持有有效票券（<code>has_ticket = True</code>）時，顯示 "參加抽獎"，否則顯示 "資格不符"。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+is_registered = True
+has_ticket = True
+
+if is_registered and has_ticket:
+    print("參加抽獎")
+else:
+    print("資格不符")</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 6：空值檢查 <span class="icon">🛈</span></h3>
+    <p>設計程式檢查一個變數是否為 <code>None</code> 或空字串，並輸出 "無效輸入" 或 "有效輸入"。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+value = input("請輸入值：")
+
+if value == "" or value is None:
+    print("無效輸入")
+else:
+    print("有效輸入")</code></pre>
+    </div>
+				
+				<h3 class="caption">挑戰 7：比較運算符綜合應用 <span class="icon">🛈</span></h3>
+    <p>設計程式，輸入三個數字，判斷它們是否可以構成一個三角形（任意兩邊之和大於第三邊）。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+a = float(input("請輸入第一邊長："))
+b = float(input("請輸入第二邊長："))
+c = float(input("請輸入第三邊長："))
+
+if a + b > c and a + c > b and b + c > a:
+    print("這三個數字可以構成三角形")
+else:
+    print("這三個數字不能構成三角形")</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 8：複雜條件判斷 <span class="icon">🛈</span></h3>
+    <p>設計程式，模擬一個電影院的門票系統。兒童（12歲以下）和老人（65歲以上）享有50%折扣，學生（持有學生證）享有30%折扣，其他人則需支付全額票價。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+full_price = 300
+age = int(input("請輸入年齡："))
+is_student = input("是否持有學生證？(是/否)") == "是"
+
+if age < 12 or age >= 65:
+    price = full_price * 0.5
+    print(f"您享有50%折扣，票價為 {price} 元")
+elif is_student:
+    price = full_price * 0.7
+    print(f"您享有30%折扣，票價為 {price} 元")
+else:
+    price = full_price
+    print(f"您需支付全額票價 {price} 元")</code></pre>
+    </div>
+
+				
+			</section>
+
+			<section>
+				<h2>結語</h2>
+				<p>邏輯與比較運算符號是程式中處理條件判斷的核心工具。掌握各種比較運算（<code>==</code>、<code>!=</code>、<code>&lt;</code>、<code>&gt;</code>、<code>&lt;=</code>、<code>&gt;=</code>、<code>is</code>、<code>is not</code>）和邏輯運算（<code>and</code>、<code>or</code>、<code>not</code>）的用法，你可以處理從簡單到複雜的邏輯需求。</p>
+                <p>記住，撰寫清晰、易讀的條件判斷是程式設計的基礎。透過合理使用括號和適當的格式，可以讓你的邏輯判斷更加嚴謹和易於理解。請繼續練習，讓你的邏輯思維更加精確！</p>
+
+			</section>
+		</main>
+    </div>			
+</body>
+</html>

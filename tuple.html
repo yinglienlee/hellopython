@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>元組容器</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+	<!-- Prism.js CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css">
+    <!-- Prism.js Line Numbers CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
+    <!-- Prism.js Syntax Highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <!-- Prism.js Line Numbers Plugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", (event) => {
+            includeHTML(highlightItem);
+            document.getElementById("toggleNav").addEventListener("click", navClick);
+			enableAnswerRevealer();
+        });
+    </script>
+</head>
+<body>
+    <div class="d-flex">
+        <!-- Floating Button -->
+        <button id="toggleNav" class="btn btn-primary">&#8212;</button>
+        <nav id="sidebar" class="bg-light border-end" style="display: block;">
+            <div>
+                <div w3-include-html="navigation.html"></div>
+            </div>
+        </nav>
+        <main class="flex-grow-1">
+            <header>
+                <h1>元組容器</h1>
+            </header>
+            <section>
+                <h2>學習導覽</h2>
+                <p>在這一章，我們將學習元組 (tuple)，這是一種不可變且有序的資料結構，適合用來儲存不可更改的資料集合。</p>
+                <ul>
+                    <li>了解如何建立元組。</li>
+                    <li>學習如何存取元組中的元素。</li>
+                    <li>探索元組的常用操作與方法。</li>
+                    <li>理解元組與串列的差異。</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>元組的基本操作</h2>
+                <h3>1. 建立元組</h3>
+                <p>元組使用小括號 <code>()</code> 表示，元素間以逗號分隔：</p>
+                <pre class="line-numbers"><code class="language-python"># 建立空元組
+empty_tuple = ()
+
+# 建立包含多個元素的元組
+tuple_example = (1, 2, 3, "Python", True)</code></pre>
+
+                <h3>2. 存取元組中的元素</h3>
+                <p>可以透過索引值存取元組的元素：</p>
+                <pre class="line-numbers"><code class="language-python"># 存取第一個元素
+print(tuple_example[0])  # 輸出：1
+
+# 存取最後一個元素
+print(tuple_example[-1])  # 輸出：True</code></pre>
+
+                <h3>3. 元組的不可變性</h3>
+                <p>元組一旦建立，其內容不可修改：</p>
+                <pre class="line-numbers"><code class="language-python"># 嘗試修改元組中的元素
+# tuple_example[1] = 99  # 會產生錯誤</code></pre>
+
+                <h3>4. 解包元組</h3>
+                <p>可以將元組中的元素賦值給多個變數：</p>
+                <pre class="line-numbers"><code class="language-python"># 解包元組
+a, b, c, d, e = tuple_example
+print(a, b, c)  # 輸出：1 2 3</code></pre>
+
+                <h3>5. 常用操作</h3>
+                <p>元組支援基本操作，例如長度計算與合併：</p>
+                <pre class="line-numbers"><code class="language-python"># 計算元組的長度
+print(len(tuple_example))  # 輸出：5
+
+# 合併元組
+new_tuple = tuple_example + ("New", 42)
+print(new_tuple)  # 輸出：(1, 2, 3, 'Python', True, 'New', 42)</code></pre>
+            </section>
+
+            <section>
+                <h2>常見問題與解答</h2>
+                <h3>問題 1：元組的用途是什麼？</h3>
+                <p>元組適合用來儲存不需要更改的資料，例如座標、設定值等。</p>
+
+                <h3>問題 2：如何建立只有一個元素的元組？</h3>
+                <p>需要在元素後加上逗號以區分單一值與元組：</p>
+                <pre class="line-numbers"><code class="language-python"># 單元素元組
+single_tuple = (42,)
+print(type(single_tuple))  # 輸出：<class 'tuple'></code></pre>
+
+                <h3>問題 3：如何將串列轉換為元組？</h3>
+                <p>可以使用 <code>tuple()</code> 函數：</p>
+                <pre class="line-numbers"><code class="language-python"># 將串列轉為元組
+my_list = [1, 2, 3]
+my_tuple = tuple(my_list)
+print(my_tuple)  # 輸出：(1, 2, 3)</code></pre>
+            </section>
+
+            <section>
+                <h3 class="caption">挑戰 1：資料分類 <span class="icon">🛈</span></h3>
+    <p>定義一個元組，其中包含多種類型的資料，並依序輸出其類型。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+data_tuple = (42, 3.14, "Python", True)
+for item in data_tuple:
+    print(f"元素: {item}, 類型: {type(item)}")</code></pre>
+    </div>
+
+                <h3 class="caption">挑戰 2：成績排序 <span class="icon">🛈</span></h3>
+    <p>建立一個包含多位學生成績的元組，依成績排序後輸出結果。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+grades_tuple = (85, 92, 78, 99, 88)
+sorted_grades = tuple(sorted(grades_tuple, reverse=True))
+print("排序後的成績:", sorted_grades)</code></pre>
+    </div>
+
+                <h3 class="caption">挑戰 3：座標計算 <span class="icon">🛈</span></h3>
+    <p>設計一個程式，輸入兩個座標元組，計算它們之間的距離。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+import math
+point1 = (3, 4)
+point2 = (7, 1)
+distance = math.sqrt((point2[0] - point1[0])**2 + (point2[1] - point1[1])**2)
+print("座標間的距離:", distance)</code></pre>
+    </div>
+				
+				<h3 class="caption">挑戰 4：去除重複元素 <span class="icon">🛈</span></h3>
+				<p>建立一個包含重複元素的元組，設計一個程式移除重複的元素並保持原順序輸出結果。</p>
+				<pre class="line-numbers"><code class="language-python"># 範例輸入
+input_tuple = (1, 2, 2, 3, 4, 4, 5)
+# 預期輸出
+(1, 2, 3, 4, 5)</code></pre>
+				<div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+input_tuple = (1, 2, 2, 3, 4, 4, 5)
+unique_tuple = tuple(set(input_tuple))
+print("移除重複後的元組:", unique_tuple)</code></pre>
+    </div>
+
+				<h3 class="caption">挑戰 5：元素查找 <span class="icon">🛈</span></h3>
+				<p>定義一個元組與一個目標值，撰寫程式檢查目標值是否存在於元組中，若存在則輸出其索引，否則提示目標值不存在。</p>
+				<pre class="line-numbers"><code class="language-python"># 範例輸入
+my_tuple = ('apple', 'banana', 'cherry', 'date')
+target = 'cherry'
+# 預期輸出
+元素 'cherry' 的索引為 2</code></pre>
+				<div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+my_tuple = ('apple', 'banana', 'cherry', 'date')
+target = 'cherry'
+if target in my_tuple:
+    print(f"元素 '{target}' 的索引為 {my_tuple.index(target)}")
+else:
+    print(f"元素 '{target}' 不存在於元組中")</code></pre>
+    </div>
+
+				<h3 class="caption">挑戰 6：元組切片 <span class="icon">🛈</span></h3>
+				<p>給定一個元組與兩個索引範圍，實作程式切片該元組並輸出結果。</p>
+				<pre class="line-numbers"><code class="language-python"># 範例輸入
+sample_tuple = (10, 20, 30, 40, 50, 60)
+start = 1
+end = 4
+# 預期輸出
+(20, 30, 40)</code></pre>
+				<div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+sample_tuple = (10, 20, 30, 40, 50, 60)
+start, end = 1, 4
+sliced_tuple = sample_tuple[start:end]
+print("切片後的元組:", sliced_tuple)</code></pre>
+    </div>
+
+				<h3 class="caption">挑戰 7：動態解包 <span class="icon">🛈</span></h3>
+				<p>設計程式實現動態解包，給定元組並指定若干變數進行解包，未指定變數的部分使用串列接收。</p>
+				<pre class="line-numbers"><code class="language-python"># 範例資料
+input_tuple = (1, 2, 3, 4, 5)
+# 預期輸出
+a: 1, b: 2, 剩餘: [3, 4, 5]</code></pre>
+				<div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+input_tuple = (1, 2, 3, 4, 5)
+a, b, *rest = input_tuple
+print(f"a: {a}, b: {b}, 剩餘: {rest}")</code></pre>
+    </div>
+
+				<h3 class="caption">挑戰 8：最小與最大值 <span class="icon">🛈</span></h3>
+				<p>建立一個元組，實作程式找出該元組的最小值與最大值並輸出結果。</p>
+				<pre class="line-numbers"><code class="language-python"># 範例輸入
+numbers = (34, 1, 78, 56, 99, 12)
+# 預期輸出
+最小值：1, 最大值：99</code></pre>
+				<div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+numbers = (34, 1, 78, 56, 99, 12)
+min_value = min(numbers)
+max_value = max(numbers)
+print(f"最小值: {min_value}, 最大值: {max_value}")</code></pre>
+    </div>
+				
+            </section>
+
+            <section>
+                <h2>結語</h2>
+                <p>元組是 Python 中重要的資料結構，特別適合用來處理不可變的資料集合。透過本章學習，你將掌握元組的使用技巧，並能有效運用於各種場景。</p>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

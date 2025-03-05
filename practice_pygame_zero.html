@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>綜合練習：Pygame Zero 基礎教學</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+	<!-- Prism.js CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css">
+    <!-- Prism.js Line Numbers CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
+    <!-- Prism.js Syntax Highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <!-- Prism.js Line Numbers Plugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", (event) => {
+            includeHTML(highlightItem);
+            document.getElementById("toggleNav").addEventListener("click", navClick);
+            enableAnswerRevealer();
+        });
+    </script>
+</head>
+<body>
+    <div class="d-flex">
+        <button id="toggleNav" class="btn btn-primary">&#8212;</button>
+        <nav id="sidebar" class="bg-light border-end" style="display: block;">
+            <div>
+                <div w3-include-html="navigation.html"></div>
+            </div>
+        </nav>
+        <main class="flex-grow-1">
+            <header>
+                <h1>綜合練習：Pygame Zero 基礎教學</h1>
+            </header>
+            <section>
+                <h2>學習導覽</h2>
+                <p>本教學將帶你逐步學習如何使用 Pygame Zero 建立簡單的遊戲。我們將涵蓋以下主題：</p>
+                <ul>
+                    <li>什麼是 Pygame Zero？</li>
+                    <li>建立基本的遊戲框架。</li>
+                    <li>使用 Actor（角色）。</li>
+                    <li>處理鍵盤輸入。</li>
+                    <li>遊戲邏輯與場景更新。</li>
+                </ul>
+            </section>
+
+<section>
+    <h2>基本框架</h2>
+    <p>以下是一個簡單的 Pygame Zero 程式範例：</p>
+    <pre class="line-numbers"><code class="language-python">WIDTH = 800
+HEIGHT = 600
+
+def draw():
+    screen.clear()
+    screen.draw.text("歡迎使用 Pygame Zero！", (100, 100), fontsize=30)
+
+def update():
+    pass  # 在這裡添加遊戲邏輯
+</code></pre>
+
+    <h3>如何在 Thonny 中執行 Pygame Zero 程式</h3>
+<p>若要在 Thonny 編輯器中執行 Pygame Zero 程式，可以按照以下步驟設置：</p>
+
+<ol>
+    <li><strong>安裝 Pygame Zero：</strong> 
+        <p>在 Thonny 中安裝 Pygame Zero，請按照以下步驟操作：</p>
+        <ul>
+            <li>點擊「工具 (Tools) > 管理套件 (Manage Packages)」。</li>
+            <li>在搜尋欄中輸入 <code>pgzero</code>，然後點擊 <code>Search</code>。</li>
+            <li>選擇 <code>pgzero</code>，然後點擊 <code>Install</code> 以完成安裝。</li>
+        </ul>
+    </li>
+
+    <li><strong>啟用 Pygame Zero Mode：</strong>
+        <p>在 Thonny 的 Run 選單中啟用 Pygame Zero 模式：</p>
+        <ul>
+            <li>點擊「執行 (Run) > 啟用 Pygame Zero 模式 (Pygame Zero Mode)」。</li>
+            <li>確保該選項已被勾選。</li>
+        </ul>
+    </li>
+
+    <li><strong>執行程式：</strong> 儲存後按下執行鍵（F5）即可啟動 Pygame Zero 程式。</li>
+</ol>
+
+    <h3>使用 `import pgzrun` 和 `pgzrun.go()` 執行程式</h3>
+    <p>另一種方法是使用 <code>pgzrun</code> 模組啟動 Pygame Zero 程式，這對於不支援直接執行 Pygame Zero 的環境（如某些編輯器）特別有用。</p>
+    <ol>
+        <li>在程式的第一行及最後一行新增以下代碼：
+            <pre class="line-numbers"><code class="language-python">import pgzrun # 匯入 pgzrun
+
+pgzrun.go()  # 啟動 Pygame Zero 主循環
+</code></pre>
+        </li>
+        <li>執行程式，Pygame Zero 將正常啟動。</li>
+    </ol>
+    <p>完整範例如下：</p>
+    <pre class="line-numbers"><code class="language-python">import pgzrun
+	
+WIDTH = 800
+HEIGHT = 600
+
+def draw():
+    screen.clear()
+    screen.draw.text("歡迎使用 Pygame Zero！", (100, 100), fontsize=30)
+
+def update():
+    pass  # 在這裡添加遊戲邏輯
+
+pgzrun.go()
+</code></pre>
+    <p><strong>注意：</strong> 使用 <code>pgzrun.go()</code> 時，請確保檔案名稱不與 <code>pgzrun</code> 衝突（例如，不要命名為 <code>pgzrun.py</code>）。</p>
+</section>
+
+            <section>
+                <h2>詳細說明</h2>
+                <h3>1. 定義視窗大小</h3>
+                <p>使用 <code>WIDTH</code> 和 <code>HEIGHT</code> 變數定義遊戲視窗的寬度與高度。</p>
+
+
+<h3>2. 特定目錄結構</h3>
+<p>Pygame Zero 使用特定的目錄結構來組織遊戲資源，例如圖片和音效檔案。以下是常用的目錄及其用途：</p>
+<ul>
+    <li><strong><code>images/</code></strong>：存放遊戲中的圖片資源，例如角色或背景圖。圖片檔案名稱與 <code>Actor</code> 初始化時的名稱相對應。例如，<code>Actor("character")</code> 將自動載入 <code>images/character.png</code>。</li>
+    <li><strong><code>sounds/</code></strong>：存放遊戲中的音效檔案，例如背景音樂或按鍵聲音。可以通過 <code>sounds.sound_name.play()</code> 播放對應的音效。</li>
+    <li><strong><code>music/</code></strong>：存放背景音樂檔案。可以使用 <code>music.play("track_name")</code> 播放音樂。</li>
+	<li><strong><code>fonts/</code></strong>：存放自定義字體檔案，例如支援中文的字體。可以在繪製文字時以 <code>fontname</code> 參數指定字體。例如，若在 <code>fonts/</code> 目錄中有 <code>notosans.ttf</code>，可以這樣使用：</li>
+<pre class="line-numbers"><code class="language-python">screen.draw.text("歡迎使用 Pygame Zero！", (100, 100), fontsize=30, fontname="notosans.ttf")</code></pre>
+<p>確保字體檔案已正確放置於 <code>fonts/</code> 目錄，並支持所需的字符集（例如中文）。如果你需要 <code>Noto</code> 字體，可到 <a href="https://fonts.google.com/" target="_blank">Google Fonts </a>下載，或直接下載<a href="res/notosans.ttf">改檔名的版本</a>。</p>
+
+
+
+</ul>
+<p>以下是範例目錄結構：</p>
+<pre class="line-numbers"><code class="language-python">my_game/
+├── images/
+│   ├── character.png
+│   ├── goal.png
+├── sounds/
+│   ├── jump.wav
+│   ├── collide.wav
+├── music/
+│   ├── background.mp3
+├── fonts/
+│   ├── notosans.ttf
+├── game.py
+</code></pre>
+
+
+                <h3>3. 繪製畫面（`draw` 函數）</h3>
+                <p><code>draw</code> 函數負責繪製遊戲畫面，每秒執行約 60 次（60 FPS）。以下是該函數的詳細說明：</p>
+                <ul>
+                    <li><strong>自動更新畫面：</strong> Pygame 在繪製每幀時會自動呼叫 <code>draw</code> ，無需手動呼叫。</li>
+                    <li><strong>清空畫面：</strong> 使用 <code>screen.clear()</code> 清空螢幕，避免畫面重疊。</li>
+                    <li><strong>填充背景：</strong> 使用 <code>screen.fill(color)</code> 設定背景顏色。</li>
+                    <li><strong>繪製內容：</strong> 利用 <code>screen.draw</code> 方法繪製文字、圖形或角色（如圓形、直線或文字）。</li>
+                </ul>
+                <p>以下是一個示例，展示如何使用 <code>draw</code> 函數繪製多種元素：</p>
+                <pre class="line-numbers"><code class="language-python">WIDTH = 800
+HEIGHT = 600
+
+player = Actor("character", (WIDTH // 2, HEIGHT // 2))  # 載入角色
+
+def draw():
+    screen.clear()  # 清空畫面
+    screen.fill((200, 200, 255))  # 背景顏色
+    screen.draw.text("歡迎來到 Pygame Zero!", (50, 50), fontsize=40, color="black")
+    screen.draw.line((100, 100), (700, 100), color="red")  # 繪製紅線
+    screen.draw.circle((400, 300), 50, color="green")  # 繪製綠色圓形
+    player.draw()  # 繪製角色
+</code></pre>
+<p>
+如果你需要 <code>character.png</code> ，可點<a href="res/character.png" download="character.png" target="_blank">此連結</a>下載。
+</p>
+
+<h3>4. 使用 Actor 繪製角色</h3>
+<p><code>Actor</code> 是 Pygame Zero 提供的核心物件，用於表示遊戲中的角色或物件。它能夠輕鬆管理圖片、位置及與其他物件的碰撞檢測。</p>
+
+<ul>
+    <li><strong>初始化 Actor：</strong> 使用圖片名稱初始化 <code>Actor</code>，圖片必須存放於 <code>images/</code> 目錄。例如，若有圖片檔案 <code>images/character.png</code>，可通過以下方式創建 Actor：
+        <pre class="line-numbers"><code class="language-python">player = Actor("character")</code></pre>
+    </li>
+    <li><strong>設置位置：</strong> 可以使用 <code>Actor.x</code> 和 <code>Actor.y</code> 設置或取得角色的位置：
+        <pre class="line-numbers"><code class="language-python">player.x = 400
+player.y = 300</code></pre>
+    </li>
+    <li><strong>繪製 Actor：</strong> 在 <code>draw</code> 函數中使用 <code>Actor.draw()</code> 方法繪製角色：
+        <pre class="line-numbers"><code class="language-python">def draw():
+    screen.clear()
+    player.draw()</code></pre>
+    </li>
+</ul>
+
+<h4>Actor 的更多屬性與方法</h4>
+<p>以下是 <code>Actor</code> 的一些常用屬性與方法：</p>
+<ul>
+    <li><code>Actor.image</code>：指定或更改角色的圖片。
+        <pre class="line-numbers"><code class="language-python">player.image = "new_character"</code></pre>
+    </li>
+    <li><code>Actor.pos</code>：以元組形式讀取或設置角色的 (x, y) 位置。
+        <pre class="line-numbers"><code class="language-python">player.pos = (200, 150)</code></pre>
+    </li>
+    <li><code>Actor.angle</code>：設置角色的旋轉角度（以度為單位）。
+        <pre class="line-numbers"><code class="language-python">player.angle = 45</code></pre>
+    </li>
+    <li><code>Actor.colliderect()</code>：檢測與其他 Actor 的邊界碰撞。
+        <pre class="line-numbers"><code class="language-python">if player.colliderect(goal):
+    print("碰撞發生！")</code></pre>
+    </li>
+</ul>
+
+
+
+                <h3>5. 更新邏輯（`update` 函數）</h3>
+                <p><code>update</code> 函數是用來處理遊戲邏輯的核心函數，例如角色移動、碰撞檢測及遊戲狀態更新。該函數的詳細說明如下：</p>
+                <ul>
+                    <li><strong>自動執行：</strong> Pygame 在繪製每幀時會自動呼叫 <code>update</code> ，無需手動呼叫。</li>
+                    <li><strong>處理邏輯：</strong> 在 <code>update</code> 中添加遊戲中的核心邏輯。</li>
+                    <li><strong>鍵盤輸入：</strong> 可以使用 <code>keyboard</code> 物件檢測按鍵。</li>
+                </ul>
+                <p>以下是一個範例，展示如何在 <code>update</code> 中讓角色透過方向鍵移動：</p>
+                <pre class="line-numbers"><code class="language-python">WIDTH = 800
+HEIGHT = 600
+player = Actor("character", (WIDTH // 2, HEIGHT // 2))  # 載入角色
+speed = 5
+
+def draw():
+    screen.clear()
+    player.draw()
+
+def update():
+    if keyboard.left:
+        player.x -= speed
+    if keyboard.right:
+        player.x += speed
+    if keyboard.up:
+        player.y -= speed
+    if keyboard.down:
+        player.y += speed
+</code></pre>
+                
+<h3>6. 碰撞檢測（colliderect）</h3>
+<p><code>colliderect</code> 是 Pygame Zero 提供的一個方法，用於檢測兩個 <code>Actor</code> 物件是否發生碰撞。</p>
+<p>當兩個角色或物件的邊界矩形重疊時，<code>colliderect</code> 方法會返回 <code>True</code>，否則返回 <code>False</code>。</p>
+<p>以下是使用 <code>colliderect</code> 方法的詳細範例：</p>
+<pre class="line-numbers"><code class="language-python">WIDTH = 800
+HEIGHT = 600
+
+player = Actor("character", (WIDTH // 2, HEIGHT // 2))
+goal = Actor("goal", (400, 300))
+
+def draw():
+    screen.clear()
+    player.draw()
+    goal.draw()
+
+def update():
+    if player.colliderect(goal):
+        print("碰撞發生！")
+</code></pre>
+<ul>
+    <li><strong>優點：</strong> 使用簡單，適用於大多數矩形邊界的碰撞檢測。</li>
+    <li><strong>注意：</strong> 如果角色圖像本身不是矩形（例如圓形角色），<code>colliderect</code> 可能會略顯不精確，因為它基於矩形邊界。</li>
+</ul>
+<p>
+如果你需要 <code>goal.png</code> ，可點<a href="res/goal.png" download="goal.png" target="_blank">此連結</a>下載。
+</p>
+
+
+<h3>7. 其他碰撞檢測</h3>
+<p>除了 <code>colliderect</code>，Pygame Zero 還支持其他類型的碰撞檢測，例如檢測點是否在物件內或圓形物件的距離檢測：</p>
+
+<h4>7.1. 檢測點是否在物件內</h4>
+<p>可以使用 <code>Actor.collidepoint()</code> 方法，檢測特定的點（例如滑鼠點擊位置）是否位於物件內。</p>
+<pre class="line-numbers"><code class="language-python">def on_mouse_down(pos):
+    if player.collidepoint(pos):
+        print("滑鼠點擊到角色！")
+</code></pre>
+
+<h4>7.2. 檢測圓形物件的距離</h4>
+<p>當角色或物件是圓形時，可以使用數學公式檢測兩個圓心之間的距離：</p>
+<pre class="line-numbers"><code class="language-python">import math
+
+def is_circle_collision(obj1, obj2):
+    distance = math.sqrt((obj1.x - obj2.x) ** 2 + (obj1.y - obj2.y) ** 2)
+    return distance < (obj1.radius + obj2.radius)
+
+# 範例用法
+player.radius = 50
+goal.radius = 30
+
+def update():
+    if is_circle_collision(player, goal):
+        print("圓形碰撞發生！")
+</code></pre>
+<p>這種方法對於圓形物件的碰撞檢測更為準確。</p>
+            </section>
+
+            <section>
+                <h2>挑戰題目</h2>
+				<h3 class="caption">挑戰 1：簡單計分機制 <span class="icon">🛈</span></h3>
+    <p>設計一個遊戲，當角色碰撞到目標物時，計分增加 1 並將目標物移動到隨機位置。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+import random
+
+WIDTH = 800
+HEIGHT = 600
+player = Actor("character", (WIDTH // 2, HEIGHT // 2))
+goal = Actor("goal", (random.randint(50, WIDTH - 50), random.randint(50, HEIGHT - 50)))
+score = 0
+
+def draw():
+    screen.clear()
+    player.draw()
+    goal.draw()
+    screen.draw.text(f"Score: {score}", (10, 10), fontsize=40, color="white")
+
+def update():
+    global score
+    if keyboard.left:
+        player.x -= 5
+    if keyboard.right:
+        player.x += 5
+    if keyboard.up:
+        player.y -= 5
+    if keyboard.down:
+        player.y += 5
+
+    if player.colliderect(goal):
+        score += 1
+        goal.pos = (random.randint(50, WIDTH - 50), random.randint(50, HEIGHT - 50))
+</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 2：計時遊戲 <span class="icon">🛈</span></h3>
+    <p>設計一個遊戲，在 30 秒內計算角色能碰撞目標物幾次，並在時間結束時顯示結果。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+import random
+import time
+
+WIDTH = 800
+HEIGHT = 600
+player = Actor("character", (WIDTH // 2, HEIGHT // 2))
+goal = Actor("goal", (random.randint(50, WIDTH - 50), random.randint(50, HEIGHT - 50)))
+score = 0
+start_time = time.time()
+game_duration = 30  # 遊戲持續時間（秒）
+
+def draw():
+    screen.clear()
+    player.draw()
+    goal.draw()
+    remaining_time = max(0, int(game_duration - (time.time() - start_time)))
+    screen.draw.text(f"Score: {score}", (10, 10), fontsize=40, color="white")
+    screen.draw.text(f"Time: {remaining_time}s", (10, 50), fontsize=40, color="white")
+    if remaining_time == 0:
+        screen.draw.text("Game Over!", (WIDTH // 2 - 100, HEIGHT // 2), fontsize=60, color="red")
+
+def update():
+    global score
+    if time.time() - start_time < game_duration:
+        if keyboard.left:
+            player.x -= 5
+        if keyboard.right:
+            player.x += 5
+        if keyboard.up:
+            player.y -= 5
+        if keyboard.down:
+            player.y += 5
+
+        if player.colliderect(goal):
+            score += 1
+            goal.pos = (random.randint(50, WIDTH - 50), random.randint(50, HEIGHT - 50))
+</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 3：避開敵人 <span class="icon">🛈</span></h3>
+    <p>新增一個敵人角色，敵人會隨機移動，玩家需要在不碰到敵人的情況下盡可能碰撞目標物。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+import random
+
+WIDTH = 800
+HEIGHT = 600
+player = Actor("character", (WIDTH // 2, HEIGHT // 2))
+goal = Actor("goal", (random.randint(50, WIDTH - 50), random.randint(50, HEIGHT - 50)))
+enemy = Actor("enemy", (random.randint(50, WIDTH - 50), random.randint(50, HEIGHT - 50)))
+score = 0
+
+def draw():
+    screen.clear()
+    player.draw()
+    goal.draw()
+    enemy.draw()
+    screen.draw.text(f"Score: {score}", (10, 10), fontsize=40, color="white")
+
+def update():
+    global score
+    # 玩家移動
+    if keyboard.left:
+        player.x -= 5
+    if keyboard.right:
+        player.x += 5
+    if keyboard.up:
+        player.y -= 5
+    if keyboard.down:
+        player.y += 5
+
+    # 碰撞檢測
+    if player.colliderect(goal):
+        score += 1
+        goal.pos = (random.randint(50, WIDTH - 50), random.randint(50, HEIGHT - 50))
+
+    if player.colliderect(enemy):
+        print("遊戲結束！")
+        exit()
+
+    # 敵人隨機移動
+    enemy.x += random.choice([-3, -2, -1, 0, 1, 2, 3])
+    enemy.y += random.choice([-3, -2, -1, 0, 1, 2, 3])
+    enemy.x = max(0, min(WIDTH, enemy.x))
+    enemy.y = max(0, min(HEIGHT, enemy.y))
+</code></pre>
+    </div>
+
+
+            </section>
+
+            <section>
+                <h2>結語</h2>
+                <p>透過本教學，你學會了 Pygame Zero 的基本操作，了解了如何使用 <code>draw</code> 和 <code>update</code> 函數，以及如何控制遊戲邏輯和 FPS。接下來，可以嘗試新增更多元素，例如音效、計分系統或更複雜的遊戲邏輯，讓你的遊戲更有趣！</p>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>字串格式化</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+	<script type="text/javascript" src="js/script.js"></script>
+	<!-- Prism.js CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css">
+    <!-- Prism.js Line Numbers CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
+    <!-- Prism.js Syntax Highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <!-- Prism.js Line Numbers Plugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+	<script>
+		document.addEventListener("DOMContentLoaded", (event) => {
+			includeHTML(highlightItem);					
+			document.getElementById("toggleNav").addEventListener("click", navClick);	
+			enableAnswerRevealer();
+		});
+	</script>	
+</head>
+<body>
+	<div class="d-flex">
+		<!-- Floating Button -->
+		<button id="toggleNav" class="btn btn-primary">&#8212;</button>
+        <nav id="sidebar" class="bg-light border-end" style="display: block;">
+            <div>
+				<div w3-include-html="navigation.html"></div>
+            </div>
+        </nav>
+        <main class="flex-grow-1">
+			<header>
+				<h1>字串格式化</h1>
+			</header>
+			<section>
+				<h2>學習導覽</h2>
+				<p>在這一章中，我們將深入探討 Python 的字串格式化方法。這不僅能讓你的程式碼更加清晰，也能讓輸出的內容更具吸引力。學習這些技巧，將有助於你輕鬆處理各種輸出需求。</p>
+				<ul>
+					<li>了解舊版格式化方法：<code>%</code> 格式化。</li>
+					<li>學習 <code>str.format()</code> 方法。</li>
+					<li>掌握現代 <code>f-string</code> 格式化。</li>
+					<li>運用格式化參數控制數字的寬度、精度等細節。</li>
+				</ul>
+			</section>
+
+			<section>
+
+				<h2>字串格式化方法</h2>
+				<h3>1. 使用百分比格式化</h3>
+				<p>這是 Python 中的舊式格式化方法，使用 <code>%</code> 來插入變數：</p>
+				<pre class="line-numbers"><code class="language-python">name = "Alice"
+age = 25
+print("我的名字是 %s，我今年 %d 歲。" % (name, age))</code></pre>
+				<p>輸出結果：<br><code>我的名字是 Alice，我今年 25 歲。</code></p>
+				<p><code>%s</code> 用來插入字串（string），它會將變數轉換為字串形式插入到指定位置。<code>%d</code> 用來插入整數（decimal），表示十進位整數。</p>
+
+				<h3>Python 格式化符號對照表</h3>
+				<table>
+					<thead>
+						<tr>
+							<th>格式符號</th>
+							<th>描述</th>
+							<th>範例</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><code>%s</code></td>
+							<td>字串</td>
+							<td><code>"Hello, %s!" % "World"</code><br> → <strong>Hello, World!</strong></td>
+						</tr>
+						<tr>
+							<td><code>%d</code></td>
+							<td>十進位整數</td>
+							<td><code>"Number: %d" % 10</code><br> → <strong>Number: 10</strong></td>
+						</tr>
+						<tr>
+							<td><code>%f</code></td>
+							<td>浮點數</td>
+							<td><code>"Pi: %.2f" % 3.14159</code><br> → <strong>Pi: 3.14</strong></td>
+						</tr>
+						<tr>
+							<td><code>%e</code></td>
+							<td>科學記數法（小寫 e）</td>
+							<td><code>"%.2e" % 12345</code><br> → <strong>1.23e+04</strong></td>
+						</tr>
+						<tr>
+							<td><code>%E</code></td>
+							<td>科學記數法（大寫 E）</td>
+							<td><code>"%.2E" % 12345</code><br> → <strong>1.23E+04</strong></td>
+						</tr>
+						<tr>
+							<td><code>%x</code></td>
+							<td>十六進位數（小寫）</td>
+							<td><code>"%x" % 255</code><br> → <strong>ff</strong></td>
+						</tr>
+						<tr>
+							<td><code>%X</code></td>
+							<td>十六進位數（大寫）</td>
+							<td><code>"%X" % 255</code><br> → <strong>FF</strong></td>
+						</tr>
+						<tr>
+							<td><code>%%</code></td>
+							<td>插入一個 <code>%</code> 符號</td>
+							<td><code>"Discount: %d%%" % 20</code><br> → <strong>Discount: 20%</strong></td>
+						</tr>
+					</tbody>
+				</table>
+
+				<h3>2. 使用 <code>str.format()</code></h3>
+				<p>這種方法提供了更靈活的格式控制：</p>
+				<pre class="line-numbers"><code class="language-python">name = "Bob"
+age = 30
+print("我的名字是 {}，我今年 {} 歲。".format(name, age))</code></pre>
+				<p>輸出結果：<br><code>我的名字是 Bob，我今年 30 歲。</code></p>
+
+				<h3>3. 使用 <code>f-string</code>（推薦）</h3>
+				<p>這是 Python 3.6 引入的一種更簡潔的格式化方法：</p>
+				<pre class="line-numbers"><code class="language-python">name = "Charlie"
+age = 35
+print(f"我的名字是 {name}，我今年 {age} 歲。")</code></pre>
+				<p>輸出結果：<br><code>我的名字是 Charlie，我今年 35 歲。</code></p>
+
+				<h3>4. 控制格式化細節</h3>
+				<p>你可以使用格式化參數控制數字的寬度和精度：</p>
+				<pre class="line-numbers"><code class="language-python">value = 3.14159
+print(f"圓周率：約為 {value:.2f}")  # 精確到小數點後兩位
+print(f"編號：{42:05}")  # 寬度為5，前面補0</code></pre>
+				<p>輸出結果：<br>
+				<code>圓周率：約為 3.14</code><br>
+				<code>編號：00042</code>
+				</p>
+				
+				<h3>Python f-string 格式化控制表</h3>
+				<table>
+					<thead>
+						<tr>
+							<th>格式控制</th>
+							<th>描述</th>
+							<th>範例</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><code>{value:.2f}</code></td>
+							<td>格式化浮點數，保留小數點後 2 位</td>
+							<td><code>pi = 3.14159; f"Pi: {pi:.2f}"</code><br> → <strong>Pi: 3.14</strong></td>
+						</tr>
+						<tr>
+							<td><code>{value:05d}</code></td>
+							<td>整數補零，總長度為 5</td>
+							<td><code>num = 42; f"Number: {num:05d}"</code><br> → <strong>Number: 00042</strong></td>
+						</tr>
+						<tr>
+							<td><code>{value:>10}</code></td>
+							<td>右對齊，總寬度為 10</td>
+							<td><code>name = "Alice"; f"{name:>10}"</code><br> → <strong>     Alice</strong></td>
+						</tr>
+						<tr>
+							<td><code>{value:<10}</code></td>
+							<td>左對齊，總寬度為 10</td>
+							<td><code>name = "Alice"; f"{name:<10}"</code><br> → <strong>Alice     </strong></td>
+						</tr>
+						<tr>
+							<td><code>{value:^10}</code></td>
+							<td>置中對齊，總寬度為 10</td>
+							<td><code>name = "Alice"; f"{name:^10}"</code><br> → <strong>  Alice   </strong></td>
+						</tr>
+						<tr>
+							<td><code>{value:+d}</code></td>
+							<td>顯示數字符號（正負號）</td>
+							<td><code>num = 42; f"{num:+d}"</code><br> → <strong>+42</strong></td>
+						</tr>
+						<tr>
+							<td><code>{value:,}</code></td>
+							<td>數字加上千分位逗號</td>
+							<td><code>num = 1000000; f"{num:,}"</code><br> → <strong>1,000,000</strong></td>
+						</tr>
+						<tr>
+							<td><code>{value:.2%}</code></td>
+							<td>格式化為百分比，保留小數點後 2 位</td>
+							<td><code>rate = 0.85; f"{rate:.2%}"</code><br> → <strong>85.00%</strong></td>
+						</tr>
+						<tr>
+							<td><code>{value:#x}</code></td>
+							<td>十六進位，包含前綴 <code>0x</code></td>
+							<td><code>num = 255; f"{num:#x}"</code><br> → <strong>0xff</strong></td>
+						</tr>
+						<tr>
+							<td><code>{value:.2e}</code></td>
+							<td>科學記數法，保留小數點後 2 位</td>
+							<td><code>num = 12345; f"{num:.2e}"</code><br> → <strong>1.23e+04</strong></td>
+						</tr>
+						<tr>
+							<td><code>{value:b}</code></td>
+							<td>格式化為二進位</td>
+							<td><code>num = 10; f"{num:b}"</code><br> → <strong>1010</strong></td>
+						</tr>
+					</tbody>
+				</table>
+			</section>
+
+			<section>
+				<h2>常見問題與解答</h2>
+				<h3>問題 1：如何在 <code>str.format()</code> 中指定變數名稱？</h3>
+				<p>你可以在格式化字串中使用命名變數：</p>
+				<pre class="line-numbers"><code class="language-python">print("我的名字是 {name}，我今年 {age} 歲。".format(name="David", age=40))</code></pre>
+
+				<h3>問題 2：為什麼使用 <code>f-string</code> 時會有錯誤訊息？</h3>
+				<p>檢查你的 Python 版本是否是 3.6 或更新版本。<code>f-string</code> 只支援新版 Python。</p>
+
+				<h3>問題 3：如何在字串中包含百分比符號？</h3>
+				<p>可以通過兩個百分比符號來表示：</p>
+				<pre class="line-numbers"><code class="language-python">print("成功率是 100%")
+print("成功率是 %d%%" % 100)</code></pre>
+				<p>輸出結果：<br><code>成功率是 100%</code><br>
+<code>成功率是 100%</code>
+				</p>
+			</section>
+
+			<section>
+				<h2>挑戰題目</h2>
+				<h3 class="caption">挑戰 1：使用三種格式化方法 <span class="icon">🛈</span></h3>
+    <p>寫一段程式，讓它分別使用 <code>%</code>、<code>str.format()</code> 和 <code>f-string</code> 來輸出以下句子：<br><code>我的名字是 John，我有 3 隻貓。</code></p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+# 使用 % 格式化
+print("我的名字是 %s，我有 %d 隻貓。" % ("John", 3))
+
+# 使用 str.format() 方法
+print("我的名字是 {}，我有 {} 隻貓。".format("John", 3))
+
+# 使用 f-string
+name = "John"
+cats = 3
+print(f"我的名字是 {name}，我有 {cats} 隻貓。")</code></pre>
+    </div>
+
+				<h3 class="caption">挑戰 2：控制數字格式 <span class="icon">🛈</span></h3>
+    <p>嘗試使用 <code>f-string</code> 格式化以下數字：</p>
+    <ul>
+        <li>顯示小數點後 3 位的 1/3。</li>
+        <li>將整數 7 格式化為 4 位數字，前面補 0。</li>
+    </ul>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+# 顯示小數點後 3 位的 1/3
+value = 1 / 3
+print(f"1/3 約為 {value:.3f}")
+
+# 將整數 7 格式化為 4 位數字，前面補 0
+number = 7
+print(f"數字格式化為: {number:04d}")</code></pre>
+    </div>
+
+				<h3 class="caption">挑戰 3：設計自訂訊息 <span class="icon">🛈</span></h3>
+    <p>定義變數 <code>name</code> 和 <code>hobby</code>，使用 <code>f-string</code> 將它們嵌入字串，生成一段介紹自己的句子。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+# 定義變數
+name = "Alice"
+hobby = "讀書"
+
+# 使用 f-string 生成介紹句子
+print(f"大家好，我是 {name}，我的興趣是 {hobby}。")</code></pre>
+    </div>
+	
+				<h3 class="caption">挑戰 4：百分比格式化 <span class="icon">🛈</span></h3>
+    <p>使用 <code>f-string</code> 顯示一個百分比值，精確到小數點後 2 位。例如，將數值 <code>0.856</code> 格式化為百分比。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+# 定義數值
+rate = 0.856
+
+# 使用 f-string 格式化為百分比
+print(f"轉換為百分比：{rate:.2%}")</code></pre>
+    </div>
+	
+				<h3 class="caption">挑戰 5：二進位表示 <span class="icon">🛈</span></h3>
+    <p>將整數 <code>42</code> 轉換為二進位格式，並使用 <code>f-string</code> 格式化輸出。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+# 定義數值
+number = 42
+
+# 格式化為二進位
+print(f"42 的二進位表示：{number:b}")</code></pre>
+    </div>
+	
+	
+				<h3 class="caption">挑戰 6：置中格式化 <span class="icon">🛈</span></h3>
+    <p>使用 <code>f-string</code> 將字串 <code>"Python"</code> 置中對齊，總寬度為 20。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+# 定義字串
+text = "Python"
+
+# 置中格式化
+print(f"置中顯示：{text:^20}")</code></pre>
+    </div>
+	
+				<h3 class="caption">挑戰 7：顯示科學記數法 <span class="icon">🛈</span></h3>
+    <p>將數值 <code>123456</code> 格式化為科學記數法（小數點後保留 3 位）。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+# 定義數值
+number = 123456
+
+# 格式化為科學記數法
+print(f"科學記數法：{number:.3e}")</code></pre>
+    </div>
+	
+				<h3 class="caption">挑戰 8：帶前綴的十六進位 <span class="icon">🛈</span></h3>
+    <p>將數值 <code>255</code> 格式化為十六進位格式，並顯示 <code>0x</code> 前綴。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+# 定義數值
+number = 255
+
+# 格式化為帶前綴的十六進位
+print(f"255 的十六進位表示：{number:#x}")</code></pre>
+    </div>
+	
+	
+			</section>
+
+			<section>
+				<h2>結語</h2>
+				<p>學習字串格式化是 Python 程式設計的重要基礎，它能讓你的程式輸出更加專業和易讀。無論是舊式的 <code>%</code> 格式化，還是現代的 <code>f-string</code>，都各有用途。試著將這些技巧應用於你的程式吧！</p>
+			</section>
+		</main>
+    </div>			
+</body>
+</html>

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>了解 __name__</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+	<!-- Prism.js CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css">
+    <!-- Prism.js Line Numbers CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
+    <!-- Prism.js Syntax Highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <!-- Prism.js Line Numbers Plugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", (event) => {
+            includeHTML(highlightItem);
+            document.getElementById("toggleNav").addEventListener("click", navClick);
+			enableAnswerRevealer();
+        });
+    </script>
+</head>
+<body>
+    <div class="d-flex">
+        <!-- Floating Button -->
+        <button id="toggleNav" class="btn btn-primary">&#8212;</button>
+        <nav id="sidebar" class="bg-light border-end" style="display: block;">
+            <div>
+                <div w3-include-html="navigation.html"></div>
+            </div>
+        </nav>
+        <main class="flex-grow-1">
+            <header>
+                <h1>了解 __name__</h1>
+            </header>
+            <section>
+                <h2>學習導覽</h2>
+                <p>在本章中，我們將探討 Python 中的特殊變數 <code>__name__</code> 及其用途。這個主題是理解 Python 程式執行邏輯的關鍵。</p>
+                <ul>
+                    <li>什麼是 <code>__name__</code>？</li>
+                    <li>如何使用 <code>if __name__ == "__main__"</code>？</li>
+                    <li>分離執行程式與模組的邏輯。</li>
+                    <li>設計一個乾淨且易於重用的 Python 程式。</li>
+                </ul>
+                <p>完成這一章後，你將能夠更靈活地設計模組化的程式，並清楚程式的執行邏輯。</p>
+            </section>
+
+            <section>
+                <h2>什麼是 <code>__name__</code>？</h2>
+                <p>在 Python 中，每個執行的程式都有一個特定的名稱存在特殊變數 <code>__name__</code> 中。如果程式是直接執行的，則其名稱為 <code>__main__</code>。這允許我們區分程式是作為主程式執行還是被匯入為模組使用。</p>
+                <pre class="line-numbers"><code class="language-python"># example.py
+print(__name__)</code></pre>
+                <p>如果直接執行此程式，輸出為：</p>
+                <pre class="line-numbers"><code class="language-python">__main__</code></pre>
+                <p>但如果此程式被匯入為模組，則 <code>__name__</code> 的值為檔案名稱，例如 <code>example</code>。</p>
+            </section>
+
+            <section>
+                <h2>使用 <code>if __name__ == "__main__"</code></h2>
+                <p>為了分離模組的功能與程式執行邏輯，我們通常使用：</p>
+                <pre class="line-numbers"><code class="language-python">if __name__ == "__main__":
+    # 執行主要程式邏輯
+    print("這是主程式！")</code></pre>
+                <p>當檔案被匯入為模組時，此部分程式碼將不會執行。</p>
+
+                <h3>範例：建立一個模組</h3>
+                <pre class="line-numbers"><code class="language-python"># mymodule.py
+def greet():
+    print("Hello from the module!")
+
+if __name__ == "__main__":
+    print("這是主程式！")
+    greet()</code></pre>
+                <p>若直接執行 <code>mymodule.py</code>，輸出為：</p>
+                <pre class="line-numbers"><code class="language-python">這是主程式！
+Hello from the module!</code></pre>
+                <p>若被其他程式匯入：</p>
+                <pre class="line-numbers"><code class="language-python"># main.py
+import mymodule</code></pre>
+                <p>則只會執行模組中的函式或程式邏輯，而不會執行 <code>if __name__ == "__main__"</code> 區塊。</p>
+            </section>
+
+            <section>
+                <h2>常見問題與解答</h2>
+                <h3>問題 1：為什麼需要 <code>if __name__ == "__main__"</code>？</h3>
+                <p>它讓我們能夠將模組的功能與主要程式邏輯分開，便於模組重用與測試。</p>
+
+                <h3>問題 2：如果省略 <code>if __name__ == "__main__"</code>，會發生什麼？</h3>
+                <p>被匯入的模組中所有的程式碼都會執行，可能導致非預期的行為。當模組僅用來定義函式、類別和變數，且沒有任何全域執行邏輯時，才可以考慮省略這個判斷。不過為了程式安全與可維護性，即使在這種情況下，也建議保留這個區塊以應對未來擴充需求。</p>
+
+                <h3>問題 3：如何測試模組？</h3>
+                <p>可以在 <code>if __name__ == "__main__"</code> 區塊中撰寫測試程式，匯入模組時則不會執行這些測試。</p>
+				<pre class="line-numbers"><code class="language-python"># mymodule.py
+
+def add(a, b):
+    """回傳兩數相加的結果。"""
+    return a + b
+
+def subtract(a, b):
+    """回傳兩數相減的結果。"""
+    return a - b
+
+# 當模組直接執行時，執行以下測試程式
+if __name__ == "__main__":
+    print("測試 add 函式：")
+    print("2 + 3 =", add(2, 3))       # 預期輸出：5
+    print("10 + 20 =", add(10, 20))   # 預期輸出：30
+
+    print("\n測試 subtract 函式：")
+    print("5 - 3 =", subtract(5, 3))  # 預期輸出：2
+    print("20 - 10 =", subtract(20, 10))  # 預期輸出：10</code></pre>
+
+            </section>
+
+            <section>
+                <h2>挑戰題目</h2>
+                <h3 class="caption">挑戰 1：模組設計 <span class="icon">🛈</span></h3>
+    <p>建立一個模組，其中包含一個函式與主要程式邏輯，並嘗試將它匯入到另一個檔案中。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+# module1.py
+def greet(name):
+    return f"Hello, {name}!"
+
+if __name__ == "__main__":
+    print(greet("Alice"))
+
+# main.py
+import module1
+print(module1.greet("Bob"))</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 2：檢查執行模式 <span class="icon">🛈</span></h3>
+    <p>撰寫一個程式，輸出該程式是直接執行還是被匯入。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+# check_mode.py
+if __name__ == "__main__":
+    print("程式是直接執行")
+else:
+    print("程式是被匯入")</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 3：多檔案互動 <span class="icon">🛈</span></h3>
+    <p>設計兩個檔案，檔案 A 匯入檔案 B，並檢查 <code>if __name__ == "__main__"</code> 的作用。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+# file_a.py
+print("執行 file_a.py")
+import file_b
+
+# file_b.py
+print("執行 file_b.py")
+if __name__ == "__main__":
+    print("file_b.py 被直接執行")
+else:
+    print("file_b.py 被匯入")</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 4：模組重用 <span class="icon">🛈</span></h3>
+    <p>建立一個模組，該模組包含一個函式計算兩數的乘積，並使用 <code>if __name__ == "__main__"</code> 區塊進行測試。嘗試將此模組匯入至另一個程式中使用其函式。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+# multiply_module.py
+def multiply(a, b):
+    return a * b
+
+if __name__ == "__main__":
+    print(multiply(2, 3))
+
+# main.py
+from multiply_module import multiply
+print(multiply(4, 5))</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 5：建立模組目錄 <span class="icon">🛈</span></h3>
+    <p>設計一個包含多個模組的專案結構，例如 <code>utils</code> 目錄，並匯入該目錄下的模組來執行相關功能。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+# utils/math_utils.py
+def add(a, b):
+    return a + b
+
+# utils/string_utils.py
+def reverse(text):
+    return text[::-1]
+
+# main.py
+from utils.math_utils import add
+from utils.string_utils import reverse
+
+print(add(3, 5))
+print(reverse("Python"))</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 6：測試模組功能 <span class="icon">🛈</span></h3>
+    <p>撰寫一個模組，內含多個函式，並在 <code>if __name__ == "__main__"</code> 區塊中測試所有函式。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+# utilities.py
+def add(a, b):
+    return a + b
+
+def subtract(a, b):
+    return a - b
+
+if __name__ == "__main__":
+    print(add(10, 5))
+    print(subtract(10, 5))</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 7：防止無意執行 <span class="icon">🛈</span></h3>
+    <p>建立一個模組，包含敏感操作（如刪除檔案），確保只有在主程式執行時才能執行該操作。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+# sensitive.py
+import os
+
+def delete_file(filename):
+    os.remove(filename)
+
+if __name__ == "__main__":
+    print("請確認是否要執行敏感操作")
+    # delete_file("important.txt")</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 8：檢查模組執行順序 <span class="icon">🛈</span></h3>
+    <p>設計三個檔案，分別匯入彼此並使用 <code>print</code> 確認程式執行的順序。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+# a.py
+print("執行 a.py")
+import b
+
+# b.py
+print("執行 b.py")
+import c
+
+# c.py
+print("執行 c.py")</code></pre>
+    </div>
+				
+				
+            </section>
+
+            <section>
+                <h2>結語</h2>
+                <p>理解 <code>__main__</code> 的用途是設計模組化 Python 程式的重要基礎。透過練習這些概念，你將能撰寫更具結構和可重用性的程式。</p>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

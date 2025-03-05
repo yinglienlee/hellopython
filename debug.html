@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>追蹤與偵錯</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+	<!-- Prism.js CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css">
+    <!-- Prism.js Line Numbers CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
+    <!-- Prism.js Syntax Highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <!-- Prism.js Line Numbers Plugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", (event) => {
+            includeHTML(highlightItem);
+            document.getElementById("toggleNav").addEventListener("click", navClick);
+        });
+    </script>
+</head>
+<body>
+    <div class="d-flex">
+        <!-- Floating Button -->
+        <button id="toggleNav" class="btn btn-primary">&#8212;</button>
+        <nav id="sidebar" class="bg-light border-end" style="display: block;">
+            <div>
+                <div w3-include-html="navigation.html"></div>
+            </div>
+        </nav>
+        <main class="flex-grow-1">
+            <header>
+                <h1>追蹤與偵錯</h1>
+            </header>
+
+            <section>
+                <h2>學習導覽</h2>
+                <p>在這一章中，我們將學習如何使用 Thonny 的追蹤與除錯功能。這些功能能幫助你理解程式執行的每一步，找出並修正程式中的問題。</p>
+                <ul>
+                    <li>學習如何進入追蹤模式。</li>
+                    <li>掌握逐步執行程式的方法。</li>
+                    <li>學會檢查變數值及設置中斷點。</li>
+                    <li>理解如何利用除錯工具來修正錯誤。</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>什麼是追蹤與除錯功能？</h2>
+                <p>Thonny 是一款簡單易用的 Python 編輯器，其內建的追蹤與除錯功能特別適合初學者。以下是它的特色：</p>
+                <ul>
+                    <li>可以逐步執行程式，幫助你了解每一行程式碼的作用。</li>
+                    <li>提供即時變數檢視，讓你追蹤變數值的變化。</li>
+                    <li>支援設置中斷點，讓程式執行到特定位置時暫停。</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>如何使用 Thonny 的追蹤與除錯功能？</h2>
+
+                <h3>1. 啟用追蹤模式</h3>
+                <ol>
+                    <li>打開 Thonny 並載入你的程式碼。</li>
+                    <li>點擊工具列上的 <strong>Debug</strong> 按鈕（隱形的烏龜圖示）。</li>
+                    <li>程式將進入逐步執行模式。</li>
+                </ol>
+
+                <h3>2. 使用除錯控制</h3>
+                <p>以下是常用的控制按鈕及其作用：</p>
+                <ul>
+                    <li><strong>Step Over:</strong> 執行當前行，並跳過函式內部的細節。</li>
+                    <li><strong>Step Into:</strong> 進入函式內部，檢查細節。</li>
+                    <li><strong>Step Out:</strong> 跳出函式，回到外部程式碼。</li>
+                    <li><strong>Continue:</strong> 讓程式執行到下一個中斷點或結束。</li>
+                </ul>
+
+                <h3>3. 檢視變數值</h3>
+                <p>在 Thonny 的右側或底部的 <strong>Variables</strong> 面板，你可以檢視所有變數的即時值。觀察它們隨程式執行的變化，有助於找出問題所在。</p>
+
+                <h3>4. 設置中斷點</h3>
+                <p>斷點是一種讓程式暫停的工具，方便你專注於特定程式碼段的執行：</p>
+                <ol>
+                    <li>在程式碼行號的左側點擊，添加中斷點。</li>
+                    <li>執行程式時，Thonny 會在中斷點處暫停。</li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>常見問題與解答</h2>
+                <h3>問題 1：如何檢查變數值？</h3>
+                <p>在除錯模式中，右側的 <strong>Variables</strong> 面板會顯示所有變數的即時值。點擊變數名稱可以檢查其詳細內容。</p>
+
+                <h3>問題 2：中斷點無法生效？</h3>
+                <p>確保程式已在除錯模式中執行，並檢查中斷點是否設置在有效的程式碼行。</p>
+
+                <h3>問題 3：如何退出除錯模式？</h3>
+                <p>點擊工具列上的<strong>Stop</strong> 按鈕即可退出除錯模式。</p>
+            </section>
+
+            <section>
+                <h2>挑戰題目</h2>
+                <h3>挑戰 1：檢查變數值</h3>
+                <p>編寫以下程式碼，使用除錯模式檢查變數 <code>total</code> 的值：</p>
+                <pre class="line-numbers"><code class="language-python">def add_numbers(a, b):
+    total = a + b
+    return total
+
+result = add_numbers(3, 5)
+print(result)</code></pre>
+
+                <h3>挑戰 2：修正錯誤</h3>
+                <p>以下程式碼有一個錯誤，使用 Thonny 的除錯功能找出並修正它：</p>
+                <pre class="line-numbers"><code class="language-python">def divide_numbers(a, b):
+    result = a / b
+    return result
+
+print(divide_numbers(5, 0))  # 錯誤：除以零</code></pre>
+
+
+				<h3>挑戰 3：數字累加問題</h3>
+				
+				<p>以下程式碼試圖計算數列的總和，但程式中有些邏輯錯誤，導致結果不正確。</p>
+				<p>請使用 <strong>中斷點</strong> 和 <strong>變數觀察功能</strong>，找出並修正這些錯誤。</p>
+				
+				<pre class="line-numbers"><code class="language-python">def calculate_sum(numbers):
+	total = 0
+	for i in range(len(numbers)):
+		total += numbers[i]  # 累加數列元素
+
+		# 錯誤：嘗試存取不存在的索引
+		if i > len(numbers):
+			print("發生錯誤：索引超出範圍！")
+
+	return total
+
+# 測試數列
+numbers = [1, 2, 3, 4, 5]
+result = calculate_sum(numbers)
+
+print(f"數列總和：{result}")
+</code></pre>
+
+				<h3>任務目標</h3>
+				<ul>
+					<li><strong>設置斷點</strong>：在 <code>for</code> 迴圈內的 <code>total += numbers[i]</code> 行設置斷點，觀察變數 <code>total</code> 的變化。</li>
+					<li><strong>變數監控</strong>：檢查 <code>numbers[i]</code> 和 <code>total</code> 在每次迭代中的值。</li>
+					<li><strong>追蹤執行流程</strong>：使用單步執行功能，確保程式執行邏輯正確。</li>
+					<li><strong>修正程式錯誤</strong>：
+						<ul>
+							<li>移除不必要的條件檢查 <code>if i > len(numbers)</code>。</li>
+							<li>確保程式正確計算數列的總和。</li>
+						</ul>
+					</li>
+				</ul>
+				
+				<h3>提示</h3>
+				<ul>
+					<li>觀察條件 <code>if i > len(numbers)</code> 是否有意義。</li>
+					<li>確保程式邏輯只在有效索引範圍內運行。</li>
+				</ul>
+
+
+            </section>
+
+            <section>
+                <h2>結語</h2>
+                <p>透過本章的學習，你應該已經了解如何使用 Thonny 的追蹤與除錯功能。這些技巧將大幅提升你發現和解決程式問題的能力。試著多練習，成為一名更出色的 Python 程式設計師！</p>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

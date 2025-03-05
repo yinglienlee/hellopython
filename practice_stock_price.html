@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>綜合練習：抓取 TSMC 股票歷史價格</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+    <!-- Prism.js CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css">
+    <!-- Prism.js Line Numbers CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
+    <!-- Prism.js Syntax Highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <!-- Prism.js Line Numbers Plugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", (event) => {
+            includeHTML(highlightItem);
+            document.getElementById("toggleNav").addEventListener("click", navClick);
+			enableAnswerRevealer();
+        });
+    </script>
+</head>
+<body>
+    <div class="d-flex">
+        <!-- Floating Button -->
+        <button id="toggleNav" class="btn btn-primary">&#8212;</button>
+        <nav id="sidebar" class="bg-light border-end" style="display: block;">
+            <div>
+                <div w3-include-html="navigation.html"></div>
+            </div>
+        </nav>
+        <main class="flex-grow-1">
+            <header>
+                <h1>綜合練習：抓取 TSMC 股票歷史價格</h1>
+            </header>
+            <section>
+                <h2>學習導覽</h2>
+                <p>在本章中，我們將學習如何利用 Python 抓取 TSMC（台積電）的歷史股價，並將數據存儲到 CSV 文件中。我們會探討程式的基本架構，並一步步實現功能。</p>
+                <ul>
+                    <li>介紹程式的架構與邏輯。</li>
+                    <li>使用 <code>yfinance</code> 模組獲取股票數據。</li>
+                    <li>將抓取的數據儲存到 CSV 文件中。</li>
+                    <li>處理例外狀況，確保程式穩定執行。</li>
+                </ul>
+                <p>完成本章後，你將能熟練使用 Python 抓取並分析股票數據。</p>
+            </section>           
+
+			<section>
+                <h2>如何安裝 yfinance</h2>
+                <p>在撰寫本章程式之前，必須先安裝 <code>yfinance</code> 模組。以下是不同安裝方式的詳細說明：</p>
+
+                <h3>在 Thonny 中安裝</h3>
+                <ol>
+                    <li>打開 Thonny 開發環境。</li>
+                    <li>點擊選單中的 <strong>工具 (Tools)</strong>，然後選擇 <strong>管理套件 (Manage Packages)</strong>。</li>
+                    <li>在彈出的視窗中，於搜索框輸入 <code>yfinance</code>。</li>
+                    <li>點擊 <strong>安裝 (Install)</strong> 按鈕，等待安裝完成。</li>
+                </ol>
+
+                <h3>使用 pip 安裝</h3>
+                <p>若你使用其他開發環境，則可以通過以下指令安裝：</p>
+                <pre class="line-numbers"><code class="language-python">pip install yfinance</code></pre>
+
+                <h3>檢查安裝</h3>
+                <p>安裝完成後，可以使用以下指令確認是否安裝成功：</p>
+                <pre class="line-numbers"><code class="language-python">pip show yfinance</code></pre>
+                <p>如果已成功安裝，將顯示 yfinance 的詳細資訊。</p>
+            </section>
+			
+<section>
+            <h2>程式架構解析</h2>
+
+            <h3>1. 設定參數</h3>
+            <p>程式中定義了以下重要參數：</p>
+            <ul>
+                <li><strong>STOCK_CODE：</strong>指定要抓取的股票代碼，如台積電為 <code>2330.TW</code>。</li>
+                <li><strong>START_DATE 與 END_DATE：</strong>指定抓取的時間範圍，例如從 <code>2022-01-01</code> 到 <code>2023-01-01</code>。</li>
+                <li><strong>CSV_FILE：</strong>指定輸出的 CSV 檔案名稱。</li>
+            </ul>
+            <pre class="line-numbers"><code class="language-python"># 股票代碼
+STOCK_CODE = "2330.TW"
+
+# 日期範圍
+START_DATE = "2022-01-01"
+END_DATE = "2023-01-01"
+
+# 輸出檔案名稱
+CSV_FILE = "tsmc_stock_data.csv"</code></pre>
+
+            <h3>2. 定義函式</h3>
+            <h4>2.1 抓取數據函式 <code>fetch_stock_data</code></h4>
+            <p>此函式使用 <code>yfinance</code> 抓取指定股票的歷史數據：</p>
+            <pre class="line-numbers"><code class="language-python">def fetch_stock_data(stock_code, start_date, end_date):
+    try:
+        stock = yf.Ticker(stock_code)
+        hist = stock.history(start=start_date, end=end_date)
+        return hist
+    except Exception as e:
+        print(f"無法抓取數據: {e}")
+        return None</code></pre>
+            <p>主要步驟：</p>
+            <ol>
+                <li>利用 <code>yfinance.Ticker</code> 初始化股票物件。</li>
+                <li>抓取指定日期範圍內的歷史數據。</li>
+                <li>若抓取失敗，顯示錯誤訊息。</li>
+            </ol>
+
+            <h4>2.2 儲存數據函式 <code>save_to_csv</code></h4>
+            <p>將抓取的數據存儲為 CSV 文件：</p>
+            <pre class="line-numbers"><code class="language-python">def save_to_csv(data, filename):
+    try:
+        data.reset_index(inplace=True)
+        data["Date"] = data["Date"].apply(lambda x: x.strftime("%Y-%m-%d"))
+        data.to_csv(filename, index=False, encoding="utf-8-sig")
+        print(f"數據已儲存到 {filename}")
+    except Exception as e:
+        print(f"無法儲存數據到 CSV: {e}")</code></pre>
+            <p>主要步驟：</p>
+            <ol>
+                <li>重設索引，將日期列提取出來。</li>
+                <li>格式化日期為 <code>YYYY-MM-DD</code> 格式。</li>
+                <li>將數據保存到 CSV 文件，使用 <code>utf-8-sig</code> 編碼以支援中文。</li>
+            </ol>
+
+            <h3>3. 主程式邏輯</h3>
+            <p>整個程式的主邏輯寫在 <code>if __name__ == "__main__"</code> 區塊中：</p>
+            <pre class="line-numbers"><code class="language-python">if __name__ == "__main__":
+    print("正在抓取 TSMC 股票數據...")
+    stock_data = fetch_stock_data(STOCK_CODE, START_DATE, END_DATE)
+    if stock_data is not None:
+        save_to_csv(stock_data, CSV_FILE)
+    else:
+        print("抓取失敗，請檢查程式設定。")</code></pre>
+            <p>步驟：</p>
+            <ol>
+                <li>輸出訊息提示抓取開始。</li>
+                <li>調用 <code>fetch_stock_data</code> 抓取數據。</li>
+                <li>如果抓取成功，調用 <code>save_to_csv</code> 儲存數據；否則輸出錯誤訊息。</li>
+            </ol>
+        </section>
+			
+			
+            <section>
+                <h2>完整範例程式碼</h2>
+                <pre class="line-numbers"><code class="language-python">import yfinance as yf
+import csv
+from datetime import datetime
+
+# 股票代碼
+STOCK_CODE = "2330.TW"
+
+# 設定抓取的日期範圍
+START_DATE = "2022-01-01"
+END_DATE = "2023-01-01"
+
+# 輸出 CSV 的檔案名稱
+CSV_FILE = "tsmc_stock_data.csv"
+
+# 抓取數據
+def fetch_stock_data(stock_code, start_date, end_date):
+    try:
+        stock = yf.Ticker(stock_code)
+        hist = stock.history(start=start_date, end=end_date)
+        return hist
+    except Exception as e:
+        print(f"無法抓取數據: {e}")
+        return None
+
+# 將數據儲存為 CSV
+def save_to_csv(data, filename):
+    try:
+        data.reset_index(inplace=True)
+        data["Date"] = data["Date"].apply(lambda x: x.strftime("%Y-%m-%d"))
+        data.to_csv(filename, index=False, encoding="utf-8-sig")
+        print(f"數據已儲存到 {filename}")
+    except Exception as e:
+        print(f"無法儲存數據到 CSV: {e}")
+
+# 主程式
+if __name__ == "__main__":
+    print("正在抓取 TSMC 股票數據...")
+    stock_data = fetch_stock_data(STOCK_CODE, START_DATE, END_DATE)
+    if stock_data is not None:
+        save_to_csv(stock_data, CSV_FILE)
+    else:
+        print("抓取失敗，請檢查程式設定。")</code></pre>
+            </section>
+
+
+
+
+
+            <section>
+                <h2>挑戰題目</h2>
+                <h3 class="caption">挑戰 1：抓取其他股票數據 <span class="icon">🛈</span></h3>
+    <p>嘗試修改程式以抓取其他股票的歷史數據，例如 Apple (<code>AAPL</code>)。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+import yfinance as yf
+
+# 股票代碼
+STOCK_CODE = "AAPL"  # Apple 的股票代碼
+START_DATE = "2022-01-01"
+END_DATE = "2023-01-01"
+
+def fetch_stock_data(stock_code, start_date, end_date):
+    try:
+        stock = yf.Ticker(stock_code)
+        hist = stock.history(start=start_date, end=end_date)
+        print(hist)
+    except Exception as e:
+        print(f"無法抓取數據: {e}")
+
+fetch_stock_data(STOCK_CODE, START_DATE, END_DATE)
+</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 2：增加數據分析功能 <span class="icon">🛈</span></h3>
+    <p>將抓取的數據進行基本的統計分析，例如計算平均價格或最大漲跌幅。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+import yfinance as yf
+
+STOCK_CODE = "2330.TW"  # 台積電
+START_DATE = "2022-01-01"
+END_DATE = "2023-01-01"
+
+def fetch_and_analyze(stock_code, start_date, end_date):
+    try:
+        stock = yf.Ticker(stock_code)
+        hist = stock.history(start=start_date, end=end_date)
+        
+        avg_price = hist['Close'].mean()
+        max_change = (hist['High'] - hist['Low']).max()
+
+        print(f"平均收盤價：{avg_price:.2f}")
+        print(f"最大日內波動：{max_change:.2f}")
+    except Exception as e:
+        print(f"錯誤：{e}")
+
+fetch_and_analyze(STOCK_CODE, START_DATE, END_DATE)
+</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 3：可視化數據 <span class="icon">🛈</span></h3>
+    <p>使用 <code>matplotlib</code> 或其他繪圖工具將數據可視化，例如繪製股價趨勢圖。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+import yfinance as yf
+import matplotlib.pyplot as plt
+
+STOCK_CODE = "2330.TW"
+START_DATE = "2022-01-01"
+END_DATE = "2023-01-01"
+
+def fetch_and_visualize(stock_code, start_date, end_date):
+    try:
+        stock = yf.Ticker(stock_code)
+        hist = stock.history(start=start_date, end=end_date)
+        
+        plt.figure(figsize=(10, 5))
+        plt.plot(hist.index, hist['Close'], label='收盤價', color='blue')
+        plt.title(f"{stock_code} 股價趨勢")
+        plt.xlabel("日期")
+        plt.ylabel("收盤價")
+        plt.legend()
+        plt.grid()
+        plt.show()
+    except Exception as e:
+        print(f"錯誤：{e}")
+
+fetch_and_visualize(STOCK_CODE, START_DATE, END_DATE)
+</code></pre>
+    </div>
+            </section>
+
+            <section>
+                <h2>結語</h2>
+                <p>透過本章的學習，我們了解了如何使用 Python 抓取並儲存股票數據。這是一個結合網路爬蟲、數據處理與檔案操作的實用案例，希望你能進一步擴展並應用於更多場景！</p>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

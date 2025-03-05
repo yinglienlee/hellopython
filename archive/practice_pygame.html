@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>綜合練習：Pygame 基礎教學</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+	<!-- Prism.js CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css">
+    <!-- Prism.js Line Numbers CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
+    <!-- Prism.js Syntax Highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <!-- Prism.js Line Numbers Plugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", (event) => {
+            includeHTML(highlightItem);
+            document.getElementById("toggleNav").addEventListener("click", navClick);
+            enableAnswerRevealer();
+        });
+    </script>
+</head>
+<body>
+    <div class="d-flex">
+        <button id="toggleNav" class="btn btn-primary">&#8212;</button>
+        <nav id="sidebar" class="bg-light border-end" style="display: block;">
+            <div>
+                <div w3-include-html="navigation.html"></div>
+            </div>
+        </nav>
+        <main class="flex-grow-1">
+            <header>
+                <h1>綜合練習：Pygame 基礎教學</h1>
+            </header>
+            <section>
+                <h2>學習導覽</h2>
+                <p>本教學將帶你逐步學習如何使用 Python 的 <code>pygame</code> 模組來設計簡單的遊戲。我們將涵蓋以下主題：</p>
+                <ul>
+                    <li>什麼是 <code>pygame</code>？</li>
+                    <li>建立基本的遊戲框架。</li>
+                    <li>處理事件（鍵盤與滑鼠輸入）。</li>
+                    <li>繪製圖形與文字。</li>
+                    <li>更新遊戲邏輯與螢幕顯示。</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>什麼是 Pygame？</h2>
+                <p><code>pygame</code> 是一個用於設計 2D 遊戲的 Python 庫。它提供了豐富的功能，包括視窗管理、事件處理、圖形繪製、音效播放等。</p>
+            </section>
+
+            <section>
+                <h2>基本框架</h2>
+                <p>以下是一個簡單的 <code>pygame</code> 程式框架：</p>
+                <pre class="line-numbers"><code class="language-python">import pygame
+
+# 初始化 pygame
+pygame.init()
+
+# 設置畫布大小與標題
+WIDTH, HEIGHT = 800, 600
+screen = pygame.display.set_mode((WIDTH, HEIGHT))
+pygame.display.set_caption("Pygame 基本框架")
+
+# 設置顏色
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
+
+# 創建時鐘物件以控制更新速度
+clock = pygame.time.Clock()
+FPS = 60
+
+# 主循環
+running = True
+while running:
+    # 處理事件
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+
+    # 更新邏輯
+    # 例如：更新遊戲物件的位置
+
+    # 繪製畫面
+    screen.fill(WHITE)  # 填充背景色
+    # 在這裡繪製其他物件
+    pygame.display.flip()  # 更新螢幕顯示
+
+    # 控制更新速度
+    clock.tick(FPS)
+
+# 結束 pygame
+pygame.quit()
+</code></pre>
+            </section>
+
+            <section>
+                <h2>詳細說明</h2>
+                <h3>1. 初始化 pygame</h3>
+                <p>在使用 <code>pygame</code> 前，必須調用 <code>pygame.init()</code>，以初始化所有必要的模組。</p>
+
+                <h3>2. 設置畫布</h3>
+                <p>使用 <code>pygame.display.set_mode()</code> 設定遊戲視窗的大小。可以通過 <code>pygame.display.set_caption()</code> 設定視窗標題。</p>
+
+                <h3>3. 處理事件</h3>
+                <p>使用 <code>pygame.event.get()</code> 來捕捉事件，例如鍵盤輸入或滑鼠操作。</p>
+
+                <h3>4. 更新邏輯</h3>
+                <p>在每個循環中更新遊戲物件的狀態，例如移動角色或碰撞偵測。</p>
+
+                <h3>5. 繪製畫面</h3>
+                <p>使用 <code>pygame.draw</code> 系列函數（如 <code>pygame.draw.rect()</code>）來繪製圖形。</p>
+
+                <h3>6. 控制更新速度</h3>
+                <p>使用 <code>pygame.time.Clock()</code> 限制遊戲的更新頻率，以避免過度使用 CPU。</p>
+            </section>
+
+            <section>
+                <h2>挑戰題目</h2>
+                <h3 class="caption">挑戰 1：繪製圖形 <span class="icon">🛈</span></h3>
+    <p>修改程式，繪製一個紅色的矩形和藍色的圓形，並讓它們隨滑鼠移動。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+import pygame
+
+# 初始化 pygame
+pygame.init()
+
+# 設置畫布大小與顏色
+WIDTH, HEIGHT = 800, 600
+screen = pygame.display.set_mode((WIDTH, HEIGHT))
+pygame.display.set_caption("挑戰 1：繪製圖形")
+WHITE = (255, 255, 255)
+RED = (255, 0, 0)
+BLUE = (0, 0, 255)
+
+# 時鐘控制 FPS
+clock = pygame.time.Clock()
+FPS = 60
+
+# 主循環
+running = True
+while running:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+
+    # 取得滑鼠位置
+    mouse_x, mouse_y = pygame.mouse.get_pos()
+
+    # 繪製畫布與圖形
+    screen.fill(WHITE)  # 填充背景
+    pygame.draw.rect(screen, RED, (mouse_x - 50, mouse_y - 50, 100, 100))  # 繪製紅色矩形
+    pygame.draw.circle(screen, BLUE, (mouse_x, mouse_y), 50)  # 繪製藍色圓形
+    pygame.display.flip()  # 更新螢幕
+
+    clock.tick(FPS)  # 控制更新速度
+
+pygame.quit()
+</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 2：鍵盤控制 <span class="icon">🛈</span></h3>
+    <p>讓使用者使用鍵盤方向鍵移動畫布上的矩形。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+import pygame
+
+# 初始化 pygame
+pygame.init()
+
+# 設置畫布大小與顏色
+WIDTH, HEIGHT = 800, 600
+screen = pygame.display.set_mode((WIDTH, HEIGHT))
+pygame.display.set_caption("挑戰 2：鍵盤控制")
+WHITE = (255, 255, 255)
+RED = (255, 0, 0)
+
+# 矩形初始位置
+rect_x, rect_y = WIDTH // 2, HEIGHT // 2
+rect_width, rect_height = 100, 100
+rect_speed = 5
+
+# 時鐘控制 FPS
+clock = pygame.time.Clock()
+FPS = 60
+
+# 主循環
+running = True
+while running:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+
+    # 檢測按鍵
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_UP]:
+        rect_y -= rect_speed
+    if keys[pygame.K_DOWN]:
+        rect_y += rect_speed
+    if keys[pygame.K_LEFT]:
+        rect_x -= rect_speed
+    if keys[pygame.K_RIGHT]:
+        rect_x += rect_speed
+
+    # 繪製畫布與矩形
+    screen.fill(WHITE)
+    pygame.draw.rect(screen, RED, (rect_x, rect_y, rect_width, rect_height))
+    pygame.display.flip()
+
+    clock.tick(FPS)
+
+pygame.quit()
+</code></pre>
+    </div>
+
+    <h3 class="caption">挑戰 3：簡單遊戲邏輯 <span class="icon">🛈</span></h3>
+    <p>新增一個可以跳動的小球，並讓它碰到視窗邊界時反彈。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+import pygame
+
+# 初始化 pygame
+pygame.init()
+
+# 設置畫布大小與顏色
+WIDTH, HEIGHT = 800, 600
+screen = pygame.display.set_mode((WIDTH, HEIGHT))
+pygame.display.set_caption("挑戰 3：簡單遊戲邏輯")
+WHITE = (255, 255, 255)
+BLUE = (0, 0, 255)
+
+# 小球初始位置與速度
+ball_x, ball_y = WIDTH // 2, HEIGHT // 2
+ball_radius = 20
+ball_speed_x, ball_speed_y = 5, 5
+
+# 時鐘控制 FPS
+clock = pygame.time.Clock()
+FPS = 60
+
+# 主循環
+running = True
+while running:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+
+    # 更新小球位置
+    ball_x += ball_speed_x
+    ball_y += ball_speed_y
+
+    # 碰撞檢測（邊界反彈）
+    if ball_x - ball_radius < 0 or ball_x + ball_radius > WIDTH:
+        ball_speed_x = -ball_speed_x
+    if ball_y - ball_radius < 0 or ball_y + ball_radius > HEIGHT:
+        ball_speed_y = -ball_speed_y
+
+    # 繪製畫布與小球
+    screen.fill(WHITE)
+    pygame.draw.circle(screen, BLUE, (ball_x, ball_y), ball_radius)
+    pygame.display.flip()
+
+    clock.tick(FPS)
+
+pygame.quit()
+</code></pre>
+    </div>
+            </section>
+
+            <section>
+                <h2>結語</h2>
+                <p>透過本章的教學，你學會了如何使用 <code>pygame</code> 建立基本的遊戲框架。下一步，你可以嘗試新增音效、圖片或更複雜的遊戲邏輯，讓你的遊戲更有趣！</p>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

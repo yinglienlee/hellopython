@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>變數與資料型態</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+	<script type="text/javascript" src="js/script.js"></script>
+	<!-- Prism.js CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css">
+    <!-- Prism.js Line Numbers CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
+    <!-- Prism.js Syntax Highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <!-- Prism.js Line Numbers Plugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+	<script>
+		document.addEventListener("DOMContentLoaded", (event) => {
+			includeHTML(highlightItem);		
+			document.getElementById("toggleNav").addEventListener("click", navClick);		
+			enableAnswerRevealer();
+		});
+	</script>	
+</head>
+<body>
+	<div class="d-flex">
+		<!-- Floating Button -->
+		<button id="toggleNav" class="btn btn-primary">&#8212;</button>
+        <nav id="sidebar" class="bg-light border-end" style="display: block;">
+            <div>
+				<div w3-include-html="navigation.html"></div>
+            </div>
+        </nav>
+        <main class="flex-grow-1">
+			<header>
+				<h1>變數與資料型態</h1>
+			</header>
+			<section>
+				<h2>學習導覽</h2>
+				<p>本章節將帶你認識 Python 中的變數與資料型態，並學會以下內容：</p>
+				<ul>
+					<li>了解什麼是變數，以及如何在程式中使用它們</li>
+					<li>熟悉變數命名的規則</li>
+					<li>掌握 Python 的基本資料型態，包括整數、浮點數、字串和布林值</li>
+					<li>學會進行型態轉換，靈活處理不同資料型態</li>
+					<li>使用 <code>type()</code> 函式檢查變數型態，並用 <code>id()</code> 觀察變數的參照位址</li>
+				</ul>
+				<p>透過學習這些內容，你將為 Python 程式設計打下基礎，進一步探索更複雜的應用。</p>
+			</section>
+
+			<section>
+
+				<h2>什麼是變數？</h2>
+				<p>變數在 Python 中是參照（reference），它本身並不是儲存資料的實際值，而是指向記憶體中某個物件的位置。當我們將值賦予變數時，變數會參照該值所對應的記憶體位置。。它們允許我們在程式中命名數值或文字，方便重複使用。</p>
+				<pre class="line-numbers"><code class="language-python">x = 10
+name = "Alice"
+print(x)
+print(name)</code></pre>
+				<p>這裡：</p>
+				<ul>
+					<li><code>x</code> 是一個整數型態的變數，指向 <code>10</code>。</li>
+					<li><code>name</code> 是一個字串型態的變數，指向 <code>"Alice"</code>。</li>
+				</ul>
+
+				<h2>變數命名規則</h2>
+				<p>在 Python 中，變數命名需遵守以下規則：</p>
+				<ol>
+					<li>只能包含字母、數字和底線（_）。</li>
+					<li>不能以數字開頭。</li>
+					<li>不能使用 Python 的保留字（例如 <code>if</code>、<code>for</code>）。</li>
+					<li>區分大小寫，例如 <code>myVariable</code> 和 <code>myvariable</code> 是不同的變數。</li>
+				</ol>
+
+				<h2>基本資料型態</h2>
+				<p>Python 支援多種基本資料型態，包括：</p>
+				<ul>
+					<li>整數（int）：如 <code>10</code>、<code>-3</code></li>
+					<li>浮點數（float）：如 <code>3.14</code>、<code>-0.5</code></li>
+					<li>字串（str）：如 <code>"hello"</code>、<code>'world'</code></li>
+					<li>布林值（bool）：如 <code>True</code>、<code>False</code></li>
+				</ul>
+
+				<h2>型態轉換</h2>
+				<p>在 Python 中，可以使用內建函式進行型態轉換：</p>
+				<ul>
+					<li><code>int()</code>：轉換為整數</li>
+					<li><code>float()</code>：轉換為浮點數</li>
+					<li><code>str()</code>：轉換為字串</li>
+					<li><code>bool()</code>：轉換為布林值</li>
+				</ul>
+				<pre class="line-numbers"><code class="language-python">x = "10"
+y = int(x)  # 將字串 "10" 轉換為整數 10
+z = float(y)  # 將整數 10 轉換為浮點數 10.0
+print(y, z)</code></pre>
+
+				<h2>使用 <code>type</code> 查看型態</h2>
+				<p>我們可以使用 <code>type()</code> 函式檢查變數的資料型態：</p>
+				<pre class="line-numbers"><code class="language-python">x = 42
+print(type(x))  # 輸出：&lt;class 'int'&gt;</code></pre>
+				<p>更多範例：</p>
+				<pre class="line-numbers"><code class="language-python">print(type(3.14))    # &lt;class 'float'&gt;
+print(type("hello")) # &lt;class 'str'&gt;
+print(type(True))    # &lt;class 'bool'&gt;</code></pre>
+
+				<h2>使用 <code>id</code> 查看參照位址</h2>
+				<p>每個變數在記憶體中都有唯一的參照位址，可以使用 <code>id()</code> 函式來檢查：</p>
+				<pre class="line-numbers"><code class="language-python">x = 42
+y = x
+print(id(x))  # 輸出 x 的參照位址
+print(id(y))  # 與 x 相同，因為 y 指向同一個物件</code></pre>
+				<p>改變變數的值會導致其參照位址改變：</p>
+				<pre class="line-numbers"><code class="language-python">x = 42
+print(id(x))
+x = 43
+print(id(x))  # 與之前不同</code></pre>
+			</section>
+
+			<section>
+
+				<h2>常見問題與解答</h2>
+				<h3>問題 1：為什麼變數名稱不能以數字開頭？</h3>
+				<p>因為以數字開頭的名稱會和數字型態衝突，例如 <code>1var</code> 會被解釋為語法錯誤。</p>
+
+				<h3>問題 2：如何避免保留字命名問題？</h3>
+				<p>避免使用 Python 的保留字作為變數名稱，可以參考官方文件或使用 IDE 的自動提示功能。</p>
+
+				<h3>問題 3：什麼是不可變物件？</h3>
+				<p>例如，整數和字串是不可變物件，一旦定義就無法修改。改變變數值時，會建立一個新物件，將變數指向該物件。</p>
+
+			</section>
+			<section>
+
+				<h2>挑戰題</h2>
+				<h3 class="caption">挑戰 1：定義並輸出變數 <span class="icon">🛈</span></h3>
+				<p>定義一個整數、一個浮點數、一個字串和一個布林值的變數，然後輸出它們的值和型態。</p>
+				<div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+x = 42  # 整數
+y = 3.14  # 浮點數
+z = "Hello"  # 字串
+b = True  # 布林值
+
+print(x, type(x))  # 42 <class 'int'>
+print(y, type(y))  # 3.14 <class 'float'>
+print(z, type(z))  # Hello <class 'str'>
+print(b, type(b))  # True <class 'bool'></code></pre>
+    </div>
+
+				<h3 class="caption">挑戰 2：型態轉換 <span class="icon">🛈</span></h3>
+				<p>定義一個變數，將它從整數轉換為字串，然後再轉換為浮點數，最後輸出每一步的結果。</p>
+				<div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+x = 10  # 整數
+x_str = str(x)  # 轉換為字串
+x_float = float(x_str)  # 再轉換為浮點數
+
+print(x, type(x))  # 10 <class 'int'>
+print(x_str, type(x_str))  # '10' <class 'str'>
+print(x_float, type(x_float))  # 10.0 <class 'float'></code></pre>
+    </div>
+				
+				<h3 class="caption">挑戰 3：觀察參照位址 <span class="icon">🛈</span></h3>
+				<p>定義兩個相等的整數變數，檢查它們的參照位址是否相同。嘗試改變其中一個變數的值，然後再次檢查。</p>
+				<div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+a = 42
+b = 42
+
+print(id(a))  # 輸出 a 的參照位址
+print(id(b))  # 與 a 相同
+
+b = 43
+print(id(b))  # b 的位址改變</code></pre>
+    </div>
+				
+				<h3 class="caption">挑戰 4：變數命名挑戰 <span class="icon">🛈</span></h3>
+				<p>嘗試定義三個有效的變數名稱和三個無效的變數名稱，並觀察執行結果。</p>
+				<div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+# 有效變數名稱
+my_var = 10
+_var2 = "hello"
+num_3 = 3.14
+
+# 無效變數名稱（將產生語法錯誤）
+# 3num = 10
+# my-var = 20
+# if = 30  # 保留字</code></pre>
+    </div>
+
+				<h3 class="caption">挑戰 5：布林運算 <span class="icon">🛈</span></h3>
+				<p>定義兩個布林值變數，進行與運算（and）、或運算（or）和非運算（not），輸出結果。</p>
+				<div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+a = True
+b = False
+
+print(a and b)  # 輸出：False
+print(a or b)  # 輸出：True
+print(not a)  # 輸出：False</code></pre>
+    </div>
+
+				<h3 class="caption">挑戰 6：多重型態轉換 <span class="icon">🛈</span></h3>
+				<p>定義一個變數 <code>x = 10.5</code>，將它轉換為整數，再轉換為字串，最後轉換回浮點數，並輸出每一步的型態與值。</p>
+				<div class="answer">
+				<pre class="line-numbers"><code class="language-python"># 解答
+x = 10.5  # 浮點數
+x_int = int(x)  # 轉換為整數
+x_str = str(x_int)  # 轉換為字串
+x_float = float(x_str)  # 轉回浮點數
+
+print(x, type(x))       # 10.5 <class 'float'>
+print(x_int, type(x_int))   # 10 <class 'int'>
+print(x_str, type(x_str))   # '10' <class 'str'>
+print(x_float, type(x_float)) # 10.0 <class 'float'></code></pre>
+    </div>
+
+				<h3 class="caption">挑戰 7：動態變數型態 <span class="icon">🛈</span></h3>
+				<p>定義一個變數，賦值為整數、浮點數和字串，依次輸出變數的型態與值，觀察 Python 如何處理。</p>
+				<div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+x = 42  # 整數
+print(x, type(x))  # 42 <class 'int'>
+
+x = 3.14  # 浮點數
+print(x, type(x))  # 3.14 <class 'float'>
+
+x = "Hello, Python!"  # 字串
+print(x, type(x))  # 'Hello, Python!' <class 'str'></code></pre>
+    </div>
+
+				<h3 class="caption">挑戰 8：檢查記憶體參照 <span class="icon">🛈</span></h3>
+				<p>定義兩個變數分別指向相同的浮點數值，檢查它們的記憶體參照位址是否相同。嘗試改變其中一個變數，並重新檢查。</p>
+				<div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
+a = 3.14
+b = 3.14
+
+print(id(a))  # 輸出 a 的參照位址
+print(id(b))  # 與 a 相同，因為它們指向相同的物件
+
+b = 3.15  # 改變 b 的值
+print(id(a))  # a 的位址保持不變
+print(id(b))  # b 的位址改變，指向新物件</code></pre>
+    </div>
+
+
+			</section>
+
+			<section>
+
+				<h2>結語</h2>
+				<p>透過這一章，你學會了變數的基本使用方法、命名規則、資料型態與型態轉換，還有如何使用 <code>type</code> 和 <code>id</code> 來檢查變數的細節。</p>
+			</section>
+		</main>
+    </div>			
+</body>
+</html>
+
