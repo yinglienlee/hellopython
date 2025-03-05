@@ -155,6 +155,7 @@ function enableAnswerRevealer() {
 			const result = {};
 
 			rows.forEach(row => {
+				console.log(row);
 				const [key, ...values] = row.split(","); // Split by comma
 				result[key.trim()] = values.map(value => value.trim())
 								.filter(value => value !== "")
