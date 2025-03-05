@@ -161,7 +161,7 @@ function enableAnswerRevealer() {
 								.map(Number);
 			});
 			
-			// console.log(result);
+			console.log(result);
 			
 			if (result.hasOwnProperty(fileName) && result[fileName].length != 0) showAnswers = true;
 			else showAnswers = false;
