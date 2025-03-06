@@ -155,14 +155,14 @@ function enableAnswerRevealer() {
 			const result = {};
 
 			rows.forEach(row => {
-				// console.log(row);
+				console.log(row);
 				const [key, ...values] = row.split(","); // Split by comma
 				result[key.trim()] = values.map(value => value.trim())
 								.filter(value => value !== "")
 								.map(Number);
 			});
 			
-			// console.log(result);
+			console.log(result);
 			
 			if (result.hasOwnProperty(fileName) && result[fileName].length != 0) showAnswers = true;
 			else showAnswers = false;
