@@ -14,6 +14,7 @@ function includeHTML(cb = null) {
         <li class="nav-item mb-2"><a href="if.html" class="nav-link link-primary">條件判斷</a></li>
         <li class="nav-item mb-2"><a href="loop.html" class="nav-link link-primary">迴圈</a></li>
         <li class="nav-item mb-2"><a href="def.html" class="nav-link link-primary">自訂函式</a></li>
+	<li class="nav-item mb-2"><a href="practice_1.html" class="nav-link link-primary">問題導向練習題組 1</a></li>
         <li class="nav-item mb-2"><a href="scope.html" class="nav-link link-primary">區域變數與全域變數</a></li>
         <li class="nav-item mb-2"><a href="exception.html" class="nav-link link-primary">例外處理</a></li>
         <li class="nav-item mb-2"><a href="debug.html" class="nav-link link-primary">追蹤與偵錯</a></li>
