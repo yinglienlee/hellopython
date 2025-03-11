@@ -1,4 +1,4 @@
-const update_date = "1.0";
+const update_date = "1.1";
 
 function includeHTML(cb = null) {
     const NAVIGATION_HTML = `
