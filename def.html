@@ -106,17 +106,7 @@ print(words)  # 輸出：['date', 'apple', 'banana', 'cherry']</code></pre>
 
             <section>
                 <h2>挑戰題目</h2>
-				<h3 class="caption">挑戰 1：計算矩形面積 <span class="icon">🛈</span></h3>
-    <p>撰寫一個函式，接收長與寬作為參數，並回傳矩形的面積。</p>
-    <div class="answer">
-        <pre class="line-numbers"><code class="language-python"># 解答
-def rectangle_area(length, width):
-    return length * width
-
-print(rectangle_area(5, 10))  # 輸出：50</code></pre>
-    </div>
-
-    <h3 class="caption">挑戰 2：溫度轉換 <span class="icon">🛈</span></h3>
+    <h3 class="caption">挑戰 1：溫度轉換 <span class="icon">🛈</span></h3>
     <p>設計一個函式，將攝氏溫度轉換為華氏溫度，並回傳結果。</p>
     <div class="answer">
         <pre class="line-numbers"><code class="language-python"># 解答
@@ -126,7 +116,7 @@ def celsius_to_fahrenheit(celsius):
 print(celsius_to_fahrenheit(25))  # 輸出：77.0</code></pre>
     </div>
 
-    <h3 class="caption">挑戰 3：應用 Lambda 函式 <span class="icon">🛈</span></h3>
+    <h3 class="caption">挑戰 2：應用 Lambda 函式 <span class="icon">🛈</span></h3>
     <p>使用 <code>lambda</code> 函式，實現一個功能，接收圓的半徑，並返回圓的面積。</p>
     <div class="answer">
         <pre class="line-numbers"><code class="language-python"># 解答
@@ -134,7 +124,7 @@ circle_area = lambda radius: 3.14159 * radius ** 2
 print(circle_area(5))  # 輸出：78.53975</code></pre>
     </div>
 
-    <h3 class="caption">挑戰 4：應用 Lambda 函式 <span class="icon">🛈</span></h3>
+    <h3 class="caption">挑戰 3：應用 Lambda 函式 <span class="icon">🛈</span></h3>
     <p>給定一組數字 <code>numbers = [5, -10, 3, -1, 7]</code>，使用 <code>sorted</code> 函式和 <code>lambda</code>，將數字按照它們的絕對值進行排序，並輸出排序結果。</p>
     <div class="answer">
         <pre class="line-numbers"><code class="language-python"># 解答
@@ -143,7 +133,7 @@ sorted_numbers = sorted(numbers, key=lambda x: abs(x))
 print(sorted_numbers)  # 輸出：[3, -1, 5, 7, -10]</code></pre>
     </div>
 
-    <h3 class="caption">挑戰 5：判斷閏年 <span class="icon">🛈</span></h3>
+    <h3 class="caption">挑戰 4：判斷閏年 <span class="icon">🛈</span></h3>
     <p>撰寫一個函式，接收一個年份作為參數，並回傳該年份是否為閏年。若未提供年份，則預設為 2025。</p>
     <div class="answer">
         <pre class="line-numbers"><code class="language-python"># 解答
@@ -153,7 +143,7 @@ def is_leap_year(year=2025):
 print(is_leap_year(2024))  # 輸出：True</code></pre>
     </div>
 
-    <h3 class="caption">挑戰 6：清單中的最大值 <span class="icon">🛈</span></h3>
+    <h3 class="caption">挑戰 5：清單中的最大值 <span class="icon">🛈</span></h3>
     <p>撰寫一個函式，接收一個數字清單，並回傳該清單中的最大值。</p>
     <div class="answer">
         <pre class="line-numbers"><code class="language-python"># 解答
@@ -163,7 +153,7 @@ def max_in_list(numbers):
 print(max_in_list([10, 20, 5, 30]))  # 輸出：30</code></pre>
     </div>
 
-    <h3 class="caption">挑戰 7：使用 Lambda 過濾清單 <span class="icon">🛈</span></h3>
+    <h3 class="caption">挑戰 6：使用 Lambda 過濾清單 <span class="icon">🛈</span></h3>
     <p>給定一個數字清單 <code>numbers = [10, -5, 15, -20, 30]</code>，使用 <code>filter</code> 和 <code>lambda</code>，篩選出清單中所有大於 0 的數字，並輸出結果。</p>
     <div class="answer">
         <pre class="line-numbers"><code class="language-python"># 解答
@@ -172,7 +162,7 @@ positive_numbers = list(filter(lambda x: x > 0, numbers))
 print(positive_numbers)  # 輸出：[10, 15, 30]</code></pre>
     </div>
 
-    <h3 class="caption">挑戰 8：計算多個矩形的面積 <span class="icon">🛈</span></h3>
+    <h3 class="caption">挑戰 7：計算多個矩形的面積 <span class="icon">🛈</span></h3>
     <p>撰寫一個函式，接收多個矩形的長與寬（作為一個清單），並回傳所有矩形面積的總和。</p>
     <div class="answer">
         <pre class="line-numbers"><code class="language-python"># 解答
@@ -182,7 +172,7 @@ def total_area(rectangles):
 print(total_area([(5, 10), (3, 4), (2, 6)]))  # 輸出：62</code></pre>
     </div>
 
-    <h3 class="caption">挑戰 9：應用 Lambda 進行資料轉換 <span class="icon">🛈</span></h3>
+    <h3 class="caption">挑戰 8：應用 Lambda 進行資料轉換 <span class="icon">🛈</span></h3>
     <p>設計一段程式碼，使用 <code>map</code> 和 <code>lambda</code> 將一組攝氏溫度清單 <code>[0, 20, 37, 100]</code> 轉換為華氏溫度，並輸出結果。</p>
     <div class="answer">
         <pre class="line-numbers"><code class="language-python"># 解答
