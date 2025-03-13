@@ -70,7 +70,17 @@ def add(a, b):
 result = add(3, 5)
 print(result)  # 輸出：8</code></pre>
 
-                <h3>4. 匿名函式 (Lambda)</h3>
+				<h3>4. 使用具名參數呼叫函式</h3>
+                <p>在 Python 中，可以使用具名參數來呼叫函式，使程式碼更具可讀性，並允許參數順序的彈性。</p>
+                <pre class="line-numbers"><code class="language-python"># 定義函式
+def introduce(name, age, city):
+    print(f"我是{name}，{age}歲，來自{city}。")
+
+# 使用具名參數呼叫函式
+introduce(name="小明", age=25, city="台北")  # 輸出：我是小明，25歲，來自台北。
+introduce(city="台中", name="小華", age=30)  # 參數順序可變</code></pre>
+
+                <h3>5. 匿名函式 (Lambda)</h3>
                 <p>匿名函式是沒有名稱的簡單函式，使用 <code>lambda</code> 關鍵字定義。</p>
                 <pre class="line-numbers"><code class="language-python"># 使用 lambda 定義函式
 square = lambda x: x ** 2
