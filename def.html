@@ -91,6 +91,10 @@ def introduce(name, age, city):
 introduce(name="小明", age=25, city="台北")  # 輸出：我是小明，25歲，來自台北。
 introduce(city="台中", name="小華", age=30)  # 參數順序可變</code></pre>
 
+	    	<p>如果想了解某函式有哪些參數，可使用 <code>help</code> 並將函式名稱當作參數傳入，例如：</p>
+		<pre class="line-numbers"><code class="language-python">help(introduce)</code></pre>
+		<p>輸出結果：<br><code>Help on function introduce in module __main__:<br><br>introduce(name, age, city)</code></p>
+		    
                 <h3>5. 匿名函式 (Lambda)</h3>
                 <p>匿名函式是沒有名稱的簡單函式，使用 <code>lambda</code> 關鍵字定義。</p>
                 <pre class="line-numbers"><code class="language-python"># 使用 lambda 定義函式
