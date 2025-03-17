@@ -24,6 +24,10 @@
             enableAnswerRevealer();
         });
     </script>
+	<script type="module">
+		import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+		mermaid.initialize({ startOnLoad: true });
+	</script>
 </head>
 <body>
     <div class="d-flex">
@@ -115,13 +119,21 @@ pgzrun.go()
 </code></pre>
     <p><strong>注意：</strong> 使用 <code>pgzrun.go()</code> 時，請確保檔案名稱不與 <code>pgzrun</code> 衝突（例如，不要命名為 <code>pgzrun.py</code>）。</p>
 	
-	<p>下圖整理以上所說明的基本執行循環流程。</p>
-	<img src="figure/game-loop-diagram.svg">
 
 </section>
 
             <section>
                 <h2>詳細說明</h2>
+				<p>PyGame Zero 基本執行循環流程如下圖。</p>
+				<pre class="mermaid">
+					flowchart TD
+						Start --> Init["初始化"]
+						Init  --> Update["更新邏輯（update函數）"]
+						Update --> Draw["繪製畫面（draw函數）"]
+						Draw --> Internal["更新顯示(由PyGame處理)"]
+						Internal --> Update						
+				</pre>
+				
                 <h3>1. 定義視窗大小</h3>
                 <p>使用 <code>WIDTH</code> 和 <code>HEIGHT</code> 變數定義遊戲視窗的寬度與高度。</p>
 
@@ -304,6 +316,7 @@ def update():
         print("圓形碰撞發生！")
 </code></pre>
 <p>這種方法對於圓形物件的碰撞檢測更為準確。</p>
+	
 
             </section>
 
