@@ -85,6 +85,7 @@ for i in range(10, 0, -2):
 				<pre class="line-numbers"><code class="language-python">for i in range(5):
     print(i)</code></pre>
 				<p>輸出結果：<br><code>0<br>1<br>2<br>3<br>4</code></p>
+				<img src="figure/for-flowchart.svg" width="50%">
 				
 				<p>這段程式碼將輸出字串中各個字元。</p>				
 				<pre class="line-numbers"><code class="language-python">for c in "Formosa":
@@ -98,6 +99,7 @@ while count < 5:
     print(count)
     count += 1</code></pre>
 				<p>輸出結果與 <code>for</code> 迴圈相同：<br><code>0<br>1<br>2<br>3<br>4</code></p>
+				<img src="figure/while-flowchart.svg" width="50%">
 
 				<h3>4. <code>break</code> 與 <code>continue</code></h3>
 				<p><code>break</code> 用於中止迴圈，<code>continue</code> 則用於跳過當前迭代並進入下一次迭代：</p>
@@ -107,12 +109,15 @@ for i in range(10):
         break
     print(i)</code></pre>
 				<p>輸出結果：<br><code>0<br>1<br>2<br>3<br>4</code></p>
+				<img src="figure/break-flowchart.svg" width="50%">
+				
 				<pre class="line-numbers"><code class="language-python"># 使用 continue
 for i in range(5):
     if i == 2:
         continue
     print(i)</code></pre>
 				<p>輸出結果：<br><code>0<br>1<br>3<br>4</code></p>
+				<img src="figure/continue-flowchart.svg" width="50%">
 
 				<h3>5. 巢狀迴圈</h3>
 				<p>巢狀迴圈是指一個迴圈內部嵌套另一個迴圈：</p>
