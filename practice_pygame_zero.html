@@ -55,6 +55,15 @@
 
 <section>
     <h2>基本框架</h2>
+	<p>PyGame Zero 基本執行循環流程如下圖。</p>
+	<pre class="mermaid">
+		flowchart TD
+			Start --> Init["初始化"]
+			Init  --> Update["更新邏輯（update函數）"]
+			Update --> Draw["繪製畫面（draw函數）"]
+			Draw --> Internal["更新顯示(由PyGame處理)"]
+			Internal --> Update						
+	</pre>
     <p>以下是一個簡單的 Pygame Zero 程式範例：</p>
     <pre class="line-numbers"><code class="language-python">WIDTH = 800
 HEIGHT = 600
@@ -119,15 +128,7 @@ pgzrun.go()
 </code></pre>
     <p><strong>注意：</strong> 使用 <code>pgzrun.go()</code> 時，請確保檔案名稱不與 <code>pgzrun</code> 衝突（例如，不要命名為 <code>pgzrun.py</code>）。</p>
 	
-	<p>PyGame Zero 基本執行循環流程如下圖。</p>
-	<pre class="mermaid">
-		flowchart TD
-			Start --> Init["初始化"]
-			Init  --> Update["更新邏輯（update函數）"]
-			Update --> Draw["繪製畫面（draw函數）"]
-			Draw --> Internal["更新顯示(由PyGame處理)"]
-			Internal --> Update						
-	</pre>
+	
 
 </section>
 
