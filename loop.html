@@ -24,6 +24,10 @@
 			enableAnswerRevealer();
 		});
 	</script>	
+	<script type="module">
+		import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+		mermaid.initialize({ startOnLoad: true });
+	</script>
 </head>
 <body>
 	<div class="d-flex">
@@ -85,12 +89,29 @@ for i in range(10, 0, -2):
 				<pre class="line-numbers"><code class="language-python">for i in range(5):
     print(i)</code></pre>
 				<p>輸出結果：<br><code>0<br>1<br>2<br>3<br>4</code></p>
-				<img src="figure/for-flowchart.svg" width="50%">
+				<p>上述程式碼的流程圖如下。</p>
+				<pre class="mermaid">
+					flowchart TD
+						A[Start] --> B{"range(5)是否還有元素未取出?"}
+						B --> |Yes| C["取出一個元素放入變數i"]
+						C --> D["print(i)"]
+						D --> B
+						B -->|No| E[End]
+				</pre>
 				
 				<p>這段程式碼將輸出字串中各個字元。</p>				
 				<pre class="line-numbers"><code class="language-python">for c in "Formosa":
     print(c)</code></pre>
 				<p>輸出結果：<br><code>F<br>o<br>r<br>m<br>o<br>s<br>a</code></p>
+				<p>上述程式碼的流程圖如下。</p>
+				<pre class="mermaid">
+					flowchart TD						
+						A[Start] --> B{"字串是否還有元素未取出?"}
+						B --> |Yes| C["取出一個元素放入變數c"]
+						C --> D["print(c)"]
+						D --> B
+						B -->|No| E[End]
+				</pre>
 
 				<h3>3. <code>while</code> 迴圈</h3>
 				<p><code>while</code> 迴圈用於在條件成立時持續執行程式碼：</p>
@@ -99,7 +120,16 @@ while count < 5:
     print(count)
     count += 1</code></pre>
 				<p>輸出結果與 <code>for</code> 迴圈相同：<br><code>0<br>1<br>2<br>3<br>4</code></p>
-				<img src="figure/while-flowchart.svg" width="50%">
+				<p>上述程式碼的流程圖如下。</p>
+				<pre class="mermaid">
+					flowchart TD
+						A[Start] --> B[count = 0]
+						B --> C{count < 5?}
+						C -->|Yes| D["print(count)"]
+						D --> E[count += 1]
+						E --> C
+						C -->|No| F[End]
+				</pre>
 
 				<h3>4. <code>break</code> 與 <code>continue</code></h3>
 				<p><code>break</code> 用於中止迴圈，<code>continue</code> 則用於跳過當前迭代並進入下一次迭代：</p>
@@ -109,7 +139,18 @@ for i in range(10):
         break
     print(i)</code></pre>
 				<p>輸出結果：<br><code>0<br>1<br>2<br>3<br>4</code></p>
-				<img src="figure/break-flowchart.svg" width="50%">
+				<p>上述程式碼的流程圖如下。</p>
+				<pre class="mermaid">
+					flowchart TD
+						A[Start] --> B{"range(10)是否還有元素未取出?"}
+						B --> |Yes| C["取出一個元素放入變數i"]
+						C --> D{"i == 5?"}
+						D --> |Yes| E["break"]
+						E --> G[End]
+						D --> |No| F["print(i)"]	
+						F --> B
+						B -->|No| G[End]
+				</pre>
 				
 				<pre class="line-numbers"><code class="language-python"># 使用 continue
 for i in range(5):
@@ -117,7 +158,18 @@ for i in range(5):
         continue
     print(i)</code></pre>
 				<p>輸出結果：<br><code>0<br>1<br>3<br>4</code></p>
-				<img src="figure/continue-flowchart.svg" width="50%">
+				<p>上述程式碼的流程圖如下。</p>
+				<pre class="mermaid">
+					flowchart TD
+						A[Start] --> B{"range(5)是否還有元素未取出?"}
+						B --> |Yes| C["取出一個元素放入變數i"]
+						C --> D{"i == 2?"}
+						D --> |Yes| E["continue"]
+						E --> B
+						D --> |No| F["print(i)"]	
+						F --> B
+						B -->|No| G[End]
+				</pre>
 
 				<h3>5. 巢狀迴圈</h3>
 				<p>巢狀迴圈是指一個迴圈內部嵌套另一個迴圈：</p>

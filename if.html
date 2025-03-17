@@ -24,6 +24,10 @@
 			enableAnswerRevealer();			
 		});
 	</script>	
+	<script type="module">
+		import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+		mermaid.initialize({ startOnLoad: true });
+	</script>
 </head>
 <body>
 	<div class="d-flex">
@@ -57,7 +61,15 @@
 if x > 5:
     print("x 大於 5")</code></pre>
 				<p>如果條件 <code>x > 5</code> 為真，將輸出：<br><code>x 大於 5</code></p>
-				<img src="figure/if-flowchart.svg" width="50%">
+				<p>上述程式碼的流程圖如下。</p>
+				<pre class="mermaid">
+					flowchart TD
+						Start --> Set_x["x = 10"]
+						Set_x --> Check_x{"Is x > 5?"}
+						Check_x -- Yes --> Print["print('x 大於 5')"]						
+						Print --> End
+						Check_x -- No --> End
+				</pre>
 
 				<h3>2. 使用 <code>elif</code></h3>
 				<p><code>elif</code>（縮寫自 "else if"）用於檢查額外的條件：</p>
@@ -67,7 +79,19 @@ if x > 15:
 elif x > 5:
     print("x 大於 5 但小於等於 15")</code></pre>	
 				<p>當 <code>x > 15</code> 不成立，但 <code>x > 5</code> 成立時，輸出：<br><code>x 大於 5 但小於等於 15</code></p>
-				<img src="figure/if-elif-flowchart.svg">
+				<p>上述程式碼的流程圖如下。</p>
+				<pre class="mermaid">
+					flowchart TD
+						A[Start] --> B[x = 10]
+						B --> C{x > 15?}
+						C -->|Yes| D["print('x 大於 15')"]
+						C -->|No| E{x > 5?}
+						E -->|Yes| F["print('x 大於 5 但小於等於 15')"]
+						E -->|No| G[End]
+						D --> G
+						F --> G
+				</pre>
+				
 
 				<h3>3. 使用 <code>else</code></h3>
 				<p><code>else</code> 用於處理所有未被上述條件涵蓋的情況：</p>
@@ -77,7 +101,16 @@ if x > 5:
 else:
     print("x 小於或等於 5")</code></pre>
 				<p>當 <code>x > 5</code> 不成立時，輸出：<br><code>x 小於或等於 5</code></p>
-				<img src="figure/if-else-flowchart.svg">
+				<p>上述程式碼的流程圖如下。</p>
+				<pre class="mermaid">
+					flowchart TD
+						A[Start] --> B[x = 3]
+						B --> C{x > 5?}
+						C -->|Yes| D["print('x 大於 5')"]
+						C -->|No| E["print('x 小於或等於 5')"]
+						D --> F[End]
+						E --> F
+				</pre>
 
 				<h3>4. 巢狀條件判斷</h3>
 				<p>可以在條件內再巢狀另一個條件判斷：</p>
@@ -86,6 +119,17 @@ if x > 5:
     if x % 2 == 0:
         print("x 是一個偶數且大於 5")</code></pre>
 				<p>如果條件全部成立，輸出：<br><code>x 是一個偶數且大於 5</code></p>
+				<p>上述程式碼的流程圖如下。</p>
+				<pre class="mermaid">
+					flowchart TD
+						A[Start] --> B[x = 10]
+						B --> C{x > 5?}
+						C -->|Yes| D{x % 2 == 0?}
+						D -->|Yes| E["print('x 是一個偶數且大於 5')"]
+						D -->|No| F[End]
+						C -->|No| F
+						E --> F
+				</pre>
 			</section>
 
 			<section>
