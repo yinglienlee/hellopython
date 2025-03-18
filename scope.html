@@ -293,8 +293,8 @@ def function_b(value):
 function_a()  # Doubled value: 60</code></pre>
     </div>
 
-				<h3 class="caption">挑戰 8：使用預設參數值 <span class="icon">🛈</span></h3>
-				<p>撰寫一個程式，展示如何使用函式的預設參數值：</p>
+				<h3 class="caption">挑戰 8：參數也屬於區域變數 <span class="icon">🛈</span></h3>
+				<p>撰寫一個程式，說明函式的參數也屬於區域變數：</p>
 				<ol>
 					<li>撰寫一個名為 <code>greet_user()</code> 的函式，該函式有兩個參數：
 						<ul>
@@ -303,7 +303,7 @@ function_a()  # Doubled value: 60</code></pre>
 						</ul>
 					</li>
 					<li>函式應輸出一個訊息，例如：<code>Hello, Guest!</code> 或 <code>Hi, Alice!</code>。</li>
-					<li>測試：呼叫函式時使用預設值與提供自訂值，檢查輸出是否正確。</li>
+					<li>在函式外檢查是否能輸出函式內的參數值。</li>
 				</ol>
 				<div class="answer">
         <pre class="line-numbers"><code class="language-python"># 解答
@@ -312,7 +312,11 @@ def greet_user(name="Guest", greeting="Hello"):
 
 greet_user()  # Hello, Guest!
 greet_user("Alice")  # Hello, Alice!
-greet_user("Alice", "Hi")  # Hi, Alice!</code></pre>
+greet_user("Alice", "Hi")  # Hi, Alice!
+
+# 嘗試在函式外部存取參數
+print(name)  # NameError: name is not defined
+print(greeting)  # NameError: greeting is not defined</code></pre>
     </div>
 							
             </section>
