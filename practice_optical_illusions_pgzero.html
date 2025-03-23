@@ -102,7 +102,7 @@ show_radiating_lines = False # 是否顯示放射線</code></pre>
         spacing += 1
     elif key == keys.LEFT:
         spacing = max(1, spacing - 1)
-	elif key == keys.T:
+    elif key == keys.T:
         show_radiating_lines = not show_radiating_lines</code></pre>
             <p>用戶可以使用方向鍵調整平行線偏移距離和放射線的間距。</p>
 
@@ -153,8 +153,8 @@ def draw():
     screen.fill(WHITE)
 
     # 繪製放射線
-	if show_radiating_lines:
-		draw_radiating_lines(center, spacing)
+    if show_radiating_lines:
+        draw_radiating_lines(center, spacing)
 
     # 繪製平行線
     draw_parallel_lines(center, line_offset)
@@ -166,11 +166,11 @@ def draw():
         fontsize=24,
         color=BLACK
     )
-	
+
     # 顯示 spacing 與 line_offset 數值
     screen.draw.text("Spacing: " + str(spacing), (10, 40), fontsize=24, color=BLACK)
     screen.draw.text("Line Offset: " + str(line_offset), (10, 70), fontsize=24, color=BLACK)
-	
+
 
 def update():
     pass
@@ -185,7 +185,7 @@ def on_key_down(key):
         spacing += 1
     elif key == keys.LEFT:
         spacing = max(1, spacing - 1)
-	elif key == keys.T:
+    elif key == keys.T:
         show_radiating_lines = not show_radiating_lines
 
 def draw_radiating_lines(center, spacing):
