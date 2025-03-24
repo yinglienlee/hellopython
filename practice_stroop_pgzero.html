@@ -72,6 +72,7 @@ HEIGHT = 400
 COLORS = ["red", "blue", "green", "yellow"]
 WORDS = ["紅色", "藍色", "綠色", "黃色"]
 
+number_of_tasks = 20
 tasks = []  # 儲存所有任務
 results = []  # 儲存使用者反應結果
 reaction_start_time = 0  # 記錄反應時間起點
@@ -82,11 +83,11 @@ buttons = []  # 儲存按鈕的區域</code></pre>
     <p>匯入必要模組，定義畫面寬高和顏色選項，並初始化測驗任務、按鈕和反應時間等全域變數。</p>
 
     <h3>2. 測驗任務生成</h3>
-    <pre class="line-numbers"><code class="language-python">for _ in range(10):
+    <pre class="line-numbers"><code class="language-python">for _ in range(number_of_tasks//2):
     color = random.choice(COLORS)
     word = WORDS[COLORS.index(color)]
     tasks.append((color, word))
-for _ in range(10):
+for _ in range(number_of_tasks//2):
     color = random.choice(COLORS)
     word = random.choice([WORDS[COLORS.index(w)] for w in COLORS if w != color])
     tasks.append((color, word))
@@ -98,8 +99,7 @@ random.shuffle(tasks)</code></pre>
     screen.clear()
     screen.fill("white")
 	
-    total_tasks = len(results) + len(tasks)
-    progress_text = f"答題進度：{len(results)}/{total_tasks}"
+    progress_text = f"答題進度：{len(results)}/{number_of_tasks}"
     screen.draw.text(
         progress_text,
         (10, 10),
@@ -196,6 +196,7 @@ COLORS = ["red", "blue", "green", "yellow"]
 WORDS = ["紅色", "藍色", "綠色", "黃色"]
 
 # 全域變數
+number_of_tasks = 20
 tasks = []  # 儲存所有任務
 results = []  # 儲存使用者反應結果
 reaction_start_time = 0  # 記錄反應時間起點
@@ -205,11 +206,11 @@ is_waiting = True  # 判斷是否等待按鍵
 buttons = []  # 儲存按鈕的區域
 
 # 生成測驗任務
-for _ in range(10):
+for _ in range(number_of_tasks//2):
     color = random.choice(COLORS)
     word = WORDS[COLORS.index(color)]
     tasks.append((color, word))
-for _ in range(10):
+for _ in range(number_of_tasks//2):
     color = random.choice(COLORS)
     word = random.choice([WORDS[COLORS.index(w)] for w in COLORS if w != color])
     tasks.append((color, word))
@@ -220,8 +221,7 @@ def draw():
     screen.fill("white")  # 背景設為白色
 
     # 顯示答題進度（目前完成題數/總題數）
-    total_tasks = len(results) + len(tasks)
-    progress_text = f"答題進度：{len(results)}/{total_tasks}"
+    progress_text = f"答題進度：{len(results)}/{number_of_tasks}"
     screen.draw.text(
         progress_text,
         (10, 10),
