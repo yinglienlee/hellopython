@@ -1,5 +1,3 @@
-const update_date = "1.1";
-
 function includeHTML(cb = null) {
     const NAVIGATION_HTML = `
     <ul class="nav flex-column">
@@ -47,7 +45,7 @@ function includeHTML(cb = null) {
 
     if (cb) cb();
 	
-	document.title += ` - ${update_date}`;
+    document.title;
 
 }
 
