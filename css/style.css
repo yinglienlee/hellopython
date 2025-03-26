@@ -108,7 +108,7 @@ pre {
     display: flex;
     height: 100vh; /* Ensure the full viewport height is used */
     overflow: hidden; /* Prevent overflow issues */
-	padding-bottom: 60px;
+    /* padding-bottom: 60px; */
 }
 
 #sidebar {	
