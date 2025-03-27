@@ -17,8 +17,8 @@ function includeHTML(cb = null) {
         <li class="nav-item mb-2"><a href="exception.html" class="nav-link link-primary">例外處理</a></li>
         <li class="nav-item mb-2"><a href="debug.html" class="nav-link link-primary">追蹤與偵錯</a></li>
         <li class="nav-item mb-2"><a href="list.html" class="nav-link link-primary">串列容器</a></li>
-        <li class="nav-item mb-2"><a href="set.html" class="nav-link link-primary">集合容器</a></li>
         <li class="nav-item mb-2"><a href="tuple.html" class="nav-link link-primary">元組容器</a></li>
+        <li class="nav-item mb-2"><a href="set.html" class="nav-link link-primary">集合容器</a></li>
         <li class="nav-item mb-2"><a href="dict.html" class="nav-link link-primary">字典容器</a></li>
         <li class="nav-item mb-2"><a href="ds_functions.html" class="nav-link link-primary">四大資料結構建構式</a></li>
         <li class="nav-item mb-2"><a href="packing.html" class="nav-link link-primary">指定、多重指定、打包與解包</a></li>
