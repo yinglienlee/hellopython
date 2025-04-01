@@ -163,7 +163,7 @@ def on_key_down(key):
 def handle_response(selected_color):
     reaction_time = time.time() - reaction_start_time
     correct = (selected_color == current_color)
-    results.append((current_color, current_word, selected_color, correct, reaction_time))
+    results.append((current_color, current_word, COLORS[WORDS.index(current_word)], selected_color, correct, reaction_time))
     is_waiting = True</code></pre>
     <p>依序顯示測驗單詞，並記錄使用者的反應時間與答案正確性。</p>
 
@@ -172,7 +172,7 @@ def handle_response(selected_color):
     """儲存結果到 CSV 檔案"""
     with open("stroop_results.csv", "w", newline="", encoding="utf-8") as file:
         writer = csv.writer(file)
-        writer.writerow(["Color (English)", "Word (Chinese)", "Selected Color", "Correct", "Reaction Time"])
+        writer.writerow(["Color (English)", "Word (Chinese)", "Word (English)", "Selected Color", "Correct", "Reaction Time"])
         writer.writerows(results)
     print("結果已保存到 stroop_results.csv")</code></pre>
 
@@ -314,14 +314,14 @@ def handle_response(selected_color):
     reaction_time = time.time() - reaction_start_time
     correct = (selected_color == current_color)
 
-    results.append((current_color, current_word, selected_color, correct, reaction_time))
+    results.append((current_color, current_word, COLORS[WORDS.index(current_word)], selected_color, correct, reaction_time))
     is_waiting = True
 
 def save_results():
     """儲存結果到 CSV 檔案"""
     with open("stroop_results.csv", "w", newline="", encoding="utf-8") as file:
         writer = csv.writer(file)
-        writer.writerow(["Color (English)", "Word (Chinese)", "Selected Color", "Correct", "Reaction Time"])
+        writer.writerow(["Color (English)", "Word (Chinese)", "Word (English)", "Selected Color", "Correct", "Reaction Time"])
         writer.writerows(results)
     print("結果已保存到 stroop_results.csv")
 
