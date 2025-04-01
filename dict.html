@@ -92,6 +92,44 @@ print(person.values())  # 輸出：dict_values(['Alice', 26, 'Engineer'])
 
 # 獲取所有鍵值組
 print(person.items())  # 輸出：dict_items([('name', 'Alice'), ('age', 26), ('job', 'Engineer')])</code></pre>
+
+		<h3>5. 學習如何迭代字典</h3>
+		<p>有時候，我們會想要<strong>逐一處理字典裡的每一筆資料</strong>。這時候就需要使用「<strong>迭代（iteration）</strong>」的方法。你可以使用 <code>for</code> 迴圈來達成這個目標。</p>
+
+		<h4>列出所有的 key</h4>
+		<pre class="line-numbers"><code class="language-python">my_dict = {'apple': 3, 'banana': 5, 'orange': 2}
+for key in my_dict:
+    print(key)
+</code></pre>
+<p>輸出：</p>
+<pre><code>apple
+banana
+orange
+</code></pre>
+
+		<h4>列出所有的 value</h4>
+		<pre class="line-numbers"><code class="language-python">my_dict = {'apple': 3, 'banana': 5, 'orange': 2}
+for value in my_dict.values():
+    print(value)
+</code></pre>
+<p>輸出：</p>
+<pre><code>3
+5
+2
+</code></pre>
+
+		<h4>同時列出 key 和 value</h4>
+		<pre class="line-numbers"><code class="language-python">my_dict = {'apple': 3, 'banana': 5, 'orange': 2}
+for key, value in my_dict.items():
+    print(f"{key}: {value}")
+</code></pre>
+<p>輸出：</p>
+<pre><code>apple: 3
+banana: 5
+orange: 2
+</code></pre>
+
+		    
             </section>
 
             <section>
