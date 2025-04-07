@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>問題導向練習題組 2</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+	<script type="text/javascript" src="js/script.js"></script>
+	<!-- Prism.js CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css">
+    <!-- Prism.js Line Numbers CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
+    <!-- Prism.js Syntax Highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <!-- Prism.js Line Numbers Plugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+	<script>
+		document.addEventListener("DOMContentLoaded", (event) => {
+			includeHTML(highlightItem);		
+			document.getElementById("toggleNav").addEventListener("click", navClick);		
+			enableAnswerRevealer();
+		});
+	</script>	
+</head>
+<body>
+	<div class="d-flex">
+		<!-- Floating Button -->
+		<button id="toggleNav" class="btn btn-primary">&#8212;</button>
+        <nav id="sidebar" class="bg-light border-end" style="display: block;">
+            <div>
+				<div w3-include-html="navigation.html"></div>
+            </div>
+        </nav>
+        <main class="flex-grow-1">
+			<header>
+				<h1>問題導向練習題組 2</h1>				
+			</header>
+
+			<section>
+				<h2>學習導覽</h2>
+				<p>本節提供多個問題導向的練習題，旨在幫助你強化 Python 的基礎概念，挑戰不同情境的程式設計問題。</p>			
+			</section>
+					
+			<section>
+<h3 class="caption">挑戰題 1：貓咪的挑食日記 <span class="icon">🛈</span></h3>
+<p>小明家裡有一隻挑食的貓，每天準備五種食物給牠吃（編號1~5），貓咪喜歡吃編號為3的食物。</p>
+<p>使用迴圈隨機餵食（隨機選擇編號1~5），並記錄餵食幾次貓咪才願意吃。</p>
+<p>若隨機選到的食物不是3，則顯示「貓咪轉頭不吃！」並跳過本次，繼續下一次餵食。</p>
+<p>當貓咪選到喜歡的食物3時，顯示「貓咪開心地吃了！」並結束迴圈，輸出總共餵食的次數。</p>
+<div class="answer">
+  <pre class="line-numbers"><code class="language-python">import random
+
+count = 0
+while True:
+    food = random.randint(1, 5)
+    count += 1
+    
+    if food != 3:
+        print("貓咪轉頭不吃！")
+        continue
+    
+    print("貓咪開心地吃了！")
+    break
+
+print(f"總共餵食了 {count} 次")</code></pre>
+</div>
+
+<h3 class="caption">挑戰題 2：骰子遊戲大挑戰 <span class="icon">🛈</span></h3>
+<p>設計一個簡單的骰子遊戲：</p>
+<p>每次擲骰子（隨機1~6），將數字累加成總分。</p>
+<p>若骰出數字為「4」，玩家「運氣不好」，不加分，顯示「Oops! 擲到4，這回合不加分！」，繼續下一次擲骰。</p>
+<p>若總分超過或等於20分，玩家獲勝，結束迴圈並顯示：「你贏了！總分：XX」。</p>
+<p>若骰到「1」，則玩家直接輸掉遊戲，顯示：「骰到1，直接輸掉！」並立即結束迴圈。</p>
+<div class="answer">
+  <pre class="line-numbers"><code class="language-python">import random
+
+score = 0
+while True:
+    dice = random.randint(1, 6)
+    print(f"擲出點數：{dice}")
+    
+    if dice == 1:
+        print("骰到1，直接輸掉！")
+        break
+    if dice == 4:
+        print("Oops! 擲到4，這回合不加分！")
+        continue
+    
+    score += dice
+    print(f"目前總分：{score}")
+    
+    if score >= 20:
+        print(f"你贏了！總分：{score}")
+        break</code></pre>
+</div>
+
+<h3 class="caption">挑戰題 3：垃圾郵件清理小幫手 <span class="icon">🛈</span></h3>
+<p>你是郵件管理員，有以下一串收件匣內的郵件標題清單：</p>
+<p>['特價商品', '重要通知', '免費旅遊', '垃圾訊息', '您的發票中獎', '廣告優惠', '緊急郵件', '會議通知', '免費課程']</p>
+<p>使用迴圈篩選郵件，並做以下動作：</p>
+<p>如果郵件標題含有「免費」、「特價」、「廣告」或「垃圾」等字樣，則直接略過不顯示。</p>
+<p>如果遇到「緊急郵件」，立即顯示標題，並提示：「⚠️收到緊急郵件，請立即處理！」之後使用 break 結束篩選迴圈。</p>
+<p>其他標題視為正常郵件，正常顯示。</p>
+<div class="answer">
+  <pre class="line-numbers"><code class="language-python">mails = ["特價商品", "重要通知", "免費旅遊", "垃圾訊息", 
+         "您的發票中獎", "廣告優惠", "緊急郵件", 
+         "會議通知", "免費課程"]
+
+for mail in mails:
+    if "免費" in mail or "特價" in mail or "廣告" in mail or "垃圾" in mail:
+        continue
+    
+    print(mail)
+    
+    if mail == "緊急郵件":
+        print("⚠️收到緊急郵件，請立即處理！")
+        break</code></pre>
+</div>
+				
+			</section>
+
+		</main>
+    </div>			
+</body>
+</html>
