@@ -119,6 +119,364 @@ for mail in mails:
         print("⚠️收到緊急郵件，請立即處理！")
         break</code></pre>
 </div>
+
+<h3 class="caption">挑戰題 4：防盜系統模擬器 <span class="icon">🛈</span></h3>
+<p>模擬一個密碼鎖系統，使用者最多可輸入密碼三次。</p>
+<p>密碼設為「5566」。</p>
+<p>如果輸入錯誤，顯示「密碼錯誤，再試一次！」並繼續下一輪輸入。</p>
+<p>當密碼輸入正確時，顯示「門已解鎖，歡迎進入！」並跳出迴圈。</p>
+<p>三次都輸錯時，顯示「密碼錯誤超過三次，系統已鎖定！」並立即停止程式。</p>
+<div class="answer">
+  <pre class="line-numbers"><code class="language-python">password = "5566"
+attempts = 0
+
+while attempts < 3:
+    user_input = input("請輸入密碼：")
+    
+    if user_input == password:
+        print("門已解鎖，歡迎進入！")
+        break
+    
+    attempts += 1
+    if attempts < 3:
+        print("密碼錯誤，再試一次！")
+
+if attempts == 3:
+    print("密碼錯誤超過三次，系統已鎖定！")</code></pre>
+</div>
+
+<h3 class="caption">挑戰題 5：製作漢堡 <span class="icon">🛈</span></h3>
+<p>建立一個名為 make_burger 的函式，接收麵包、肉排、蔬菜三種材料，回傳組合後的漢堡字串。</p>
+<p>在函式外設定一個全域變數 order_count，初始值為 0。</p>
+<p>每次呼叫 make_burger 時，order_count 加 1，表示多了一份漢堡訂單。</p>
+<p>執行函式三次後，印出目前的 order_count 數量。</p>
+<div class="answer">
+  <pre class="line-numbers"><code class="language-python">order_count = 0
+
+def make_burger(bread, meat, veggie):
+    global order_count
+    order_count += 1
+    return f"漢堡內容：{bread} + {meat} + {veggie}"
+
+print(make_burger("白麵包", "牛肉排", "生菜"))
+print(make_burger("黑麥麵包", "雞肉排", "番茄"))
+print(make_burger("全麥麵包", "豬肉排", "洋蔥"))
+
+print(f"目前訂單數量：{order_count}")</code></pre>
+</div>
+
+<h3 class="caption">挑戰題 6：溫度轉換器 <span class="icon">🛈</span></h3>
+<p>建立一個函式 celsius_to_fahrenheit，將攝氏溫度轉換為華氏溫度後回傳。</p>
+<p>轉換公式為 °F = °C × 9⁄5 + 32</p>
+<p>函式內有區域變數 fahrenheit 儲存轉換結果。</p>
+<p>函式外有一個全域變數 record，儲存所有轉換後的溫度。</p>
+<p>將攝氏 25、30、35 轉換成華氏，最後印出 record 的內容。</p>
+<div class="answer">
+  <pre class="line-numbers"><code class="language-python">record = []
+
+def celsius_to_fahrenheit(celsius):
+    fahrenheit = celsius * 9 / 5 + 32
+    record.append(fahrenheit)
+    return fahrenheit
+
+print(celsius_to_fahrenheit(25))
+print(celsius_to_fahrenheit(30))
+print(celsius_to_fahrenheit(35))
+
+print("所有轉換紀錄：", record)</code></pre>
+</div>
+
+<h3 class="caption">挑戰題 7：庫存管理小幫手 <span class="icon">🛈</span></h3>
+<p>建立函式 update_stock，接收產品名稱和數量兩個參數。</p>
+<p>使用全域字典 stock 管理庫存數量，初始時為空字典。</p>
+<p>每次更新庫存時，若產品已存在，則增加數量；若不存在，則新增產品並設定數量。</p>
+<p>執行以下操作：新增10個「蘋果」、新增5個「香蕉」、再新增10個「蘋果」。最後印出完整庫存內容。</p>
+<div class="answer">
+  <pre class="line-numbers"><code class="language-python">stock = {}
+
+def update_stock(product, amount):
+    if product in stock:
+        stock[product] += amount
+    else:
+        stock[product] = amount
+
+update_stock("蘋果", 10)
+update_stock("香蕉", 5)
+update_stock("蘋果", 10)
+
+print("完整庫存內容：", stock)</code></pre>
+</div>
+
+<h3 class="caption">挑戰題 8：電影票售票系統 V2 <span class="icon">🛈</span></h3>
+<p>請設計一個簡單的售票系統，使用者可以選擇場次並輸入座位號碼訂票。請包含以下功能與限制：</p>
+<p>1. 場次資訊（dictionary）：使用一個字典 movies 儲存多場電影資訊，每部電影包含時間與可用座位（以清單表示）。</p>
+<p>2. 函式 print_ticket(movie, seat)：輸出格式：「您觀看的電影是《電影名稱》，時間：XX，座位號碼：XX。」</p>
+<p>3. 函式 book_ticket(movie, seat)：檢查電影是否存在、座位是否為整數與可用，若可用則印出票券，否則印出錯誤訊息。</p>
+<p>4. 主程式邏輯：顯示所有場次與剩餘座位，提示使用者輸入電影名稱與座位號碼進行訂票。</p>
+<div class="answer">
+  <pre class="line-numbers"><code class="language-python">movies = {
+    "蜘蛛人": {"time": "晚上七點", "seats": [1, 2, 3, 4, 5]},
+    "玩命關頭": {"time": "下午五點", "seats": [10, 11, 12]}
+}
+
+def print_ticket(movie, seat):
+    print(f"您觀看的電影是《{movie}》，時間：{movies[movie]['time']}，座位號碼：{seat}。")
+
+def book_ticket(movie, seat):
+    if movie not in movies:
+        print("錯誤！查無此電影。")
+        return
+    try:
+        seat = int(seat)
+    except ValueError:
+        print("錯誤！座位號碼必須是數字。")
+        return
+    if seat not in movies[movie]["seats"]:
+        print("錯誤！該座位無法使用。")
+        return
+    movies[movie]["seats"].remove(seat)
+    print_ticket(movie, seat)
+
+# 主程式
+print("目前可訂票的場次：")
+for movie, info in movies.items():
+    seats = ", ".join(map(str, info["seats"]))
+    print(f"《{movie}》 時間：{info['time']} 座位：{seats}")
+
+movie = input("請輸入想訂購的電影名稱：")
+seat = input("請輸入座位號碼：")
+book_ticket(movie, seat)</code></pre>
+</div>
+
+<h3 class="caption">挑戰題 9：進階計算機 <span class="icon">🛈</span></h3>
+<p>設計函式 advanced_calculator，接受使用者輸入兩個數字與一個運算子('+', '-', '*', '/')進行計算。</p>
+<p>使用字串格式化輸出結果，例如：「XX + XX = XX」。</p>
+<p>加入例外處理，處理以下狀況：</p>
+<p>- 若使用者輸入的數字非有效數字，顯示：「錯誤！請輸入有效的數字。」</p>
+<p>- 若運算子非以上四種之一，顯示：「錯誤！無效的運算子。」</p>
+<p>- 若除數為零，顯示：「錯誤！除數不可為零。」</p>
+<div class="answer">
+  <pre class="line-numbers"><code class="language-python">def advanced_calculator(num1, num2, operator):
+    try:
+        num1, num2 = float(num1), float(num2)
+        
+        if operator == '+':
+            result = num1 + num2
+        elif operator == '-':
+            result = num1 - num2
+        elif operator == '*':
+            result = num1 * num2
+        elif operator == '/':
+            if num2 == 0:
+                raise ZeroDivisionError
+            result = num1 / num2
+        else:
+            raise ValueError("錯誤！無效的運算子。")
+        
+        print(f"{num1} {operator} {num2} = {result:.2f}")
+        
+    except ValueError as ve:
+        print(ve if str(ve) else "錯誤！請輸入有效的數字。")
+    except ZeroDivisionError:
+        print("錯誤！除數不可為零。")
+
+advanced_calculator("10", "5", "+")
+advanced_calculator("10", "0", "/")
+advanced_calculator("ten", "5", "*")
+advanced_calculator("8", "2", "?")</code></pre>
+</div>
+
+<h3 class="caption">挑戰題 10：日期格式轉換器 <span class="icon">🛈</span></h3>
+<p>建立一個函式 format_date，接受年、月、日三個整數參數，並轉換成「YYYY-MM-DD」的格式回傳。</p>
+<p>若輸入的月份或日期超出合理範圍（例如月份 > 12 或日期 > 31），則顯示錯誤訊息：「日期輸入錯誤！」</p>
+<div class="answer">
+  <pre class="line-numbers"><code class="language-python">from datetime import datetime
+
+def format_date(year, month, day):
+    try:
+        date = datetime(year, month, day)
+        formatted = date.strftime("%Y-%m-%d")
+        print("格式化日期：", formatted)
+    except ValueError:
+        print("日期輸入錯誤！")
+
+format_date(2025, 3, 26)
+format_date(2025, 2, 29)  # 非閏年
+format_date(2024, 2, 29)  # 閏年
+format_date(2025, 4, 31)  # 不存在的日期</code></pre>
+</div>
+
+<h3 class="caption">挑戰題 11：購物車結帳 <span class="icon">🛈</span></h3>
+<p>設計函式 checkout，傳入購買商品名稱與價格的字典，並計算總金額。</p>
+<p>輸出每個商品與價格（價格格式化為兩位小數），最後輸出總金額。</p>
+<p>使用例外處理，若有商品價格無法轉換為數字，顯示錯誤訊息：「商品價格格式錯誤！」並停止結帳。</p>
+<div class="answer">
+  <pre class="line-numbers"><code class="language-python">def checkout(cart):
+    total = 0
+    try:
+        for item, price in cart.items():
+            price = float(price)
+            print(f"{item}: ${price:.2f}")
+            total += price
+        print(f"總金額：${total:.2f}")
+    except ValueError:
+        print("商品價格格式錯誤！")
+
+cart1 = {"蘋果": "20", "香蕉": "15.5", "橘子": "10"}
+cart2 = {"蘋果": "20", "香蕉": "abc", "橘子": "10"}
+
+checkout(cart1)
+checkout(cart2)</code></pre>
+</div>
+
+<h3 class="caption">挑戰題 12：氣球遊戲爆破王 <span class="icon">🛈</span></h3>
+<p>你有 10 顆氣球，每次遊戲會隨機選一顆氣球進行充氣（每次增加 1~5 單位）。</p>
+<p>如果某顆氣球的氣超過 10，會「Boom!」爆炸，並顯示是哪一顆氣球爆了，然後結束遊戲。</p>
+<p>否則顯示「氣球 X 目前氣量：Y」，繼續遊戲。</p>
+<p>（提示：使用一個字典來追蹤每顆氣球的氣量）</p>
+<div class="answer">
+  <pre class="line-numbers"><code class="language-python">import random
+
+balloons = [0 for i in range(1, 11)]
+
+while True:
+    balloon = random.randint(0, 9)
+    inflate = random.randint(1, 5)
+    balloons[balloon] += inflate
+
+    if balloons[balloon] > 10:
+        print(f"💥 氣球 {balloon} 爆炸了！")
+        break
+    else:
+        print(f"氣球 {balloon} 目前氣量：{balloons[balloon]}")</code></pre>
+</div>
+
+<h3 class="caption">挑戰題 13：果汁機系統 <span class="icon">🛈</span></h3>
+<p>請設計函式 make_juice(fruit)，只接受「蘋果」、「柳橙」、「葡萄」這三種水果。</p>
+<p>如果輸入不是這三種，請拋出並處理自訂例外 JuiceError，顯示：「⚠️ 無法製作這種果汁！」</p>
+<p>否則顯示：「🥤 已製作{fruit}果汁！」</p>
+<p>呼叫函式測試以下水果：「蘋果」、「鳳梨」、「葡萄」、「西瓜」</p>
+<div class="answer">
+  <pre class="line-numbers"><code class="language-python">class JuiceError(Exception):
+    pass
+
+def make_juice(fruit):
+    allowed = ["蘋果", "柳橙", "葡萄"]
+    if fruit not in allowed:
+        raise JuiceError("⚠️ 無法製作這種果汁！")
+    print(f"🥤 已製作{fruit}果汁！")
+
+# 測試
+fruits = ["蘋果", "鳳梨", "葡萄", "西瓜"]
+for fruit in fruits:
+    try:
+        make_juice(fruit)
+    except JuiceError as e:
+        print(e)</code></pre>
+</div>
+
+<h3 class="caption">挑戰題 14：打瞌睡偵測器 <span class="icon">🛈</span></h3>
+<p>老師正在上課，學生有 10 人，其中部分人會打瞌睡（隨機選學生）。</p>
+<p>每次檢查隨機抽一個學生名字（用名單），若該學生打瞌睡則顯示：「⚠️ {name} 正在打瞌睡！」</p>
+<p>否則顯示：「{name} 很專心。」</p>
+<p>直到發現 3 位學生在打瞌睡後，老師大怒喊出：「全班罰抄課文五十遍！」並停止檢查。</p>
+<div class="answer">
+  <pre class="line-numbers"><code class="language-python">import random
+
+students = ["小美", "小明", "小華", "阿忠", "阿寶", "小芬", "小光", "阿姨", "小英", "小偉"]
+sleepy_students = random.sample(students, 5)
+count = 0
+
+while True:
+    student = random.choice(students)
+    if student in sleepy_students:
+        print(f"⚠️ {student} 正在打瞌睡！")
+        count += 1
+    else:
+        print(f"{student} 很專心。")
+    
+    if count == 3:
+        print("全班罰抄課文五十遍！")
+        break</code></pre>
+</div>
+
+<h3 class="caption">挑戰題 15：煎蛋挑戰賽 <span class="icon">🛈</span></h3>
+<p>有 5 顆雞蛋（1~5），其中只有一顆是壞蛋（用 random 選定）。</p>
+<p>請你用迴圈一顆一顆「煎」蛋（顯示「正在煎第X顆蛋…」），直到遇到壞蛋。</p>
+<p>當煎到壞蛋時，顯示「💥 第X顆是壞蛋！整鍋報廢了！」然後結束程式。</p>
+<div class="answer">
+  <pre class="line-numbers"><code class="language-python">import random
+
+bad_egg = random.randint(1, 5)
+
+for i in range(1, 6):
+    print(f"正在煎第{i}顆蛋…")
+    if i == bad_egg:
+        print(f"💥 第{i}顆是壞蛋！整鍋報廢了！")
+        break</code></pre>
+</div>
+
+<h3 class="caption">挑戰題 16：猜天氣小助手 <span class="icon">🛈</span></h3>
+<p>請寫一個程式，讓使用者猜今天的天氣（可能是：晴天、陰天、雨天、雷雨）。</p>
+<p>使用 random 模組隨機決定實際天氣，讓使用者最多猜三次。</p>
+<p>如果猜對，顯示「你猜對了！今天是{weather}！」</p>
+<p>若三次都沒猜中，顯示「你猜錯三次了，今天其實是{weather}！」</p>
+<div class="answer">
+  <pre class="line-numbers"><code class="language-python">import random
+
+weather_list = ["晴天", "陰天", "雨天", "雷雨"]
+actual_weather = random.choice(weather_list)
+
+for i in range(3):
+    guess = input("請猜今天的天氣：")
+    if guess == actual_weather:
+        print(f"你猜對了！今天是{actual_weather}！")
+        break
+else:
+    print(f"你猜錯三次了，今天其實是{actual_weather}！")</code></pre>
+</div>
+
+<h3 class="caption">挑戰題 17：狗狗學名字 <span class="icon">🛈</span></h3>
+<p>設計函式 teach_name(dog_name)：</p>
+<p>每次呼叫時，將狗狗的新名字加入全域變數 dog_names（list）。</p>
+<p>若名字已經教過，顯示：「這個名字{dog_name}已經學過了喔！」</p>
+<p>否則顯示：「🐶 學會新名字：{dog_name}！」</p>
+<p>最後顯示狗狗學過的所有名字。</p>
+<div class="answer">
+  <pre class="line-numbers"><code class="language-python">dog_names = []
+
+def teach_name(dog_name):
+    if dog_name in dog_names:
+        print(f"這個名字{dog_name}已經學過了喔！")
+    else:
+        dog_names.append(dog_name)
+        print(f"🐶 學會新名字：{dog_name}！")
+
+teach_name("Lucky")
+teach_name("Coco")
+teach_name("Lucky")
+print("學過的名字：", dog_names)</code></pre>
+</div>
+
+<h3 class="caption">挑戰題 18：交通燈模擬器 <span class="icon">🛈</span></h3>
+<p>設計一個交通燈系統，依照順序顯示：紅燈 → 綠燈 → 黃燈 → 紅燈...。</p>
+<p>每次顯示間隔 1 秒（可使用 time.sleep(1)）。</p>
+<p>讓系統重複循環 6 次，並顯示每個燈號：「🟥紅燈停」、「🟩綠燈行」、「🟨黃燈等一下」</p>
+<div class="answer">
+  <pre class="line-numbers"><code class="language-python">import time
+
+lights = ["紅燈", "綠燈", "黃燈"]
+messages = {
+    "紅燈": "🟥 紅燈停",
+    "綠燈": "🟩 綠燈行",
+    "黃燈": "🟨 黃燈等一下"
+}
+
+for i in range(6):
+    light = lights[i % 3]
+    print(messages[light])
+    time.sleep(1)</code></pre>
+</div>
 				
 			</section>
 
