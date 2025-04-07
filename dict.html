@@ -132,6 +132,30 @@ orange: 2
 		    
             </section>
 
+		<section>
+  <h2>進階語法：字典推導式</h2>
+  <p>字典推導式（Dictionary Comprehension）是 Python 提供的一種簡潔語法，用於創建新的字典。其語法結構類似於串列推導式，但是產生鍵值對。</p>
+  <pre class="line-numbers"><code class="language-python">{key_expr: value_expr for item in iterable if condition}</code></pre>
+  <p>解析語法：</p>
+  <ul>
+    <li><code>key_expr</code>：定義字典中每個鍵的值。</li>
+    <li><code>value_expr</code>：定義字典中每個對應值。</li>
+    <li><code>item</code>：來自可迭代物件的元素。</li>
+    <li><code>iterable</code>：任何可迭代物件（例如串列、範圍、字串）。</li>
+    <li><code>condition</code>（可選）：篩選條件，僅包含滿足條件的項目。</li>
+  </ul>
+  <p>舉例：</p>
+  <pre class="line-numbers"><code class="language-python"># 範例 1：將數字與其平方配對
+squares_dict = {x: x**2 for x in range(5)}
+print(squares_dict)  # 輸出：{0: 0, 1: 1, 2: 4, 3: 9, 4: 16}
+
+# 範例 2：過濾只留下偶數作為鍵
+even_squares_dict = {x: x**2 for x in range(10) if x % 2 == 0}
+print(even_squares_dict)  # 輸出：{0: 0, 2: 4, 4: 16, 6: 36, 8: 64}
+</code></pre>
+</section>
+
+		
             <section>
                 <h2>常見問題與解答</h2>
                 <h3>問題 1：字典的鍵有什麼限制？</h3>
