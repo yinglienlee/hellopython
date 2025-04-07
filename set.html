@@ -87,6 +87,29 @@ print(2 in my_set)  # 輸出：True
 print(10 in my_set)  # 輸出：False</code></pre>
             </section>
 
+		<section>
+  <h2>進階語法：集合推導式</h2>
+  <p>集合推導式（Set Comprehension）是 Python 提供的一種簡潔語法，用於建立不重複元素的集合。其語法與串列推導式相似，但使用大括號 <code>{}</code>。</p>
+  <pre class="line-numbers"><code class="language-python">{expression for item in iterable if condition}</code></pre>
+  <p>解析語法：</p>
+  <ul>
+    <li><code>expression</code>：定義集合中每個元素的值。</li>
+    <li><code>item</code>：來自可迭代物件的元素。</li>
+    <li><code>iterable</code>：任何可迭代物件（例如串列、範圍、字串）。</li>
+    <li><code>condition</code>（可選）：篩選條件，僅包含滿足條件的元素。</li>
+  </ul>
+  <p>舉例：</p>
+  <pre class="line-numbers"><code class="language-python"># 範例 1：平方數組成的集合
+squares_set = {x**2 for x in range(5)}
+print(squares_set)  # 輸出：{0, 1, 4, 9, 16}
+
+# 範例 2：平方偶數
+even_squares_set = {x**2 for x in range(10) if x % 2 == 0}
+print(even_squares_set)  # 輸出：{0, 64, 4, 36, 16}
+</code></pre>
+</section>
+
+		
             <section>
                 <h2>常見問題與解答</h2>
                 <h3>問題 1：為什麼集合中的元素是無序的？</h3>
