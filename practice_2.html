@@ -207,12 +207,17 @@ update_stock("蘋果", 10)
 print("完整庫存內容：", stock)</code></pre>
 </div>
 
-<h3 class="caption">挑戰題 8：電影票售票系統 V2 <span class="icon">🛈</span></h3>
+<h3 class="caption">挑戰題 8：電影票售票系統<span class="icon">🛈</span></h3>
 <p>請設計一個簡單的售票系統，使用者可以選擇場次並輸入座位號碼訂票。請包含以下功能與限制：</p>
 <p>1. 場次資訊（dictionary）：使用一個字典 movies 儲存多場電影資訊，每部電影包含時間與可用座位（以清單表示）。</p>
 <p>2. 函式 print_ticket(movie, seat)：輸出格式：「您觀看的電影是《電影名稱》，時間：XX，座位號碼：XX。」</p>
 <p>3. 函式 book_ticket(movie, seat)：檢查電影是否存在、座位是否為整數與可用，若可用則印出票券，否則印出錯誤訊息。</p>
 <p>4. 主程式邏輯：顯示所有場次與剩餘座位，提示使用者輸入電影名稱與座位號碼進行訂票。</p>
+<p>movies字典內容如下：</p>
+<pre class="line-numbers"><code class="language-python">movies = {
+    "蜘蛛人": {"time": "晚上七點", "seats": [1, 2, 3, 4, 5]},
+    "玩命關頭": {"time": "下午五點", "seats": [10, 11, 12]}
+}</code></pre>				
 <div class="answer">
   <pre class="line-numbers"><code class="language-python">movies = {
     "蜘蛛人": {"time": "晚上七點", "seats": [1, 2, 3, 4, 5]},
