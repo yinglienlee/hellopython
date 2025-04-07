@@ -20,6 +20,7 @@ function includeHTML(cb = null) {
         <li class="nav-item mb-2"><a href="tuple.html" class="nav-link link-primary">元組容器</a></li>
         <li class="nav-item mb-2"><a href="set.html" class="nav-link link-primary">集合容器</a></li>
         <li class="nav-item mb-2"><a href="dict.html" class="nav-link link-primary">字典容器</a></li>
+	<li class="nav-item mb-2"><a href="practice_2.html" class="nav-link link-primary">問題導向練習題組 2</a></li>
         <li class="nav-item mb-2"><a href="ds_functions.html" class="nav-link link-primary">四大資料結構建構式</a></li>
         <li class="nav-item mb-2"><a href="packing.html" class="nav-link link-primary">指定、多重指定、打包與解包</a></li>
         <li class="nav-item mb-2"><a href="in_is.html" class="nav-link link-primary">身分與成員運算符號</a></li>
