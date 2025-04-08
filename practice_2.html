@@ -292,8 +292,8 @@ advanced_calculator("8", "2", "?")</code></pre>
 </div>
 
 <h3 class="caption">挑戰題 10：日期格式轉換器 <span class="icon">🛈</span></h3>
-<p>建立一個函式 format_date，接受年、月、日三個整數參數，並轉換成「YYYY-MM-DD」的格式回傳。</p>
-<p>若輸入的月份或日期超出合理範圍（例如月份 > 12 或日期 > 31），則顯示錯誤訊息：「日期輸入錯誤！」</p>
+<p>建立一個函式 format_date，接受年、月、日三個整數參數，透過 Python 的 datetime 模組檢查輸入的日期是否正確，並轉換成「YYYY-MM-DD」的格式回傳。</p>
+<p>若輸入了不存在的日期（例如 2 月 30 日或非閏年的 2 月 29 日），則顯示錯誤訊息：「日期輸入錯誤！」</p>
 <div class="answer">
   <pre class="line-numbers"><code class="language-python">from datetime import datetime
 
