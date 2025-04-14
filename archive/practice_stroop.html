@@ -196,7 +196,7 @@ t.write("紅色", align="center", font=("Arial", 48, "bold"))</code></pre>
 				<h3>問題 1：如何動態生成按鍵說明？</h3>
 				<p>按鍵說明的生成方式如下：</p>
 				<pre class="line-numbers"><code class="language-python">key_instructions = ", ".join([f"{color[0]} ({WORDS[COLORS.index(color)]})" for color in COLORS])</code></pre>
-				<p>這段程式碼會遍歷所有顏色，取出其第一個字母（作為按鍵）及其對應的中文顏色名稱，並生成類似 <code>r (紅色), b (藍色), g (綠色), y (黃色)</code> 的字符串。</p>
+				<p>這段程式碼會走訪所有顏色，取出其第一個字母（作為按鍵）及其對應的中文顏色名稱，並生成類似 <code>r (紅色), b (藍色), g (綠色), y (黃色)</code> 的字符串。</p>
 
 				<h3>問題 2：如何增加測驗次數？</h3>
 				<p>可以在初始化測驗時調整生成任務的數量。例如，將程式中的任務生成部分改為：</p>
