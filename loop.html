@@ -84,7 +84,7 @@ for i in range(10, 0, -2):
 
 
 				<h3>2. <code>for</code> 迴圈</h3>
-				<p><code>for</code> 迴圈用於依序走訪可迭代物件（例如串列或字串）：</p>
+				<p><code>for</code> 迴圈用於依序走訪可迭代物件（例如range物件、串列或字串）：</p>
 				<p>這段程式碼將輸出從 0 到 4 的數字。</p>
 				<pre class="line-numbers"><code class="language-python">for i in range(5):
     print(i)</code></pre>
@@ -99,6 +99,22 @@ for i in range(10, 0, -2):
 						B -->|No| E[End]
 				</pre>
 				
+				<p>這段程式碼將輸出串列中各個元素。</p>				
+				<pre class="line-numbers"><code class="language-python">fruits = ["apple", "banana", "cherry"]
+
+for fruit in fruits:
+    print(f"I like {fruit}")</code></pre>
+				<p>輸出結果：<br><code>I like apple<br>I like banana<br>I like cherry<br></code></p>
+				<p>上述程式碼的流程圖如下。</p>
+				<pre class="mermaid">
+					flowchart TD						
+						A[Start] --> B{"fruits串列是否還有元素未取出?"}
+						B --> |Yes| C["取出一個元素放入變數fruit"]
+						C --> D["print(fruit)"]
+						D --> B
+						B -->|No| E[End]
+				</pre>
+
 				<p>這段程式碼將輸出字串中各個字元。</p>				
 				<pre class="line-numbers"><code class="language-python">for c in "Formosa":
     print(c)</code></pre>
