@@ -182,6 +182,62 @@ for i in range(5):
 			</section>			
 
 			<section>
+				<h2><code>for</code> 和 <code>while</code> 迴圈中的 <code>else</code> 子句</h2>
+				<h3>語法說明</h3>
+				<p>在 Python 中，<code>for</code> 和 <code>while</code> 迴圈可以搭配 <code>else</code> 子句使用。<code>else</code> 子句會在迴圈正常結束時執行，也就是沒有被 <code>break</code> 中斷的情況下。語法結構如下：</p>
+				<pre class="line-numbers"><code class="language-python">for item in iterable:
+    # 執行區塊
+    if condition:
+        break
+else:
+    # 當迴圈未被 break 中斷時執行</code></pre>
+				<pre class="line-numbers"><code class="language-python">while condition:
+    # 執行區塊
+    if condition:
+        break
+else:
+    # 當迴圈未被 break 中斷時執行</code></pre>
+
+				<h3>使用情境與範例</h3>
+				<pre class="line-numbers"><code class="language-python">fruits = ["apple", "banana", "cherry"]
+for fruit in fruits:
+    if fruit == "orange":
+        print("找到橘子了！")
+        break
+else:
+    print("清單中沒有橘子。")</code></pre>
+				<p>在這個例子中，<code>for</code> 迴圈依序走訪 fruits 清單，尋找 "orange"。由於清單中沒有 "orange"，迴圈未被 <code>break</code> 中斷，因此執行 <code>else</code> 子句，輸出提示訊息。</p>
+				
+				<pre class="line-numbers"><code class="language-python">num = 17
+for i in range(2, int(num ** 0.5) + 1):
+    if num % i == 0:
+        print(f"{num} 不是質數")
+        break
+else:
+    print(f"{num} 是質數")</code></pre>
+				<p>此範例中，<code>for</code> 迴圈檢查 num 是否能被 2 到 sqrt(num) 的數整除。若找到因數，表示 num 不是質數，並使用 <code>break</code> 中斷迴圈。若迴圈正常結束，則執行 <code>else</code> 子句，確認 num 為質數。</p>
+
+				<pre class="line-numbers"><code class="language-python">attempts = 0
+max_attempts = 3
+
+while attempts < max_attempts:
+    password = input("請輸入密碼：")
+    if password == "secret":
+        print("登入成功！")
+        break
+    attempts += 1
+else:
+    print("超過嘗試次數，請稍後再試。")</code></pre>
+				<p>在這個例子中，使用者有三次機會輸入正確的密碼。若在三次內輸入正確，則使用 <code>break</code> 中斷迴圈；若三次皆輸入錯誤，則迴圈正常結束，執行 <code>else</code> 子句，提示使用者稍後再試。</p>
+
+				<h3>注意事項</h3>
+				<ul>
+					<li><code>else</code> 子句僅在迴圈未被 <code>break</code> 中斷的情況下執行。</li>
+					<li>若迴圈因 <code>break</code>、<code>return</code> 或拋出例外 (<code>raise</code>) 而提前結束，<code>else</code> 子句將不會執行。</li>
+				</ul>
+			</section>
+		
+			<section>
 				<h2>常見問題與解答</h2>
 				<h3>問題 1：如何避免 <code>while</code> 迴圈無限執行？</h3>
 				<p>確保迴圈條件會在某個時候變為 <code>False</code>，例如：</p>
