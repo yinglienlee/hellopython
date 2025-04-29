@@ -182,10 +182,11 @@ dict2 = {"b": 3, "c": 4}
 merged = {}
 
 for k in dict1.keys() | dict2.keys():
-    merged[k] = max(dict1.get(k, -float('inf')), dict2.get(k, -float('inf')))
-
+    merged[k] = max(dict1.get(k, -float('inf')), dict2.get(k, -float('inf')))	
 print(merged)
-</code></pre>
+
+merged = {k: max(dict1.get(k, -float('inf')), dict2.get(k, -float('inf'))) for k in dict1.keys() | dict2.keys()}
+print(merged)</code></pre>
     </div>
 
     <h3 class="caption">挑戰 7：排序元組中的數字 <span class="icon">🛈</span></h3>
