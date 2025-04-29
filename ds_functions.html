@@ -185,6 +185,7 @@ for k in dict1.keys() | dict2.keys():
     merged[k] = max(dict1.get(k, -float('inf')), dict2.get(k, -float('inf')))	
 print(merged)
 
+# 使用字典推導式		
 merged = {k: max(dict1.get(k, -float('inf')), dict2.get(k, -float('inf'))) for k in dict1.keys() | dict2.keys()}
 print(merged)</code></pre>
     </div>
