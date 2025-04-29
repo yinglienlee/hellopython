@@ -182,7 +182,7 @@ dict2 = {"b": 3, "c": 4}
 merged = {}
 
 for k in dict1.keys() | dict2.keys():
-    merged[k] = max(dict1.get(k, 0), dict2.get(k, 0))
+    merged[k] = max(dict1.get(k, -float('inf')), dict2.get(k, -float('inf')))
 
 print(merged)
 </code></pre>
