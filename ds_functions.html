@@ -179,9 +179,13 @@ print("Unique List:", unique_list)</code></pre>
 dict1 = {"a": 1, "b": 2}
 dict2 = {"b": 3, "c": 4}
 
-merged_dict = {key: max(dict1.get(key, float('-inf')), dict2.get(key, float('-inf'))) for key in dict1.keys() | dict2.keys()}
+merged = {}
 
-print("Merged Dict:", merged_dict)</code></pre>
+for k in dict1.keys() | dict2.keys():
+    merged[k] = max(dict1.get(k, 0), dict2.get(k, 0))
+
+print(merged)
+</code></pre>
     </div>
 
     <h3 class="caption">挑戰 7：排序元組中的數字 <span class="icon">🛈</span></h3>
