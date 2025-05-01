@@ -68,18 +68,21 @@ print(x, y, z)  # 輸出：1 2 3</code></pre>
 
             <section>
                 <h2>打包與解包</h2>                
-                <p>在 Python 中，使用 <code>*</code> 可以將多個值打包到一個變數中，例如元組或串列。</p>
+                <p>在 Python 中，「打包」(packing)與「解包」(unpacking)是針對多個值與變數之間的相互操作方式。打包 (Packing) 是把多個值合併成一個單一集合（通常為tuple或list），而解包 (Unpacking) 是將集合（例如tuple、list）中的元素分配給多個變數。</p>
                 <pre class="line-numbers"><code class="language-python"># 打包成元組
-packed_tuple = 1, 2, 3, 4
+packed_tuple = 1, 2, 3, 4 # 逗號自動生成元組
 print(packed_tuple)  # 輸出：(1, 2, 3, 4)
 
+# 解包
+a, b, c = (7, 8, 9)
+print(a)  # 7
+print(b)  # 8
+print(c)  # 9
+			
 # 解包成串列
 *unpacked_list, = [1, 2, 3, 4]
 print(unpacked_list)  # 輸出：[1, 2, 3, 4]</code></pre>
-				<p>
-				在第一例中為什麼不需要星號 ? 這是 Python 的語法特性，逗號自動生成元組。
-				</p>
-				<p>在第二例中星號表示將多個值收集成一個串列，而逗號表示這是解包操作的一部分，即使只有一個變數，也需要用逗號來告知 Python 是解包而非一般指定。雖然此例也可直接寫成 <code>unpacked_list = [1, 2, 3, 4]</code>，但解包的寫法更具彈性。在 Python 中，<code>*</code> 運算符可以用來解包任何可迭代物件（如 <code>list</code>、<code>tuple</code>、<code>set</code>、<code>range</code>、<code>map</code>、<code>generator</code>），而 <code>unpacked_list = [...]</code> 只適用於 <code>list</code>。</p>
+				<p>在第三例中星號表示將多個值收集成一個串列，而逗號表示這是解包操作的一部分，即使只有一個變數，也需要用逗號來告知 Python 是解包而非一般指定。雖然此例也可直接寫成 <code>unpacked_list = [1, 2, 3, 4]</code>，但解包的寫法更具彈性。在 Python 中，<code>*</code> 運算符可以用來解包任何可迭代物件（如 <code>list</code>、<code>tuple</code>、<code>set</code>、<code>range</code>、<code>map</code>、<code>generator</code>），而 <code>unpacked_list = [...]</code> 只適用於 <code>list</code>。</p>
 				
 				<pre class="line-numbers"><code class="language-python">*unpacked_list, = range(5)  # range(5) 產生 0,1,2,3,4
 print(unpacked_list)  # [0, 1, 2, 3, 4]
@@ -87,14 +90,9 @@ print(unpacked_list)  # [0, 1, 2, 3, 4]
 *unpacked_list, = map(int, ["1", "2", "3", "4"])
 print(unpacked_list)  # [1, 2, 3, 4]</code></pre>
 
-                <p>解包也可用在多個變數的指定上。</p>
+                <p>解包也可用在變數個數與集合元素數量不等的指定上。</p>
 				
-                <pre class="line-numbers"><code class="language-python"># 解包元組
-data = (10, 20, 30)
-a, b, c = data
-print(a, b, c)  # 輸出：10 20 30
-
-# 動態解包
+                <pre class="line-numbers"><code class="language-python"># 動態解包
 data = [1, 2, 3, 4, 5]
 a, *b, c = data
 print(a, b, c)  # 輸出：1 [2, 3, 4] 5</code></pre>
