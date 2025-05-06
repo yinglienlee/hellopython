@@ -117,18 +117,28 @@ def add_numbers(*args):
 add_numbers(1, 2, 3)  # 輸出：數字總和：6</code></pre>
 
                 <h3>3. 解包參數</h3>
-                <p>使用 <code>*</code> 或 <code>**</code> 解包資料傳遞給函式。</p>
-                <pre class="line-numbers"><code class="language-python"># 解包位置參數
-def multiply(a, b, c):
+		    <p>在 Python 中，位置參數（positional arguments）和關鍵字參數（keyword arguments）是傳遞參數給函式的兩種方式。</p>
+		    <p>位置參數是根據參數的位置順序傳值。呼叫函式時，第一個值會對應到第一個參數，第二個值對應第二個參數，依此類推。使用 <code>*</code> 可解包資料並以位置參數的方式傳遞給函式。</p>
+                <pre class="line-numbers"><code class="language-python">def multiply(a, b, c):
     return a * b * c
 
+# 直接以位置參數
+print(multiply(2, 3, 4))  # 輸出：24
+
+# 解包位置參數
 numbers = (2, 3, 4)
 print(multiply(*numbers))  # 輸出：24
+</code></pre>
 
-# 解包關鍵字參數
-def display_info(name, age, city):
+
+		    <p>若使用關鍵字參數，在呼叫函式時需指定每個參數的名稱和值。順序可以不一致，因為每個參數名稱都被明確指定。使用 <code>**</code> 可解包資料並以關鍵字參數的方式傳遞給函式。</p>
+                <pre class="line-numbers"><code class="language-python">def display_info(name, age, city):
     print(f"{name} is {age} years old and lives in {city}.")
 
+# 直接以關鍵字參數
+display_info(name="Alice", "age"=30, "city"="Taipei")
+			
+# 解包關鍵字參數
 person_info = {"name": "Alice", "age": 30, "city": "Taipei"}
 display_info(**person_info)
 # 輸出：Alice is 30 years old and lives in Taipei.</code></pre>
