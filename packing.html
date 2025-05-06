@@ -258,16 +258,9 @@ print(f"合併結果：{merged_tuple}")</code></pre>
     <p>將一個包含多個數字的串列分組，每組包含兩個元素，並解包每組輸出結果。</p>
     <pre class="line-numbers"><code class="language-python"># 範例輸入
 numbers = [1, 2, 3, 4, 5, 6]
-# 預期輸出
-組 1: 1, 2
-組 2: 3, 4
-組 3: 5, 6</code></pre>
-    <div class="answer">
-        <pre class="line-numbers"><code class="language-python"># 解答
-numbers = [1, 2, 3, 4, 5, 6]
-groups = [numbers[i:i+2] for i in range(0, len(numbers), 2)]
-for i, (a, b) in enumerate(groups, start=1):
-    print(f"組 {i}: {a}, {b}")</code></pre>
+
+for i in range(0, len(numbers), 2):
+    print(f"組 {i//2 + 1}: {numbers[i]}, {numbers[i+1]}")</code></pre>
     </div>
 
             </section>
