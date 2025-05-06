@@ -176,17 +176,20 @@ nested_list = [1, [2, [3, 4]], 5]
 3 是否存在：True</code></pre>
     <div class="answer">
         <pre class="line-numbers"><code class="language-python"># 解答
-def check_nested(nested, value):
-    if type(nested) == list:  # Check if `nested` is a list
-        for item in nested:
-            if check_nested(item, value):  # Recursively search inside nested lists
-                return True
-        return False
-    return nested == value  # Direct comparison for non-list elements
+def contains_value(nested, target):
+    for item in nested:
+        if type(item) == list:  # 使用 type 檢查是否是 list
+            return contains_value(item, target)                
+        elif item == target:
+            return True
+    return False
 
 nested_list = [1, [2, [3, 4]], 5]
 value = 3
-print(f"{value} 是否存在：{check_nested(nested_list, value)}")</code></pre>
+print(f"{value} 是否存在：{contains_value(nested_list, value)}")
+value = 0
+print(f"{value} 是否存在：{contains_value(nested_list, value)}")
+</code></pre>
     </div>
 
     <h3 class="caption">挑戰 7：清單去重並檢查成員 <span class="icon">🛈</span></h3>
