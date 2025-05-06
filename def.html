@@ -73,6 +73,7 @@ def greet(name):
 # 呼叫函式
 greet("Alice")  # 輸出：你好, Alice!</code></pre>
 
+		    
                 <h3>3. 函式的參數與回傳值</h3>
 		    <p>在 Python 中 <code>return</code> 關鍵字用於函式內，可結束函式執行並回傳指定的值給呼叫該函式的程式碼。</p>
                 <pre class="line-numbers"><code class="language-python"># 帶有回傳值的函式
@@ -119,6 +120,44 @@ print(words)  # 輸出：['date', 'apple', 'banana', 'cherry']</code></pre>
 
             </section>
 
+<section>
+<h2>位置參數與關鍵字參數</h2>
+
+<h3 class="caption">位置參數 <span class="icon">🧩</span></h3>
+<p>位置參數（<strong>positional arguments</strong>）是根據參數出現的順序來傳遞值。第一個值對應第一個參數，第二個值對應第二個參數，依此類推。</p>
+<pre class="line-numbers"><code class="language-python">def greet(name, age):
+    print(f"Hello, {name}. You are {age} years old.")
+
+greet("Alice", 12)
+</code></pre>
+<p><strong>輸出結果：</strong><br>Hello, Alice. You are 12 years old.</p>
+
+<h3 class="caption">關鍵字參數 <span class="icon">🧷</span></h3>
+<p>關鍵字參數（<strong>keyword arguments</strong>）是使用參數名稱來指定值。即使順序不同也能正確對應到參數。</p>
+<pre class="line-numbers"><code class="language-python">greet(age=12, name="Alice")
+</code></pre>
+<p><strong>輸出結果：</strong><br>Hello, Alice. You are 12 years old.</p>
+
+<h3 class="caption">混合使用位置參數與關鍵字參數 <span class="icon">🔀</span></h3>
+<p>你可以先使用位置參數，再使用關鍵字參數，但不能顛倒順序。</p>
+
+<p><strong>合法寫法：</strong></p>
+<pre class="line-numbers"><code class="language-python">greet("Alice", age=12)
+</code></pre>
+
+<p><strong>錯誤寫法（會出錯）：</strong></p>
+<pre class="line-numbers"><code class="language-python">greet(age=12, "Alice")  # ❌ SyntaxError
+</code></pre>
+
+<h3 class="caption">小結 <span class="icon">📌</span></h3>
+<p>
+  <ul>
+    <li><strong>位置參數：</strong>按順序傳值，簡潔但不直觀</li>
+    <li><strong>關鍵字參數：</strong>指定參數名稱，清楚明確，順序可調換</li>
+  </ul>
+</p>
+</section>
+		
             <section>
                 <h2>常見問題與解答</h2>
                 <h3>問題 1：函式可以沒有回傳值嗎？</h3>
