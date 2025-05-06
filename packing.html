@@ -280,7 +280,8 @@ for i in range(0, len(numbers), 2):
     groups[i//2 + 1] = [numbers[i], numbers[i+1]]
 
 for i, e in groups.items():
-    print(f"組 {i}: ", ", ".join(map(str, e)), sep="")</code></pre>
+    print(f"組 {g}: ", end="")
+    print(*m, sep=", ")</code></pre>
 </div>
 
             </section>
