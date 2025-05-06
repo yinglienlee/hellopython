@@ -128,10 +128,10 @@ print(multiply(*numbers))  # 輸出：24
     print(f"{name} is {age} years old and lives in {city}.")
 
 # 直接以關鍵字參數
-display_info(name="Alice", age=30, city="Taipei")
+display_info(age=30, city="Taipei", name="Alice")
 			
 # 解包關鍵字參數
-person_info = {"name": "Alice", "age": 30, "city": "Taipei"}
+person_info = {"age": 30, "city": "Taipei", "name": "Alice"}
 display_info(**person_info)
 # 輸出：Alice is 30 years old and lives in Taipei.</code></pre>
             </section>
