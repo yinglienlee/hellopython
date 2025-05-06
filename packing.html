@@ -100,15 +100,7 @@ print(a, b, c)  # 輸出：1 [2, 3, 4] 5</code></pre>
 
             <section>
                 <h2>參數中的打包與解包</h2>
-                <h3>1. 函式中的基本參數</h3>
-                <pre class="line-numbers"><code class="language-python"># 函式基本參數
-def greet(name="Guest"):
-    print(f"Hello, {name}!")
-
-greet()  # 輸出：Hello, Guest!
-greet("Alice")  # 輸出：Hello, Alice!</code></pre>
-
-                <h3>2. 可變參數（打包）</h3>
+                <h3>1. 可變參數（打包）</h3>
                 <p>使用 <code>*args</code> 將多個位置參數打包為元組傳遞給函式。</p>
                 <pre class="line-numbers"><code class="language-python"># 可變參數
 def add_numbers(*args):
@@ -116,7 +108,7 @@ def add_numbers(*args):
 
 add_numbers(1, 2, 3)  # 輸出：數字總和：6</code></pre>
 
-                <h3>3. 解包參數</h3>
+                <h3>2. 解包參數</h3>
 		    <p>在 Python 中，位置參數（positional arguments）和關鍵字參數（keyword arguments）是傳遞參數給函式的兩種方式。</p>
 		    <p>位置參數是根據參數的位置順序傳值。呼叫函式時，第一個值會對應到第一個參數，第二個值對應第二個參數，依此類推。使用 <code>*</code> 可解包資料並以位置參數的方式傳遞給函式。</p>
                 <pre class="line-numbers"><code class="language-python">def multiply(a, b, c):
