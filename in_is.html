@@ -189,19 +189,19 @@ value = 3
 print(f"{value} 是否存在：{contains_value(nested_list, value)}")</code></pre>
     </div>
 
-    <h3 class="caption">挑戰 7：清單去重並檢查成員 <span class="icon">🛈</span></h3>
+    <h3 class="caption">挑戰 7：清單移除重複並檢查成員 <span class="icon">🛈</span></h3>
     <p>給定一個包含重複元素的串列，移除重複後檢查某個值是否仍然存在。</p>
     <pre class="line-numbers"><code class="language-python"># 範例輸入
 data = [1, 2, 2, 3, 4, 4, 5]
 # 預期輸出
-清單去重後：{1, 2, 3, 4, 5}
+清單移除重複後：{1, 2, 3, 4, 5}
 5 是否存在：True</code></pre>
     <div class="answer">
         <pre class="line-numbers"><code class="language-python"># 解答
 data = [1, 2, 2, 3, 4, 4, 5]
 unique_data = set(data)
 value = 5
-print(f"清單去重後：{unique_data}")
+print(f"清單移除重複後：{unique_data}")
 print(f"{value} 是否存在：{value in unique_data}")</code></pre>
     </div>
 
