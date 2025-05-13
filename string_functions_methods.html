@@ -100,7 +100,10 @@ print(length)  # 輸出：5</code></pre>
                 <h3>2. <code>ord()</code> 與 <code>chr()</code> 函式</h3>
                 <p>轉換字元與 Unicode 編碼：</p>
                 <pre class="line-numbers"><code class="language-python">print(ord("A"))  # 輸出：65
-print(chr(65))  # 輸出：A</code></pre>
+print(chr(65))  # 輸出：A
+		
+for i in range(ord("A"), ord("z")+1):
+    print(f"{i}\t{chr(i)}")</code></pre>
             </section>
 
             <section>
