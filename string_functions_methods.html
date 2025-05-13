@@ -206,7 +206,7 @@ True</code></pre>
     <div class="answer">
         <pre class="line-numbers"><code class="language-python"># 解答
 def is_palindrome(text):
-    cleaned = "".join(c for c in text if c.isalnum()).lower()
+    cleaned = text.lower().replace(" ", "")
     return cleaned == cleaned[::-1]
 
 text = "人人為我、我為人人"
