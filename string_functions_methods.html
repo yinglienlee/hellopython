@@ -61,7 +61,11 @@ print(words)  # 輸出：["Hello", "World", "Python"]</code></pre>
                 <p>用指定的分隔符將串列合併為字串：</p>
                 <pre class="line-numbers"><code class="language-python">words = ["Hello", "World", "Python"]
 result = ",".join(words)
-print(result)  # 輸出：Hello,World,Python</code></pre>
+print(result)  # 輸出：Hello,World,Python
+		
+numbers = [i+1 for i in range(10)]
+result = "\t".join(map(str, numbers))
+print(result) # 輸出：1	2	3	4	5	6	7	8	9	10</code></pre>
 
                 <h3>3. <code>strip()</code> 方法</h3>
                 <p>移除字串首尾的空格或指定字元：</p>
@@ -80,6 +84,8 @@ print(new_text)  # 輸出：I love coding</code></pre>
                 <pre class="line-numbers"><code class="language-python">name = "Alice"
 age = 25
 message = "My name is {} and I am {} years old.".format(name, age)
+print(message)  # 輸出：My name is Alice and I am 25 years old.
+message = "My name is {name} and I am {age} years old.".format(age=age, name=name)
 print(message)  # 輸出：My name is Alice and I am 25 years old.</code></pre>
             </section>
 
