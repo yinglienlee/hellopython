@@ -180,7 +180,7 @@ def contains_value(nested, target):
     for item in nested:
         if type(item) == list:  # 使用 type 檢查是否是 list
             if contains_value(item, target):
-		return True
+                return True
         elif item == target:
             return True
     return False
