@@ -138,7 +138,7 @@ try:
     file = open("example.txt", "r")
     content = file.read()
 finally:
-    if file:
+    if 'file' in locals():
         file.close()</code></pre>
             </section>
 
