@@ -97,7 +97,9 @@ print(text[-6:])  # 輸出：World!</code></pre>
                 <pre class="line-numbers"><code class="language-python"># 複製範例
 numbers = [1, 2, 3, 4, 5]
 copy_numbers = numbers[:]
-print(copy_numbers)  # 輸出：[1, 2, 3, 4, 5]</code></pre>
+print(copy_numbers)  # 輸出：[1, 2, 3, 4, 5]
+alias_numbers = numbers # alias_numbers 僅為別名，沒有複製效果
+print(id(numbers), id(alias_numbers), id(copy_numbers))</code></pre>
             </section>
 
             <section>
