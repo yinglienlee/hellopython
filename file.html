@@ -140,37 +140,7 @@ finally:
     if 'file' in locals():
         file.close()</code></pre>
             </section>
-
-			<section>
-				<h2>不同平台的換行符號</h2>
-				<p>在檔案操作中，換行符號的使用因操作系統而異。這些差異可能會影響到檔案的可讀性或跨平台的相容性，因此了解它們非常重要。</p>
-
-				<h3>1. 常見的換行符號</h3>
-				<ul>
-					<li><code>\n</code>（LF, Line Feed）：用於 Unix/Linux 和 macOS 系統。</li>
-					<li><code>\r\n</code>（CRLF, Carriage Return + Line Feed）：用於 Windows 系統。</li>
-					<li><code>\r</code>（CR, Carriage Return）：舊版的 macOS 使用，但現已被 LF 替代。</li>
-				</ul>
-
-				<h3>2. 範例</h3>
-				<p>以下範例展示了不同平台的換行符號對檔案輸出的影響：</p>
-				<pre class="line-numbers"><code class="language-python"># Windows 系統換行符號
-with open("example_windows.txt", "w", newline="\r\n") as file:
-	file.write("第一行\n第二行")
-
-# Unix/Linux/macOS 系統換行符號
-with open("example_unix.txt", "w", newline="\n") as file:
-	file.write("第一行\n第二行")</code></pre>
-
-				<h3>3. 跨平台注意事項</h3>
-				<p>在處理檔案時，建議使用 Python 的內建功能來自動處理換行符號，以確保跨平台的相容性：</p>
-				<pre class="line-numbers"><code class="language-python">with open("example.txt", "w", newline=None) as file:
-	file.write("第一行\n第二行")</code></pre>
-				<p>上述程式會根據操作系統自動應用適當的換行符號。</p>
-			</section>
-
-
-
+		
             <section>
                 <h2>常見問題與解答</h2>
                 <h3>問題 1：可以同時讀取和寫入檔案嗎？</h3>
