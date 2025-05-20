@@ -70,7 +70,14 @@ print(math.sqrt(16))  # 輸出：4.0</code></pre>
 import requests
 
 response = requests.get("https://www.example.com")
-print(response.status_code)</code></pre>
+
+if response.status_code == 200:
+    html = response.text
+    print(html)
+else:
+    print(f"Failed to retrieve page. Status code: {response.status_code}")
+		
+		</code></pre>
 
 				<p>Thonny 也提供便捷的安裝方式</p>
                 <ol>
