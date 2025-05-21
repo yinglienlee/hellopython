@@ -133,11 +133,12 @@ except FileNotFoundError:
 
                 <h3>2. 確保檔案正確關閉</h3>
                 <p>雖然 <code>with</code> 語法通常能自動處理，但也可以使用 <code>finally</code> 確保檔案被關閉：</p>
-                <pre class="line-numbers"><code class="language-python">try:
+                <pre class="line-numbers"><code class="language-python">file = None
+try:
     file = open("example.txt", "r")
     content = file.read()
 finally:
-    if 'file' in locals():
+    if file:
         file.close()</code></pre>
             </section>
 		
