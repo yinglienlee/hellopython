@@ -92,7 +92,8 @@ except Exception as e:
 
                 <h3>5. 使用 <code>else</code> 與 <code>finally</code></h3>
                 <p><code>else</code> 用於當 <code>try</code> 區塊中沒有發生例外時執行的程式碼，而 <code>finally</code> 則一定會執行：</p>
-                <pre class="line-numbers"><code class="language-python">try:
+                <pre class="line-numbers"><code class="language-python">file = None
+try:
     file = open("example.txt", "r")
     content = file.read()
     print(content)
@@ -101,7 +102,7 @@ except FileNotFoundError:
 else:
     print("檔案讀取成功！")
 finally:
-    if 'file' in locals():
+    if file:
         file.close()
         print("檔案已關閉。")</code></pre>
 		<p>
