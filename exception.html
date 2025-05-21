@@ -82,13 +82,20 @@ except (ValueError, IndexError):
     print("輸入的索引值無效或超出範圍！")</code></pre>
 
 <h3>4. 捕獲所有例外</h3>
-<p>使用 <code>Exception</code> 可以捕獲所有可能的例外，但應該謹慎使用，以免忽略特定錯誤的詳細資訊：</p>
+<p>使用 <code>Exception</code> 可以捕獲所有可能的例外</p>
 
 <pre class="line-numbers"><code class="language-python">try:
     file = open("不存在的檔案.txt", "r")
     content = file.read()
 except Exception as e:
     print(f"發生錯誤: {e}")</code></pre>
+
+<p>不指定例外也可捕獲所有可能的例外，但應該謹慎使用，以免忽略特定錯誤的詳細資訊。</p>
+<pre class="line-numbers"><code class="language-python">try:
+    file = open("不存在的檔案.txt", "r")
+    content = file.read()
+except:
+    print("發生錯誤")</code></pre>
 
                 <h3>5. 使用 <code>else</code> 與 <code>finally</code></h3>
                 <p><code>else</code> 用於當 <code>try</code> 區塊中沒有發生例外時執行的程式碼，而 <code>finally</code> 則一定會執行：</p>
