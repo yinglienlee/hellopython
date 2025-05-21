@@ -132,7 +132,7 @@ except FileNotFoundError:
     print("檔案不存在！")</code></pre>
 
                 <h3>2. 確保檔案正確關閉</h3>
-                <p>雖然 <code>with</code> 語法通常能自動處理，但也可以使用 <code>finally</code> 確保檔案被關閉：</p>
+                <p>除了可透過 <code>with</code> 自動關閉檔案外，也可以使用 <code>finally</code> 確保檔案被關閉：</p>
                 <pre class="line-numbers"><code class="language-python">file = None
 try:
     file = open("example.txt", "r")
