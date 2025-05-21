@@ -137,6 +137,8 @@ except FileNotFoundError:
 try:
     file = open("example.txt", "r")
     content = file.read()
+except FileNotFoundError:
+    print("檔案不存在！")			
 finally:
     if file:
         file.close()</code></pre>
