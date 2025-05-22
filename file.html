@@ -86,13 +86,13 @@ file.close()  # 關閉檔案</code></pre>
             <section>
                 <h2>讀取檔案</h2>
                 <h3>1. 使用 <code>read()</code></h3>
-                <p>讀取檔案的所有內容：</p>
+                <p>讀取檔案的所有內容。透過此方法讀取大檔案會占用較多記憶體，因此僅適合用來讀取小檔案。</p>
                 <pre class="line-numbers"><code class="language-python">with open("example.txt", "r") as file:
     content = file.read()
     print(content)</code></pre>
 
                 <h3>2. 使用 <code>readline()</code></h3>
-                <p>一次讀取一行：</p>
+                <p>一次讀取一行。</p>
                 <pre class="line-numbers"><code class="language-python">with open("example.txt", "r") as file:
     line = file.readline()
     while line:
@@ -100,7 +100,7 @@ file.close()  # 關閉檔案</code></pre>
         line = file.readline()</code></pre>
 
                 <h3>3. 使用 <code>readlines()</code></h3>
-                <p>讀取所有行並回傳串列：</p>
+                <p>讀取所有行並回傳串列。透過此方法讀取大檔案會占用較多記憶體，因此僅適合用來讀取小檔案。</p>
                 <pre class="line-numbers"><code class="language-python">with open("example.txt", "r") as file:
     lines = file.readlines()
     for line in lines:
