@@ -123,7 +123,6 @@ if __name__ == "__main__":
             <section>
                 <h2>挑戰題目</h2>
                 <h3 class="caption">挑戰 1：模組設計 <span class="icon">🛈</span></h3>
-    <p>建立一個模組，其中包含一個函式與主要程式邏輯，並嘗試將它匯入到另一個檔案中。</p>
 <p>
     建立兩個 Python 檔案，分別命名為 <code>module1.py</code> 和 <code>main.py</code>。
 </p>
@@ -132,16 +131,16 @@ if __name__ == "__main__":
     <li>
 	在 <code>module1.py</code> 檔案中：
 	<ul>
-	    <li>定義一個名為 <code>greet</code> 的函式，該函式接收一個參數 <code>name</code>，並回傳一個字串，格式為 <code>"Hello, [name]!"</code> [1]。</li>
-	    <li>使用 <code>if __name__ == "__main__":</code> 這個判斷式 [2, 3]。</li>
-	    <li>在 <code>if __name__ == "__main__":</code> 區塊內，呼叫 <code>greet</code> 函式並傳入一個名稱（例如 "Alice"），然後將回傳的結果印出 [1]。**這個區塊的程式碼只應該在 <code>module1.py</code> 被直接執行時才執行** [3]。</li>
+	    <li>定義一個名為 <code>greet</code> 的函式，該函式接收一個參數 <code>name</code>，並回傳一個字串，格式為 <code>"Hello, [name]!"</code>。</li>
+	    <li>使用 <code>if __name__ == "__main__":</code> 這個判斷式。</li>
+	    <li>在 <code>if __name__ == "__main__":</code> 區塊內，呼叫 <code>greet</code> 函式並傳入一個名稱（例如 "Alice"），然後將回傳的結果印出。這個區塊的程式碼只應該在 <code>module1.py</code> 被直接執行時才執行。</li>
 	</ul>
     </li>
     <li>
 	在 <code>main.py</code> 檔案中：
 	<ul>
-	    <li>匯入整個 <code>module1</code> 模組 [1]。</li>
-	    <li>呼叫匯入的 <code>module1</code> 中的 <code>greet</code> 函式，並傳入另一個名稱（例如 "Bob"），然後將回傳的結果印出 [1]。</li>
+	    <li>匯入整個 <code>module1</code> 模組。</li>
+	    <li>呼叫匯入的 <code>module1</code> 中的 <code>greet</code> 函式，並傳入另一個名稱（例如 "Bob"），然後將回傳的結果印出。</li>
 	</ul>
     </li>
 </ul>
