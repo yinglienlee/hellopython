@@ -122,70 +122,8 @@ if __name__ == "__main__":
 
             <section>
                 <h2>挑戰題目</h2>
-                <h3 class="caption">挑戰 1：模組設計 <span class="icon">🛈</span></h3>
-<p>
-    建立兩個 Python 檔案，分別命名為 <code>module1.py</code> 和 <code>main.py</code>。
-</p>
 
-<ul>
-    <li>
-	在 <code>module1.py</code> 檔案中：
-	<ul>
-	    <li>定義一個名為 <code>greet</code> 的函式，該函式接收一個參數 <code>name</code>，並回傳一個字串，格式為 <code>"Hello, [name]!"</code>。</li>
-	    <li>使用 <code>if __name__ == "__main__":</code> 這個判斷式。</li>
-	    <li>在 <code>if __name__ == "__main__":</code> 區塊內，呼叫 <code>greet</code> 函式並傳入一個名稱（例如 "Alice"），然後將回傳的結果印出。這個區塊的程式碼只應該在 <code>module1.py</code> 被直接執行時才執行。</li>
-	</ul>
-    </li>
-    <li>
-	在 <code>main.py</code> 檔案中：
-	<ul>
-	    <li>匯入整個 <code>module1</code> 模組。</li>
-	    <li>呼叫匯入的 <code>module1</code> 中的 <code>greet</code> 函式，並傳入另一個名稱（例如 "Bob"），然後將回傳的結果印出。</li>
-	</ul>
-    </li>
-</ul>
-    <div class="answer">
-        <pre class="line-numbers"><code class="language-python"># 解答
-# module1.py
-def greet(name):
-    return f"Hello, {name}!"
-
-if __name__ == "__main__":
-    print(greet("Alice"))
-
-# main.py
-import module1
-print(module1.greet("Bob"))</code></pre>
-    </div>
-
-    <h3 class="caption">挑戰 2：檢查執行模式 <span class="icon">🛈</span></h3>
-    <p>撰寫一個程式，輸出該程式是直接執行還是被匯入。</p>
-    <div class="answer">
-        <pre class="line-numbers"><code class="language-python"># 解答
-# check_mode.py
-if __name__ == "__main__":
-    print("程式是直接執行")
-else:
-    print("程式是被匯入")</code></pre>
-    </div>
-
-    <h3 class="caption">挑戰 3：多檔案互動 <span class="icon">🛈</span></h3>
-    <p>設計兩個檔案，檔案 A 匯入檔案 B，並檢查 <code>if __name__ == "__main__"</code> 的作用。</p>
-    <div class="answer">
-        <pre class="line-numbers"><code class="language-python"># 解答
-# file_a.py
-print("執行 file_a.py")
-import file_b
-
-# file_b.py
-print("執行 file_b.py")
-if __name__ == "__main__":
-    print("file_b.py 被直接執行")
-else:
-    print("file_b.py 被匯入")</code></pre>
-    </div>
-
-    <h3 class="caption">挑戰 4：模組重用 <span class="icon">🛈</span></h3>
+    <h3 class="caption">挑戰 1：模組重用 <span class="icon">🛈</span></h3>
     <p>建立一個模組，該模組包含一個函式計算兩數的乘積，並使用 <code>if __name__ == "__main__"</code> 區塊進行測試。嘗試將此模組匯入至另一個程式中使用其函式。</p>
     <div class="answer">
         <pre class="line-numbers"><code class="language-python"># 解答
@@ -200,75 +138,7 @@ if __name__ == "__main__":
 from multiply_module import multiply
 print(multiply(4, 5))</code></pre>
     </div>
-
-    <h3 class="caption">挑戰 5：建立模組目錄 <span class="icon">🛈</span></h3>
-    <p>設計一個包含多個模組的專案結構，例如 <code>utils</code> 目錄，並匯入該目錄下的模組來執行相關功能。</p>
-    <div class="answer">
-        <pre class="line-numbers"><code class="language-python"># 解答
-# utils/math_utils.py
-def add(a, b):
-    return a + b
-
-# utils/string_utils.py
-def reverse(text):
-    return text[::-1]
-
-# main.py
-from utils.math_utils import add
-from utils.string_utils import reverse
-
-print(add(3, 5))
-print(reverse("Python"))</code></pre>
-    </div>
-
-    <h3 class="caption">挑戰 6：測試模組功能 <span class="icon">🛈</span></h3>
-    <p>撰寫一個模組，內含多個函式，並在 <code>if __name__ == "__main__"</code> 區塊中測試所有函式。</p>
-    <div class="answer">
-        <pre class="line-numbers"><code class="language-python"># 解答
-# utilities.py
-def add(a, b):
-    return a + b
-
-def subtract(a, b):
-    return a - b
-
-if __name__ == "__main__":
-    print(add(10, 5))
-    print(subtract(10, 5))</code></pre>
-    </div>
-
-    <h3 class="caption">挑戰 7：防止無意執行 <span class="icon">🛈</span></h3>
-    <p>建立一個模組，包含敏感操作（如刪除檔案），確保只有在主程式執行時才能執行該操作。</p>
-    <div class="answer">
-        <pre class="line-numbers"><code class="language-python"># 解答
-# sensitive.py
-import os
-
-def delete_file(filename):
-    os.remove(filename)
-
-if __name__ == "__main__":
-    print("請確認是否要執行敏感操作")
-    # delete_file("important.txt")</code></pre>
-    </div>
-
-    <h3 class="caption">挑戰 8：檢查模組執行順序 <span class="icon">🛈</span></h3>
-    <p>設計三個檔案，分別匯入彼此並使用 <code>print</code> 確認程式執行的順序。</p>
-    <div class="answer">
-        <pre class="line-numbers"><code class="language-python"># 解答
-# a.py
-print("執行 a.py")
-import b
-
-# b.py
-print("執行 b.py")
-import c
-
-# c.py
-print("執行 c.py")</code></pre>
-    </div>
-				
-				
+    
             </section>
 
             <section>
