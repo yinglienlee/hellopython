@@ -102,11 +102,11 @@ p.greet()  # 輸出：你好，我是 Alice，我今年 30 歲。</code></pre>
         print(f"物件 {self.name} 已建立。")
 
     def __del__(self):
-        print(f"物件 {self.name} 已刪除。")
+        print(f"物件 {self.name} 即將被刪除。")
 
 # 建立與刪除物件
 obj = Example("測試物件")
-del obj  # 輸出：物件 測試物件 已刪除。</code></pre>
+del obj  # 輸出：物件 測試物件 即將刪除。</code></pre>
 
                 <h3>3. 注意事項</h3>
                 <p><code>__del__</code> 的執行時間由 Python 的垃圾回收機制決定，當物件的引用計數為 0 時會被清理，但具體執行時間可能不確定。因此，對於需要即時釋放的資源，建議使用 <code>try</code>/<code>finally</code> 或 <code>with</code> 語法來手動管理。</p>
@@ -142,7 +142,7 @@ finally:
         # 此處可以加入釋放資源的程式碼，例如關閉檔案、釋放連線等
         
     def __del__(self):
-        print(f"物件 {self.name} 已刪除。")
+        print(f"物件 {self.name} 即將刪除。")
 		
 		
 with Example("測試物件") as obj:
@@ -355,10 +355,10 @@ class Resource:
         print(f"資源 {self.name} 已建立。")
 
     def __del__(self):
-        print(f"資源 {self.name} 已清理。")
+        print(f"資源 {self.name} 即將被清理。")
 
 resource = Resource("測試資源")
-del resource  # 輸出：資源 測試資源 已清理。
+del resource  # 輸出：資源 測試資源 即將清理。
 </code></pre>
     </div>
 
