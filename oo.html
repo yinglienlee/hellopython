@@ -108,7 +108,7 @@ p.greet()  # 輸出：你好，我是 Alice，我今年 30 歲。</code></pre>
 obj = Example("測試物件")
 del obj  # 輸出：物件 測試物件 即將刪除。</code></pre>
 
-                <h3>3. 注意事項</h3>
+                <h3>3. 資源釋放</h3>
                 <p><code>__del__</code> 的執行時間由 Python 的垃圾回收機制決定，當物件的引用計數為 0 時會被清理，但具體執行時間可能不確定。因此，對於需要即時釋放的資源，建議使用 <code>try</code>/<code>finally</code> 或 <code>with</code> 語法來手動管理。</p>
 				
 				<h4>使用 <code>try/finally</code></h4>
@@ -124,7 +124,7 @@ finally:
     # 無論 try 區塊內是否發生錯誤，finally 區塊都會被執行
     print("進入 finally 區塊，進行資源清理")
     del obj  # 明確刪除物件，呼叫 __del__ 方法</code></pre>
-
+				
 				<h4>使用 <code>with</code> 語法</h4>
 				<p>要使用 with 語法管理資源，需要修改 Example 類別，使其支援「上下文管理器」協議，也就是實作 __enter__ 和 __exit__ 方法。修改後的類別如下：</p>
 				<pre class="line-numbers"><code class="language-python">class Example:
