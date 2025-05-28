@@ -36,7 +36,7 @@
         </nav>
         <main class="flex-grow-1">
 			<header>
-				<h1>問題導向練習題組 2</h1>				
+				<h1>問題導向練習題組 3</h1>				
 			</header>
 
 			<section>
@@ -75,7 +75,116 @@ Code is powerful.
         print(clean)</code></pre>
 </div>
 
+<h3 class="caption">挑戰題 2：寵物辨識系統 🐶🐱 <span class="icon">🛈</span></h3>
 
+<p>你正在設計一套「寵物辨識系統」，幫助飼主確認兩隻動物是不是同一隻、以及牠們是不是同類。</p>
+
+<p>請你完成一個 <code>Pet</code> 類別，每個寵物有名字（<code>name</code>）和種類（<code>species</code>，例如 "dog" 或 "cat"）。接著建立幾個寵物物件，並使用：</p>
+<ul>
+  <li><code>is</code> 運算子來判斷是否是「同一隻寵物」</li>
+  <li><code>in</code> 運算子來判斷某種類是否在允許照顧的清單中</li>
+</ul>
+
+<p>模擬下列情境：</p>
+<ol>
+  <li>判斷 pet1 和 pet2 是否為同一物件</li>
+  <li>確認 pet1 的種類是否在照顧清單 <code>["dog", "cat", "rabbit"]</code> 中</li>
+</ol>
+
+<p><strong>提示：</strong>使用 <code>is</code> 判斷物件身分，<code>in</code> 判斷成員關係。</p>
+
+<div class="answer">
+  <pre class="line-numbers"><code class="language-python">class Pet:
+    def __init__(self, name, species):
+        self.name = name
+        self.species = species
+
+pet1 = Pet("Buddy", "dog")
+pet2 = Pet("Buddy", "dog")
+pet3 = pet1  # 指向同一物件
+
+# 身分比較
+print(pet1 is pet2)  # False，雖然資料一樣，但是不同物件
+print(pet1 is pet3)  # True，同一個物件參考
+
+# 成員測試
+allowed_species = ["dog", "cat", "rabbit"]
+if pet1.species in allowed_species:
+    print(f"{pet1.name} 的種類 {pet1.species} 可接受照顧！")
+else:
+    print(f"{pet1.name} 的種類 {pet1.species} 不在可照顧清單中。")
+</code></pre>
+</div>
+
+<h3 class="caption">挑戰題 3：姓名格式大翻修 ✂️ <span class="icon">🛈</span></h3>
+
+<p>你拿到一份輸入名單，裡面都是使用者亂填的名字資料，例如：</p>
+<pre>
+"lIOnel, mEssi"
+"taYLoR, swIFt"
+"kuRo, miKO"
+</pre>
+
+<p>每一筆都是「姓, 名」格式，大小寫混亂。請你設計一段程式碼，</p>
+<ul>
+  <li>將姓與名使用 <code>split()</code> 拆開，並使用 **多重指定** 方式指派給 <code>last</code> 和 <code>first</code></li>
+  <li>把每個字母都轉為「首字大寫」，也就是 <code>capitalize()</code></li>
+  <li>重新組合為「名 姓」格式並印出</li>
+</ul>
+
+<p><strong>加分挑戰：</strong>使用函式封裝轉換邏輯，並處理多筆名單！</p>
+
+<div class="answer">
+  <pre class="line-numbers"><code class="language-python">def fix_name(record):
+    last, first = record.split(", ")
+    return f"{first.capitalize()} {last.capitalize()}"
+
+names = [
+    "lIOnel, mEssi",
+    "taYLoR, swIFt",
+    "kuRo, miKO"
+]
+
+for name in names:
+    print(fix_name(name))</code></pre>
+</div>
+
+				
+<h3 class="caption">挑戰題 4：氣象小幫手 ☀️🌧️ <span class="icon">🛈</span></h3>
+
+<p>你正在開發一個氣象小程式，用來協助使用者查看最近一週的高溫資料。</p>
+
+<p>已知高溫資料如下，請完成下列任務：</p>
+
+<pre>
+[30, 32, 31, 33, 34, 29, 28]
+</pre>
+
+<ul>
+  <li>使用 <code>list()</code> 建構這份資料</li>
+  <li>使用切片技巧取得：
+    <ul>
+      <li>前三天的氣溫</li>
+      <li>最後三天的氣溫</li>
+      <li>間隔一天的氣溫（從第 1 天開始，每隔一天擷取一次）</li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong>提示：</strong>這題重點在於資料建構與切片技巧的靈活運用。</p>
+
+<div class="answer">
+  <pre class="line-numbers"><code class="language-python">temperatures = list([30, 32, 31, 33, 34, 29, 28])
+
+# 前三天
+print("前三天氣溫：", temperatures[:3])
+
+# 最後三天
+print("最後三天氣溫：", temperatures[-3:])
+
+# 每隔一天的氣溫
+print("隔日氣溫：", temperatures[::2])</code></pre>
+</div>
 
 		
 			</section>
