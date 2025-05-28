@@ -30,6 +30,7 @@ function includeHTML(cb = null) {
         <li class="nav-item mb-2"><a href="import.html" class="nav-link link-primary">匯入模組</a></li>
         <li class="nav-item mb-2"><a href="main.html" class="nav-link link-primary">了解 __name__</a></li>
         <li class="nav-item mb-2"><a href="oo.html" class="nav-link link-primary">類別與物件</a></li>
+	<li class="nav-item mb-2"><a href="practice_3.html" class="nav-link link-primary">問題導向練習題組 3</a></li>
         <li class="nav-item mb-2"><a href="practice_stock_price.html" class="nav-link link-primary">綜合練習：抓取 TSMC 股票歷史價格</a></li>
         <li class="nav-item mb-2"><a href="practice_pygame_zero.html" class="nav-link link-primary">綜合練習：Pygame Zero 基礎教學</a></li>
         <li class="nav-item mb-2"><a href="practice_optical_illusions_pgzero.html" class="nav-link link-primary">綜合練習：Hering Illusion</a></li>
