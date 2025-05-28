@@ -108,11 +108,9 @@ Taylor Swift</pre>
     "swIFt, taYLoR"
 ]
 
-last, first = names[0].split(", ")
-print(f"{first.capitalize()} {last.capitalize()}")
-last, first = names[1].split(", ")
-print(f"{first.capitalize()} {last.capitalize()}")
-</code></pre>
+for name in names:
+    last, first = name.split(", ")
+    print(f"{first.capitalize()} {last.capitalize()}")</code></pre>
 </div>
 
 <hr/>
