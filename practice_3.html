@@ -155,49 +155,50 @@ Python is fun!</pre>
 </div>
 
 <hr/>
-<h3 class="caption">挑戰題 6（★★☆）：寵物身分辨識與照顧檢查系統 🐶🐱 <span class="icon">🛈</span></h3>
+<h3 class="caption">挑戰題 6（★★☆）：每日健身任務追蹤器 🏋️‍♀️ <span class="icon">🛈</span></h3>
 
-<p><strong>涵蓋主題：</strong>類別與物件，身分與成員運算符號</p>
+<p><strong>涵蓋主題：</strong>集合（<code>set</code>）、邏輯運算子、資料比對</p>
 
-<p>你正在開發一個寵物登記與照顧系統，請依下列說明完成：</p>
+<p>你正在建立一個健身App，用來追蹤使用者今天完成哪些健身任務。</p>
 
+<p>已知每天的指定健身清單如下：</p>
+<pre>
+expected = {'push-up', 'sit-up', 'squat', 'plank'}
+</pre>
+
+<p>請依照使用者輸入的清單比對完成情況：</p>
 <ul>
-  <li>定義一個 <code>Pet</code> 類別，每隻寵物有 <code>name</code> 和 <code>species</code>（例如：dog、cat）</li>
-  <li>建立三個物件：
-    <ul>
-      <li><code>pet1</code> 和 <code>pet2</code> 有相同資料但為不同實體</li>
-      <li><code>pet3</code> 指向 <code>pet1</code>（同一物件）</li>
-    </ul>
-  </li>
-  <li>使用 <code>is</code> 判斷：<code>pet1</code> 和 <code>pet2</code> 是否為同一隻寵物？<br>
-      <code>pet1</code> 和 <code>pet3</code> 呢？</li>
-  <li>使用 <code>in</code> 判斷：<code>pet1</code> 的種類是否在 <code>["dog", "cat", "rabbit"]</code> 的可照顧清單中？</li>
+  <li>列出完成了哪些項目</li>
+  <li>列出尚未完成的項目</li>
+  <li>若全數完成，顯示鼓勵訊息</li>
 </ul>
 
-<p><strong>預期輸出：</strong></p>
-
+<p><strong>範例輸入：</strong></p>
 <pre>
-pet1 和 pet2 是同一隻嗎？ False
-pet1 和 pet3 是同一隻嗎？ True
-Buddy 的種類 dog 可接受照顧！
+done = {'push-up', 'plank', 'sit-up'}
+</pre>
+
+<p><strong>預期輸出：</strong></p>
+<pre>
+已完成：{'push-up', 'plank', 'sit-up'}
+尚未完成：{'squat'}
+加油！還差一點點就完成所有任務了！
 </pre>
 
 <div class="answer">
-  <pre class="line-numbers"><code class="language-python">class Pet:
-    def __init__(self, name, species):
-        self.name = name
-        self.species = species
+  <pre class="line-numbers"><code class="language-python">expected = {'push-up', 'sit-up', 'squat', 'plank'}
+done = {'push-up', 'plank', 'sit-up'}
 
-pet1 = Pet("Buddy", "dog")
-pet2 = Pet("Buddy", "dog")
-pet3 = pet1
+completed = done & expected
+incomplete = expected - done
 
-print("pet1 和 pet2 是同一隻嗎？", pet1 is pet2)
-print("pet1 和 pet3 是同一隻嗎？", pet1 is pet3)
+print("已完成：", completed)
+print("尚未完成：", incomplete)
 
-allowed = ["dog", "cat", "rabbit"]
-if pet1.species in allowed:
-    print(f"{pet1.name} 的種類 {pet1.species} 可接受照顧！")</code></pre>
+if not incomplete:
+    print("太棒了！你完成了全部任務！")
+else:
+    print("加油！還差一點點就完成所有任務了！")</code></pre>
 </div>
 
 
