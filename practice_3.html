@@ -155,17 +155,33 @@ Python is fun!</pre>
 </div>
 
 <hr/>
-<h3 class="caption">挑戰題 6（★★☆）：寵物辨識系統 🐶🐱 <span class="icon">🛈</span></h3>
+<h3 class="caption">挑戰題 6（★★☆）：寵物身分辨識與照顧檢查系統 🐶🐱 <span class="icon">🛈</span></h3>
+
 <p><strong>涵蓋主題：</strong>類別與物件，身分與成員運算符號</p>
-<p>你需要判斷兩隻寵物是否為同一個，以及牠們是否屬於照顧範圍。</p>
-<pre></pre>
-<p>請你：</p>
-<ul><li>定義 <code>Pet</code> 類別，含 <code>name</code> 和 <code>species</code></li>
-<li>建立多隻寵物物件並使用 <code>is</code> 判斷是否為同一物件</li>
-<li>使用 <code>in</code> 判斷 <code>species</code> 是否在可接受名單中</li></ul>
-<pre>False
-True
-Buddy 的種類 dog 可接受照顧！</pre>
+
+<p>你正在開發一個寵物登記與照顧系統，請依下列說明完成：</p>
+
+<ul>
+  <li>定義一個 <code>Pet</code> 類別，每隻寵物有 <code>name</code> 和 <code>species</code>（例如：dog、cat）</li>
+  <li>建立三個物件：
+    <ul>
+      <li><code>pet1</code> 和 <code>pet2</code> 有相同資料但為不同實體</li>
+      <li><code>pet3</code> 指向 <code>pet1</code>（同一物件）</li>
+    </ul>
+  </li>
+  <li>使用 <code>is</code> 判斷：<code>pet1</code> 和 <code>pet2</code> 是否為同一隻寵物？<br>
+      <code>pet1</code> 和 <code>pet3</code> 呢？</li>
+  <li>使用 <code>in</code> 判斷：<code>pet1</code> 的種類是否在 <code>["dog", "cat", "rabbit"]</code> 的可照顧清單中？</li>
+</ul>
+
+<p><strong>預期輸出：</strong></p>
+
+<pre>
+pet1 和 pet2 是同一隻嗎？ False
+pet1 和 pet3 是同一隻嗎？ True
+Buddy 的種類 dog 可接受照顧！
+</pre>
+
 <div class="answer">
   <pre class="line-numbers"><code class="language-python">class Pet:
     def __init__(self, name, species):
@@ -176,13 +192,14 @@ pet1 = Pet("Buddy", "dog")
 pet2 = Pet("Buddy", "dog")
 pet3 = pet1
 
-print(pet1 is pet2)
-print(pet1 is pet3)
+print("pet1 和 pet2 是同一隻嗎？", pet1 is pet2)
+print("pet1 和 pet3 是同一隻嗎？", pet1 is pet3)
 
-allowed_species = ["dog", "cat", "rabbit"]
-if pet1.species in allowed_species:
+allowed = ["dog", "cat", "rabbit"]
+if pet1.species in allowed:
     print(f"{pet1.name} 的種類 {pet1.species} 可接受照顧！")</code></pre>
 </div>
+
 
 <hr/>
 
