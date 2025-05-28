@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>問題導向練習題組 3</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+	<script type="text/javascript" src="js/script.js"></script>
+	<!-- Prism.js CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css">
+    <!-- Prism.js Line Numbers CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
+    <!-- Prism.js Syntax Highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <!-- Prism.js Line Numbers Plugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+	<script>
+		document.addEventListener("DOMContentLoaded", (event) => {
+			includeHTML(highlightItem);		
+			document.getElementById("toggleNav").addEventListener("click", navClick);		
+			enableAnswerRevealer();
+		});
+	</script>	
+</head>
+<body>
+	<div class="d-flex">
+		<!-- Floating Button -->
+		<button id="toggleNav" class="btn btn-primary">&#8212;</button>
+        <nav id="sidebar" class="bg-light border-end" style="display: block;">
+            <div>
+				<div w3-include-html="navigation.html"></div>
+            </div>
+        </nav>
+        <main class="flex-grow-1">
+			<header>
+				<h1>問題導向練習題組 2</h1>				
+			</header>
+
+			<section>
+				<h2>學習導覽</h2>
+				<p>本節提供多個問題導向的練習題，旨在幫助你強化 Python 的基礎概念，挑戰不同情境的程式設計問題。</p>			
+			</section>
+					
+			<section>
+
+<h3 class="caption">挑戰題 1：神祕訊息解碼器 🕵️‍♂️ <span class="icon">🛈</span></h3>
+
+<p>你收到了一份神祕檔案 <code>secrets.txt</code>，內容如下，每一行都是一段被雜訊干擾的訊息：</p>
+
+<pre>
+Txxhxxixx xxisxx xxaxxsxxexxcrxxexxtxx
+Pxxyxxtxxhxxoxxnxx xxixxsxx xxfxuxnxx!
+Cxxoxxdxexx xxixxsxx pxxoxxwxexxrfxuxlxx.
+</pre>
+
+<p>但你注意到：每三個字元中，第 1 個字元才是真正的內容，其餘是雜訊！</p>
+
+<p>請你寫一段 Python 程式，讀取檔案後，解碼每一行的訊息，並印出以下內容：</p>
+
+<pre>
+This is a secret
+Python is fun!
+Code is powerful.
+</pre>
+
+<p><strong>提示：</strong>使用 <code>字串切片</code> 與 <code>檔案操作</code> 來完成。</p>
+
+<div class="answer">
+  <pre class="line-numbers"><code class="language-python">with open("secrets.txt", "r", encoding="utf-8") as f:
+    for line in f:
+        clean = line.strip()[::3]
+        print(clean)</code></pre>
+</div>
+
+
+
+		
+			</section>
+
+		</main>
+    </div>			
+</body>
+</html>
