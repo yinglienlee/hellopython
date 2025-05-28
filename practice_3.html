@@ -186,38 +186,96 @@ if pet1.species in allowed_species:
 </div>
 
 <hr/>
-<h3 class="caption">挑戰題 7（★★☆）：姓與名反轉 📛 <span class="icon">🛈</span></h3>
-<p><strong>涵蓋主題：</strong>字串方法，多重指定</p>
-<p>將 '姓, 名' 格式的資料轉換為 '名 姓' 格式並正確大小寫。</p>
-<pre>"wAtSoN, eMiLy"</pre>
-<p>請你：</p>
-<ul><li>使用 <code>split()</code> 拆分</li>
-<li>使用 <code>capitalize()</code> 處理格式</li>
-<li>組合為 '名 姓' 輸出</li></ul>
-<pre>Emily Watson</pre>
-<div class="answer">
-  <pre class="line-numbers"><code class="language-python">raw = "wAtSoN, eMiLy"
-last, first = raw.split(", ")
-print(f"{first.capitalize()} {last.capitalize()}")</code></pre>
-</div>
 
+<h3 class="caption">挑戰題 7（★★☆）：怪名字清洗器 🧼 <span class="icon">🛈</span></h3>
+
+<p><strong>涵蓋主題：</strong>字串方法，條件判斷，函式封裝</p>
+
+<p>你接手一份包含奇怪名字的名單，例如：</p>
+<pre>
+@aMy!
+#B_ob23
+ch@rLie##
+</pre>
+
+<p>請撰寫一個函式 <code>clean_name()</code>，具備以下功能：</p>
+<ul>
+  <li>去除所有非英文字母的字元（只保留 a-z 和 A-Z）</li>
+  <li>將字首轉為大寫，其餘字母小寫（使用 <code>.capitalize()</code>）</li>
+  <li>若名字長度少於 2 或過長（超過 10 個字母），則回傳 <code>"Invalid"</code></li>
+</ul>
+
+<p>對以下清單進行處理並列印結果：</p>
+<pre>
+["@aMy!", "#B_ob23", "ch@rLie##", "x", "thisisaverylongname"]
+</pre>
+
+<pre>
+Amy
+Bob
+Charlie
+Invalid
+Invalid
+</pre>
+
+<div class="answer">
+  <pre class="line-numbers"><code class="language-python">def clean_name(raw):
+    clean = "".join([c for c in raw if c.isalpha()])
+    if len(clean) < 2 or len(clean) > 10:
+        return "Invalid"
+    return clean.capitalize()
+
+names = ["@aMy!", "#B_ob23", "ch@rLie##", "x", "thisisaverylongname"]
+
+for name in names:
+    print(clean_name(name))</code></pre>
+</div>
+				
+				
 <hr/>
-<h3 class="caption">挑戰題 8（★★☆）：帳號驗證器 ✅ <span class="icon">🛈</span></h3>
-<p><strong>涵蓋主題：</strong>字串方法，邏輯與比較</p>
-<p>輸入一個帳號，若帳號長度大於等於 6 且不能包含空格，則為有效。</p>
-<pre></pre>
-<p>請你：</p>
-<ul><li>使用 <code>len()</code> 和 <code>in</code> 搭配邏輯運算</li>
-<li>輸出帳號是否有效</li></ul>
-<pre>帳號有效！</pre>
-<div class="answer">
-  <pre class="line-numbers"><code class="language-python">username = "my_user"
 
-if len(username) &gt;= 6 and " " not in username:
-    print("帳號有效！")
-else:
-    print("帳號無效！")</code></pre>
+<h3 class="caption">挑戰題 8（★★☆）：帳號健檢系統 🛡️ <span class="icon">🛈</span></h3>
+
+<p><strong>涵蓋主題：</strong>字串方法，邏輯與比較，函式封裝</p>
+
+<p>設計一個帳號健檢工具，幫助使用者確認帳號是否符合格式標準。</p>
+
+<pre>usernames = ['goodUser1', 'no space', 'short', 'toolongusername123', 'Valid_User']</pre>
+
+<p>請你：</p>
+<ul>
+  <li>撰寫函式 <code>is_valid_username()</code>，條件如下：</li>
+  <li>1. 長度需介於 6～15 字元之間</li>
+  <li>2. 不可包含空格或特殊符號（僅可使用英文字母與數字）</li>
+  <li>3. 必須至少含有一個英文字母</li>
+  <li>使用迴圈印出每個帳號是否有效</li>
+</ul>
+
+<pre>
+goodUser1 ✅
+no space ❌
+short ❌
+toolongusername123 ❌
+Valid_User ❌
+</pre>
+
+<div class="answer">
+  <pre class="line-numbers"><code class="language-python">def is_valid_username(username):
+    if not (6 <= len(username) <= 15):
+        return False
+    if not username.isalnum():
+        return False
+    if not any(c.isalpha() for c in username):
+        return False
+    return True
+
+usernames = ['goodUser1', 'no space', 'short', 'toolongusername123', 'Valid_User']
+
+for name in usernames:
+    status = "✅" if is_valid_username(name) else "❌"
+    print(f"{name} {status}")</code></pre>
 </div>
+
 
 <hr/>
 <h3 class="caption">挑戰題 9（★★☆）：訂單分類器 🛍️ <span class="icon">🛈</span></h3>
@@ -242,19 +300,42 @@ print(result)</code></pre>
 </div>
 
 <hr/>
-<h3 class="caption">挑戰題 10（★★☆）：簡易排行榜 🏆 <span class="icon">🛈</span></h3>
-<p><strong>涵蓋主題：</strong>串列切片，字典容器</p>
-<p>給定一組選手得分，請列出前三名的名字。</p>
-<pre>scores = {'Amy': 90, 'Bob': 85, 'Charlie': 95, 'Diana': 88}</pre>
+
+<h3 class="caption">挑戰題 10（★★☆）：排行榜產生器 🏆 <span class="icon">🛈</span></h3>
+
+<p><strong>涵蓋主題：</strong>字典容器，lambda 函式，排序與切片，格式化輸出</p>
+
+<p>你有一份選手與得分的對照資料如下：</p>
+
+<pre>
+{'Amy': 90, 'Bob': 85, 'Charlie': 95, 'Diana': 88}
+</pre>
+
 <p>請你：</p>
-<ul><li>將字典依照成績排序</li>
-<li>使用切片取出前三名</li></ul>
-<pre>['Charlie', 'Amy', 'Diana']</pre>
+<ul>
+  <li>依得分由高到低排序選手</li>
+  <li>取出前 3 名，並輸出格式如下：</li>
+</ul>
+
+<pre>
+🥇 Charlie - 95
+🥈 Amy - 90
+🥉 Diana - 88
+</pre>
+
+<p>提示：使用 <code>sorted()</code> 搭配 <code>lambda</code> 排序，搭配 <code>enumerate()</code> 列出前三名。</p>
+
 <div class="answer">
   <pre class="line-numbers"><code class="language-python">scores = {'Amy': 90, 'Bob': 85, 'Charlie': 95, 'Diana': 88}
-top3 = sorted(scores, key=lambda x: scores[x], reverse=True)[:3]
-print(top3)</code></pre>
+
+sorted_scores = sorted(scores.items(), key=lambda x: x[1], reverse=True)
+medals = ["🥇", "🥈", "🥉"]
+
+for i, (name, score) in enumerate(sorted_scores[:3]):
+    print(f"{medals[i]} {name} - {score}")</code></pre>
 </div>
+
+				
 
 <hr/>
 <h3 class="caption">挑戰題 11（★★☆）：錯誤筆記過濾器 ❌ <span class="icon">🛈</span></h3>
@@ -274,25 +355,41 @@ Critical error in system</pre>
 </div>
 
 <hr/>
-<h3 class="caption">挑戰題 12（★★☆）：商品資訊讀取 🧾 <span class="icon">🛈</span></h3>
-<p><strong>涵蓋主題：</strong>檔案操作，打包與解包</p>
-<p>從檔案中讀取商品資訊，並拆分為名稱、數量與價格。</p>
-<pre>apple,10,15
-banana,5,10</pre>
-<p>請你：</p>
-<ul><li>讀取每行後使用 <code>split()</code></li>
-<li>使用多重指定將資訊指派給對應變數</li>
-<li>印出格式化資訊</li></ul>
-<pre>apple 有 10 個，單價為 15 元
-banana 有 5 個，單價為 10 元</pre>
-<div class="answer">
-  <pre class="line-numbers"><code class="language-python">lines = ["apple,10,15", "banana,5,10"]
 
-for line in lines:
-    name, qty, price = line.split(",")
-    print(f"{name} 有 {qty} 個，單價為 {price} 元")</code></pre>
+<h3 class="caption">挑戰題 12（★★☆）：商品資訊讀取 🧾 <span class="icon">🛈</span></h3>
+
+<p><strong>涵蓋主題：</strong>檔案操作，打包與解包</p>
+
+<p>你有一份檔案 <code>products.txt</code>，每行儲存一筆商品資訊，格式如下：</p>
+
+<pre>
+apple,10,15
+banana,5,10
+grape,12,8
+</pre>
+
+<p>請你：</p>
+<ul>
+  <li>使用 <code>with open()</code> 讀取檔案內容</li>
+  <li>使用 <code>split()</code> 拆分每行</li>
+  <li>使用多重指定（unpacking）將資料指派給 <code>name</code>, <code>qty</code>, <code>price</code></li>
+  <li>格式化輸出每筆商品的說明句：</li>
+</ul>
+
+<pre>
+apple 有 10 個，單價為 15 元
+banana 有 5 個，單價為 10 元
+grape 有 12 個，單價為 8 元
+</pre>
+
+<div class="answer">
+  <pre class="line-numbers"><code class="language-python">with open("products.txt", "r", encoding="utf-8") as f:
+    for line in f:
+        name, qty, price = line.strip().split(",")
+        print(f"{name} 有 {qty} 個，單價為 {price} 元")</code></pre>
 </div>
 
+				
 <hr/>
 <h3 class="caption">挑戰題 13（★★★）：類別化顧客名單 🧑‍💼 <span class="icon">🛈</span></h3>
 <p><strong>涵蓋主題：</strong>類別與物件，字串處理</p>
@@ -320,71 +417,147 @@ for line in data:
 </div>
 
 <hr/>
-<h3 class="caption">挑戰題 14（★★★）：小明的數據包 📦 <span class="icon">🛈</span></h3>
-<p><strong>涵蓋主題：</strong>打包與解包，資料結構建構式</p>
-<p>將數組拆分成變數、轉為集合與字典結構，再重新打包。</p>
-<pre>['apple', 'banana', 'cherry']</pre>
-<p>請你：</p>
-<ul><li>使用打包與解包取得第一項與其餘</li>
-<li>轉為集合去除重複，建立鍵為名稱、值為字母數的字典</li>
-<li>重新打包為 <code>(名稱, 長度)</code> 的元組列表</li></ul>
-<pre>[('apple', 5), ('banana', 6), ('cherry', 6)]</pre>
+<h3 class="caption">挑戰題 14（★★★）：每日銷售報表生成器 📊 <span class="icon">🛈</span></h3>
+
+<p><strong>涵蓋主題：</strong>打包與解包，資料結構建構式，格式化輸出</p>
+
+<p>你收到來自某日銷售系統的原始資料，格式如下：</p>
+
+<pre>
+sales = [
+    ("apple", 3, 20),
+    ("banana", 5, 12),
+    ("grape", 10, 8)
+]
+</pre>
+
+<p>每筆紀錄為：<code>(品項, 數量, 單價)</code>。請你撰寫程式：</p>
+<ul>
+  <li>使用 <code>for</code> 迴圈與解包技巧處理每筆資料</li>
+  <li>計算每項總金額（數量 × 單價）</li>
+  <li>格式化輸出每筆明細</li>
+  <li>最後加總總銷售金額並輸出</li>
+</ul>
+
+<pre>
+apple：3 個 × 20 元 = 60 元
+banana：5 個 × 12 元 = 60 元
+grape：10 個 × 8 元 = 80 元
+總銷售金額：200 元
+</pre>
+
 <div class="answer">
-  <pre class="line-numbers"><code class="language-python">fruits = ['apple', 'banana', 'cherry']
-first, *rest = fruits
+  <pre class="line-numbers"><code class="language-python">sales = [
+    ("apple", 3, 20),
+    ("banana", 5, 12),
+    ("grape", 10, 8)
+]
 
-fruit_set = set(rest)
-fruit_dict = {f: len(f) for f in fruit_set}
+total = 0
+for name, qty, price in sales:
+    subtotal = qty * price
+    print(f"{name}：{qty} 個 × {price} 元 = {subtotal} 元")
+    total += subtotal
 
-result = [(k, v) for k, v in fruit_dict.items()]
-print(result)</code></pre>
+print(f"總銷售金額：{total} 元")</code></pre>
 </div>
 
-<hr/>
-<h3 class="caption">挑戰題 15（★★★）：成員追蹤器 🔎 <span class="icon">🛈</span></h3>
-<p><strong>涵蓋主題：</strong>成員運算符號，函式與容器</p>
-<p>追蹤一群會員的登入狀態，回傳是否已登入。</p>
-<pre>online = ['Amy', 'Bob', 'Dora']</pre>
-<p>請你：</p>
-<ul><li>定義函式 <code>check_status()</code></li>
-<li>使用 <code>in</code> 判斷使用者是否在線</li>
-<li>使用迴圈測試多個使用者</li></ul>
-<pre>Amy is online
-Leo is offline</pre>
-<div class="answer">
-  <pre class="line-numbers"><code class="language-python">def check_status(name, online_users):
-    if name in online_users:
-        print(f"{name} is online")
-    else:
-        print(f"{name} is offline")
 
-online = ['Amy', 'Bob', 'Dora']
-check_status("Amy", online)
-check_status("Leo", online)</code></pre>
+<hr/>
+
+<h3 class="caption">挑戰題 15（★★★）：登入追蹤與報告產生器 🔎 <span class="icon">🛈</span></h3>
+
+<p><strong>涵蓋主題：</strong>成員運算符號，字典與清單處理，條件統計</p>
+
+<p>公司有一份全體員工名單與當日登入的員工清單如下：</p>
+
+<pre>
+all_users = ["Amy", "Bob", "Charlie", "Diana", "Ethan"]
+logged_in_users = ["Bob", "Charlie", "Ethan"]
+</pre>
+
+<p>請你撰寫程式：</p>
+<ul>
+  <li>使用迴圈與 <code>in</code> 運算子檢查哪些人有登入、哪些沒登入</li>
+  <li>使用字典統整登入狀態，每位員工對應 True 或 False</li>
+  <li>印出每位員工的登入狀態</li>
+  <li>統計登入總人數與未登入總人數</li>
+</ul>
+
+<pre>
+Bob: ✅
+Charlie: ✅
+Ethan: ✅
+Amy: ❌
+Diana: ❌
+登入人數：3
+未登入人數：2
+</pre>
+
+<div class="answer">
+  <pre class="line-numbers"><code class="language-python">all_users = ["Amy", "Bob", "Charlie", "Diana", "Ethan"]
+logged_in_users = ["Bob", "Charlie", "Ethan"]
+
+status_report = {}
+
+for user in all_users:
+    status_report[user] = user in logged_in_users
+
+for name, status in status_report.items():
+    mark = "✅" if status else "❌"
+    print(f"{name}: {mark}")
+
+total_logged_in = sum(status_report.values())
+print(f"登入人數：{total_logged_in}")
+print(f"未登入人數：{len(all_users) - total_logged_in}")</code></pre>
 </div>
 
+				
+
 <hr/>
-<h3 class="caption">挑戰題 16（★★★）：匯入模組魔法師 ✨ <span class="icon">🛈</span></h3>
-<p><strong>涵蓋主題：</strong>匯入模組，__name__ 的用途</p>
-<p>模擬兩個模組互相呼叫，並透過 <code>__name__</code> 控制執行行為。</p>
-<pre>模擬 main.py 與 utils.py</pre>
-<p>請你：</p>
-<ul><li>在 <code>utils.py</code> 中定義 <code>greet()</code> 並用 <code>if __name__ == '__main__'</code> 測試</li>
-<li>從 <code>main.py</code> 匯入 <code>utils</code> 並呼叫 <code>greet()</code></li></ul>
-<pre>main.py 呼叫 greet
-utils.py 中的主函式只在直接執行時出現</pre>
+<h3 class="caption">挑戰題 16（★★★）：模組化工具與主控測試整合 ✨ <span class="icon">🛈</span></h3>
+
+<p><strong>涵蓋主題：</strong>模組匯入，__name__ 控制，函式封裝與測試</p>
+
+<p>請你建立一個檔案 <code>math_utils.py</code>，並完成以下要求：</p>
+<ul>
+  <li>定義兩個函式：<code>add(a, b)</code>、<code>multiply(a, b)</code></li>
+  <li>使用 <code>if __name__ == "__main__"</code> 包裝測試程式：自行印出加法與乘法結果</li>
+</ul>
+
+<p>然後再建立 <code>main.py</code>：</p>
+<ul>
+  <li>匯入 <code>math_utils</code>，呼叫 <code>add()</code> 與 <code>multiply()</code> 並印出結果</li>
+</ul>
+
+<p><strong>執行說明：</strong></p>
+<ul>
+  <li>直接執行 <code>math_utils.py</code>：印出測試結果</li>
+  <li>執行 <code>main.py</code>：只執行主程式邏輯，模組不會印出測試內容</li>
+</ul>
+
 <div class="answer">
-  <pre class="line-numbers"><code class="language-python"># utils.py
-def greet():
-    print("Hello from utils!")
+  <pre class="line-numbers"><code class="language-python"># math_utils.py
+def add(a, b):
+    return a + b
+
+def multiply(a, b):
+    return a * b
 
 if __name__ == "__main__":
-    print("utils.py is running directly")
+    print("測試加法：", add(2, 3))
+    print("測試乘法：", multiply(4, 5))
 
 # main.py
-import utils
-utils.greet()</code></pre>
+import math_utils
+
+result1 = math_utils.add(10, 5)
+result2 = math_utils.multiply(3, 7)
+
+print("主程式呼叫加法：", result1)
+print("主程式呼叫乘法：", result2)</code></pre>
 </div>
+
 
 				
 				
