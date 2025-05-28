@@ -103,17 +103,16 @@ print("隔日氣溫：", temperatures[::2])</code></pre>
 <pre>Lionel Messi
 Taylor Swift</pre>
 <div class="answer">
-  <pre class="line-numbers"><code class="language-python">def fix_name(record):
-    last, first = record.split(", ")
-    return f"{first.capitalize()} {last.capitalize()}"
-
-names = [
+  <pre class="line-numbers"><code class="language-python">names = [
     "lIOnel, mEssi",
     "taYLoR, swIFt"
 ]
 
-for name in names:
-    print(fix_name(name))</code></pre>
+last, first = names[0].split(", ")
+print(f"{first.capitalize()} {last.capitalize()}")
+last, first = names[1].split(", ")
+print(f"{first.capitalize()} {last.capitalize()}")
+</code></pre>
 </div>
 
 <hr/>
