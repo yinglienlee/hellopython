@@ -295,22 +295,41 @@ for name in usernames:
 
 <hr/>
 <h3 class="caption">挑戰題 9（★★☆）：訂單分類器 🛍️ <span class="icon">🛈</span></h3>
+
 <p><strong>涵蓋主題：</strong>字典建構式，成員運算符號</p>
-<p>根據使用者輸入的產品類型分類進入字典，僅處理已知類型。</p>
-<pre></pre>
-<p>請你：</p>
-<ul><li>定義已知類型列表</li>
-<li>將符合類型的訂單加進對應類別的清單中</li></ul>
-<pre>{'drink': ['tea'], 'food': ['sandwich']}</pre>
+
+<p>你正在開發一個訂單分類系統。訂單由顧客輸入產品名稱，例如 <code>'tea'</code>、<code>'sandwich'</code>。</p>
+
+<p>你已經定義好產品的類別對應如下：</p>
+
+<pre>
+types = {
+    'drink': ['tea', 'coffee'],
+    'food': ['sandwich', 'cake']
+}
+</pre>
+
+<p>請你完成程式：</p>
+<ul>
+  <li>定義輸入清單 <code>orders = ['tea', 'sandwich', 'phone']</code></li>
+  <li>建立分類結果字典 <code>result</code>，初始為空清單</li>
+  <li>只處理在已知類別清單中的項目（忽略未知項目，如 'phone'）</li>
+  <li>最後輸出分類結果，如：<code>{'drink': ['tea'], 'food': ['sandwich']}</code></li>
+</ul>
+
 <div class="answer">
   <pre class="line-numbers"><code class="language-python">orders = ['tea', 'sandwich', 'phone']
-types = {'drink': ['tea', 'coffee'], 'food': ['sandwich', 'cake']}
+types = {
+    'drink': ['tea', 'coffee'],
+    'food': ['sandwich', 'cake']
+}
 
 result = {k: [] for k in types}
+
 for item in orders:
-    for k, v in types.items():
-        if item in v:
-            result[k].append(item)
+    for category, items in types.items():
+        if item in items:
+            result[category].append(item)
 
 print(result)</code></pre>
 </div>
@@ -354,9 +373,9 @@ for i, (name, score) in enumerate(sorted_scores[:3]):
 				
 
 <hr/>
-<h3 class="caption">挑戰題 11（★★☆）：錯誤筆記過濾器 ❌ <span class="icon">🛈</span></h3>
+<h3 class="caption">挑戰題 11（★★☆）：錯誤紀錄過濾器 ❌ <span class="icon">🛈</span></h3>
 <p><strong>涵蓋主題：</strong>檔案操作，字串方法</p>
-<p>你需要過濾一份筆記中的錯誤記錄，這些行包含關鍵字 'error'。</p>
+<p>你需要過濾一份紀錄檔中的錯誤記錄，這些行包含關鍵字 'error'。</p>
 <pre>log.txt 檔案中包含多行記錄</pre>
 <p>請你：</p>
 <ul><li>逐行讀取檔案</li>
