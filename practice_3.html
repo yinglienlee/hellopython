@@ -46,133 +46,36 @@
 					
 			<section>
 
-<h3 class="caption">挑戰題 1：神祕訊息解碼器 🕵️‍♂️ <span class="icon">🛈</span></h3>
-
-<p>你收到了一份神祕檔案 <code>secrets.txt</code>，內容如下，每一行都是一段被雜訊干擾的訊息：</p>
-
-<pre>
-Txxhxxixx xxisxx xxaxxsxxexxcrxxexxtxx
-Pxxyxxtxxhxxoxxnxx xxixxsxx xxfxuxnxx!
-Cxxoxxdxexx xxixxsxx pxxoxxwxexxrfxuxlxx.
-</pre>
-
-<p>但你注意到：每三個字元中，第 1 個字元才是真正的內容，其餘是雜訊！</p>
-
-<p>請你寫一段 Python 程式，讀取檔案後，解碼每一行的訊息，並印出以下內容：</p>
-
-<pre>
-This is a secret
-Python is fun!
-Code is powerful.
-</pre>
-
-<p><strong>提示：</strong>使用 <code>字串切片</code> 與 <code>檔案操作</code> 來完成。</p>
-
+<h3 class="caption">挑戰題 1（★☆☆）：點餐小幫手 🧋 <span class="icon">🛈</span></h3>
+<p><strong>涵蓋主題：</strong>指定、多重指定、打包與解包，字串方法</p>
+<p>你點了一杯「珍珠奶茶 大杯 微糖 去冰」，系統會用一段文字紀錄這筆訂單如下：</p>
+<pre>"珍珠奶茶, 大杯, 微糖, 去冰"</pre>
+<p>請你：</p>
+<ul><li>使用 <code>split()</code> 方法把這段文字拆成四個變數</li>
+<li>用「多重指定（unpacking）」一次指派給四個變數：<code>drink</code>, <code>size</code>, <code>sugar</code>, <code>ice</code></li>
+<li>最後印出格式化的訂單確認訊息：</li></ul>
+<pre>您點的是：大杯珍珠奶茶（微糖／去冰）</pre>
 <div class="answer">
-  <pre class="line-numbers"><code class="language-python">with open("secrets.txt", "r", encoding="utf-8") as f:
-    for line in f:
-        clean = line.strip()[::3]
-        print(clean)</code></pre>
+  <pre class="line-numbers"><code class="language-python">order = "珍珠奶茶, 大杯, 微糖, 去冰"
+drink, size, sugar, ice = order.split(", ")
+
+print(f"您點的是：{size}{drink}（{sugar}／{ice}）")</code></pre>
 </div>
 
-<h3 class="caption">挑戰題 2：寵物辨識系統 🐶🐱 <span class="icon">🛈</span></h3>
-
-<p>你正在設計一套「寵物辨識系統」，幫助飼主確認兩隻動物是不是同一隻、以及牠們是不是同類。</p>
-
-<p>請你完成一個 <code>Pet</code> 類別，每個寵物有名字（<code>name</code>）和種類（<code>species</code>，例如 "dog" 或 "cat"）。接著建立幾個寵物物件，並使用：</p>
-<ul>
-  <li><code>is</code> 運算子來判斷是否是「同一隻寵物」</li>
-  <li><code>in</code> 運算子來判斷某種類是否在允許照顧的清單中</li>
-</ul>
-
-<p>模擬下列情境：</p>
-<ol>
-  <li>判斷 pet1 和 pet2 是否為同一物件</li>
-  <li>確認 pet1 的種類是否在照顧清單 <code>["dog", "cat", "rabbit"]</code> 中</li>
-</ol>
-
-<p><strong>提示：</strong>使用 <code>is</code> 判斷物件身分，<code>in</code> 判斷成員關係。</p>
-
-<div class="answer">
-  <pre class="line-numbers"><code class="language-python">class Pet:
-    def __init__(self, name, species):
-        self.name = name
-        self.species = species
-
-pet1 = Pet("Buddy", "dog")
-pet2 = Pet("Buddy", "dog")
-pet3 = pet1  # 指向同一物件
-
-# 身分比較
-print(pet1 is pet2)  # False，雖然資料一樣，但是不同物件
-print(pet1 is pet3)  # True，同一個物件參考
-
-# 成員測試
-allowed_species = ["dog", "cat", "rabbit"]
-if pet1.species in allowed_species:
-    print(f"{pet1.name} 的種類 {pet1.species} 可接受照顧！")
-else:
-    print(f"{pet1.name} 的種類 {pet1.species} 不在可照顧清單中。")
-</code></pre>
-</div>
-
-<h3 class="caption">挑戰題 3：姓名格式大翻修 ✂️ <span class="icon">🛈</span></h3>
-
-<p>你拿到一份輸入名單，裡面都是使用者亂填的名字資料，例如：</p>
-<pre>
-"lIOnel, mEssi"
-"taYLoR, swIFt"
-"kuRo, miKO"
-</pre>
-
-<p>每一筆都是「姓, 名」格式，大小寫混亂。請你設計一段程式碼，</p>
-<ul>
-  <li>將姓與名使用 <code>split()</code> 拆開，並使用 **多重指定** 方式指派給 <code>last</code> 和 <code>first</code></li>
-  <li>把每個字母都轉為「首字大寫」，也就是 <code>capitalize()</code></li>
-  <li>重新組合為「名 姓」格式並印出</li>
-</ul>
-
-<p><strong>加分挑戰：</strong>使用函式封裝轉換邏輯，並處理多筆名單！</p>
-
-<div class="answer">
-  <pre class="line-numbers"><code class="language-python">def fix_name(record):
-    last, first = record.split(", ")
-    return f"{first.capitalize()} {last.capitalize()}"
-
-names = [
-    "lIOnel, mEssi",
-    "taYLoR, swIFt",
-    "kuRo, miKO"
-]
-
-for name in names:
-    print(fix_name(name))</code></pre>
-</div>
-
-				
-<h3 class="caption">挑戰題 4：氣象小幫手 ☀️🌧️ <span class="icon">🛈</span></h3>
-
+<hr/>
+<h3 class="caption">挑戰題 2（★☆☆）：氣象小幫手 ☀️🌧️ <span class="icon">🛈</span></h3>
+<p><strong>涵蓋主題：</strong>四大資料結構建構式，切片</p>
 <p>你正在開發一個氣象小程式，用來協助使用者查看最近一週的高溫資料。</p>
-
-<p>已知高溫資料如下，請完成下列任務：</p>
-
-<pre>
-[30, 32, 31, 33, 34, 29, 28]
-</pre>
-
-<ul>
-  <li>使用 <code>list()</code> 建構這份資料</li>
-  <li>使用切片技巧取得：
-    <ul>
-      <li>前三天的氣溫</li>
-      <li>最後三天的氣溫</li>
-      <li>間隔一天的氣溫（從第 1 天開始，每隔一天擷取一次）</li>
-    </ul>
-  </li>
-</ul>
-
-<p><strong>提示：</strong>這題重點在於資料建構與切片技巧的靈活運用。</p>
-
+<pre>[30, 32, 31, 33, 34, 29, 28]</pre>
+<p>請你：</p>
+<ul><li>使用 <code>list()</code> 建構這份資料</li>
+<li>使用切片技巧取得：</li>
+<li>前三天的氣溫</li>
+<li>最後三天的氣溫</li>
+<li>間隔一天的氣溫（從第 1 天開始，每隔一天擷取一次）</li></ul>
+<pre>前三天氣溫： [30, 32, 31]
+最後三天氣溫： [34, 29, 28]
+隔日氣溫： [30, 31, 34, 28]</pre>
 <div class="answer">
   <pre class="line-numbers"><code class="language-python">temperatures = list([30, 32, 31, 33, 34, 29, 28])
 
@@ -186,7 +89,305 @@ print("最後三天氣溫：", temperatures[-3:])
 print("隔日氣溫：", temperatures[::2])</code></pre>
 </div>
 
-		
+<hr/>
+<h3 class="caption">挑戰題 3（★☆☆）：名字解碼器 ✂️ <span class="icon">🛈</span></h3>
+<p><strong>涵蓋主題：</strong>字串方法與函式，打包與解包</p>
+<p>你拿到一份輸入名單，都是大小寫混亂的名字，請你將其正確格式化為「名 姓」。</p>
+<pre>"lIOnel, mEssi"
+"taYLoR, swIFt"</pre>
+<p>請你：</p>
+<ul><li>使用 <code>split()</code> 拆開姓與名</li>
+<li>使用多重指定分別指派給 <code>last</code> 和 <code>first</code></li>
+<li>使用 <code>capitalize()</code> 標準化每個字元</li>
+<li>重新輸出為「名 姓」格式</li></ul>
+<pre>Lionel Messi
+Taylor Swift</pre>
+<div class="answer">
+  <pre class="line-numbers"><code class="language-python">def fix_name(record):
+    last, first = record.split(", ")
+    return f"{first.capitalize()} {last.capitalize()}"
+
+names = [
+    "lIOnel, mEssi",
+    "taYLoR, swIFt"
+]
+
+for name in names:
+    print(fix_name(name))</code></pre>
+</div>
+
+<hr/>
+<h3 class="caption">挑戰題 4（★☆☆）：字串切片練習 🧵 <span class="icon">🛈</span></h3>
+<p><strong>涵蓋主題：</strong>切片，字串方法</p>
+<p>給定一段字串，請使用切片操作取得特定部分。</p>
+<pre>"Python is powerful!"</pre>
+<p>請你：</p>
+<ul><li>取出前 6 個字元</li>
+<li>取出最後 9 個字元</li>
+<li>每隔一個字元擷取一次</li></ul>
+<pre>Python
+powerful!
+Pto spoefl</pre>
+<div class="answer">
+  <pre class="line-numbers"><code class="language-python">text = "Python is powerful!"
+
+print(text[:6])
+print(text[-9:])
+print(text[::2])</code></pre>
+</div>
+
+<hr/>
+<h3 class="caption">挑戰題 5（★★☆）：神祕訊息解碼器 🕵️‍♂️ <span class="icon">🛈</span></h3>
+<p><strong>涵蓋主題：</strong>檔案操作，切片</p>
+<p>你收到一份檔案，每三個字元才有一個真正的訊息字元。請讀取檔案並還原訊息。</p>
+<pre>Txxhxxixx xxisxx xxaxxsxxexxcrxxexxtxx
+Pxxyxxtxxhxxoxxnxx xxixxsxx xxfxuxnxx!</pre>
+<p>請你：</p>
+<ul><li>使用 <code>with open()</code> 開啟 <code>secrets.txt</code></li>
+<li>移除換行並使用 <code>[::3]</code> 邏輯進行解碼</li>
+<li>列出所有解碼後的訊息</li></ul>
+<pre>This is a secret
+Python is fun!</pre>
+<div class="answer">
+  <pre class="line-numbers"><code class="language-python">with open("secrets.txt", "r", encoding="utf-8") as f:
+    for line in f:
+        clean = line.strip()[::3]
+        print(clean)</code></pre>
+</div>
+
+<hr/>
+<h3 class="caption">挑戰題 6（★★☆）：寵物辨識系統 🐶🐱 <span class="icon">🛈</span></h3>
+<p><strong>涵蓋主題：</strong>類別與物件，身分與成員運算符號</p>
+<p>你需要判斷兩隻寵物是否為同一個，以及牠們是否屬於照顧範圍。</p>
+<pre></pre>
+<p>請你：</p>
+<ul><li>定義 <code>Pet</code> 類別，含 <code>name</code> 和 <code>species</code></li>
+<li>建立多隻寵物物件並使用 <code>is</code> 判斷是否為同一物件</li>
+<li>使用 <code>in</code> 判斷 <code>species</code> 是否在可接受名單中</li></ul>
+<pre>False
+True
+Buddy 的種類 dog 可接受照顧！</pre>
+<div class="answer">
+  <pre class="line-numbers"><code class="language-python">class Pet:
+    def __init__(self, name, species):
+        self.name = name
+        self.species = species
+
+pet1 = Pet("Buddy", "dog")
+pet2 = Pet("Buddy", "dog")
+pet3 = pet1
+
+print(pet1 is pet2)
+print(pet1 is pet3)
+
+allowed_species = ["dog", "cat", "rabbit"]
+if pet1.species in allowed_species:
+    print(f"{pet1.name} 的種類 {pet1.species} 可接受照顧！")</code></pre>
+</div>
+
+<hr/>
+<h3 class="caption">挑戰題 7（★★☆）：姓與名反轉 📛 <span class="icon">🛈</span></h3>
+<p><strong>涵蓋主題：</strong>字串方法，多重指定</p>
+<p>將 '姓, 名' 格式的資料轉換為 '名 姓' 格式並正確大小寫。</p>
+<pre>"wAtSoN, eMiLy"</pre>
+<p>請你：</p>
+<ul><li>使用 <code>split()</code> 拆分</li>
+<li>使用 <code>capitalize()</code> 處理格式</li>
+<li>組合為 '名 姓' 輸出</li></ul>
+<pre>Emily Watson</pre>
+<div class="answer">
+  <pre class="line-numbers"><code class="language-python">raw = "wAtSoN, eMiLy"
+last, first = raw.split(", ")
+print(f"{first.capitalize()} {last.capitalize()}")</code></pre>
+</div>
+
+<hr/>
+<h3 class="caption">挑戰題 8（★★☆）：帳號驗證器 ✅ <span class="icon">🛈</span></h3>
+<p><strong>涵蓋主題：</strong>字串方法，邏輯與比較</p>
+<p>輸入一個帳號，若帳號長度大於等於 6 且不能包含空格，則為有效。</p>
+<pre></pre>
+<p>請你：</p>
+<ul><li>使用 <code>len()</code> 和 <code>in</code> 搭配邏輯運算</li>
+<li>輸出帳號是否有效</li></ul>
+<pre>帳號有效！</pre>
+<div class="answer">
+  <pre class="line-numbers"><code class="language-python">username = "my_user"
+
+if len(username) &gt;= 6 and " " not in username:
+    print("帳號有效！")
+else:
+    print("帳號無效！")</code></pre>
+</div>
+
+<hr/>
+<h3 class="caption">挑戰題 9（★★☆）：訂單分類器 🛍️ <span class="icon">🛈</span></h3>
+<p><strong>涵蓋主題：</strong>字典建構式，成員運算符號</p>
+<p>根據使用者輸入的產品類型分類進入字典，僅處理已知類型。</p>
+<pre></pre>
+<p>請你：</p>
+<ul><li>定義已知類型列表</li>
+<li>將符合類型的訂單加進對應類別的清單中</li></ul>
+<pre>{'drink': ['tea'], 'food': ['sandwich']}</pre>
+<div class="answer">
+  <pre class="line-numbers"><code class="language-python">orders = ['tea', 'sandwich', 'phone']
+types = {'drink': ['tea', 'coffee'], 'food': ['sandwich', 'cake']}
+
+result = {k: [] for k in types}
+for item in orders:
+    for k, v in types.items():
+        if item in v:
+            result[k].append(item)
+
+print(result)</code></pre>
+</div>
+
+<hr/>
+<h3 class="caption">挑戰題 10（★★☆）：簡易排行榜 🏆 <span class="icon">🛈</span></h3>
+<p><strong>涵蓋主題：</strong>串列切片，字典容器</p>
+<p>給定一組選手得分，請列出前三名的名字。</p>
+<pre>scores = {'Amy': 90, 'Bob': 85, 'Charlie': 95, 'Diana': 88}</pre>
+<p>請你：</p>
+<ul><li>將字典依照成績排序</li>
+<li>使用切片取出前三名</li></ul>
+<pre>['Charlie', 'Amy', 'Diana']</pre>
+<div class="answer">
+  <pre class="line-numbers"><code class="language-python">scores = {'Amy': 90, 'Bob': 85, 'Charlie': 95, 'Diana': 88}
+top3 = sorted(scores, key=lambda x: scores[x], reverse=True)[:3]
+print(top3)</code></pre>
+</div>
+
+<hr/>
+<h3 class="caption">挑戰題 11（★★☆）：錯誤筆記過濾器 ❌ <span class="icon">🛈</span></h3>
+<p><strong>涵蓋主題：</strong>檔案操作，字串方法</p>
+<p>你需要過濾一份筆記中的錯誤記錄，這些行包含關鍵字 'error'。</p>
+<pre>log.txt 檔案中包含多行記錄</pre>
+<p>請你：</p>
+<ul><li>逐行讀取檔案</li>
+<li>印出包含 'error' 的行</li></ul>
+<pre>Error found in line 3
+Critical error in system</pre>
+<div class="answer">
+  <pre class="line-numbers"><code class="language-python">with open("log.txt", "r", encoding="utf-8") as f:
+    for line in f:
+        if "error" in line.lower():
+            print(line.strip())</code></pre>
+</div>
+
+<hr/>
+<h3 class="caption">挑戰題 12（★★☆）：商品資訊讀取 🧾 <span class="icon">🛈</span></h3>
+<p><strong>涵蓋主題：</strong>檔案操作，打包與解包</p>
+<p>從檔案中讀取商品資訊，並拆分為名稱、數量與價格。</p>
+<pre>apple,10,15
+banana,5,10</pre>
+<p>請你：</p>
+<ul><li>讀取每行後使用 <code>split()</code></li>
+<li>使用多重指定將資訊指派給對應變數</li>
+<li>印出格式化資訊</li></ul>
+<pre>apple 有 10 個，單價為 15 元
+banana 有 5 個，單價為 10 元</pre>
+<div class="answer">
+  <pre class="line-numbers"><code class="language-python">lines = ["apple,10,15", "banana,5,10"]
+
+for line in lines:
+    name, qty, price = line.split(",")
+    print(f"{name} 有 {qty} 個，單價為 {price} 元")</code></pre>
+</div>
+
+<hr/>
+<h3 class="caption">挑戰題 13（★★★）：類別化顧客名單 🧑‍💼 <span class="icon">🛈</span></h3>
+<p><strong>涵蓋主題：</strong>類別與物件，字串處理</p>
+<p>將顧客資料存成類別，每筆資料包含姓名與會員等級，並印出格式化結果。</p>
+<pre>name,level
+Alice,Gold
+Bob,Silver</pre>
+<p>請你：</p>
+<ul><li>定義 <code>Customer</code> 類別並初始化姓名與等級</li>
+<li>讀取資料後建立物件</li>
+<li>格式化輸出顧客資訊</li></ul>
+<pre>Alice (Gold 會員)
+Bob (Silver 會員)</pre>
+<div class="answer">
+  <pre class="line-numbers"><code class="language-python">class Customer:
+    def __init__(self, name, level):
+        self.name = name
+        self.level = level
+
+data = ["Alice,Gold", "Bob,Silver"]
+for line in data:
+    name, level = line.split(",")
+    c = Customer(name, level)
+    print(f"{c.name} ({c.level} 會員)")</code></pre>
+</div>
+
+<hr/>
+<h3 class="caption">挑戰題 14（★★★）：小明的數據包 📦 <span class="icon">🛈</span></h3>
+<p><strong>涵蓋主題：</strong>打包與解包，資料結構建構式</p>
+<p>將數組拆分成變數、轉為集合與字典結構，再重新打包。</p>
+<pre>['apple', 'banana', 'cherry']</pre>
+<p>請你：</p>
+<ul><li>使用打包與解包取得第一項與其餘</li>
+<li>轉為集合去除重複，建立鍵為名稱、值為字母數的字典</li>
+<li>重新打包為 <code>(名稱, 長度)</code> 的元組列表</li></ul>
+<pre>[('apple', 5), ('banana', 6), ('cherry', 6)]</pre>
+<div class="answer">
+  <pre class="line-numbers"><code class="language-python">fruits = ['apple', 'banana', 'cherry']
+first, *rest = fruits
+
+fruit_set = set(rest)
+fruit_dict = {f: len(f) for f in fruit_set}
+
+result = [(k, v) for k, v in fruit_dict.items()]
+print(result)</code></pre>
+</div>
+
+<hr/>
+<h3 class="caption">挑戰題 15（★★★）：成員追蹤器 🔎 <span class="icon">🛈</span></h3>
+<p><strong>涵蓋主題：</strong>成員運算符號，函式與容器</p>
+<p>追蹤一群會員的登入狀態，回傳是否已登入。</p>
+<pre>online = ['Amy', 'Bob', 'Dora']</pre>
+<p>請你：</p>
+<ul><li>定義函式 <code>check_status()</code></li>
+<li>使用 <code>in</code> 判斷使用者是否在線</li>
+<li>使用迴圈測試多個使用者</li></ul>
+<pre>Amy is online
+Leo is offline</pre>
+<div class="answer">
+  <pre class="line-numbers"><code class="language-python">def check_status(name, online_users):
+    if name in online_users:
+        print(f"{name} is online")
+    else:
+        print(f"{name} is offline")
+
+online = ['Amy', 'Bob', 'Dora']
+check_status("Amy", online)
+check_status("Leo", online)</code></pre>
+</div>
+
+<hr/>
+<h3 class="caption">挑戰題 16（★★★）：匯入模組魔法師 ✨ <span class="icon">🛈</span></h3>
+<p><strong>涵蓋主題：</strong>匯入模組，__name__ 的用途</p>
+<p>模擬兩個模組互相呼叫，並透過 <code>__name__</code> 控制執行行為。</p>
+<pre>模擬 main.py 與 utils.py</pre>
+<p>請你：</p>
+<ul><li>在 <code>utils.py</code> 中定義 <code>greet()</code> 並用 <code>if __name__ == '__main__'</code> 測試</li>
+<li>從 <code>main.py</code> 匯入 <code>utils</code> 並呼叫 <code>greet()</code></li></ul>
+<pre>main.py 呼叫 greet
+utils.py 中的主函式只在直接執行時出現</pre>
+<div class="answer">
+  <pre class="line-numbers"><code class="language-python"># utils.py
+def greet():
+    print("Hello from utils!")
+
+if __name__ == "__main__":
+    print("utils.py is running directly")
+
+# main.py
+import utils
+utils.greet()</code></pre>
+</div>
+
+				
+				
 			</section>
 
 		</main>
