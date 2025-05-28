@@ -351,7 +351,29 @@ print(result)</code></pre>
 </pre>
 
 <p>提示：使用 <code>sorted()</code> 搭配 <code>lambda</code> 排序，搭配 <code>enumerate()</code> 列出前三名。</p>
+<p>你可以使用 <code>enumerate()</code> 同時取得每一題的編號（從 0 開始）和答案：</p>
 
+<pre>
+for i, item in enumerate(某清單):
+    # i 是索引編號（第幾題），item 是該位置的值
+</pre>
+
+<p>例如：</p>
+
+<pre>
+lst = ['A', 'B', 'C']
+for i, val in enumerate(lst):
+    print(i, val)
+</pre>
+
+<p>會輸出：</p>
+
+<pre>
+0 A
+1 B
+2 C
+</pre>
+				
 <div class="answer">
   <pre class="line-numbers"><code class="language-python">scores = {'Amy': 90, 'Bob': 85, 'Charlie': 95, 'Diana': 88}
 
