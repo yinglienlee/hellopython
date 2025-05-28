@@ -556,46 +556,59 @@ print(f"未登入人數：{len(all_users) - total_logged_in}")</code></pre>
 				
 
 <hr/>
-<h3 class="caption">挑戰題 16：模組化工具與主控測試整合 ✨ <span class="icon">🛈</span></h3>
+<h3 class="caption">挑戰題 16（★★★）：密碼強度檢查器 🔐 <span class="icon">🛈</span></h3>
 
-<p>請你建立一個檔案 <code>math_utils.py</code>，並完成以下要求：</p>
-<ul>
-  <li>定義兩個函式：<code>add(a, b)</code>、<code>multiply(a, b)</code></li>
-  <li>使用 <code>if __name__ == "__main__"</code> 包裝測試程式：自行印出加法與乘法結果</li>
-</ul>
+<p><strong>涵蓋主題：</strong>函式封裝、字串處理、布林運算、模組導入、<code>__name__ == "__main__"</code></p>
 
-<p>然後再建立 <code>main.py</code>：</p>
-<ul>
-  <li>匯入 <code>math_utils</code>，呼叫 <code>add()</code> 與 <code>multiply()</code> 並印出結果</li>
-</ul>
+<p>你正在設計一個模組 <code>password_tool.py</code>，它能幫助網站或 App 檢查使用者密碼是否符合強度要求。</p>
 
-<p><strong>執行說明：</strong></p>
-<ul>
-  <li>直接執行 <code>math_utils.py</code>：印出測試結果</li>
-  <li>執行 <code>main.py</code>：只執行主程式邏輯，模組不會印出測試內容</li>
-</ul>
+<p><strong>請你：</strong></p>
+<ol>
+  <li>定義函式 <code>is_strong(password)</code>，檢查密碼是否同時包含：
+    <ul>
+      <li>至少 8 個字元</li>
+      <li>大寫英文</li>
+      <li>小寫英文</li>
+      <li>數字</li>
+      <li>符號（如 !, @, #, $, %, etc.）</li>
+    </ul>
+  </li>
+  <li>使用者可匯入此模組並呼叫 <code>is_strong("Hello123!")</code></li>
+  <li>若直接執行此檔案，提示使用者輸入密碼並立即檢查結果</li>
+</ol>
+
+<p><strong>範例：</strong></p>
+<pre>
+# 匯入後使用：
+>>> import password_tool
+>>> password_tool.is_strong("P@ssw0rd")
+True
+
+# 直接執行：
+請輸入密碼：12345
+密碼太弱，請加強！
+</pre>
 
 <div class="answer">
-  <pre class="line-numbers"><code class="language-python"># math_utils.py
-def add(a, b):
-    return a + b
+  <pre class="line-numbers"><code class="language-python">import string
 
-def multiply(a, b):
-    return a * b
+def is_strong(password):
+    return (
+        len(password) >= 8 and
+        any(c.isupper() for c in password) and
+        any(c.islower() for c in password) and
+        any(c.isdigit() for c in password) and
+        any(c in string.punctuation for c in password)
+    )
 
 if __name__ == "__main__":
-    print("測試加法：", add(2, 3))
-    print("測試乘法：", multiply(4, 5))
-
-# main.py
-import math_utils
-
-result1 = math_utils.add(10, 5)
-result2 = math_utils.multiply(3, 7)
-
-print("主程式呼叫加法：", result1)
-print("主程式呼叫乘法：", result2)</code></pre>
+    pwd = input("請輸入密碼：")
+    if is_strong(pwd):
+        print("密碼強度足夠 ✅")
+    else:
+        print("密碼太弱，請加強！ ❌")</code></pre>
 </div>
+
 
 
 				
