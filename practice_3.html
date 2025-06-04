@@ -607,50 +607,57 @@ if __name__ == "__main__":
 </div>
 
 <hr/>
-<h3 class="caption">挑戰題 17：動物的叫聲 🐶 <span class="icon">🛈</span></h3>
-<p>請定義一個基礎類別 <code>Animal</code>，有以下內容：</p>
+<h3 class="caption">挑戰題 17：動物的多重身分 🦁🎤 <span class="icon">🛈</span></h3>
+<p>請定義兩個類別：</p>
 <ul>
-  <li>屬性：<code>name</code>（名字）</li>
-  <li>方法：<code>speak()</code>，印出「我是一隻動物」</li>
+  <li><code>Animal</code>：有屬性 <code>name</code>，方法 <code>who()</code> 印出「我是動物，名字叫 {name}」</li>
+  <li><code>Singer</code>：有屬性 <code>style</code>，方法 <code>sing()</code> 印出「我會唱 {style}」</li>
 </ul>
-<p>再定義一個繼承自 <code>Animal</code> 的類別 <code>Dog</code>：</p>
-<ul>
-  <li>覆寫 <code>speak()</code> 方法，印出「我是一隻狗，名字叫 {name}」</li>
-</ul>
+<p>再定義一個子類別 <code>LionSinger</code>，同時繼承 <code>Animal</code> 和 <code>Singer</code>。</p>
+<p>請建立一個 <code>LionSinger</code> 的物件，並呼叫 <code>who()</code> 與 <code>sing()</code> 方法。</p>
 <p>預期輸出結果：</p>
-<pre>我是一隻狗，名字叫 Lucky</pre>
+<pre>
+我是動物，名字叫 Leo
+我會唱 搖滾
+</pre>
 <div class="answer">
   <pre class="line-numbers"><code class="language-python">class Animal:
     def __init__(self, name):
         self.name = name
 
-    def speak(self):
-        print("我是一隻動物")
+    def who(self):
+        print(f"我是動物，名字叫 {self.name}")
 
-class Dog(Animal):
-    def speak(self):
-        print(f"我是一隻狗，名字叫 {self.name}")
+class Singer:
+    def __init__(self, style):
+        self.style = style
 
-dog = Dog("Lucky")
-dog.speak()</code></pre>
+    def sing(self):
+        print(f"我會唱 {self.style}")
+
+class LionSinger(Animal, Singer):
+    def __init__(self, name, style):
+        Animal.__init__(self, name)
+        Singer.__init__(self, style)
+
+leo = LionSinger("Leo", "搖滾")
+leo.who()
+leo.sing()</code></pre>
 </div>
 
 <hr/>
-<h3 class="caption">挑戰題 18：多樣的交通工具 🚗 <span class="icon">🛈</span></h3>
-<p>請定義一個基礎類別 <code>Vehicle</code>，包含：</p>
+<h3 class="caption">挑戰題 18：智慧交通工具 🚗📡 <span class="icon">🛈</span></h3>
+<p>請定義兩個類別：</p>
 <ul>
-  <li>屬性：<code>brand</code>（品牌）</li>
-  <li>方法：<code>drive()</code>，印出「這是一輛 {brand} 的交通工具」</li>
+  <li><code>Vehicle</code>：有屬性 <code>brand</code>，方法 <code>drive()</code> 印出「這是一輛 {brand} 的交通工具」</li>
+  <li><code>GPS</code>：有屬性 <code>version</code>，方法 <code>navigate()</code> 印出「啟動 GPS 導航，版本：{version}」</li>
 </ul>
-<p>再定義兩個繼承類別：</p>
-<ul>
-  <li><code>Car</code> 類別：覆寫 <code>drive()</code> 印出「這是一輛 {brand} 的汽車」</li>
-  <li><code>Bike</code> 類別：覆寫 <code>drive()</code> 印出「這是一輛 {brand} 的腳踏車」</li>
-</ul>
+<p>再定義一個子類別 <code>SmartCar</code>，同時繼承 <code>Vehicle</code> 和 <code>GPS</code>。</p>
+<p>請建立一個 <code>SmartCar</code> 的物件，並呼叫 <code>drive()</code> 與 <code>navigate()</code> 方法。</p>
 <p>預期輸出結果：</p>
 <pre>
-這是一輛 Toyota 的汽車
-這是一輛 Giant 的腳踏車
+這是一輛 Tesla 的交通工具
+啟動 GPS 導航，版本：2.1
 </pre>
 <div class="answer">
   <pre class="line-numbers"><code class="language-python">class Vehicle:
@@ -660,18 +667,21 @@ dog.speak()</code></pre>
     def drive(self):
         print(f"這是一輛 {self.brand} 的交通工具")
 
-class Car(Vehicle):
-    def drive(self):
-        print(f"這是一輛 {self.brand} 的汽車")
+class GPS:
+    def __init__(self, version):
+        self.version = version
 
-class Bike(Vehicle):
-    def drive(self):
-        print(f"這是一輛 {self.brand} 的腳踏車")
+    def navigate(self):
+        print(f"啟動 GPS 導航，版本：{self.version}")
 
-car = Car("Toyota")
-bike = Bike("Giant")
+class SmartCar(Vehicle, GPS):
+    def __init__(self, brand, version):
+        Vehicle.__init__(self, brand)
+        GPS.__init__(self, version)
+
+car = SmartCar("Tesla", "2.1")
 car.drive()
-bike.drive()</code></pre>
+car.navigate()</code></pre>
 </div>
 
 <hr/>
