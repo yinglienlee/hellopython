@@ -606,6 +606,7 @@ if __name__ == "__main__":
         print("密碼太弱，請加強！ ❌")</code></pre>
 </div>
 
+<hr/>
 <h3 class="caption">挑戰題 17：動物的叫聲 🐶 <span class="icon">🛈</span></h3>
 <p>請定義一個基礎類別 <code>Animal</code>，有以下內容：</p>
 <ul>
@@ -616,6 +617,8 @@ if __name__ == "__main__":
 <ul>
   <li>覆寫 <code>speak()</code> 方法，印出「我是一隻狗，名字叫 {name}」</li>
 </ul>
+<p>預期輸出結果：</p>
+<pre>我是一隻狗，名字叫 Lucky</pre>
 <div class="answer">
   <pre class="line-numbers"><code class="language-python">class Animal:
     def __init__(self, name):
@@ -632,6 +635,7 @@ dog = Dog("Lucky")
 dog.speak()</code></pre>
 </div>
 
+<hr/>
 <h3 class="caption">挑戰題 18：多樣的交通工具 🚗 <span class="icon">🛈</span></h3>
 <p>請定義一個基礎類別 <code>Vehicle</code>，包含：</p>
 <ul>
@@ -643,6 +647,11 @@ dog.speak()</code></pre>
   <li><code>Car</code> 類別：覆寫 <code>drive()</code> 印出「這是一輛 {brand} 的汽車」</li>
   <li><code>Bike</code> 類別：覆寫 <code>drive()</code> 印出「這是一輛 {brand} 的腳踏車」</li>
 </ul>
+<p>預期輸出結果：</p>
+<pre>
+這是一輛 Toyota 的汽車
+這是一輛 Giant 的腳踏車
+</pre>
 <div class="answer">
   <pre class="line-numbers"><code class="language-python">class Vehicle:
     def __init__(self, brand):
@@ -665,6 +674,7 @@ car.drive()
 bike.drive()</code></pre>
 </div>
 
+<hr/>
 <h3 class="caption">挑戰題 19：公司職員介紹 👩‍💼 <span class="icon">🛈</span></h3>
 <p>請定義一個基礎類別 <code>Employee</code>，包含：</p>
 <ul>
@@ -676,6 +686,8 @@ bike.drive()</code></pre>
   <li>屬性：<code>department</code>（部門）</li>
   <li>覆寫 <code>get_info()</code> 印出「經理：{name}，薪資：{salary}，部門：{department}」</li>
 </ul>
+<p>預期輸出結果：</p>
+<pre>經理：Alice，薪資：80000，部門：行銷部</pre>
 <div class="answer">
   <pre class="line-numbers"><code class="language-python">class Employee:
     def __init__(self, name, salary):
@@ -697,6 +709,7 @@ m = Manager("Alice", 80000, "行銷部")
 m.get_info()</code></pre>
 </div>
 
+<hr/>
 <h3 class="caption">挑戰題 20：圖形面積計算 📐 <span class="icon">🛈</span></h3>
 <p>請定義一個基礎類別 <code>Shape</code>，其中：</p>
 <ul>
@@ -707,6 +720,11 @@ m.get_info()</code></pre>
   <li><code>Rectangle</code>：屬性為 <code>width</code> 和 <code>height</code>，<code>area()</code> 回傳 <code>width * height</code></li>
   <li><code>Circle</code>：屬性為 <code>radius</code>，<code>area()</code> 回傳 <code>3.14 * radius * radius</code></li>
 </ul>
+<p>預期輸出結果：</p>
+<pre>
+矩形面積： 20
+圓形面積： 28.26
+</pre>
 <div class="answer">
   <pre class="line-numbers"><code class="language-python">class Shape:
     def area(self):
