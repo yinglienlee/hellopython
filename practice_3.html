@@ -217,7 +217,7 @@ chA_rLie##
   <li>若名字長度少於 2 或過長（超過 10 個字母），則回傳 <code>"Invalid"</code></li>
 </ul>
 
-<p>對以下清單進行處理並列印結果：</p>
+<p>對以下串列進行處理並列印結果：</p>
 <pre>
 ["@aMy!", "#B_ob23", "chA_rLie##", "x", "thisisaverylongname"]
 </pre>
@@ -303,9 +303,9 @@ types = {
 
 <p>請你完成程式：</p>
 <ul>
-  <li>定義輸入清單 <code>orders = ['tea', 'sandwich', 'phone']</code></li>
-  <li>建立分類結果字典 <code>result</code>，初始為空清單</li>
-  <li>只處理在已知類別清單中的項目（忽略未知項目，如 'phone'）</li>
+  <li>定義輸入串列 <code>orders = ['tea', 'sandwich', 'phone']</code></li>
+  <li>建立分類結果字典 <code>result</code>，初始為空串列</li>
+  <li>只處理在已知類別串列中的項目（忽略未知項目，如 'phone'）</li>
   <li>最後輸出分類結果，如：<code>{'drink': ['tea'], 'food': ['sandwich']}</code></li>
 </ul>
 
@@ -352,7 +352,7 @@ print(result)</code></pre>
 <p>你可以使用 <code>enumerate()</code> 同時取得每個元素的編號（從 0 開始）和元素本身：</p>
 
 <pre>
-for i, item in enumerate(某清單):
+for i, item in enumerate(某串列):
     # i 是索引編號（第幾題），item 是該位置的值
 </pre>
 
@@ -508,7 +508,7 @@ print(f"總銷售金額：{total} 元")</code></pre>
 
 <h3 class="caption">挑戰題 15：登入追蹤與報告產生器 🔎 <span class="icon">🛈</span></h3>
 
-<p>公司有一份全體員工名單與當日登入的員工清單如下：</p>
+<p>公司有一份全體員工名單與當日登入的員工串列如下：</p>
 
 <pre>
 all_users = ["Amy", "Bob", "Charlie", "Diana", "Ethan"]
