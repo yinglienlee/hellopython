@@ -172,6 +172,7 @@ function enableAnswerRevealer() {
 
 			if (overrideKey && result["key"] && result["key"].includes(overrideKey)) hideKey = false; 
 			else hideKey = true;
+			console.log(hideKey)
 
 			if (showAnswers) {
 				document.querySelectorAll('.caption .icon').forEach((icon, index) => {
