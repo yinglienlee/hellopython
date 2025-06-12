@@ -170,8 +170,14 @@ function enableAnswerRevealer() {
 			if (result.hasOwnProperty(fileName) && result[fileName].length != 0) showAnswers = true;
 			else showAnswers = false;
 
-			if (overrideKey && result["key"] && result["key"].includes(overrideKey)) hideKey = false; 
-			else hideKey = true;
+			if (result["key"]) {
+				if (overrideKey && result["key"].includes(overrideKey)) hideKey = false;
+				else hideKey = true;
+			} else {
+				hideKey = false;
+			}
+
+			console.log(hideKey);
 
 			if (showAnswers) {
 				document.querySelectorAll('.caption .icon').forEach((icon, index) => {
