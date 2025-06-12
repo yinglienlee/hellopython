@@ -149,7 +149,7 @@ function enableAnswerRevealer() {
 	const overrideKey = parseInt(urlParams.get("key"));
 	const fileName = window.location.pathname.split('/').pop();
 	const GOOGLE_SHEETS_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSF-MJYb-3c-teT8X6Te8eqIoP4UC8BsgMUI0pcpo2VYKrf178ACOjLEfuFpuRPu3QSy5DDk2KY1jTO/pub?gid=0&single=true&output=csv";
-	let showAnswers = false;
+	let showAnswers = false, hideKey = false;
 
 	fetch(GOOGLE_SHEETS_CSV_URL)
 		.then(response => response.text()) // Read CSV as text
@@ -170,7 +170,8 @@ function enableAnswerRevealer() {
 			if (result.hasOwnProperty(fileName) && result[fileName].length != 0) showAnswers = true;
 			else showAnswers = false;
 
-			if (overrideKey && result["key"] && result["key"].includes(overrideKey)) showAnswers = true; 
+			if (overrideKey && result["key"] && result["key"].includes(overrideKey)) hideKey = false; 
+			else hideKey = true;
 
 			if (showAnswers) {
 				document.querySelectorAll('.caption .icon').forEach((icon, index) => {
