@@ -146,7 +146,7 @@ function navClick() {
 
 function enableAnswerRevealer() {	
 	const urlParams = new URLSearchParams(window.location.search);
-	const overrideKey = urlParams.get("key");
+	const overrideKey = parseInt(urlParams.get("key"));
 	const fileName = window.location.pathname.split('/').pop();
 	const GOOGLE_SHEETS_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSF-MJYb-3c-teT8X6Te8eqIoP4UC8BsgMUI0pcpo2VYKrf178ACOjLEfuFpuRPu3QSy5DDk2KY1jTO/pub?gid=0&single=true&output=csv";
 	let showAnswers = false;
@@ -165,7 +165,7 @@ function enableAnswerRevealer() {
 								.map(Number);
 			});
 			
-			console.log(overrideKey, result);
+			// console.log(overrideKey, result);
 			
 			if (result.hasOwnProperty(fileName) && result[fileName].length != 0) showAnswers = true;
 			else showAnswers = false;
