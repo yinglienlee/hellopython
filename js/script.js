@@ -146,7 +146,7 @@ function navClick() {
 
 function enableAnswerRevealer() {	
 	const urlParams = new URLSearchParams(window.location.search);
-	const overrideKey = parseInt(urlParams.get("key"));
+	const overrideKey = parseInt(urlParams.get("on"));
 	const fileName = window.location.pathname.split('/').pop();
 	const GOOGLE_SHEETS_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSF-MJYb-3c-teT8X6Te8eqIoP4UC8BsgMUI0pcpo2VYKrf178ACOjLEfuFpuRPu3QSy5DDk2KY1jTO/pub?gid=0&single=true&output=csv";
 	let showAnswers = false, hideKey = false;
@@ -170,8 +170,8 @@ function enableAnswerRevealer() {
 			if (result.hasOwnProperty(fileName) && result[fileName].length != 0) showAnswers = true;
 			else showAnswers = false;
 
-			if (result["key"]) {
-				if (overrideKey && result["key"].includes(overrideKey)) hideKey = false;
+			if (result["on"]) {
+				if (overrideKey && result["on"].includes(overrideKey)) hideKey = false;
 				else hideKey = true;
 			} else {
 				hideKey = false;
