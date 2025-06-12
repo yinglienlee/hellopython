@@ -177,7 +177,7 @@ function enableAnswerRevealer() {
 				hideKey = false;
 			}
 
-			console.log(hideKey);
+			console.log(overrideKey, result["on"], hideKey);
 
 			if (showAnswers) {
 				document.querySelectorAll('.caption .icon').forEach((icon, index) => {
