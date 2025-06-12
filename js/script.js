@@ -165,7 +165,7 @@ function enableAnswerRevealer() {
 								.map(Number);
 			});
 			
-			// console.log(overrideKey, result);
+			// console.log(result);
 			
 			if (result.hasOwnProperty(fileName) && result[fileName].length != 0) showAnswers = true;
 			else showAnswers = false;
@@ -177,7 +177,7 @@ function enableAnswerRevealer() {
 				hideKey = false;
 			}
 
-			console.log(overrideKey, result["on"], hideKey);
+			console.log(overrideKey, result, hideKey);
 
 			if (showAnswers) {
 				document.querySelectorAll('.caption .icon').forEach((icon, index) => {
