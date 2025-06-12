@@ -179,7 +179,7 @@ function enableAnswerRevealer() {
 					let isAnswerVisible = false;
 					const numClicksToReveal = 1;
 					
-					if (!result[fileName].includes(index+1)) {
+					if (!result[fileName].includes(index+1) || hideKey) {
 						icon.style.display = 'none'; // Hide the icon
 						const caption = icon.closest('.caption');
 						let answerElement = caption.nextElementSibling;
