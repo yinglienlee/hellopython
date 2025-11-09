@@ -1,0 +1,734 @@
+/* 未登入時的按鈕樣式提示（可選） */
+body:not(.user-logged-in) .chatbot-toggle-btn::after {
+  content: ' 🔐';
+  font-size: 0.9em;
+}
+
+body:not(.user-logged-in) .chatbot-toggle-btn {
+  position: relative;
+}
+
+/* 挑戰區塊 */
+.challenge-item {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background: #f9f9f9;
+}
+
+/* 聊天機器人啟動按鈕 */
+.chatbot-toggle-btn {
+  margin-top: 1rem;
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.chatbot-toggle-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* ============================================
+   可停靠的聊天機器人容器
+   ============================================ */
+.chatbot-docked {
+  position: fixed;
+  background: white;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+/* 停靠在右側 */
+.chatbot-docked-right {
+  top: 0;
+  right: 0;
+  width: 400px;
+  height: 100vh;
+  border-left: 2px solid #e5e7eb;
+}
+
+.chatbot-docked-right .chatbot-resizer {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 5px;
+  height: 100%;
+  cursor: ew-resize;
+  background: transparent;
+  background-color: #067d9a;
+}
+
+.chatbot-docked-right .chatbot-resizer:hover {
+  background: #0891b2;
+}
+
+/* 停靠在底部 */
+.chatbot-docked-bottom {
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 350px;
+  border-top: 2px solid #e5e7eb;
+}
+
+.chatbot-docked-bottom .chatbot-resizer {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 4px;
+  cursor: ns-resize;
+  background: transparent;
+  background-color: #067d9a;
+}
+
+.chatbot-docked-bottom .chatbot-resizer:hover {
+  background: #0891b2;
+}
+
+/* 聊天視窗 */
+.chatbot-window {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: white;
+  position: relative;
+}
+
+/* 標題列 */
+.chatbot-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.chatbot-header-left {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;  
+}
+
+.chatbot-jump-btn {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.chatbot-jump-btn:hover {
+  background: rgba(255, 255, 255, 0.35);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.chatbot-jump-btn:active {
+  transform: translateY(0);
+}
+
+.chatbot-header-right {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.chatbot-title {
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+/* 停靠位置按鈕 */
+.chatbot-dock-btn {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.chatbot-dock-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* 預設隱藏特定按鈕 */
+#dock-bottom-btn,
+#dock-right-btn {
+    display: none;
+}
+
+/* 當聊天機器人停靠在右側時 (chatbot-docked-right class)，顯示切換到 "底部" 的按鈕 */
+.chatbot-docked-right #dock-bottom-btn {
+    display: inline-block;
+}
+
+/* 當聊天機器人停靠在底部時 (chatbot-docked-bottom class)，顯示切換到 "右側" 的按鈕 */
+.chatbot-docked-bottom #dock-right-btn {
+    display: inline-block;
+}
+
+
+/* 關閉按鈕 */
+.chatbot-close {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.chatbot-close:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* 訊息區域 */
+.chatbot-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.5rem;
+  background: linear-gradient(to bottom, #f9fafb 0%, #ffffff 100%);
+}
+
+/* 訊息泡泡 */
+.message {
+  margin-bottom: 1rem;
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  max-width: 85%;
+  line-height: 1.6;
+  word-wrap: break-word;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.user-message {
+  background: linear-gradient(135deg, #0891b2 0%, #0e7490 100%);
+  color: white;
+  margin-left: auto;
+  border-bottom-right-radius: 4px;
+}
+
+.assistant-message {
+  background: white;
+  border: 1px solid #e5e7eb;
+  margin-right: auto;
+  border-bottom-left-radius: 4px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+/* 行內程式碼 */
+.assistant-message code.inline-code {
+  background: #f3f4f6;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-family: 'Courier New', 'Consolas', monospace;
+  font-size: 0.9em;
+  color: #dc2626;
+  font-weight: 500;
+}
+
+/* 程式碼區塊 */
+.assistant-message pre {
+  background: #1e293b;
+  color: #e2e8f0;
+  padding: 1rem;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 0.75rem 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.assistant-message pre code.code-block {
+  background: transparent;
+  color: #e2e8f0;
+  padding: 0;
+  font-size: 0.9em;
+  line-height: 1.5;
+  display: block;
+  white-space: pre;
+}
+
+/* 列表 */
+.assistant-message ul {
+  margin: 0.5rem 0;
+  padding-left: 1.5rem;
+}
+
+.assistant-message li {
+  margin: 0.25rem 0;
+  line-height: 1.6;
+}
+
+/* 粗體和斜體 */
+.assistant-message strong {
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.assistant-message em {
+  font-style: italic;
+  color: #4b5563;
+}
+
+/* 載入動畫 */
+.loading {
+  opacity: 1;
+  background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%) !important;
+  border: 1px solid #d1d5db !important;
+  padding: 1.25rem 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.loading .dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  margin: 0 3px;
+  animation: bounce 1.4s infinite ease-in-out;
+  box-shadow: 0 2px 4px rgba(102, 126, 234, 0.3);
+}
+
+.loading .dot:nth-child(1) {
+  animation-delay: -0.32s;
+}
+
+.loading .dot:nth-child(2) {
+  animation-delay: -0.16s;
+}
+
+@keyframes bounce {
+  0%, 80%, 100% {
+    transform: translateY(0) scale(0.8);
+    opacity: 0.4;
+  }
+  40% {
+    transform: translateY(-12px) scale(1.1);
+    opacity: 1;
+  }
+}
+
+/* 輸入區域 */
+.chatbot-input {
+  display: flex;
+  gap: 0.75rem;
+  padding: 1.5rem;
+  border-top: 2px solid #e5e7eb;
+  background: linear-gradient(to top, #f9fafb 0%, #ffffff 100%);
+  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.05);
+  flex-shrink: 0;
+}
+
+.chatbot-input textarea {
+  flex: 1;
+  padding: 1rem 1.25rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background: white;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  resize: none;
+  min-height: 52px;
+  max-height: 150px;
+  overflow-y: auto;
+  line-height: 1.5;
+}
+
+.chatbot-input textarea:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.15), 
+              0 4px 12px rgba(102, 126, 234, 0.2);
+  transform: translateY(-1px);
+}
+
+.chatbot-input textarea::placeholder {
+  color: #9ca3af;
+  font-style: italic;
+}
+
+.chatbot-input button {
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, #0891b2 0%, #0e7490 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(8, 145, 178, 0.3);
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;      /* 👈 prevents button from resizing */
+  align-self: flex-start; 
+}
+
+.chatbot-input button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s;
+}
+
+.chatbot-input button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(8, 145, 178, 0.4);
+}
+
+.chatbot-input button:hover::before {
+  left: 100%;
+}
+
+.chatbot-input button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(8, 145, 178, 0.3);
+}
+
+/* INSIDE chatbot.css (Add at the end of the file) */
+
+/* --- 禁用狀態樣式 --- */
+
+/* 禁用狀態下的輸入框 */
+.chatbot-input textarea:disabled {
+    background-color: #f5f5f5; /* 輕微變灰 */
+    color: #a0a0a0; /* 文字變淡 */
+    cursor: not-allowed; /* 顯示禁止圖標 */
+    border: 1px solid #e0e0e0;
+    /* 移除所有陰影效果，使外觀扁平 */
+    box-shadow: none; 
+}
+
+/* 禁用狀態下的發送按鈕 */
+.chatbot-input button:disabled {
+    background-color: #cccccc; /* 統一的灰色背景 */
+    background: #cccccc; /* 覆蓋掉原有的漸變背景 */
+    color: #909090;
+    cursor: not-allowed;
+    opacity: 0.7; /* 半透明效果 */
+    transform: none; /* 移除 hover/active 的變換效果 */
+    box-shadow: none; /* 移除陰影 */
+}
+
+/* 移除禁用按鈕的 hover 效果 */
+.chatbot-input button:disabled:hover {
+    transform: none; 
+    box-shadow: none;
+}
+
+/* 移除禁用按鈕上的閃光效果 */
+.chatbot-input button:disabled::before {
+    content: none;
+}
+
+/* 捲軸樣式 */
+.chatbot-messages::-webkit-scrollbar,
+.chatbot-input textarea::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.chatbot-messages::-webkit-scrollbar-track,
+.chatbot-input textarea::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.chatbot-messages::-webkit-scrollbar-thumb,
+.chatbot-input textarea::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+
+.chatbot-messages::-webkit-scrollbar-thumb:hover,
+.chatbot-input textarea::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+
+/* ===== Chat Log Modal (compact + slightly larger text, no markdown) ===== */
+.cl-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  display: none;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(2px);
+}
+
+.cl-modal {
+  position: absolute;
+  top: 6%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(900px, 92vw);
+  max-height: 88vh;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  font-size: 1rem; /* ⬆️ slightly larger overall */
+}
+
+.cl-header {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 10px;
+  border-bottom: 1px solid #e5e7eb;
+  background: #fff;
+}
+
+.cl-title {
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  font-size: 1.05rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.cl-tools {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.cl-select,
+.cl-search {
+  padding: 4px 8px;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.cl-close {
+  border: none;
+  background: transparent;
+  font-size: 32px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 2px 4px;
+}
+
+.cl-content {
+  flex: 1;
+  overflow: auto;
+  padding: 8px 12px;
+  background: #fafafa;
+}
+
+/* Challenge card */
+.cl-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  margin: 6px 0;
+  overflow: hidden;
+  font-size: 1rem; /* ⬆️ text inside cards larger */
+}
+
+.cl-card summary {
+  list-style: none;
+  cursor: pointer;
+}
+
+.cl-card summary::-webkit-details-marker {
+  display: none;
+}
+
+.cl-card-hd {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 6px 10px;
+  background: #f9f9f9;
+}
+
+.cl-card-title {
+  font-weight: 600;
+  color: #0f172a;
+  line-height: 1.2;
+  font-size: 1.05rem; /* ⬆️ challenge titles slightly larger */
+}
+
+.cl-chips {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.cl-chip {
+  background: #f1f5f9;
+  color: #0f172a;
+  border: 1px solid #e5e7eb;
+  border-radius: 999px;
+  padding: 1px 6px;
+  font-size: 1rem;
+}
+
+.cl-card-bd {
+  padding: 6px 10px;
+}
+
+/* Message row */
+.cl-msg {
+  display: flex;
+  gap: 6px;
+  margin: 4px 0;
+}
+
+.cl-msg.user {
+  justify-content: flex-end;
+}
+
+.cl-avatar {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  font-weight: 600;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 26px;
+}
+
+.cl-msg.user .cl-avatar {
+  background: #bae6fd;  /* user = light blue */
+  color: #0f172a;
+}
+
+.cl-msg.assistant .cl-avatar {
+  background: #fde68a;  /* assistant = soft yellow */
+  color: #78350f;
+}
+
+.cl-bubble {
+  max-width: 88%;
+  padding: 7px 9px;
+  border-radius: 10px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+  white-space: pre-line;
+  word-break: break-word;
+  font-size: 1rem; /* ⬆️ main message text */
+  line-height: 1.45;
+}
+
+.cl-bubble .cl-meta {
+  opacity: 0.6;
+  font-size: 0.75rem;
+  margin-bottom: 2px;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.cl-tag {
+  display: inline-block;
+  padding: 1px 6px;
+  font-size: 0.7rem;
+  border-radius: 9999px;
+  border: 1px solid #94a3b8;
+  background: #eef2f7;
+  color: #0f172a;
+}
+
+.cl-bubble.user {
+  background: #dbeafe;
+}
+
+.cl-bubble.assistant {
+  background: #f8fafc;
+}
+
+.cl-bubble.summary {
+  background: #fff7ed;
+}
+
+/* Code blocks */
+.cl-bubble pre {
+  background: #0b1220;
+  color: #e2e8f0;
+  border-radius: 8px;
+  padding: 4px 6px;
+  overflow: auto;
+  margin: 6px 0;
+  font-size: 0.9rem;
+  line-height: 1.35;
+}
+
+.cl-bubble code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  font-size: 0.92rem;
+}
+
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+  .message {
+    max-width: 90%;
+  }
+  
+  .cl-bubble {
+    max-width: 92%;
+  }
+}

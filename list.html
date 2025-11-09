@@ -6,9 +6,12 @@
     <title>串列容器</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/chatbot.css">		
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script type="text/javascript" src="js/script.js"></script>
-	   <!-- Prism.js CSS -->
+	<!-- MSAL.js Library -->
+	<script src="https://alcdn.msauth.net/browser/2.38.1/js/msal-browser.min.js"></script>	
+	<!-- Prism.js CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css">
     <!-- Prism.js Line Numbers CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
@@ -34,7 +37,7 @@
                 <div w3-include-html="navigation.html"></div>
             </div>
         </nav>
-        <main class="flex-grow-1">
+        <main class="flex-grow-1" id="teaching-content">
             <header>
                 <h1>串列容器</h1>
             </header>
@@ -146,10 +149,11 @@ print(filtered_words)  # 輸出：['藍色', '綠色', '黃色']</code></pre>
 
             <section>
                 <h2>挑戰題目</h2>
-                <h3 class="caption">挑戰 1：建立自己的購物清單 <span class="icon">🛈</span></h3>
-    <p>讓使用者輸入多個商品名稱，將這些商品存入串列，最後輸出完整的購物清單。</p>
-    <div class="answer">
-        <pre class="line-numbers"><code class="language-python"># 解答
+				<div class="challenge-item" id="challenge-1">
+					<h3 class="caption">挑戰 1：建立自己的購物清單 <span class="icon">🛈</span></h3>
+					<p>讓使用者輸入多個商品名稱，將這些商品存入串列，最後輸出完整的購物清單。</p>
+					<div class="answer">
+						<pre class="line-numbers"><code class="language-python"># 解答
 shopping_list = []
 while True:
     item = input("請輸入商品名稱（輸入 '結束' 結束輸入）: ")
@@ -157,71 +161,126 @@ while True:
         break
     shopping_list.append(item)
 print("購物清單:", shopping_list)</code></pre>
-    </div>
+					</div>
+					
+					<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
-    <h3 class="caption">挑戰 2：排序分數 <span class="icon">🛈</span></h3>
-    <p>讓使用者輸入多個分數，將這些分數存入串列並進行排序，輸出由高到低的排序結果。</p>
-    <div class="answer">
-        <pre class="line-numbers"><code class="language-python"># 解答
+				<div class="challenge-item" id="challenge-2">
+					<h3 class="caption">挑戰 2：排序分數 <span class="icon">🛈</span></h3>
+					<p>讓使用者輸入多個分數，將這些分數存入串列並進行排序，輸出由高到低的排序結果。</p>
+					<div class="answer">
+						<pre class="line-numbers"><code class="language-python"># 解答
 scores = list(map(int, input("請輸入多個分數（用空格分隔）: ").split()))
 scores.sort(reverse=True)
 print("由高到低排序的分數:", scores)</code></pre>
-    </div>
+					</div>
+					
+					<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
-    <h3 class="caption">挑戰 3：串列去除重複 <span class="icon">🛈</span></h3>
-    <p>設計一個程式，讓使用者輸入含有重複元素的串列，輸出一個不包含重複元素的新串列。</p>
-    <div class="answer">
-        <pre class="line-numbers"><code class="language-python"># 解答
+				<div class="challenge-item" id="challenge-3">
+					<h3 class="caption">挑戰 3：串列去除重複 <span class="icon">🛈</span></h3>
+					<p>設計一個程式，讓使用者輸入含有重複元素的串列，輸出一個不包含重複元素的新串列。</p>
+					<div class="answer">
+						<pre class="line-numbers"><code class="language-python"># 解答
 numbers = list(map(int, input("請輸入多個數字（用空格分隔）: ").split()))
 unique_numbers = list(set(numbers))
 print("不包含重複元素的串列:", unique_numbers)</code></pre>
-    </div>
+					</div>
+					
+					<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
-    <h3 class="caption">挑戰 4：計算平均分數 <span class="icon">🛈</span></h3>
-    <p>讓使用者輸入多個分數，將這些分數存入串列，計算並輸出這些分數的平均值。</p>
-    <div class="answer">
-        <pre class="line-numbers"><code class="language-python"># 解答
+				<div class="challenge-item" id="challenge-4">
+					<h3 class="caption">挑戰 4：計算平均分數 <span class="icon">🛈</span></h3>
+					<p>讓使用者輸入多個分數，將這些分數存入串列，計算並輸出這些分數的平均值。</p>
+					<div class="answer">
+						<pre class="line-numbers"><code class="language-python"># 解答
 scores = list(map(int, input("請輸入多個分數（用空格分隔）: ").split()))
 average = sum(scores) / len(scores) if scores else 0
 print(f"平均分數: {average:.2f}")</code></pre>
-    </div>
+					</div>
+					
+					<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
-    <h3 class="caption">挑戰 5：翻轉字串串列 <span class="icon">🛈</span></h3>
-    <p>讓使用者輸入多個字串，將這些字串存入串列，然後輸出每個字串翻轉後的新串列。</p>
-    <div class="answer">
-        <pre class="line-numbers"><code class="language-python"># 解答
+				<div class="challenge-item" id="challenge-5">
+					<h3 class="caption">挑戰 5：翻轉字串串列 <span class="icon">🛈</span></h3>
+					<p>讓使用者輸入多個字串，將這些字串存入串列，然後輸出每個字串翻轉後的新串列。</p>
+					<div class="answer">
+						<pre class="line-numbers"><code class="language-python"># 解答
 strings = input("請輸入多個字串（用空格分隔）: ").split()
 reversed_strings = [s[::-1] for s in strings]
 print("翻轉後的字串串列:", reversed_strings)</code></pre>
-    </div>
+					</div>
+					
+					<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
-    <h3 class="caption">挑戰 6：合併並排序串列 <span class="icon">🛈</span></h3>
-    <p>讓使用者輸入兩個數字串列，將它們合併成一個新串列，並將新串列按從小到大的順序排序後輸出。</p>
-    <div class="answer">
-        <pre class="line-numbers"><code class="language-python"># 解答
+				<div class="challenge-item" id="challenge-6">
+					<h3 class="caption">挑戰 6：合併並排序串列 <span class="icon">🛈</span></h3>
+					<p>讓使用者輸入兩個數字串列，將它們合併成一個新串列，並將新串列按從小到大的順序排序後輸出。</p>
+					<div class="answer">
+						<pre class="line-numbers"><code class="language-python"># 解答
 list1 = list(map(int, input("請輸入第一組數字（用空格分隔）: ").split()))
 list2 = list(map(int, input("請輸入第二組數字（用空格分隔）: ").split()))
 merged_list = sorted(list1 + list2)
 print("合併並排序的串列:", merged_list)</code></pre>
-    </div>
-
-    <h3 class="caption">挑戰 7：篩選奇數 <span class="icon">🛈</span></h3>
-    <p>讓使用者輸入一串數字，將這些數字存入串列，並篩選出其中的奇數，輸出包含奇數的新串列。</p>
-    <div class="answer">
-        <pre class="line-numbers"><code class="language-python"># 解答
+					</div>
+					
+					<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
+				
+				<div class="challenge-item" id="challenge-7">
+					<h3 class="caption">挑戰 7：篩選奇數 <span class="icon">🛈</span></h3>
+					<p>讓使用者輸入一串數字，將這些數字存入串列，並篩選出其中的奇數，輸出包含奇數的新串列。</p>
+					<div class="answer">
+						<pre class="line-numbers"><code class="language-python"># 解答
 numbers = list(map(int, input("請輸入多個數字（用空格分隔）: ").split()))
 odd_numbers = [n for n in numbers if n % 2 != 0]
 print("包含奇數的串列:", odd_numbers)</code></pre>
-    </div>
+					</div>
+					
+					<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
-    <h3 class="caption">挑戰 8：計算字串長度 <span class="icon">🛈</span></h3>
-    <p>讓使用者輸入多個字串，將這些字串存入串列，然後輸出每個字串的長度。</p>
-    <div class="answer">
-        <pre class="line-numbers"><code class="language-python"># 解答
+				<div class="challenge-item" id="challenge-8">
+					<h3 class="caption">挑戰 8：計算字串長度 <span class="icon">🛈</span></h3>
+					<p>讓使用者輸入多個字串，將這些字串存入串列，然後輸出每個字串的長度。</p>
+					<div class="answer">
+						<pre class="line-numbers"><code class="language-python"># 解答
 strings = input("請輸入多個字串（用空格分隔）: ").split()
 lengths = [len(s) for s in strings]
 print("每個字串的長度:", lengths)</code></pre>
-    </div>
+					</div>
+					
+					<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 				
             </section>
 
@@ -230,6 +289,52 @@ print("每個字串的長度:", lengths)</code></pre>
                 <p>學習串列資料結構能幫助你處理多個相關資料項目，並提升程式的靈活性與可讀性。試著將所學應用到你的專案中，進一步熟悉這項強大的工具！</p>
             </section>
         </main>
+		
+		<!-- 全域聊天機器人容器（只需要一個） -->
+		<div id="chatbot-container" class="chatbot-docked chatbot-docked-right" style="display: none;">
+			<div class="chatbot-window">
+				<div class="chatbot-header">
+					<div class="chatbot-header-left">
+						<span class="chatbot-title" id="chatbot-title">🤖 Python 學習助手</span>
+						
+					</div>
+					<div class="chatbot-header-right">
+						<button class="chatbot-jump-btn" id="chatbot-jump-btn" onclick="jumpToChallenge()" title="跳轉到挑戰位置">🚩</button>
+						<!-- 停靠位置按鈕 -->
+						<button class="chatbot-dock-btn" id="dock-right-btn" onclick="dockChatbot('right')" title="停靠右側">
+							▷
+						</button>
+						<button class="chatbot-dock-btn" id="dock-bottom-btn" onclick="dockChatbot('bottom')" title="停靠底部">
+							▽
+						</button>
+						<!--button class="chatbot-dock-btn" onclick="dockChatbot('top')" title="停靠頂部">
+							△
+						</button-->
+						<button class="chatbot-close" onclick="closeChatbot()">✕</button>
+					</div>
+				</div>
+								
+				<!-- 調整大小的拖曳柄 -->
+				<div class="chatbot-resizer" id="chatbot-resizer"></div>
+				
+				<div class="chatbot-messages" id="chatbot-messages"></div>
+				<div class="chatbot-input">
+					<textarea 
+						id="chatbot-input" 
+						placeholder="輸入你的回答或問題...（Shift+Enter 換行，Enter 發送）" 
+						onkeydown="handleKeyPress(event)"
+						rows="1"></textarea>
+					<button id="chatbot-send-btn" onclick="sendMessage()">發送</button>
+					<button id="chatbot-summary-btn" onclick="generateSummary()">📊</button>
+				</div>
+			</div>
+		</div>
+
+		<script src="js/auth.js"></script>
+		<script src="js/chatbot.js"></script>
+		
     </div>
+	
+	
 </body>
 </html>

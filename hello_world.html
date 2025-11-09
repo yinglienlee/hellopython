@@ -6,8 +6,11 @@
     <title>Hello, World!</title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/chatbot.css">	
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-	<script type="text/javascript" src="js/script.js"></script>
+	<script type="text/javascript" src="js/script.js"></script>	
+	<!-- MSAL.js Library -->
+	<script src="https://alcdn.msauth.net/browser/2.38.1/js/msal-browser.min.js"></script>
 	<!-- Prism.js CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css">
     <!-- Prism.js Line Numbers CSS -->
@@ -34,7 +37,7 @@
 				<div w3-include-html="navigation.html"></div>
             </div>
         </nav>
-        <main class="flex-grow-1">
+        <main class="flex-grow-1" id="teaching-content">
 			<header>
 				<h1>Hello, World!</h1>
 			</header>
@@ -177,35 +180,76 @@ print("World")  # 會出錯</code></pre>
 			<section>
 
 				<h2>挑戰</h2>
-				<h3 class="caption">挑戰 1：自訂你的訊息 <span class="icon">🛈</span></h3>
-				<p>試著修改 "Hello, World!" 的內容，顯示其他訊息。</p>
-				<div class="answer">
-                <pre class="line-numbers"><code class="language-python"># 自訂訊息範例
+				<!-- 挑戰 1 -->
+				<div class="challenge-item" id="challenge-1">
+					<h3 class="caption">挑戰 1：自訂你的訊息 <span class="icon">🛈</span></h3>
+					<p>試著修改 "Hello, World!" 的內容，顯示其他訊息。</p>
+					<div class="answer">
+					<pre class="line-numbers"><code class="language-python"># 自訂訊息範例
 print("Welcome to Python programming!")</code></pre>
+					</div>
+					
+					<!-- 聊天機器人按鈕 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+                    💬 需要引導？找學習助手
+					</button>
 				</div>
-				
 
-				<h3 class="caption">挑戰 2：加入多行輸出 <span class="icon">🛈</span></h3>
-				<p>試試看如何讓程式輸出多行訊息：</p>
-				<div class="answer">
-                <pre class="line-numbers"><code class="language-python"># 多行輸出範例
+
+				<div class="challenge-item" id="challenge-2">
+					<h3 class="caption">挑戰 2：加入多行輸出 <span class="icon">🛈</span></h3>
+					<p>用不同方法讓程式輸出三行訊息（至少嘗試兩種）：</p>
+					<ul>
+						<li>方法A：寫三次 <code>print()</code></li>
+						<li>方法B：在單一字串中使用 <code>\n</code></li>
+						<li>方法C（進階）：使用三引號建立多行字串</li>
+					</ul>
+					<div class="answer">
+					<pre class="line-numbers"><code class="language-python"># 範例：方法A（多次 print）
 print("Hello, Python!")
 print("This is your second line.")
-print("Happy coding!")</code></pre>
+print("Happy coding!")
+
+# 範例：方法B（使用 \n）
+print("Hello, Python!\nThis is your second line.\nHappy coding!")
+
+# 範例：方法C（多行字串）
+msg = """Hello, Python!
+This is your second line.
+Happy coding!"""
+print(msg)
+
+# 延伸：end 參數（不自動換行）
+print("First", end="")
+print("Second")  # 兩段會接在同一行</code></pre>
+					</div>
+					
+					<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
 				</div>
 
-				<h3 class="caption">挑戰 3：使用變數顯示訊息 <span class="icon">🛈</span></h3>
-				<p>嘗試定義一個變數，然後使用變數來顯示訊息：</p>
-				<div class="answer">
-                <pre class="line-numbers"><code class="language-python"># 使用變數範例
+				<div class="challenge-item" id="challenge-3">
+					<h3 class="caption">挑戰 3：使用變數顯示訊息 <span class="icon">🛈</span></h3>
+					<p>嘗試定義一個變數，然後使用變數來顯示訊息：</p>
+					<div class="answer">
+					<pre class="line-numbers"><code class="language-python"># 使用變數範例
 message = "Hello from a variable!"
 print(message)</code></pre>
+					</div>
+					
+					<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
 				</div>
 
-				<h3 class="caption">挑戰 4：探索不同類型的字串 <span class="icon">🛈</span></h3>
-				<p>試試看單引號和雙引號是否可以混用，並觀察會發生什麼。</p>
-				<div class="answer">
-                <pre class="line-numbers"><code class="language-python"># 單引號與雙引號範例
+				<div class="challenge-item" id="challenge-4">
+					<h3 class="caption">挑戰 4：探索字串不同的寫法 <span class="icon">🛈</span></h3>
+					<p>試試看單引號和雙引號是否可以混用，並觀察會發生什麼。</p>
+					<div class="answer">
+					<pre class="line-numbers"><code class="language-python"># 單引號與雙引號範例
 print('This is a single-quoted string.')
 print("This is a double-quoted string.")
 
@@ -228,33 +272,53 @@ multi_line_str = "這是一個換行的字串，\
 因為它使用了反斜線"
 print(multi_line_str)
 </code></pre>
+					</div>
+					
+					<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
 				</div>
         
-				
-				<h3 class="caption">挑戰 5：加入註解解釋程式 <span class="icon">🛈</span></h3>
-				<p>在程式碼中為每一行加入註解，解釋它的功能。</p>
-				<div class="answer">
-                <pre class="line-numbers"><code class="language-python"># 使用 print 函式輸出訊息
+				<div class="challenge-item" id="challenge-5">
+					<h3 class="caption">挑戰 5：加入註解解釋程式 <span class="icon">🛈</span></h3>
+					<p>在程式碼中為每一行加入註解，解釋它的功能。</p>
+					<div class="answer">
+					<pre class="line-numbers"><code class="language-python"># 使用 print 函式輸出訊息
 print("Hello, World!")  # 這是經典的程式設計起點
 
 # 輸出歡迎訊息
 print("Welcome to Python!")</code></pre>
+					</div>
+					
+					<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
 				</div>
 
-				<h3 class="caption">挑戰 6：嘗試縮排錯誤 <span class="icon">🛈</span></h3>
-				<p>故意在程式碼中加入不正確的縮排，觀察 Python 提示的錯誤訊息，然後修正錯誤。</p>
-				<div class="answer">
-				<pre class="line-numbers"><code class="language-python"># 範例程式碼
+				<div class="challenge-item" id="challenge-6">
+					<h3 class="caption">挑戰 6：嘗試縮排錯誤 <span class="icon">🛈</span></h3>
+					<p>故意在程式碼中加入不正確的縮排，觀察 Python 提示的錯誤訊息，然後修正錯誤。</p>
+					<div class="answer">
+					<pre class="line-numbers"><code class="language-python"># 範例程式碼
 # 錯誤縮排
   print("This line has incorrect indentation.")  # 會產生 IndentationError
 # 修正縮排
 print("This line is correctly indented.")</code></pre>
+					</div>
+					
+					<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
 				</div>
 
-				<h3 class="caption">挑戰 7：新增空行與多行註解 <span class="icon">🛈</span></h3>
-				<p>在程式中加入多行註解，描述程式的功能和目標。</p>
-				<div class="answer">
-				<pre class="line-numbers"><code class="language-python">"""
+				<div class="challenge-item" id="challenge-7">
+					<h3 class="caption">挑戰 7：新增空行與多行註解 <span class="icon">🛈</span></h3>
+					<p>在程式中加入多行註解，描述程式的功能和目標。</p>
+					<div class="answer">
+						<pre class="line-numbers"><code class="language-python">"""
 這是一個多行註解的範例
 用於說明程式的功能與目標
 """
@@ -262,15 +326,22 @@ print("This line is correctly indented.")</code></pre>
 # 輸出兩行訊息
 print("This is the first message.")
 print("This is the second message.")</code></pre>
+					</div>
+					
+					<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
 				</div>
 				
-				<h3 class="caption">挑戰 8：使用反斜線讓程式碼換行 <span class="icon">🛈</span></h3>
-				<p>請修改以下 Python 程式，使它在不影響輸出結果的情況下，使用反斜線讓程式碼換行。</p>
-				<pre class="line-numbers"><code class="language-python"># 原始程式碼
+				<div class="challenge-item" id="challenge-8">
+					<h3 class="caption">挑戰 8：使用反斜線讓程式碼換行 <span class="icon">🛈</span></h3>
+					<p>請修改以下 Python 程式，使它在不影響輸出結果的情況下，使用反斜線讓程式碼換行。</p>
+					<pre class="line-numbers"><code class="language-python"># 原始程式碼
 result = 10 * 2 + 30 * 3 + 40 * 4 + 50 * 5 + 60 * 6 + 70 * 7
 print("計算結果:", result)</code></pre>
-				<div class="answer">
-				<pre class="line-numbers"><code class="language-python"># 使用反斜線讓程式碼換行
+					<div class="answer">
+						<pre class="line-numbers"><code class="language-python"># 使用反斜線讓程式碼換行
 result = 10 * 2 + \
          30 * 3 + \
          40 * 4 + \
@@ -279,6 +350,12 @@ result = 10 * 2 + \
          70 * 7
 
 print("計算結果:", result)</code></pre>
+					</div>
+					
+					<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
 				</div>
 
 			</section>
@@ -290,6 +367,50 @@ print("計算結果:", result)</code></pre>
 				<p>透過這一章，你學到了如何使用Thonny撰寫與執行Python程式，並理解了程式碼的基本組成部分。在接下來的章節，我們將深入探索Python的更多功能，讓你能夠撰寫更有趣的程式。加油！</p>
 			</section>
 		</main>
+		
+		<!-- 全域聊天機器人容器（只需要一個） -->
+		<div id="chatbot-container" class="chatbot-docked chatbot-docked-right" style="display: none;">
+			<div class="chatbot-window">
+				<div class="chatbot-header">
+					<div class="chatbot-header-left">
+						<span class="chatbot-title" id="chatbot-title">🤖 Python 學習助手</span>
+						
+					</div>
+					<div class="chatbot-header-right">
+						<button class="chatbot-jump-btn" id="chatbot-jump-btn" onclick="jumpToChallenge()" title="跳轉到挑戰位置">🚩</button>
+						<!-- 停靠位置按鈕 -->
+						<button class="chatbot-dock-btn" id="dock-right-btn" onclick="dockChatbot('right')" title="停靠右側">
+							▷
+						</button>
+						<button class="chatbot-dock-btn" id="dock-bottom-btn" onclick="dockChatbot('bottom')" title="停靠底部">
+							▽
+						</button>
+						<!--button class="chatbot-dock-btn" onclick="dockChatbot('top')" title="停靠頂部">
+							△
+						</button-->
+						<button class="chatbot-close" onclick="closeChatbot()">✕</button>
+					</div>
+				</div>
+								
+				<!-- 調整大小的拖曳柄 -->
+				<div class="chatbot-resizer" id="chatbot-resizer"></div>
+				
+				<div class="chatbot-messages" id="chatbot-messages"></div>
+				<div class="chatbot-input">
+					<textarea 
+						id="chatbot-input" 
+						placeholder="輸入你的回答或問題...（Shift+Enter 換行，Enter 發送）" 
+						onkeydown="handleKeyPress(event)"
+						rows="1"></textarea>
+					<button id="chatbot-send-btn" onclick="sendMessage()">發送</button>
+					<button id="chatbot-summary-btn" onclick="generateSummary()">📊</button>
+				</div>
+			</div>
+		</div>
+
+		<script src="js/auth.js"></script>
+		<script src="js/chatbot.js"></script>
+		
     </div>
 </body>
 </html>

@@ -6,6 +6,19 @@ body {
 	color: #333;
 	margin: 0;
 	padding: 0;
+    
+    /* NEW: CSS 變數預設值 */
+    --chatbot-offset-right: 0px;
+    --chatbot-offset-bottom: 0px;
+    --chatbot-offset-top: 0px;
+    --header-height: 90px;
+    
+    /* MODIFIED: 讓 body 內容給右側 Chatbot 讓位 (使用 padding) */
+    padding-right: var(--chatbot-offset-right);
+    /* 移除 body padding-bottom，改由 main/sidebar 處理 margin/padding-bottom */
+    padding-bottom: 0;
+    
+    transition: padding-right 0.3s ease, padding-bottom 0.3s ease;
 }
 
 header {
@@ -15,11 +28,15 @@ header {
 	position: fixed;
 	top: 0;
 	left: 0;
-	width: 100%;	
+    /* MODIFIED: 讓 Header 寬度給右側 Chatbot 讓位 */
+	width: calc(100% - var(--chatbot-offset-right));
 	border-bottom: 1px solid #ddd;
 	padding: 1rem;
-	padding-left: 250px;
-	transition: padding-left 0.3s ease;
+    
+    /* MODIFIED: 讓 Header 向下推移給頂部 Chatbot 讓位 */
+    transform: translateY(var(--chatbot-offset-top));
+    
+	transition: padding-left 0.3s ease, width 0.3s ease, transform 0.3s ease;
 	z-index: 10;
 }
 
@@ -39,13 +56,16 @@ th {
 	background-color: #f4f4f4;
 }
 
+/* MODIFIED: 調整 Main 內容: 使用 padding-bottom 讓位 */
 main {
     flex-grow: 1 !important;
-    transition: margin-left 0.3s ease; /* Smooth transition */
-    width: calc(100% - 250px); /* Dynamically adjust width */
-	margin-top: 90px; /* Space for the fixed header */	
+    transition: margin-left 0.3s ease; 
+    width: 100%; 
+	margin-top: 0; 
 	overflow: auto;
-	padding-bottom: 60px;
+	
+    /* NEW: 當 Chatbot 停靠底部時，增加底部空間 + 預設的 60px 緩衝 */
+	padding-bottom: calc(var(--chatbot-offset-bottom) + 60px); 
 }
 main.hidden {
     margin-left: 0;
@@ -58,7 +78,7 @@ header h1 {
 section {
 	max-width: 1024px;
 	width: 90%;
-	margin: 2rem auto;
+	margin: 5rem auto;
 	background: white;
 	padding: 2rem;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -104,23 +124,35 @@ pre {
   cursor: pointer; /* Changes cursor to pointer */
 }
 
+/* MODIFIED: 調整 .d-flex 容器: 垂直方向位移，並設定高度 */
 .d-flex {
     display: flex;
-    height: 100vh; /* Ensure the full viewport height is used */
-    overflow: hidden; /* Prevent overflow issues */
-    /* padding-bottom: 60px; */
+    /* 位移：向下推移以避開 Header 和頂部 Chatbot */
+    margin-top: calc(var(--header-height) + var(--chatbot-offset-top)); 
+    
+    /* 高度設定，讓其自然延伸到視窗底部 */
+    height: calc(100vh - var(--header-height) - var(--chatbot-offset-top));
+    
+    overflow: hidden; 
+    
+    transition: margin-top 0.3s ease, height 0.3s ease;
 }
 
+/* MODIFIED: 調整 Sidebar: 使用 margin-bottom 讓位 */
 #sidebar {	
     width: 250px;    
     position: sticky;
-    top: 0px;
+    top: 0;
     overflow-y: auto;
     font-size: large;
     padding-top: 0px;
-    margin-top: 90px;
-	transition: transform 0.3s ease;
-    flex-shrink: 0; /* Prevent the sidebar from shrinking */	
+    margin-top: 0; 
+    
+    /* NEW: 當 Chatbot 停靠底部時，增加底部空間 */
+    margin-bottom: calc(var(--chatbot-offset-bottom)); 
+    
+	transition: transform 0.3s ease, margin-bottom 0.3s ease;
+    flex-shrink: 0;
 }
 #sidebar.hidden {
 	transform: translateX(-250px);
@@ -129,13 +161,15 @@ pre {
 #toggleNav {
 	position: fixed;
 	font-size: 1rem;
-    top: 97px;
+    /* MODIFIED: 增加頂部偏移量 */
+    top: calc(97px + var(--chatbot-offset-top)); 
     left: 190px;
     z-index: 1000;
 	color: black;
     background: transparent;
     border: 0px;	
-	transition: left 0.3s ease;
+    
+	transition: left 0.3s ease, top 0.3s ease;
 }
 #toggleNav:hover {
 	background: lightgray;
