@@ -1,13 +1,23 @@
-// ======================= auth.js =======================
-// Server-side auth integration (Microsoft 365 via server.py)
-// - No MSAL in browser
-// - Uses /api/auth/* endpoints
-// - Exposes: initAuth, isLoggedIn, getUserInfo, login, logout, openChatLogModal
+// ======================= auth.js (plain text version) =======================
+// MSAL + Chatlog modal (compact, pretty, safe, no markdown)
 
-const API_BASE = 'https://chatbot-api-250975721717.asia-east1.run.app/api';
+// ---------------------- Microsoft 365 Auth Setup ----------------------
+const msalConfig = {
+  auth: {
+    clientId: 'ed80079f-7763-4181-84fa-b3a775f69355',
+    authority: 'https://login.microsoftonline.com/organizations',
+    redirectUri: window.location.origin,
+    navigateToLoginRequestUrl: false
+  },
+  cache: {
+    cacheLocation: 'localStorage',
+    storeAuthStateInCookie: false
+  }
+};
 
+const loginRequest = { scopes: ['User.Read', 'User.ReadBasic.All'] };
+const msalInstance = new msal.PublicClientApplication(msalConfig);
 let currentUser = null;
-let authInitialized = false;
 
 // ---------------------- Utility ----------------------
 function escapeHtml(s) {
@@ -20,54 +30,123 @@ function escapeHtml(s) {
 }
 
 function getUserInfo() {
-  return currentUser;
+  const stored = localStorage.getItem('userInfo');
+  if (stored) return JSON.parse(stored);
+  if (currentUser) {
+    return {
+      name: currentUser.displayName || currentUser.name || '學生',
+      email: currentUser.email || '',
+      organization: currentUser.organization || ''
+    };
+  }
+  return null;
 }
 
-function isLoggedIn() {
-  return !!(currentUser && currentUser.email);
-}
-
-// ---------------------- Auth Flow (server-side) ----------------------
+// ---------------------- Auth Flow ----------------------
 async function initAuth() {
   try {
-    const res = await fetch(`${API_BASE}/auth/status`, {
-      method: 'GET',
-      credentials: 'include'
-    });
-    if (res.ok) {
-      const data = await res.json();
-      if (data.authenticated && data.user) {
-        currentUser = data.user;
-        document.body.classList.add('user-logged-in');
-        showWelcomeBanner();
+    const redirectResponse = await msalInstance.handleRedirectPromise();
+    if (redirectResponse && redirectResponse.state) {
+      const returnUrl = decodeURIComponent(redirectResponse.state);
+      if (returnUrl && returnUrl !== window.location.href) {
+        window.location.replace(returnUrl);
+        return true;
       }
     }
-  } catch (err) {
-    console.error('❌ initAuth failed:', err);
-  } finally {
-    authInitialized = true;
+
+    const accounts = msalInstance.getAllAccounts();
+    if (accounts.length > 0) {
+      currentUser = accounts[0];
+      msalInstance.setActiveAccount(currentUser);
+      await getUserDetails();
+      localStorage.setItem('userInfo', JSON.stringify({
+        name: currentUser.displayName,
+        email: currentUser.email,
+        organization: currentUser.organization
+      }));
+      showWelcomeBanner();
+      return true;
+    }
+    return false;
+  } catch (error) {
+    console.error('❌ Auth error:', error);
+    return false;
   }
 }
 
-function login() {
-  const redirectUri = encodeURIComponent(window.location.href.split('#')[0]);
-  window.location.href = `${API_BASE}/auth/login?redirect_uri=${redirectUri}`;
+async function login() {
+  try {
+    const response = await msalInstance.loginPopup(loginRequest);
+    currentUser = response.account;
+    msalInstance.setActiveAccount(currentUser);
+    await getUserDetails();
+    localStorage.setItem('userInfo', JSON.stringify({
+      name: currentUser.displayName,
+      email: currentUser.email,
+      organization: currentUser.organization
+    }));
+    hideLoginPrompt();
+    showWelcomeBanner();
+    document.body.classList.add('user-logged-in');
+    return true;
+  } catch (error) {
+    console.error('❌ Login failed:', error);
+    alert('登入失敗，請重試');
+    return false;
+  }
 }
 
 async function logout() {
   try {
-    await fetch(`${API_BASE}/auth/logout`, {
-      method: 'POST',
-      credentials: 'include'
+    localStorage.removeItem('userInfo');
+    await msalInstance.logoutRedirect({
+      account: msalInstance.getActiveAccount() || currentUser || undefined,
+      postLogoutRedirectUri: window.location.href.split('#')[0]
     });
-  } catch (err) {
-    console.error('❌ Logout error:', err);
-  } finally {
     currentUser = null;
-    document.body.classList.remove('user-logged-in');
-    const banner = document.getElementById('welcome-banner');
-    if (banner) banner.remove();
-    window.location.reload();
+  } catch (error) {
+    console.error('❌ Logout error:', error);
+  }
+}
+
+// ---------------------- Check Login State ----------------------
+function isLoggedIn() {
+  try {
+    // Use MSAL to check if there’s at least one active account
+    const accounts = msalInstance.getAllAccounts();
+    if (accounts && accounts.length > 0) return true;
+
+    // Fallback: check if userInfo is cached locally
+    const stored = localStorage.getItem('userInfo');
+    if (stored) {
+      const info = JSON.parse(stored);
+      return !!(info && info.email);
+    }
+
+    return false;
+  } catch (err) {
+    console.warn('⚠️ isLoggedIn check failed:', err);
+    return false;
+  }
+}
+
+async function getUserDetails() {
+  try {
+    const tokenResponse = await msalInstance.acquireTokenSilent({
+      ...loginRequest,
+      account: currentUser
+    });
+    const response = await fetch('https://graph.microsoft.com/v1.0/me', {
+      headers: { 'Authorization': `Bearer ${tokenResponse.accessToken}` }
+    });
+    if (response.ok) {
+      const userDetails = await response.json();
+      currentUser.displayName = userDetails.displayName || currentUser.name;
+      currentUser.email = userDetails.mail || userDetails.userPrincipalName;
+      currentUser.jobTitle = userDetails.jobTitle || '';
+    }
+  } catch (error) {
+    console.error('❌ Get user details failed:', error);
   }
 }
 
@@ -82,21 +161,17 @@ function showLoginPrompt() {
       <div style="background:#fff;padding:2rem;border-radius:12px;text-align:center;max-width:420px;">
         <h2>Python 學習平台</h2>
         <p style="color:#555;margin-bottom:1rem;">請使用 Microsoft 365 帳號登入以開始學習</p>
-        <button id="login-confirm-btn" style="padding:.8rem 1.2rem;background:#0ea5e9;color:#fff;border:none;border-radius:8px;cursor:pointer;">🔐 登入</button>
+        <button onclick="login()" style="padding:.8rem 1.2rem;background:#0ea5e9;color:#fff;border:none;border-radius:8px;cursor:pointer;">🔐 登入</button>
       </div>
     </div>`;
   document.body.appendChild(el);
-  document.getElementById('login-confirm-btn').onclick = () => {
-    hideLoginPrompt();
-    login();
-  };
 }
-
 function hideLoginPrompt() {
   const el = document.getElementById('login-prompt');
   if (el) el.remove();
 }
 
+// ---------------------- Welcome Banner ----------------------
 function showWelcomeBanner() {
   const old = document.getElementById('welcome-banner');
   if (old) old.remove();
@@ -108,7 +183,7 @@ function showWelcomeBanner() {
   banner.innerHTML = `
     <div style="background:#fff;padding:.6rem 1rem;border-radius:10px;
                 box-shadow:0 3px 10px rgba(0,0,0,.1);display:flex;align-items:center;gap:.6rem;">
-      <span>👋 你好，<strong style="color:#0891b2;">${escapeHtml(userInfo.name || '學生')}</strong></span>
+      <span>👋 你好，<strong style="color:#0891b2;">${escapeHtml(userInfo.name)}</strong></span>
       <a href="#" onclick="logout();return false;" style="color:#0891b2;font-size:.82rem;">登出</a>
       <button onclick="openChatLogModal()" style="padding:.3rem .6rem;background:#f1f5f9;border:1px solid #e2e8f0;border-radius:8px;font-size:.8rem;">📓 我的紀錄</button>
     </div>`;
@@ -168,11 +243,6 @@ function msgBubble(msg) {
 
 // ---------------------- Fetch & Render Chat Logs ----------------------
 async function openChatLogModal() {
-  if (!isLoggedIn()) {
-    showLoginPrompt();
-    return;
-  }
-
   createChatLogModalIfNeeded();
   const modal = document.getElementById('chatlog-modal');
   const container = document.getElementById('chatlog-content');
@@ -183,13 +253,12 @@ async function openChatLogModal() {
   container.innerHTML = `<div class="cl-chip">讀取中…</div>`;
 
   try {
+    const user = getUserInfo() || {};
     const params = new URLSearchParams({
+      email: (user.email || '').toLowerCase(),
       documentTitle: document.title
     });
-    const res = await fetch(`${API_BASE}/chat/logs?${params.toString()}`, {
-      method: 'GET',
-      credentials: 'include'
-    });
+    const res = await fetch(`https://chatbot-api-250975721717.asia-east1.run.app/api/chat/logs?${params.toString()}`);
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const data = await res.json();
     const challenges = (data && data.challenges) || [];
@@ -199,6 +268,7 @@ async function openChatLogModal() {
       return;
     }
 
+    // dropdown
     jumpMenu.innerHTML = '<option value="">跳至挑戰題...</option>' +
       challenges.map((c, i) => {
         const label = c.question || c.title || c.challenge_key;
@@ -213,6 +283,7 @@ async function openChatLogModal() {
       e.target.value = '';
     };
 
+    // search filter
     if (searchBox) {
       searchBox.oninput = () => {
         const q = searchBox.value.trim().toLowerCase();
@@ -225,6 +296,7 @@ async function openChatLogModal() {
 
     function chip(text) { return `<span class="cl-chip">${escapeHtml(text)}</span>`; }
 
+    // render
     container.innerHTML = challenges.map((c, i) => {
       const latest = c.latest_completion ?? null;
       const best = c.best_completion ?? null;
@@ -251,14 +323,9 @@ async function openChatLogModal() {
   }
 }
 
-// ---------------------- Init & Expose ----------------------
-window.addEventListener('DOMContentLoaded', () => {
-  initAuth();
+// ---------------------- Init ----------------------
+window.addEventListener('DOMContentLoaded', async () => {
+  await initAuth();
 });
-
-window.isLoggedIn = isLoggedIn;
-window.getUserInfo = getUserInfo;
-window.login = login;
-window.logout = logout;
 window.openChatLogModal = openChatLogModal;
 window.closeChatLogModal = closeChatLogModal;
