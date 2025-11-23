@@ -6,28 +6,25 @@
     <title>字串格式化</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/chatbot.css">	
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-	<script type="text/javascript" src="js/script.js"></script>
-	<!-- Prism.js CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css">
-    <!-- Prism.js Line Numbers CSS -->
+	<script type="text/javascript" src="js/script.js"></script>	
+	<script src="https://alcdn.msauth.net/browser/2.38.1/js/msal-browser.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
-    <!-- Prism.js Syntax Highlighting -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
-    <!-- Prism.js Line Numbers Plugin -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
 	<script>
 		document.addEventListener("DOMContentLoaded", (event) => {
-			includeHTML(highlightItem);					
-			document.getElementById("toggleNav").addEventListener("click", navClick);	
+			includeHTML(highlightItem);			
+			document.getElementById("toggleNav").addEventListener("click", navClick);		
 			enableAnswerRevealer();
 		});
-	</script>	
+	</script>		
 </head>
 <body>
 	<div class="d-flex">
-		<!-- Floating Button -->
 		<button id="toggleNav" class="btn btn-primary">&#8212;</button>
         <nav id="sidebar" class="bg-light border-end" style="display: block;">
             <div>
@@ -226,10 +223,12 @@ print("成功率是 %d%%" % 100)</code></pre>
 
 			<section>
 				<h2>挑戰題目</h2>
-				<h3 class="caption">挑戰 1：使用三種格式化方法 <span class="icon">🛈</span></h3>
-    <p>寫一段程式，讓它分別使用 <code>%</code>、<code>str.format()</code> 和 <code>f-string</code> 來輸出以下句子：<br><code>我的名字是 John，我有 3 隻貓。</code></p>
-    <div class="answer">
-        <pre class="line-numbers"><code class="language-python"># 解答
+				
+				<div class="challenge-item" id="challenge-1">
+					<h3 class="caption">挑戰 1：使用三種格式化方法 <span class="icon">🛈</span></h3>
+					<p>寫一段程式，讓它分別使用 <code>%</code>、<code>str.format()</code> 和 <code>f-string</code> 來輸出以下句子：<br><code>我的名字是 John，我有 3 隻貓。</code></p>
+					<div class="answer">
+						<pre class="line-numbers"><code class="language-python"># 解答
 # 使用 % 格式化
 print("我的名字是 %s，我有 %d 隻貓。" % ("John", 3))
 
@@ -240,16 +239,21 @@ print("我的名字是 {}，我有 {} 隻貓。".format("John", 3))
 name = "John"
 cats = 3
 print(f"我的名字是 {name}，我有 {cats} 隻貓。")</code></pre>
-    </div>
+					</div>
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
-				<h3 class="caption">挑戰 2：控制數字格式 <span class="icon">🛈</span></h3>
-    <p>嘗試使用 <code>f-string</code> 格式化以下數字：</p>
-    <ul>
-        <li>顯示小數點後 3 位的 1/3。</li>
-        <li>將整數 7 格式化為 4 位數字，前面補 0。</li>
-    </ul>
-    <div class="answer">
-        <pre class="line-numbers"><code class="language-python"># 解答
+				<div class="challenge-item" id="challenge-2">
+					<h3 class="caption">挑戰 2：控制數字格式 <span class="icon">🛈</span></h3>
+					<p>嘗試使用 <code>f-string</code> 格式化以下數字：</p>
+					<ul>
+						<li>顯示小數點後 3 位的 1/3。</li>
+						<li>將整數 7 格式化為 4 位數字，前面補 0。</li>
+					</ul>
+					<div class="answer">
+						<pre class="line-numbers"><code class="language-python"># 解答
 # 顯示小數點後 3 位的 1/3
 value = 1 / 3
 print(f"1/3 約為 {value:.3f}")
@@ -257,76 +261,109 @@ print(f"1/3 約為 {value:.3f}")
 # 將整數 7 格式化為 4 位數字，前面補 0
 number = 7
 print(f"數字格式化為: {number:04d}")</code></pre>
-    </div>
+					</div>
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
-				<h3 class="caption">挑戰 3：設計自訂訊息 <span class="icon">🛈</span></h3>
-    <p>定義變數 <code>name</code> 和 <code>hobby</code>，使用 <code>f-string</code> 將它們嵌入字串，生成一段介紹自己的句子。</p>
-    <div class="answer">
-        <pre class="line-numbers"><code class="language-python"># 解答
+				<div class="challenge-item" id="challenge-3">
+					<h3 class="caption">挑戰 3：設計自訂訊息 <span class="icon">🛈</span></h3>
+					<p>定義變數 <code>name</code> 和 <code>hobby</code>，使用 <code>f-string</code> 將它們嵌入字串，生成一段介紹自己的句子。</p>
+					<div class="answer">
+						<pre class="line-numbers"><code class="language-python"># 解答
 # 定義變數
 name = "Alice"
 hobby = "讀書"
 
 # 使用 f-string 生成介紹句子
 print(f"大家好，我是 {name}，我的興趣是 {hobby}。")</code></pre>
-    </div>
+					</div>
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 	
-				<h3 class="caption">挑戰 4：百分比格式化 <span class="icon">🛈</span></h3>
-    <p>使用 <code>f-string</code> 顯示一個百分比值，精確到小數點後 2 位。例如，將數值 <code>0.856</code> 格式化為百分比。</p>
-    <div class="answer">
-        <pre class="line-numbers"><code class="language-python"># 解答
+				<div class="challenge-item" id="challenge-4">
+					<h3 class="caption">挑戰 4：百分比格式化 <span class="icon">🛈</span></h3>
+					<p>使用 <code>f-string</code> 顯示一個百分比值，精確到小數點後 2 位。例如，將數值 <code>0.856</code> 格式化為百分比。</p>
+					<div class="answer">
+						<pre class="line-numbers"><code class="language-python"># 解答
 # 定義數值
 rate = 0.856
 
 # 使用 f-string 格式化為百分比
 print(f"轉換為百分比：{rate:.2%}")</code></pre>
-    </div>
+					</div>
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 	
-				<h3 class="caption">挑戰 5：二進位表示 <span class="icon">🛈</span></h3>
-    <p>將整數 <code>42</code> 轉換為二進位格式，並使用 <code>f-string</code> 格式化輸出。</p>
-    <div class="answer">
-        <pre class="line-numbers"><code class="language-python"># 解答
+				<div class="challenge-item" id="challenge-5">
+					<h3 class="caption">挑戰 5：二進位表示 <span class="icon">🛈</span></h3>
+					<p>將整數 <code>42</code> 轉換為二進位格式，並使用 <code>f-string</code> 格式化輸出。</p>
+					<div class="answer">
+						<pre class="line-numbers"><code class="language-python"># 解答
 # 定義數值
 number = 42
 
 # 格式化為二進位
 print(f"42 的二進位表示：{number:b}")</code></pre>
-    </div>
+					</div>
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 	
 	
-				<h3 class="caption">挑戰 6：置中格式化 <span class="icon">🛈</span></h3>
-    <p>使用 <code>f-string</code> 將字串 <code>"Python"</code> 置中對齊，總寬度為 20。</p>
-    <div class="answer">
-        <pre class="line-numbers"><code class="language-python"># 解答
+				<div class="challenge-item" id="challenge-6">
+					<h3 class="caption">挑戰 6：置中格式化 <span class="icon">🛈</span></h3>
+					<p>使用 <code>f-string</code> 將字串 <code>"Python"</code> 置中對齊，總寬度為 20。</p>
+					<div class="answer">
+						<pre class="line-numbers"><code class="language-python"># 解答
 # 定義字串
 text = "Python"
 
 # 置中格式化
 print(f"置中顯示：{text:^20}")</code></pre>
-    </div>
+					</div>
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 	
-				<h3 class="caption">挑戰 7：顯示科學記數法 <span class="icon">🛈</span></h3>
-    <p>將數值 <code>123456</code> 格式化為科學記數法（小數點後保留 3 位）。</p>
-    <div class="answer">
-        <pre class="line-numbers"><code class="language-python"># 解答
+				<div class="challenge-item" id="challenge-7">
+					<h3 class="caption">挑戰 7：顯示科學記數法 <span class="icon">🛈</span></h3>
+					<p>將數值 <code>123456</code> 格式化為科學記數法（小數點後保留 3 位）。</p>
+					<div class="answer">
+						<pre class="line-numbers"><code class="language-python"># 解答
 # 定義數值
 number = 123456
 
 # 格式化為科學記數法
 print(f"科學記數法：{number:.3e}")</code></pre>
-    </div>
+					</div>
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 	
-				<h3 class="caption">挑戰 8：帶前綴的十六進位 <span class="icon">🛈</span></h3>
-    <p>將數值 <code>255</code> 格式化為十六進位格式，並顯示 <code>0x</code> 前綴。</p>
-    <div class="answer">
-        <pre class="line-numbers"><code class="language-python"># 解答
+				<div class="challenge-item" id="challenge-8">
+					<h3 class="caption">挑戰 8：帶前綴的十六進位 <span class="icon">🛈</span></h3>
+					<p>將數值 <code>255</code> 格式化為十六進位格式，並顯示 <code>0x</code> 前綴。</p>
+					<div class="answer">
+						<pre class="line-numbers"><code class="language-python"># 解答
 # 定義數值
 number = 255
 
 # 格式化為帶前綴的十六進位
 print(f"255 的十六進位表示：{number:#x}")</code></pre>
-    </div>
-	
+					</div>
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 	
 			</section>
 
@@ -335,6 +372,44 @@ print(f"255 的十六進位表示：{number:#x}")</code></pre>
 				<p>學習字串格式化是 Python 程式設計的重要基礎，它能讓你的程式輸出更加專業和易讀。無論是舊式的 <code>%</code> 格式化，還是現代的 <code>f-string</code>，都各有用途。試著將這些技巧應用於你的程式吧！</p>
 			</section>
 		</main>
+		
+		<div id="chatbot-container" class="chatbot-docked chatbot-docked-right" style="display: none;">
+			<div class="chatbot-window">
+				<div class="chatbot-header">
+					<div class="chatbot-header-left">
+						<span class="chatbot-title" id="chatbot-title">🤖 Python 學習助手</span>
+						
+					</div>
+					<div class="chatbot-header-right">
+						<button class="chatbot-jump-btn" id="chatbot-jump-btn" onclick="jumpToChallenge()" title="跳轉到挑戰位置">🚩</button>
+						<button class="chatbot-dock-btn" id="dock-right-btn" onclick="dockChatbot('right')" title="停靠右側">
+							▷
+						</button>
+						<button class="chatbot-dock-btn" id="dock-bottom-btn" onclick="dockChatbot('bottom')" title="停靠底部">
+							▽
+						</button>
+						<button class="chatbot-close" onclick="closeChatbot()">✕</button>
+					</div>
+				</div>
+								
+				<div class="chatbot-resizer" id="chatbot-resizer"></div>
+				
+				<div class="chatbot-messages" id="chatbot-messages"></div>
+				<div class="chatbot-input">
+					<textarea 
+						id="chatbot-input" 
+						placeholder="輸入你的回答或問題...（Shift+Enter 換行，Enter 發送）" 
+						onkeydown="handleKeyPress(event)"
+						rows="1"></textarea>
+					<button id="chatbot-send-btn" onclick="sendMessage()">發送</button>
+					<button id="chatbot-summary-btn" onclick="generateSummary()">📊</button>
+				</div>
+			</div>
+		</div>
+
+		<script src="js/auth.js"></script>
+		<script src="js/chatbot.js"></script>
+		
     </div>			
 </body>
 </html>

@@ -6,28 +6,25 @@
     <title>算術運算符號與運算優先順序</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/chatbot.css">	
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-	<script type="text/javascript" src="js/script.js"></script>
-	<!-- Prism.js CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css">
-    <!-- Prism.js Line Numbers CSS -->
+	<script type="text/javascript" src="js/script.js"></script>	
+	<script src="https://alcdn.msauth.net/browser/2.38.1/js/msal-browser.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
-    <!-- Prism.js Syntax Highlighting -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
-    <!-- Prism.js Line Numbers Plugin -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
 	<script>
 		document.addEventListener("DOMContentLoaded", (event) => {
-			includeHTML(highlightItem);	
-			document.getElementById("toggleNav").addEventListener("click", navClick);
+			includeHTML(highlightItem);			
+			document.getElementById("toggleNav").addEventListener("click", navClick);		
 			enableAnswerRevealer();
 		});
 	</script>	
 </head>
 <body>
 	<div class="d-flex">
-		<!-- Floating Button -->
 		<button id="toggleNav" class="btn btn-primary">&#8212;</button>
         <nav id="sidebar" class="bg-light border-end" style="display: block;">
             <div>
@@ -148,10 +145,12 @@ else:
 			<section>
 
 				<h2>挑戰題</h2>
-				<h3 class="caption">挑戰 1：計算數學表達式 <span class="icon">🛈</span></h3>
-    <p>讓使用者輸入三個數字，計算其加減乘除的結果，並輸出。</p>
-    <div class="answer">
-        <pre class="line-numbers"><code class="language-python"># 解答
+				
+				<div class="challenge-item" id="challenge-1">
+					<h3 class="caption">挑戰 1：計算數學表達式 <span class="icon">🛈</span></h3>
+					<p>讓使用者輸入三個數字，計算其加減乘除的結果，並輸出。</p>
+					<div class="answer">
+						<pre class="line-numbers"><code class="language-python"># 解答
 print("請輸入三個數字：")
 num1 = int(input("第一個數字："))
 num2 = int(input("第二個數字："))
@@ -163,21 +162,31 @@ if num2 != 0 and num3 != 0:
     print("除法結果：", num1 / num2 / num3)
 else:
     print("無法進行除法，因為除數為 0")</code></pre>
-    </div>
+					</div>
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
-				<h3 class="caption">挑戰 2：字串操作 <span class="icon">🛈</span></h3>
-    <p>讓使用者輸入一個字串和一個數字，將該字串重複輸出指定次數。</p>
-    <div class="answer">
-        <pre class="line-numbers"><code class="language-python"># 解答
+				<div class="challenge-item" id="challenge-2">
+					<h3 class="caption">挑戰 2：字串操作 <span class="icon">🛈</span></h3>
+					<p>讓使用者輸入一個字串和一個數字，將該字串重複輸出指定次數。</p>
+					<div class="answer">
+						<pre class="line-numbers"><code class="language-python"># 解答
 text = input("請輸入一個字串：")
 times = int(input("請輸入一個數字："))
 print("重複字串：", text * times)</code></pre>
-    </div>
+					</div>
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
-				<h3 class="caption">挑戰 3：綜合運算 <span class="icon">🛈</span></h3>
-    <p>定義兩個整數，分別進行加減乘除、取餘數與平方，並輸出每個運算的結果。</p>
-    <div class="answer">
-        <pre class="line-numbers"><code class="language-python"># 解答
+				<div class="challenge-item" id="challenge-3">
+					<h3 class="caption">挑戰 3：綜合運算 <span class="icon">🛈</span></h3>
+					<p>定義兩個整數，分別進行加減乘除、取餘數與平方，並輸出每個運算的結果。</p>
+					<div class="answer">
+						<pre class="line-numbers"><code class="language-python"># 解答
 num1 = int(input("第一個整數："))
 num2 = int(input("第二個整數："))
 print("加法結果：", num1 + num2)
@@ -189,27 +198,38 @@ if num2 != 0:
 else:
     print("無法進行除法或取餘數，因為除數為 0")
 print("平方結果：", num1 ** num2)</code></pre>
-    </div>
+					</div>
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
-				<h3 class="caption">挑戰 4：運算優先順序練習 <span class="icon">🛈</span></h3>
-    <p>請建立一個程式，讓使用者輸入三個數字，分別進行以下運算：</p>
-    <ol>
-        <li>不加括號，依照預設運算優先順序進行計算（如加法與乘法的混合運算）。</li>
-        <li>加入括號，改變運算的優先順序。</li>
-    </ol>
-	<p>輸出兩種計算結果，並觀察結果的差異，理解括號對運算優先順序的影響。</p>
-    <div class="answer">
-        <pre class="line-numbers"><code class="language-python"># 解答
+				<div class="challenge-item" id="challenge-4">
+					<h3 class="caption">挑戰 4：運算優先順序練習 <span class="icon">🛈</span></h3>
+					<p>請建立一個程式，讓使用者輸入三個數字，分別進行以下運算：</p>
+					<ol>
+						<li>不加括號，依照預設運算優先順序進行計算（如加法與乘法的混合運算）。</li>
+						<li>加入括號，改變運算的優先順序。</li>
+					</ol>
+					<p>輸出兩種計算結果，並觀察結果的差異，理解括號對運算優先順序的影響。</p>
+					<div class="answer">
+						<pre class="line-numbers"><code class="language-python"># 解答
 num1 = int(input("第一個數字："))
 num2 = int(input("第二個數字："))
 num3 = int(input("第三個數字："))
 print("不加括號的結果：", num1 + num2 * num3)
 print("加括號的結果：", (num1 + num2) * num3)</code></pre>
-    </div>
-				<h3 class="caption">挑戰 5：指定運算符號應用 <span class="icon">🛈</span></h3>
-    <p>定義一個初始值，使用指定運算符號（<code>+=</code>、<code>*=</code> 等）進行多次運算，並輸出每一步的結果。</p>
-    <div class="answer">
-        <pre class="line-numbers"><code class="language-python"># 解答
+					</div>
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
+
+				<div class="challenge-item" id="challenge-5">
+					<h3 class="caption">挑戰 5：指定運算符號應用 <span class="icon">🛈</span></h3>
+					<p>定義一個初始值，使用指定運算符號（<code>+=</code>、<code>*=</code> 等）進行多次運算，並輸出每一步的結果。</p>
+					<div class="answer">
+						<pre class="line-numbers"><code class="language-python"># 解答
 value = int(input("請輸入初始值："))
 value += 5
 print("加 5 的結果：", value)
@@ -219,23 +239,33 @@ value -= 3
 print("減 3 的結果：", value)
 value //= 4
 print("整數除以 4 的結果：", value)</code></pre>
-    </div>
+					</div>
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
-				<h3 class="caption">挑戰 6：檢查奇數或偶數 <span class="icon">🛈</span></h3>
-    <p>讓使用者輸入一個整數，使用取餘數運算符號（<code>%</code>）檢查該數字是奇數還是偶數，並輸出結果。</p>
-    <div class="answer">
-        <pre class="line-numbers"><code class="language-python"># 解答
+				<div class="challenge-item" id="challenge-6">
+					<h3 class="caption">挑戰 6：檢查奇數或偶數 <span class="icon">🛈</span></h3>
+					<p>讓使用者輸入一個整數，使用取餘數運算符號（<code>%</code>）檢查該數字是奇數還是偶數，並輸出結果。</p>
+					<div class="answer">
+						<pre class="line-numbers"><code class="language-python"># 解答
 num = int(input("請輸入一個整數："))
 if num % 2 == 0:
     print("這是一個偶數")
 else:
     print("這是一個奇數")</code></pre>
-    </div>
+					</div>
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
-				<h3 class="caption">挑戰 7：安全除法 <span class="icon">🛈</span></h3>
-    <p>讓使用者輸入兩個整數，計算第一個數字除以第二個數字的結果。如果除數為 0，顯示錯誤訊息並提示重新輸入。</p>
-    <div class="answer">
-        <pre class="line-numbers"><code class="language-python"># 解答
+				<div class="challenge-item" id="challenge-7">
+					<h3 class="caption">挑戰 7：安全除法 <span class="icon">🛈</span></h3>
+					<p>讓使用者輸入兩個整數，計算第一個數字除以第二個數字的結果。如果除數為 0，顯示錯誤訊息並提示重新輸入。</p>
+					<div class="answer">
+						<pre class="line-numbers"><code class="language-python"># 解答
 numerator = int(input("請輸入被除數："))
 while True:
     denominator = int(input("請輸入除數（不能為 0）："))
@@ -245,17 +275,26 @@ while True:
         break
     else:
         print("除數不能為 0，請重新輸入！")</code></pre>
-    </div>
+					</div>
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 	
-				<h3 class="caption">挑戰 8：字串與數字結合運算 <span class="icon">🛈</span></h3>
-    <p>讓使用者輸入一個字串和一個數字，分別嘗試將它們進行加法、乘法運算，並解釋每種情況的結果。</p>
-    <div class="answer">
-        <pre class="line-numbers"><code class="language-python"># 解答
+				<div class="challenge-item" id="challenge-8">
+					<h3 class="caption">挑戰 8：字串與數字結合運算 <span class="icon">🛈</span></h3>
+					<p>讓使用者輸入一個字串和一個數字，分別嘗試將它們進行加法、乘法運算，並解釋每種情況的結果。</p>
+					<div class="answer">
+						<pre class="line-numbers"><code class="language-python"># 解答
 text = input("請輸入一個字串：")
 num = int(input("請輸入一個整數："))
 print("字串與數字的加法運算：不允許，會產生錯誤")
 print("字串的乘法運算：", text * num, "（字串被重複輸出）")</code></pre>
-    </div>
+					</div>
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
 			</section>
 
@@ -264,6 +303,44 @@ print("字串的乘法運算：", text * num, "（字串被重複輸出）")</co
 				<p>透過本章節，你學會了基本的算術運算符號、指定運算符號、運算優先順序，以及如何將運算符號應用於字串。</p>
 			</section>
 		</main>
+		
+		<div id="chatbot-container" class="chatbot-docked chatbot-docked-right" style="display: none;">
+			<div class="chatbot-window">
+				<div class="chatbot-header">
+					<div class="chatbot-header-left">
+						<span class="chatbot-title" id="chatbot-title">🤖 Python 學習助手</span>
+						
+					</div>
+					<div class="chatbot-header-right">
+						<button class="chatbot-jump-btn" id="chatbot-jump-btn" onclick="jumpToChallenge()" title="跳轉到挑戰位置">🚩</button>
+						<button class="chatbot-dock-btn" id="dock-right-btn" onclick="dockChatbot('right')" title="停靠右側">
+							▷
+						</button>
+						<button class="chatbot-dock-btn" id="dock-bottom-btn" onclick="dockChatbot('bottom')" title="停靠底部">
+							▽
+						</button>
+						<button class="chatbot-close" onclick="closeChatbot()">✕</button>
+					</div>
+				</div>
+								
+				<div class="chatbot-resizer" id="chatbot-resizer"></div>
+				
+				<div class="chatbot-messages" id="chatbot-messages"></div>
+				<div class="chatbot-input">
+					<textarea 
+						id="chatbot-input" 
+						placeholder="輸入你的回答或問題...（Shift+Enter 換行，Enter 發送）" 
+						onkeydown="handleKeyPress(event)"
+						rows="1"></textarea>
+					<button id="chatbot-send-btn" onclick="sendMessage()">發送</button>
+					<button id="chatbot-summary-btn" onclick="generateSummary()">📊</button>
+				</div>
+			</div>
+		</div>
+
+		<script src="js/auth.js"></script>
+		<script src="js/chatbot.js"></script>
+		
     </div>			
 </body>
 </html>

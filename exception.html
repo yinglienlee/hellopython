@@ -6,28 +6,25 @@
     <title>例外處理</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <script type="text/javascript" src="js/script.js"></script>
-	<!-- Prism.js CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css">
-    <!-- Prism.js Line Numbers CSS -->
+	<link rel="stylesheet" href="css/chatbot.css">	
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+	<script type="text/javascript" src="js/script.js"></script>	
+	<script src="https://alcdn.msauth.net/browser/2.38.1/js/msal-browser.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
-    <!-- Prism.js Syntax Highlighting -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
-    <!-- Prism.js Line Numbers Plugin -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", (event) => {
-            includeHTML(highlightItem);
-            document.getElementById("toggleNav").addEventListener("click", navClick);
+	<script>
+		document.addEventListener("DOMContentLoaded", (event) => {
+			includeHTML(highlightItem);			
+			document.getElementById("toggleNav").addEventListener("click", navClick);		
 			enableAnswerRevealer();
-        });
-    </script>
+		});
+	</script>	
 </head>
 <body>
     <div class="d-flex">
-        <!-- Floating Button -->
         <button id="toggleNav" class="btn btn-primary">&#8212;</button>
         <nav id="sidebar" class="bg-light border-end" style="display: block;">
             <div>
@@ -172,10 +169,12 @@ except Exception as e:
 
             <section>
                 <h2>挑戰題目</h2>
-                <h3 class="caption">挑戰 1：例外處理的基礎 <span class="icon">🛈</span></h3>
-                <p>設計一個程式，要求使用者輸入兩個數字，然後進行除法運算。如果輸入的不是數字或除以零，則捕獲例外並提示錯誤訊息。</p>
-				<div class="answer">
-        <pre class="line-numbers"><code class="language-python"># 解答
+                
+                <div class="challenge-item" id="challenge-1">
+                    <h3 class="caption">挑戰 1：例外處理的基礎 <span class="icon">🛈</span></h3>
+                    <p>設計一個程式，要求使用者輸入兩個數字，然後進行除法運算。如果輸入的不是數字或除以零，則捕獲例外並提示錯誤訊息。</p>
+                    <div class="answer">
+                        <pre class="line-numbers"><code class="language-python"># 解答
 try:
     a = float(input("請輸入第一個數字: "))
     b = float(input("請輸入第二個數字: "))
@@ -185,24 +184,28 @@ except ValueError:
     print("輸入的不是有效數字！")
 except ZeroDivisionError:
     print("除數不能為零！")</code></pre>
-    </div>
+                    </div>
+                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+                        💬 需要引導？找學習助手
+                    </button>
+                </div>
 
-
-				<h3 class="caption">挑戰 2：多層次例外處理 <span class="icon">🛈</span></h3>
-				<p>設計一個程式，模擬 ATM 提款流程：</p>
-				<ol>
-					<li>要求使用者輸入提款金額。</li>
-					<li>捕獲以下例外情況：
-						<ul>
-							<li>使用者輸入的不是數字。</li>
-							<li>提款金額小於 0（顯示「金額無效！」）。</li>
-							<li>提款金額大於帳戶餘額（顯示「餘額不足！」）。</li>
-						</ul>
-					</li>
-					<li>如果輸入金額正確且可提取，顯示「提款成功！您的餘額是：<剩餘金額>」。</li>
-				</ol>
-				<div class="answer">
-        <pre class="line-numbers"><code class="language-python"># 解答
+                <div class="challenge-item" id="challenge-2">
+                    <h3 class="caption">挑戰 2：多層次例外處理 <span class="icon">🛈</span></h3>
+                    <p>設計一個程式，模擬 ATM 提款流程：</p>
+                    <ol>
+                        <li>要求使用者輸入提款金額。</li>
+                        <li>捕獲以下例外情況：
+                            <ul>
+                                <li>使用者輸入的不是數字。</li>
+                                <li>提款金額小於 0（顯示「金額無效！」）。</li>
+                                <li>提款金額大於帳戶餘額（顯示「餘額不足！」）。</li>
+                            </ul>
+                        </li>
+                        <li>如果輸入金額正確且可提取，顯示「提款成功！您的餘額是：<剩餘金額>」。</li>
+                    </ol>
+                    <div class="answer">
+                        <pre class="line-numbers"><code class="language-python"># 解答
 balance = 1000  # 帳戶餘額
 
 try:
@@ -218,13 +221,18 @@ except ValueError as e:
     print(e)
 except Exception:
     print("發生未知錯誤！")</code></pre>
-    </div>
+                    </div>
+                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+                        💬 需要引導？找學習助手
+                    </button>
+                </div>
               
 
-                <h3 class="caption">挑戰 3：自訂例外 <span class="icon">🛈</span></h3>
-                <p>建立一個自訂例外類別，模擬當使用者年齡小於 18 歲時，拋出 "未滿 18 歲不可註冊" 的例外。</p>
-				<div class="answer">
-        <pre class="line-numbers"><code class="language-python"># 解答
+                <div class="challenge-item" id="challenge-3">
+                    <h3 class="caption">挑戰 3：自訂例外 <span class="icon">🛈</span></h3>
+                    <p>建立一個自訂例外類別，模擬當使用者年齡小於 18 歲時，拋出 "未滿 18 歲不可註冊" 的例外。</p>
+                    <div class="answer">
+                        <pre class="line-numbers"><code class="language-python"># 解答
 class AgeRestrictionError(Exception):
     pass
 
@@ -237,23 +245,28 @@ except AgeRestrictionError as e:
     print(e)
 except ValueError:
     print("請輸入有效的數字！")</code></pre>
-    </div>
+                    </div>
+                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+                        💬 需要引導？找學習助手
+                    </button>
+                </div>
 				
 							
-				<h3 class="caption">挑戰 4：分數計算 <span class="icon">🛈</span></h3>
-				<p>設計一個程式來計算兩個分數的加總，並處理可能的例外：</p>
-				<ol>
-					<li>要求使用者輸入分數的分子與分母。</li>
-					<li>捕獲以下例外情況：
-						<ul>
-							<li>輸入的不是數字（顯示「請輸入有效的數字！」）。</li>
-							<li>分母為零（顯示「分母不能為零！」）。</li>
-						</ul>
-					</li>
-					<li>若輸入有效，計算並顯示結果，例如：<code>分數加總結果為 7/4</code>。</li>
-				</ol>
-				<div class="answer">
-        <pre class="line-numbers"><code class="language-python"># 解答
+                <div class="challenge-item" id="challenge-4">
+                    <h3 class="caption">挑戰 4：分數計算 <span class="icon">🛈</span></h3>
+                    <p>設計一個程式來計算兩個分數的加總，並處理可能的例外：</p>
+                    <ol>
+                        <li>要求使用者輸入分數的分子與分母。</li>
+                        <li>捕獲以下例外情況：
+                            <ul>
+                                <li>輸入的不是數字（顯示「請輸入有效的數字！」）。</li>
+                                <li>分母為零（顯示「分母不能為零！」）。</li>
+                            </ul>
+                        </li>
+                        <li>若輸入有效，計算並顯示結果，例如：<code>分數加總結果為 7/4</code>。</li>
+                    </ol>
+                    <div class="answer">
+                        <pre class="line-numbers"><code class="language-python"># 解答
 try:
     num1 = int(input("請輸入第一個分數的分子: "))
     den1 = int(input("請輸入第一個分數的分母: "))
@@ -268,23 +281,28 @@ except ValueError:
     print("請輸入有效的數字！")
 except ZeroDivisionError as e:
     print(e)</code></pre>
-    </div>
+                    </div>
+                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+                        💬 需要引導？找學習助手
+                    </button>
+                </div>
 
-				<h3 class="caption">挑戰 5：例外處理中的多個 <code>except</code> <span class="icon">🛈</span></h3>
-				<p>撰寫一個程式，模擬簡單的計算機操作：</p>
-				<ol>
-					<li>要求使用者輸入兩個數字以及一個運算符號（+、-、*、/）。</li>
-					<li>捕獲以下例外：
-						<ul>
-							<li>使用者輸入的不是數字（顯示「輸入無效！」）。</li>
-							<li>使用者嘗試除以零（顯示「不能除以零！」）。</li>
-							<li>無效的運算符號（顯示「不支援的運算符號！」）。</li>
-						</ul>
-					</li>
-					<li>如果輸入正確，計算並輸出結果。</li>
-				</ol>
-				<div class="answer">
-        <pre class="line-numbers"><code class="language-python"># 解答
+                <div class="challenge-item" id="challenge-5">
+                    <h3 class="caption">挑戰 5：例外處理中的多個 <code>except</code> <span class="icon">🛈</span></h3>
+                    <p>撰寫一個程式，模擬簡單的計算機操作：</p>
+                    <ol>
+                        <li>要求使用者輸入兩個數字以及一個運算符號（+、-、*、/）。</li>
+                        <li>捕獲以下例外：
+                            <ul>
+                                <li>使用者輸入的不是數字（顯示「輸入無效！」）。</li>
+                                <li>使用者嘗試除以零（顯示「不能除以零！」）。</li>
+                                <li>無效的運算符號（顯示「不支援的運算符號！」）。</li>
+                            </ul>
+                        </li>
+                        <li>如果輸入正確，計算並輸出結果。</li>
+                    </ol>
+                    <div class="answer">
+                        <pre class="line-numbers"><code class="language-python"># 解答
 try:
     num1 = float(input("請輸入第一個數字: "))
     num2 = float(input("請輸入第二個數字: "))
@@ -305,17 +323,22 @@ except ValueError as e:
     print(e)
 except ZeroDivisionError as e:
     print(e)</code></pre>
-    </div>
+                    </div>
+                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+                        💬 需要引導？找學習助手
+                    </button>
+                </div>
 
-				<h3 class="caption">挑戰 6：自訂例外處理邏輯 <span class="icon">🛈</span></h3>
-				<p>設計一個程式來模擬簡單的密碼驗證系統：</p>
-				<ol>
-					<li>撰寫一個自訂例外類別 <code>PasswordTooShortError</code>。</li>
-					<li>要求使用者輸入密碼，若密碼長度小於 8 個字元，拋出該例外並提示「密碼太短！」。</li>
-					<li>若密碼有效，顯示「密碼設定成功！」。</li>
-				</ol>
-				<div class="answer">
-        <pre class="line-numbers"><code class="language-python"># 解答
+                <div class="challenge-item" id="challenge-6">
+                    <h3 class="caption">挑戰 6：自訂例外處理邏輯 <span class="icon">🛈</span></h3>
+                    <p>設計一個程式來模擬簡單的密碼驗證系統：</p>
+                    <ol>
+                        <li>撰寫一個自訂例外類別 <code>PasswordTooShortError</code>。</li>
+                        <li>要求使用者輸入密碼，若密碼長度小於 8 個字元，拋出該例外並提示「密碼太短！」。</li>
+                        <li>若密碼有效，顯示「密碼設定成功！」。</li>
+                    </ol>
+                    <div class="answer">
+                        <pre class="line-numbers"><code class="language-python"># 解答
 class PasswordTooShortError(Exception):
     pass
 
@@ -326,21 +349,26 @@ try:
     print("密碼設定成功！")
 except PasswordTooShortError as e:
     print(e)</code></pre>
-    </div>
+                    </div>
+                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+                        💬 需要引導？找學習助手
+                    </button>
+                </div>
 
-				<h3 class="caption">挑戰 7：巢狀例外處理 <span class="icon">🛈</span></h3>
-				<p>設計一個程式，模擬巢狀例外的處理過程：</p>
-				<ol>
-					<li>撰寫一個函式模擬數字相加的過程。</li>
-					<li>捕獲以下例外：
-						<ul>
-							<li>輸入的不是有效數字（顯示「輸入錯誤！」）。</li>						
-						</ul>
-					</li>
-					<li>若無例外，顯示運算結果。</li>
-				</ol>
-				<div class="answer">
-        <pre class="line-numbers"><code class="language-python"># 解答
+                <div class="challenge-item" id="challenge-7">
+                    <h3 class="caption">挑戰 7：巢狀例外處理 <span class="icon">🛈</span></h3>
+                    <p>設計一個程式，模擬巢狀例外的處理過程：</p>
+                    <ol>
+                        <li>撰寫一個函式模擬數字相加的過程。</li>
+                        <li>捕獲以下例外：
+                            <ul>
+                                <li>輸入的不是有效數字（顯示「輸入錯誤！」）。</li>						
+                            </ul>
+                        </li>
+                        <li>若無例外，顯示運算結果。</li>
+                    </ol>
+                    <div class="answer">
+                        <pre class="line-numbers"><code class="language-python"># 解答
 def add_numbers(a, b):
     try:
         return a + b
@@ -354,22 +382,27 @@ try:
     print(f"結果是: {result}")
 except ValueError:
     print("請輸入有效的數字！")</code></pre>
-    </div>
+                    </div>
+                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+                        💬 需要引導？找學習助手
+                    </button>
+                </div>
 
-				<h3 class="caption">挑戰 8：條件式錯誤驗證 <span class="icon">🛈</span></h3>
-				<p>設計一個程式來驗證使用者輸入的年齡是否符合條件：</p>
-				<ol>
-					<li>要求使用者輸入年齡。</li>
-					<li>捕獲以下例外情況：
-						<ul>
-							<li>輸入的不是數字（顯示「請輸入有效的數字！」）。</li>
-							<li>年齡小於 0 或超過 120（顯示「年齡範圍無效！」）。</li>
-						</ul>
-					</li>
-					<li>若輸入有效，顯示「年齡有效！」。</li>
-				</ol>
-<div class="answer">
-        <pre class="line-numbers"><code class="language-python"># 解答
+                <div class="challenge-item" id="challenge-8">
+                    <h3 class="caption">挑戰 8：條件式錯誤驗證 <span class="icon">🛈</span></h3>
+                    <p>設計一個程式來驗證使用者輸入的年齡是否符合條件：</p>
+                    <ol>
+                        <li>要求使用者輸入年齡。</li>
+                        <li>捕獲以下例外情況：
+                            <ul>
+                                <li>輸入的不是數字（顯示「請輸入有效的數字！」）。</li>
+                                <li>年齡小於 0 或超過 120（顯示「年齡範圍無效！」）。</li>
+                            </ul>
+                        </li>
+                        <li>若輸入有效，顯示「年齡有效！」。</li>
+                    </ol>
+                    <div class="answer">
+                        <pre class="line-numbers"><code class="language-python"># 解答
 try:
     age = int(input("請輸入您的年齡: "))
     if age < 0 or age > 120:
@@ -377,7 +410,11 @@ try:
     print("年齡有效！")
 except ValueError as e:
     print(e)</code></pre>
-    </div>				
+                    </div>
+                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+                        💬 需要引導？找學習助手
+                    </button>
+                </div>				
 				
             </section>
 
@@ -386,6 +423,44 @@ except ValueError as e:
                 <p>例外處理是 Python 程式設計的重要部分，能夠提升程式的穩健性與可用性。透過本章的學習，你將能夠輕鬆應對程式執行中的各種意外情況。</p>
             </section>
         </main>
+		
+		<div id="chatbot-container" class="chatbot-docked chatbot-docked-right" style="display: none;">
+			<div class="chatbot-window">
+				<div class="chatbot-header">
+					<div class="chatbot-header-left">
+						<span class="chatbot-title" id="chatbot-title">🤖 Python 學習助手</span>
+						
+					</div>
+					<div class="chatbot-header-right">
+						<button class="chatbot-jump-btn" id="chatbot-jump-btn" onclick="jumpToChallenge()" title="跳轉到挑戰位置">🚩</button>
+						<button class="chatbot-dock-btn" id="dock-right-btn" onclick="dockChatbot('right')" title="停靠右側">
+							▷
+						</button>
+						<button class="chatbot-dock-btn" id="dock-bottom-btn" onclick="dockChatbot('bottom')" title="停靠底部">
+							▽
+						</button>
+						<button class="chatbot-close" onclick="closeChatbot()">✕</button>
+					</div>
+				</div>
+								
+				<div class="chatbot-resizer" id="chatbot-resizer"></div>
+				
+				<div class="chatbot-messages" id="chatbot-messages"></div>
+				<div class="chatbot-input">
+					<textarea 
+						id="chatbot-input" 
+						placeholder="輸入你的回答或問題...（Shift+Enter 換行，Enter 發送）" 
+						onkeydown="handleKeyPress(event)"
+						rows="1"></textarea>
+					<button id="chatbot-send-btn" onclick="sendMessage()">發送</button>
+					<button id="chatbot-summary-btn" onclick="generateSummary()">📊</button>
+				</div>
+			</div>
+		</div>
+
+		<script src="js/auth.js"></script>
+		<script src="js/chatbot.js"></script>
+		
     </div>
 </body>
 </html>

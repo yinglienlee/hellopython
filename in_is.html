@@ -6,28 +6,25 @@
     <title>身分與成員運算符號</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <script type="text/javascript" src="js/script.js"></script>
-	<!-- Prism.js CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css">
-    <!-- Prism.js Line Numbers CSS -->
+	<link rel="stylesheet" href="css/chatbot.css">	
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+	<script type="text/javascript" src="js/script.js"></script>	
+	<script src="https://alcdn.msauth.net/browser/2.38.1/js/msal-browser.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
-    <!-- Prism.js Syntax Highlighting -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
-    <!-- Prism.js Line Numbers Plugin -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", (event) => {
-            includeHTML(highlightItem);
-            document.getElementById("toggleNav").addEventListener("click", navClick);
+	<script>
+		document.addEventListener("DOMContentLoaded", (event) => {
+			includeHTML(highlightItem);			
+			document.getElementById("toggleNav").addEventListener("click", navClick);		
 			enableAnswerRevealer();
-        });
-    </script>
+		});
+	</script>	
 </head>
 <body>
     <div class="d-flex">
-        <!-- Floating Button -->
         <button id="toggleNav" class="btn btn-primary">&#8212;</button>
         <nav id="sidebar" class="bg-light border-end" style="display: block;">
             <div>
@@ -93,89 +90,116 @@ print("Alice" in data.values())  # 輸出 True</code></pre>
 
             <section>
                 <h2>挑戰題目</h2>
-				<h3 class="caption">挑戰 1：檢查物件身分 <span class="icon">🛈</span></h3>
-    <p>撰寫程式，建立兩個串列並檢查它們是否為同一物件。</p>
-    <pre class="line-numbers"><code class="language-python"># 範例輸入
+				
+                <div class="challenge-item" id="challenge-1">
+                    <h3 class="caption">挑戰 1：檢查物件身分 <span class="icon">🛈</span></h3>
+                    <p>撰寫程式，建立兩個串列並檢查它們是否為同一物件。</p>
+                    <pre class="line-numbers"><code class="language-python"># 範例輸入
 list1 = [1, 2, 3]
 list2 = [1, 2, 3]
 # 預期輸出
 list1 is list2：False</code></pre>
-    <div class="answer">
-        <pre class="line-numbers"><code class="language-python"># 解答
+                    <div class="answer">
+                        <pre class="line-numbers"><code class="language-python"># 解答
 list1 = [1, 2, 3]
 list2 = [1, 2, 3]
 print(f"list1 is list2：{list1 is list2}")</code></pre>
-    </div>
+                    </div>
+                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+                        💬 需要引導？找學習助手
+                    </button>
+                </div>
 
-    <h3 class="caption">挑戰 2：檢查成員 <span class="icon">🛈</span></h3>
-    <p>撰寫程式，檢查一個字串是否包含某些特定單詞。</p>
-    <pre class="line-numbers"><code class="language-python"># 範例輸入
+                <div class="challenge-item" id="challenge-2">
+                    <h3 class="caption">挑戰 2：檢查成員 <span class="icon">🛈</span></h3>
+                    <p>撰寫程式，檢查一個字串是否包含某些特定單詞。</p>
+                    <pre class="line-numbers"><code class="language-python"># 範例輸入
 text = "The quick brown fox"
 word = "quick"
 # 預期輸出
 "quick" 是否存在：True</code></pre>
-    <div class="answer">
-        <pre class="line-numbers"><code class="language-python"># 解答
+                    <div class="answer">
+                        <pre class="line-numbers"><code class="language-python"># 解答
 text = "The quick brown fox"
 word = "quick"
 print(f'"{word}" 是否存在：{word in text}')</code></pre>
-    </div>
+                    </div>
+                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+                        💬 需要引導？找學習助手
+                    </button>
+                </div>
 
-    <h3 class="caption">挑戰 3：條件篩選 <span class="icon">🛈</span></h3>
-    <p>設計程式，從一個串列中篩選出所有偶數，並檢查特定值是否在結果中。</p>
-    <pre class="line-numbers"><code class="language-python"># 範例輸入
+                <div class="challenge-item" id="challenge-3">
+                    <h3 class="caption">挑戰 3：條件篩選 <span class="icon">🛈</span></h3>
+                    <p>設計程式，從一個串列中篩選出所有偶數，並檢查特定值是否在結果中。</p>
+                    <pre class="line-numbers"><code class="language-python"># 範例輸入
 numbers = [1, 2, 3, 4, 5, 6]
 value = 4
 # 預期輸出
 篩選後的偶數：[2, 4, 6]
 4 是否存在：True</code></pre>
-    <div class="answer">
-        <pre class="line-numbers"><code class="language-python"># 解答
+                    <div class="answer">
+                        <pre class="line-numbers"><code class="language-python"># 解答
 numbers = [1, 2, 3, 4, 5, 6]
 value = 4
 evens = [num for num in numbers if num % 2 == 0]
 print(f"篩選後的偶數：{evens}")
 print(f"{value} 是否存在：{value in evens}")</code></pre>
-    </div>
+                    </div>
+                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+                        💬 需要引導？找學習助手
+                    </button>
+                </div>
 
-    <h3 class="caption">挑戰 4：檢查字典中的鍵與值 <span class="icon">🛈</span></h3>
-    <p>設計一個程式，檢查一個字典中是否存在特定的鍵與值。</p>
-    <pre class="line-numbers"><code class="language-python"># 範例輸入
+                <div class="challenge-item" id="challenge-4">
+                    <h3 class="caption">挑戰 4：檢查字典中的鍵與值 <span class="icon">🛈</span></h3>
+                    <p>設計一個程式，檢查一個字典中是否存在特定的鍵與值。</p>
+                    <pre class="line-numbers"><code class="language-python"># 範例輸入
 data = {"name": "Alice", "age": 30}
 # 預期輸出
 "name" 是否為鍵：True
 "Alice" 是否為值：True</code></pre>
-    <div class="answer">
-        <pre class="line-numbers"><code class="language-python"># 解答
+                    <div class="answer">
+                        <pre class="line-numbers"><code class="language-python"># 解答
 data = {"name": "Alice", "age": 30}
 print(f'"name" 是否為鍵：{"name" in data}')
 print(f'"Alice" 是否為值：{"Alice" in data.values()}')</code></pre>
-    </div>
+                    </div>
+                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+                        💬 需要引導？找學習助手
+                    </button>
+                </div>
 
-    <h3 class="caption">挑戰 5：比較物件身分與內容 <span class="icon">🛈</span></h3>
-    <p>建立兩個內容相同但記憶體位置不同的串列，使用 <code>is</code> 和 <code>==</code> 比較它們，並解釋結果。</p>
-    <pre class="line-numbers"><code class="language-python"># 範例輸入
+                <div class="challenge-item" id="challenge-5">
+                    <h3 class="caption">挑戰 5：比較物件身分與內容 <span class="icon">🛈</span></h3>
+                    <p>建立兩個內容相同但記憶體位置不同的串列，使用 <code>is</code> 和 <code>==</code> 比較它們，並解釋結果。</p>
+                    <pre class="line-numbers"><code class="language-python"># 範例輸入
 a = [1, 2, 3]
 b = [1, 2, 3]
 # 預期輸出
 a == b：True
 a is b：False</code></pre>
-    <div class="answer">
-        <pre class="line-numbers"><code class="language-python"># 解答
+                    <div class="answer">
+                        <pre class="line-numbers"><code class="language-python"># 解答
 a = [1, 2, 3]
 b = [1, 2, 3]
 print(f"a == b：{a == b}")
 print(f"a is b：{a is b}")</code></pre>
-    </div>
+                    </div>
+                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+                        💬 需要引導？找學習助手
+                    </button>
+                </div>
 
-    <h3 class="caption">挑戰 6：判斷成員的多層結構 <span class="icon">🛈</span></h3>
-    <p>給定一個巢狀串列，檢查某個值是否存在於其中的任何一層。</p>
-    <pre class="line-numbers"><code class="language-python"># 範例輸入
+                <div class="challenge-item" id="challenge-6">
+                    <h3 class="caption">挑戰 6：判斷成員的多層結構 <span class="icon">🛈</span></h3>
+                    <p>給定一個巢狀串列，檢查某個值是否存在於其中的任何一層。</p>
+                    <pre class="line-numbers"><code class="language-python"># 範例輸入
 nested_list = [1, [2, [3, 4]], 5]
 # 預期輸出
 3 是否存在：True</code></pre>
-    <div class="answer">
-        <pre class="line-numbers"><code class="language-python"># 解答
+                    <div class="answer">
+                        <pre class="line-numbers"><code class="language-python"># 解答
 def contains_value(nested, target):
     for item in nested:
         if type(item) == list:  # 使用 type 檢查是否是 list
@@ -188,39 +212,53 @@ def contains_value(nested, target):
 nested_list = [1, [2, [3, 4]], 5]
 value = 3
 print(f"{value} 是否存在：{contains_value(nested_list, value)}")</code></pre>
-    </div>
+                    </div>
+                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+                        💬 需要引導？找學習助手
+                    </button>
+                </div>
 
-    <h3 class="caption">挑戰 7：清單移除重複並檢查成員 <span class="icon">🛈</span></h3>
-    <p>給定一個包含重複元素的串列，移除重複後檢查某個值是否仍然存在。</p>
-    <pre class="line-numbers"><code class="language-python"># 範例輸入
+                <div class="challenge-item" id="challenge-7">
+                    <h3 class="caption">挑戰 7：清單移除重複並檢查成員 <span class="icon">🛈</span></h3>
+                    <p>給定一個包含重複元素的串列，移除重複後檢查某個值是否仍然存在。</p>
+                    <pre class="line-numbers"><code class="language-python"># 範例輸入
 data = [1, 2, 2, 3, 4, 4, 5]
 # 預期輸出
 清單移除重複後：{1, 2, 3, 4, 5}
 5 是否存在：True</code></pre>
-    <div class="answer">
-        <pre class="line-numbers"><code class="language-python"># 解答
+                    <div class="answer">
+                        <pre class="line-numbers"><code class="language-python"># 解答
 data = [1, 2, 2, 3, 4, 4, 5]
 unique_data = set(data)
 value = 5
 print(f"清單移除重複後：{unique_data}")
 print(f"{value} 是否存在：{value in unique_data}")</code></pre>
-    </div>
+                    </div>
+                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+                        💬 需要引導？找學習助手
+                    </button>
+                </div>
 
-    <h3 class="caption">挑戰 8：檢查字串中的模式 <span class="icon">🛈</span></h3>
-    <p>撰寫一個程式，檢查字串中是否包含某個子字串（區分大小寫與否）。</p>
-    <pre class="line-numbers"><code class="language-python"># 範例輸入
+                <div class="challenge-item" id="challenge-8">
+                    <h3 class="caption">挑戰 8：檢查字串中的模式 <span class="icon">🛈</span></h3>
+                    <p>撰寫一個程式，檢查字串中是否包含某個子字串（區分大小寫與否）。</p>
+                    <pre class="line-numbers"><code class="language-python"># 範例輸入
 text = "Hello Python World"
 # 預期輸出
 "Python" 是否存在：True
 "python" 是否存在：False</code></pre>
-    <div class="answer">
-        <pre class="line-numbers"><code class="language-python"># 解答
+                    <div class="answer">
+                        <pre class="line-numbers"><code class="language-python"># 解答
 text = "Hello Python World"
 substring1 = "Python"
 substring2 = "python"
 print(f'"{substring1}" 是否存在：{substring1 in text}')
 print(f'"{substring2}" 是否存在：{substring2 in text}')</code></pre>
-    </div>
+                    </div>
+                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+                        💬 需要引導？找學習助手
+                    </button>
+                </div>
 				
             </section>
 
@@ -229,6 +267,44 @@ print(f'"{substring2}" 是否存在：{substring2 in text}')</code></pre>
                 <p>掌握身分與成員運算符號是 Python 程式設計的基本技能之一，能幫助你更高效地進行邏輯判斷與資料操作。透過練習這些概念，你將能更熟練地處理各種程式設計挑戰！</p>
             </section>
         </main>
+		
+		<div id="chatbot-container" class="chatbot-docked chatbot-docked-right" style="display: none;">
+			<div class="chatbot-window">
+				<div class="chatbot-header">
+					<div class="chatbot-header-left">
+						<span class="chatbot-title" id="chatbot-title">🤖 Python 學習助手</span>
+						
+					</div>
+					<div class="chatbot-header-right">
+						<button class="chatbot-jump-btn" id="chatbot-jump-btn" onclick="jumpToChallenge()" title="跳轉到挑戰位置">🚩</button>
+						<button class="chatbot-dock-btn" id="dock-right-btn" onclick="dockChatbot('right')" title="停靠右側">
+							▷
+						</button>
+						<button class="chatbot-dock-btn" id="dock-bottom-btn" onclick="dockChatbot('bottom')" title="停靠底部">
+							▽
+						</button>
+						<button class="chatbot-close" onclick="closeChatbot()">✕</button>
+					</div>
+				</div>
+								
+				<div class="chatbot-resizer" id="chatbot-resizer"></div>
+				
+				<div class="chatbot-messages" id="chatbot-messages"></div>
+				<div class="chatbot-input">
+					<textarea 
+						id="chatbot-input" 
+						placeholder="輸入你的回答或問題...（Shift+Enter 換行，Enter 發送）" 
+						onkeydown="handleKeyPress(event)"
+						rows="1"></textarea>
+					<button id="chatbot-send-btn" onclick="sendMessage()">發送</button>
+					<button id="chatbot-summary-btn" onclick="generateSummary()">📊</button>
+				</div>
+			</div>
+		</div>
+
+		<script src="js/auth.js"></script>
+		<script src="js/chatbot.js"></script>
+		
     </div>
 </body>
 </html>

@@ -6,28 +6,25 @@
     <title>檔案操作</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <script type="text/javascript" src="js/script.js"></script>
-	<!-- Prism.js CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css">
-    <!-- Prism.js Line Numbers CSS -->
+	<link rel="stylesheet" href="css/chatbot.css">	
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+	<script type="text/javascript" src="js/script.js"></script>	
+	<script src="https://alcdn.msauth.net/browser/2.38.1/js/msal-browser.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
-    <!-- Prism.js Syntax Highlighting -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
-    <!-- Prism.js Line Numbers Plugin -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", (event) => {
-            includeHTML(highlightItem);
-            document.getElementById("toggleNav").addEventListener("click", navClick);
+	<script>
+		document.addEventListener("DOMContentLoaded", (event) => {
+			includeHTML(highlightItem);			
+			document.getElementById("toggleNav").addEventListener("click", navClick);		
 			enableAnswerRevealer();
-        });
-    </script>
+		});
+	</script>	
 </head>
 <body>
     <div class="d-flex">
-        <!-- Floating Button -->
         <button id="toggleNav" class="btn btn-primary">&#8212;</button>
         <nav id="sidebar" class="bg-light border-end" style="display: block;">
             <div>
@@ -161,10 +158,12 @@ else:
 
             <section>
                 <h2>挑戰題目</h2>
-				<h3 class="caption">挑戰 1：檔案複製 <span class="icon">🛈</span></h3>
-    <p>撰寫程式，將一個檔案的內容複製到另一個檔案。</p>
-    <div class="answer">
-        <pre class="line-numbers"><code class="language-python"># 解答
+                
+                <div class="challenge-item" id="challenge-1">
+                    <h3 class="caption">挑戰 1：檔案複製 <span class="icon">🛈</span></h3>
+                    <p>撰寫程式，將一個檔案的內容複製到另一個檔案。</p>
+                    <div class="answer">
+                        <pre class="line-numbers"><code class="language-python"># 解答
 source_file = "source.txt"
 destination_file = "destination.txt"
 
@@ -175,12 +174,17 @@ with open(destination_file, "w") as dest:
     dest.write(content)
 
 print(f"檔案 {source_file} 已複製到 {destination_file}。")</code></pre>
-    </div>
+                    </div>
+                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+                        💬 需要引導？找學習助手
+                    </button>
+                </div>
 
-    <h3 class="caption">挑戰 2：日誌系統 <span class="icon">🛈</span></h3>
-    <p>設計一個簡易的日誌系統，將使用者的輸入記錄到檔案中。</p>
-    <div class="answer">
-        <pre class="line-numbers"><code class="language-python"># 解答
+                <div class="challenge-item" id="challenge-2">
+                    <h3 class="caption">挑戰 2：日誌系統 <span class="icon">🛈</span></h3>
+                    <p>設計一個簡易的日誌系統，將使用者的輸入記錄到檔案中。</p>
+                    <div class="answer">
+                        <pre class="line-numbers"><code class="language-python"># 解答
 log_file = "log.txt"
 
 while True:
@@ -191,12 +195,17 @@ while True:
         file.write(entry + "\n")
 
 print("日誌記錄已完成。")</code></pre>
-    </div>
+                    </div>
+                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+                        💬 需要引導？找學習助手
+                    </button>
+                </div>
 
-    <h3 class="caption">挑戰 3：檔案統計 <span class="icon">🛈</span></h3>
-    <p>撰寫程式，統計一個文字檔案中的行數、單字數和字元數。</p>
-    <div class="answer">
-        <pre class="line-numbers"><code class="language-python"># 解答
+                <div class="challenge-item" id="challenge-3">
+                    <h3 class="caption">挑戰 3：檔案統計 <span class="icon">🛈</span></h3>
+                    <p>撰寫程式，統計一個文字檔案中的行數、單字數和字元數。</p>
+                    <div class="answer">
+                        <pre class="line-numbers"><code class="language-python"># 解答
 file_name = "example.txt"
 
 with open(file_name, "r") as file:
@@ -207,11 +216,16 @@ word_count = sum(len(line.split()) for line in lines)
 char_count = sum(len(line) for line in lines)
 
 print(f"行數：{line_count}, 單字數：{word_count}, 字元數：{char_count}")</code></pre>
-    </div>
+                    </div>
+                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+                        💬 需要引導？找學習助手
+                    </button>
+                </div>
 
-    <h3 class="caption">挑戰 4：搜尋檔案中的關鍵字 <span class="icon">🛈</span></h3>
-    <p>撰寫程式，讓使用者輸入關鍵字，並搜尋檔案中是否包含該關鍵字，輸出該關鍵字所在的行數。</p>
-    <pre class="line-numbers"><code class="language-python"># 範例輸入
+                <div class="challenge-item" id="challenge-4">
+                    <h3 class="caption">挑戰 4：搜尋檔案中的關鍵字 <span class="icon">🛈</span></h3>
+                    <p>撰寫程式，讓使用者輸入關鍵字，並搜尋檔案中是否包含該關鍵字，輸出該關鍵字所在的行數。</p>
+                    <pre class="line-numbers"><code class="language-python"># 範例輸入
 # example.txt 檔案內容：
 # Hello, this is a test file.
 # Python is great.
@@ -220,8 +234,8 @@ print(f"行數：{line_count}, 單字數：{word_count}, 字元數：{char_count
 keyword = "Python"
 # 預期輸出
 關鍵字 "Python" 出現在第 2 行。</code></pre>
-    <div class="answer">
-        <pre class="line-numbers"><code class="language-python"># 解答
+                    <div class="answer">
+                        <pre class="line-numbers"><code class="language-python"># 解答
 file_name = "example.txt"
 keyword = input("請輸入關鍵字：")
 
@@ -229,11 +243,16 @@ with open(file_name, "r") as file:
     for line_number, line in enumerate(file, start=1):
         if keyword in line:
             print(f"關鍵字 \"{keyword}\" 出現在第 {line_number} 行。")</code></pre>
-    </div>
+                    </div>
+                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+                        💬 需要引導？找學習助手
+                    </button>
+                </div>
 
-    <h3 class="caption">挑戰 5：合併多個檔案 <span class="icon">🛈</span></h3>
-    <p>設計一個程式，將多個文字檔案的內容合併為一個新檔案。</p>
-    <pre class="line-numbers"><code class="language-python"># 範例輸入
+                <div class="challenge-item" id="challenge-5">
+                    <h3 class="caption">挑戰 5：合併多個檔案 <span class="icon">🛈</span></h3>
+                    <p>設計一個程式，將多個文字檔案的內容合併為一個新檔案。</p>
+                    <pre class="line-numbers"><code class="language-python"># 範例輸入
 # file1.txt 和 file2.txt 的內容分別為：
 # file1.txt: Hello
 # file2.txt: World
@@ -241,8 +260,8 @@ with open(file_name, "r") as file:
 # 合併後的新檔案內容：
 # Hello
 # World</code></pre>
-    <div class="answer">
-        <pre class="line-numbers"><code class="language-python"># 解答
+                    <div class="answer">
+                        <pre class="line-numbers"><code class="language-python"># 解答
 files_to_merge = ["file1.txt", "file2.txt"]
 output_file = "merged.txt"
 
@@ -252,26 +271,36 @@ with open(output_file, "w") as outfile:
             outfile.write(infile.read() + "\n")
 
 print(f"檔案已合併為 {output_file}。")</code></pre>
-    </div>
+                    </div>
+                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+                        💬 需要引導？找學習助手
+                    </button>
+                </div>
 
-    <h3 class="caption">挑戰 6：檢查檔案大小 <span class="icon">🛈</span></h3>
-    <p>撰寫程式，檢查指定檔案的大小，並輸出檔案大小（以 KB 為單位）。</p>
-    <pre class="line-numbers"><code class="language-python"># 範例輸入
+                <div class="challenge-item" id="challenge-6">
+                    <h3 class="caption">挑戰 6：檢查檔案大小 <span class="icon">🛈</span></h3>
+                    <p>撰寫程式，檢查指定檔案的大小，並輸出檔案大小（以 KB 為單位）。</p>
+                    <pre class="line-numbers"><code class="language-python"># 範例輸入
 file_name = "example.txt"
 # 預期輸出
 檔案大小：1.23 KB</code></pre>
-    <div class="answer">
-        <pre class="line-numbers"><code class="language-python"># 解答
+                    <div class="answer">
+                        <pre class="line-numbers"><code class="language-python"># 解答
 import os
 
 file_name = "example.txt"
 file_size = os.path.getsize(file_name) / 1024  # KB
 print(f"檔案大小：{file_size:.2f} KB")</code></pre>
-    </div>
+                    </div>
+                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+                        💬 需要引導？找學習助手
+                    </button>
+                </div>
 
-    <h3 class="caption">挑戰 7：移除檔案中的空行 <span class="icon">🛈</span></h3>
-    <p>設計一個程式，讀取文字檔案，移除所有的空行，並將結果存入新檔案。</p>
-    <pre class="line-numbers"><code class="language-python"># 範例輸入
+                <div class="challenge-item" id="challenge-7">
+                    <h3 class="caption">挑戰 7：移除檔案中的空行 <span class="icon">🛈</span></h3>
+                    <p>設計一個程式，讀取文字檔案，移除所有的空行，並將結果存入新檔案。</p>
+                    <pre class="line-numbers"><code class="language-python"># 範例輸入
 # example.txt 原內容：
 # Line 1
 #
@@ -280,8 +309,8 @@ print(f"檔案大小：{file_size:.2f} KB")</code></pre>
 # 預期輸出（新檔案內容）：
 # Line 1
 # Line 2</code></pre>
-    <div class="answer">
-        <pre class="line-numbers"><code class="language-python"># 解答
+                    <div class="answer">
+                        <pre class="line-numbers"><code class="language-python"># 解答
 input_file = "example.txt"
 output_file = "cleaned.txt"
 
@@ -291,11 +320,16 @@ with open(input_file, "r") as infile, open(output_file, "w") as outfile:
             outfile.write(line)
 
 print(f"空行已移除，結果存入 {output_file}。")</code></pre>
-    </div>
+                    </div>
+                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+                        💬 需要引導？找學習助手
+                    </button>
+                </div>
 	
-	<h3 class="caption">挑戰 8：檔案加密與解密 <span class="icon">🛈</span></h3>
-<p>撰寫一個簡單的程式，將檔案中的內容進行加密（如每個字母移位 3 個位置），並能將加密內容解密回原文。</p>
-<pre class="line-numbers"><code class="language-python"># 範例輸入
+                <div class="challenge-item" id="challenge-8">
+                    <h3 class="caption">挑戰 8：檔案加密與解密 <span class="icon">🛈</span></h3>
+                    <p>撰寫一個簡單的程式，將檔案中的內容進行加密（如每個字母移位 3 個位置），並能將加密內容解密回原文。</p>
+                    <pre class="line-numbers"><code class="language-python"># 範例輸入
 # 原內容：
 # Hello
 # 加密後內容：
@@ -303,8 +337,8 @@ print(f"空行已移除，結果存入 {output_file}。")</code></pre>
 # 解密後內容：
 # Hello</code></pre>
 
-<div class="answer">
-<pre class="line-numbers"><code class="language-python"># 解答
+                    <div class="answer">
+                        <pre class="line-numbers"><code class="language-python"># 解答
 # 加密函式
 def encrypt(text, shift):
     encrypted = ""
@@ -335,7 +369,11 @@ with open("encrypted.txt", "r") as file:
 decrypted_content = decrypt(encrypted_content, 3)
 print("加密後內容：", encrypted_content)
 print("解密後內容：", decrypted_content)</code></pre>
-</div>
+                    </div>
+                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+                        💬 需要引導？找學習助手
+                    </button>
+                </div>
 					
 				
             </section>
@@ -345,6 +383,44 @@ print("解密後內容：", decrypted_content)</code></pre>
                 <p>掌握檔案操作是 Python 程式設計的重要技能之一。無論是讀取資料、儲存結果，還是進行資料處理，這些技巧都能大大提高你的程式設計能力。</p>
             </section>
         </main>
+		
+		<div id="chatbot-container" class="chatbot-docked chatbot-docked-right" style="display: none;">
+			<div class="chatbot-window">
+				<div class="chatbot-header">
+					<div class="chatbot-header-left">
+						<span class="chatbot-title" id="chatbot-title">🤖 Python 學習助手</span>
+						
+					</div>
+					<div class="chatbot-header-right">
+						<button class="chatbot-jump-btn" id="chatbot-jump-btn" onclick="jumpToChallenge()" title="跳轉到挑戰位置">🚩</button>
+						<button class="chatbot-dock-btn" id="dock-right-btn" onclick="dockChatbot('right')" title="停靠右側">
+							▷
+						</button>
+						<button class="chatbot-dock-btn" id="dock-bottom-btn" onclick="dockChatbot('bottom')" title="停靠底部">
+							▽
+						</button>
+						<button class="chatbot-close" onclick="closeChatbot()">✕</button>
+					</div>
+				</div>
+								
+				<div class="chatbot-resizer" id="chatbot-resizer"></div>
+				
+				<div class="chatbot-messages" id="chatbot-messages"></div>
+				<div class="chatbot-input">
+					<textarea 
+						id="chatbot-input" 
+						placeholder="輸入你的回答或問題...（Shift+Enter 換行，Enter 發送）" 
+						onkeydown="handleKeyPress(event)"
+						rows="1"></textarea>
+					<button id="chatbot-send-btn" onclick="sendMessage()">發送</button>
+					<button id="chatbot-summary-btn" onclick="generateSummary()">📊</button>
+				</div>
+			</div>
+		</div>
+
+		<script src="js/auth.js"></script>
+		<script src="js/chatbot.js"></script>
+		
     </div>
 </body>
 </html>

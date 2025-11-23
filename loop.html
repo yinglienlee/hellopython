@@ -6,401 +6,308 @@
     <title>迴圈</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/chatbot.css">	
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-	<script type="text/javascript" src="js/script.js"></script>
-	<!-- Prism.js CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css">
-    <!-- Prism.js Line Numbers CSS -->
+	<script type="text/javascript" src="js/script.js"></script>	
+	<script src="https://alcdn.msauth.net/browser/2.38.1/js/msal-browser.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
-    <!-- Prism.js Syntax Highlighting -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
-    <!-- Prism.js Line Numbers Plugin -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
 	<script>
 		document.addEventListener("DOMContentLoaded", (event) => {
-			includeHTML(highlightItem);					
-			document.getElementById("toggleNav").addEventListener("click", navClick);
+			includeHTML(highlightItem);			
+			document.getElementById("toggleNav").addEventListener("click", navClick);		
 			enableAnswerRevealer();
 		});
-	</script>	
-	<script type="module">
-		import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
-		mermaid.initialize({ startOnLoad: true });
 	</script>
 </head>
 <body>
-	<div class="d-flex">
-		<!-- Floating Button -->
-		<button id="toggleNav" class="btn btn-primary">&#8212;</button>
+    <div class="d-flex">
+        <button id="toggleNav" class="btn btn-primary">&#8212;</button>
         <nav id="sidebar" class="bg-light border-end" style="display: block;">
             <div>
-				<div w3-include-html="navigation.html"></div>
+                <div w3-include-html="navigation.html"></div>
             </div>
         </nav>
         <main class="flex-grow-1">
-			<header>
-				<h1>迴圈</h1>
-			</header>
-			<section>
-				<h2>學習導覽</h2>
-				<p>迴圈是程式設計中的重要概念，它能讓我們重複執行一段程式碼，直到達成特定條件為止。透過迴圈，我們可以讓程式更簡潔。本章將涵蓋：</p>
-				<ul>
-					<li><code>for</code> 迴圈的基本使用。</li>
-					<li><code>while</code> 迴圈的基本使用。</li>
-					<li>理解迴圈控制語法：<code>break</code> 和 <code>continue</code>。</li>
-					<li>巢狀迴圈的運用。</li>
-				</ul>
-			</section>
+            <header>
+                <h1>迴圈 (Loop)</h1>
+            </header>
+            <section>
+                <h2>學習導覽</h2>
+                <p>迴圈是程式語言中重複執行特定程式碼區塊的機制。本章節將深入介紹 Python 中兩種主要的迴圈結構：`for` 迴圈和 `while` 迴圈。</p>
+                <ul>
+                    <li>**`for` 迴圈**：用於遍歷序列（如列表、字串、元組）中的元素，或執行固定次數的重複操作。</li>
+                    <li>**`while` 迴圈**：只要給定的條件保持為 `True`，就會持續執行。</li>
+                    <li>**控制語句**：學習 `break`、`continue` 和 `else` 語句來控制迴圈的流程。</li>
+                </ul>
+            </section>
 
-			<section>
-				<h2>迴圈語法與使用</h2>
+            <section>
+                <h2>`for` 迴圈</h2>
+                <p>`for` 迴圈用於迭代（Iterate）任何可迭代（Iterable）的項目，例如列表或字串。</p>
+                
+                <h3>遍歷列表</h3>
+                <pre class="line-numbers"><code class="language-python"># 遍歷列表中的元素
+fruits = ["apple", "banana", "cherry"]
+for x in fruits:
+  print(x)</code></pre>
 
-				<h3>1. 認識 <code>range()</code> 函數</h3>
-				<p><code>range()</code> 是 Python 中生成一系列數字的內建函數，常與 <code>for</code> 迴圈一起使用。基本語法為：</p>
-				<pre class="line-numbers"><code class="language-python">range(start, stop, step)</code></pre>
-				<ul>
-					<li><code>start</code>（可選）：起始值，預設為 0。</li>
-					<li><code>stop</code>（必填）：結束值（不包含在範圍內）。</li>
-					<li><code>step</code>（可選）：步進值，預設為 1。</li>
-				</ul>
-				<p>以下是一些範例：</p>
-				<pre class="line-numbers"><code class="language-python"># 範例 1：生成 0 到 4
+                <h3>使用 `range()` 函式進行計數</h3>
+                <p>當你需要執行固定次數的重複操作時，`range()` 函式非常實用。</p>
+                <pre class="line-numbers"><code class="language-python"># 從 0 數到 4 (不包含 5)
 for i in range(5):
-    print(i)  # 輸出 0, 1, 2, 3, 4
+  print(i)
 
-# 範例 2：指定起始值
-for i in range(2, 6):
-    print(i)  # 輸出 2, 3, 4, 5
+# 從 2 數到 5 (不包含 6)
+for j in range(2, 6):
+  print(j) 
 
-# 範例 3：指定步進值
-for i in range(0, 10, 2):
-    print(i)  # 輸出 0, 2, 4, 6, 8
+# 從 0 數到 10，間隔為 2
+for k in range(0, 11, 2):
+  print(k)</code></pre>
+            </section>
 
-# 範例 4：反向生成
-for i in range(10, 0, -2):
-    print(i)  # 輸出 10, 8, 6, 4, 2</code></pre>
-				<p><code>range()</code> 函數非常靈活，能幫助你輕鬆處理不同範圍的數字迭代。</p>
+            <section>
+                <h2>`while` 迴圈</h2>
+                <p>`while` 迴圈會持續執行，直到其條件表達式變為 `False`。</p>
+                <p class="alert alert-warning"><strong>注意：</strong>使用 `while` 迴圈時，請確保迴圈內有改變條件的語句，否則可能導致**無限迴圈**。</p>
+                <pre class="line-numbers"><code class="language-python">i = 1
+while i < 6:
+  print(i)
+  i += 1  # 每次迴圈後增加 i 的值，以避免無限迴圈</code></pre>
+            </section>
 
+            <section>
+                <h2>迴圈控制語句</h2>
+                <p>Python 提供了三種重要的語句來控制迴圈的執行：</p>
+                
+                <h3>1. `break`：中斷迴圈</h3>
+                <p>當 `break` 被執行時，它會立即終止當前的迴圈，並跳到迴圈後面的程式碼繼續執行。</p>
+                <pre class="line-numbers"><code class="language-python">for i in range(10):
+  if i == 5:
+    break
+  print(i) # 輸出 0, 1, 2, 3, 4</code></pre>
 
-				<h3>2. <code>for</code> 迴圈</h3>
-				<p><code>for</code> 迴圈用於依序走訪可迭代物件（例如range物件、串列或字串）：</p>
-				<p>這段程式碼將輸出從 0 到 4 的數字。</p>
-				<pre class="line-numbers"><code class="language-python">for i in range(5):
-    print(i)</code></pre>
-				<p>輸出結果：<br><code>0<br>1<br>2<br>3<br>4</code></p>
-				<p>上述程式碼的流程圖如下。</p>
-				<pre class="mermaid">
-					flowchart TD
-						A[Start] --> B{"range(5)是否還有元素未取出?"}
-						B --> |Yes| C["取出一個元素放入變數i"]
-						C --> D["print(i)"]
-						D --> B
-						B -->|No| E[End]
-				</pre>
-				<br>
-				<p>這段程式碼將輸出串列中各個元素。</p>				
-				<pre class="line-numbers"><code class="language-python">fruits = ["apple", "banana", "cherry"]
+                <h3>2. `continue`：跳過當前迭代</h3>
+                <p>當 `continue` 被執行時，它會立即跳過當前迴圈的剩餘程式碼，進入下一次迭代。</p>
+                <pre class="line-numbers"><code class="language-python">for i in range(5):
+  if i == 2:
+    continue
+  print(i) # 輸出 0, 1, 3, 4 (跳過 2)</code></pre>
 
-for fruit in fruits:
-    print(f"I like {fruit}")</code></pre>
-				<p>輸出結果：<br><code>I like apple<br>I like banana<br>I like cherry<br></code></p>
-				<p>上述程式碼的流程圖如下。</p>
-				<pre class="mermaid">
-					flowchart TD						
-						A[Start] --> B{"fruits串列是否還有元素未取出?"}
-						B --> |Yes| C["取出一個元素放入變數fruit"]
-						C --> D["print(fruit)"]
-						D --> B
-						B -->|No| E[End]
-				</pre>
-				<br>
-				<p>這段程式碼將輸出字串中各個字元。</p>				
-				<pre class="line-numbers"><code class="language-python">for c in "Formosa":
-    print(c)</code></pre>
-				<p>輸出結果：<br><code>F<br>o<br>r<br>m<br>o<br>s<br>a</code></p>
-				<p>上述程式碼的流程圖如下。</p>
-				<pre class="mermaid">
-					flowchart TD						
-						A[Start] --> B{"字串是否還有元素未取出?"}
-						B --> |Yes| C["取出一個元素放入變數c"]
-						C --> D["print(c)"]
-						D --> B
-						B -->|No| E[End]
-				</pre>
+                <h3>3. `else` 語句 (針對迴圈)</h3>
+                <p>在 `for` 或 `while` 迴圈中，`else` 區塊只有在迴圈**正常完成**（沒有被 `break` 語句中斷）時才會執行。</p>
+                <pre class="line-numbers"><code class="language-python">for i in range(3):
+  print(i)
+else:
+  print("迴圈正常結束") # 會被執行
 
-				<h3>3. <code>while</code> 迴圈</h3>
-				<p><code>while</code> 迴圈用於在條件成立時持續執行程式碼：</p>
-				<pre class="line-numbers"><code class="language-python">count = 0
-while count < 5:
-    print(count)
-    count += 1</code></pre>
-				<p>輸出結果與 <code>for</code> 迴圈相同：<br><code>0<br>1<br>2<br>3<br>4</code></p>
-				<p>上述程式碼的流程圖如下。</p>
-				<pre class="mermaid">
-					flowchart TD
-						A[Start] --> B[count = 0]
-						B --> C{count < 5?}
-						C -->|Yes| D["print(count)"]
-						D --> E[count += 1]
-						E --> C
-						C -->|No| F[End]
-				</pre>
+for j in range(3):
+  if j == 1:
+    break
+  print(j)
+else:
+  print("迴圈被中斷，此句不會執行") # 不會被執行</code></pre>
+            </section>
 
-				<h3>4. <code>break</code> 與 <code>continue</code></h3>
-				<p><code>break</code> 用於中止迴圈，<code>continue</code> 則用於跳過當前迭代並進入下一次迭代：</p>
-				<pre class="line-numbers"><code class="language-python"># 使用 break
-for i in range(10):
-    if i == 5:
-        break
-    print(i)</code></pre>
-				<p>輸出結果：<br><code>0<br>1<br>2<br>3<br>4</code></p>
-				<p>上述程式碼的流程圖如下。</p>
-				<pre class="mermaid">
-					flowchart TD
-						A[Start] --> B{"range(10)是否還有元素未取出?"}
-						B --> |Yes| C["取出一個元素放入變數i"]
-						C --> D{"i == 5?"}
-						D --> |Yes| E["break"]
-						E --> G[End]
-						D --> |No| F["print(i)"]	
-						F --> B
-						B -->|No| G[End]
-				</pre>
-				
-				<pre class="line-numbers"><code class="language-python"># 使用 continue
-for i in range(5):
-    if i == 2:
+            <section>
+                <h2>挑戰題目</h2>
+
+                <div class="challenge-item" id="challenge-1">
+                    <h3 class="caption">挑戰 1：奇數計數 <span class="icon">🛈</span></h3>
+                    <p>使用 **`for` 迴圈**和 **`range()`**，輸出 1 到 20 之間（包含 1 和 20）的所有**奇數**。</p>
+                    <div class="answer">
+                        <pre class="line-numbers"><code class="language-python"># 解答
+for i in range(1, 21, 2):
+    print(i)
+
+# 或者使用 if 判斷
+# for i in range(1, 21):
+#     if i % 2 != 0:
+#         print(i)</code></pre>
+                    </div>
+                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+                        💬 需要引導？找學習助手
+                    </button>
+                </div>
+
+                <div class="challenge-item" id="challenge-2">
+                    <h3 class="caption">挑戰 2：計算總和 <span class="icon">🛈</span></h3>
+                    <p>使用 **`for` 迴圈**，計算列表 `numbers = [10, 20, 30, 40, 50]` 中所有元素的總和，並輸出結果。</p>
+                    <div class="answer">
+                        <pre class="line-numbers"><code class="language-python"># 解答
+numbers = [10, 20, 30, 40, 50]
+total = 0
+for num in numbers:
+    total += num  # total = total + num
+print(f"總和：{total}")</code></pre>
+                    </div>
+                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+                        💬 需要引導？找學習助手
+                    </button>
+                </div>
+
+                <div class="challenge-item" id="challenge-3">
+                    <h3 class="caption">挑戰 3：密碼嘗試 <span class="icon">🛈</span></h3>
+                    <p>使用 **`while` 迴圈**，要求使用者不斷輸入密碼，直到輸入正確的密碼 `"1234"` 為止。輸入正確後，輸出「密碼正確，歡迎登入！」並結束迴圈。</p>
+                    <div class="answer">
+                        <pre class="line-numbers"><code class="language-python"># 解答
+password = ""
+correct_password = "1234"
+
+while password != correct_password:
+    # 假設 input 函數在實際環境中可用
+    # 這裡用一個假設的 input 替代，因為 HTML 環境不能實際執行 Python 的 input
+    password = input("請輸入密碼：") 
+    
+    if password == correct_password:
+        print("密碼正確，歡迎登入！")
+    else:
+        print("密碼錯誤，請重新輸入。")</code></pre>
+                    </div>
+                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+                        💬 需要引導？找學習助手
+                    </button>
+                </div>
+
+                <div class="challenge-item" id="challenge-4">
+                    <h3 class="caption">挑戰 4：`continue` 的使用 <span class="icon">🛈</span></h3>
+                    <p>使用 **`for` 迴圈**，輸出 1 到 10 之間（包含 1 和 10）的所有數字，但要使用 **`continue`** 語句跳過所有**偶數**。</p>
+                    <div class="answer">
+                        <pre class="line-numbers"><code class="language-python"># 解答
+for i in range(1, 11):
+    # 如果是偶數 (i 除以 2 餘數為 0)，則跳過本次迭代
+    if i % 2 == 0:
         continue
     print(i)</code></pre>
-				<p>輸出結果：<br><code>0<br>1<br>3<br>4</code></p>
-				<p>上述程式碼的流程圖如下。</p>
-				<pre class="mermaid">
-					flowchart TD
-						A[Start] --> B{"range(5)是否還有元素未取出?"}
-						B --> |Yes| C["取出一個元素放入變數i"]
-						C --> D{"i == 2?"}
-						D --> |Yes| E["continue"]
-						E --> B
-						D --> |No| F["print(i)"]	
-						F --> B
-						B -->|No| G[End]
-				</pre>
+                    </div>
+                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+                        💬 需要引導？找學習助手
+                    </button>
+                </div>
 
-				<h3>5. 巢狀迴圈</h3>
-				<p>巢狀迴圈是指一個迴圈內部嵌套另一個迴圈：</p>
-				<pre class="line-numbers"><code class="language-python">for i in range(3):
-    for j in range(2):
-        print(f"i={i}, j={j}")</code></pre>
-				<p>輸出結果：<br>
-				<code>i=0, j=0<br>i=0, j=1<br>i=1, j=0<br>i=1, j=1<br>i=2, j=0<br>i=2, j=1</code></p>
+                <div class="challenge-item" id="challenge-5">
+                    <h3 class="caption">挑戰 5：尋找與中斷 <span class="icon">🛈</span></h3>
+                    <p>給定列表 `items = ["pen", "book", "pencil", "eraser"]`。使用 **`for` 迴圈**和 **`break`**，尋找第一個出現的 `"pencil"`，並在找到後立刻輸出「找到鉛筆了！」然後停止迴圈。如果迴圈正常結束（即沒有找到），則輸出「列表中沒有鉛筆」。</p>
+                    <div class="answer">
+                        <pre class="line-numbers"><code class="language-python"># 解答
+items = ["pen", "book", "pencil", "eraser"]
+found = False
+for item in items:
+    if item == "pencil":
+        print("找到鉛筆了！")
+        found = True
+        break
+        
+if not found:
+    print("列表中沒有鉛筆")
+
+# 使用 for/else 寫法會更簡潔
+print("\n--- 使用 for/else ---")
+for item in items:
+    if item == "pencil":
+        print("找到鉛筆了！")
+        break
+else:
+    # 只有當 for 迴圈沒有被 break 時才會執行
+    print("列表中沒有鉛筆")</code></pre>
+                    </div>
+                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+                        💬 需要引導？找學習助手
+                    </button>
+                </div>
 				
-			</section>			
-
-			<section>
-				<h2><code>for</code> 和 <code>while</code> 迴圈中的 <code>else</code> 子句</h2>
-				<h3>語法說明</h3>
-				<p>在 Python 中，<code>for</code> 和 <code>while</code> 迴圈可以搭配 <code>else</code> 子句使用。<code>else</code> 子句會在迴圈正常結束時執行，也就是沒有被 <code>break</code> 中斷的情況下。語法結構如下：</p>
-				<p>搭配<code>for</code></p>
-				<pre class="line-numbers"><code class="language-python">for item in iterable:
-    # 執行區塊
-    if condition:
-        break
-else:
-    # 當迴圈未被 break 中斷時執行</code></pre>
-				<p>搭配<code>while</code></p>
-				<pre class="line-numbers"><code class="language-python">while condition:
-    # 執行區塊
-    if condition:
-        break
-else:
-    # 當迴圈未被 break 中斷時執行</code></pre>
-
-				<h3>使用情境與範例</h3>
-				<pre class="line-numbers"><code class="language-python">fruits = ["apple", "banana", "cherry"]
-for fruit in fruits:
-    if fruit == "orange":
-        print("找到橘子了！")
-        break
-else:
-    print("清單中沒有橘子。")</code></pre>
-				<p>在這個例子中，<code>for</code> 迴圈依序走訪 fruits 清單，尋找 "orange"。由於清單中沒有 "orange"，迴圈未被 <code>break</code> 中斷，因此執行 <code>else</code> 子句，輸出提示訊息。</p>
-				<br>
-				<pre class="line-numbers"><code class="language-python">num = 17
-for i in range(2, int(num ** 0.5) + 1):
-    if num % i == 0:
-        print(f"{num} 不是質數")
-        break
-else:
-    print(f"{num} 是質數")</code></pre>
-				<p>此範例中，<code>for</code> 迴圈檢查 num 是否能被 2 到 sqrt(num) 的數整除。若找到因數，表示 num 不是質數，並使用 <code>break</code> 中斷迴圈。若迴圈正常結束，則執行 <code>else</code> 子句，確認 num 為質數。</p>
-				<br>
-				<pre class="line-numbers"><code class="language-python">attempts = 0
-max_attempts = 3
-
-while attempts < max_attempts:
-    password = input("請輸入密碼：")
-    if password == "secret":
-        print("登入成功！")
-        break
-    attempts += 1
-else:
-    print("超過嘗試次數，請稍後再試。")</code></pre>
-				<p>在這個例子中，使用者有三次機會輸入正確的密碼。若在三次內輸入正確，則使用 <code>break</code> 中斷迴圈；若三次皆輸入錯誤，則迴圈正常結束，執行 <code>else</code> 子句，提示使用者稍後再試。</p>
-
-				<h3>注意事項</h3>
-				<ul>
-					<li><code>else</code> 子句僅在迴圈未被 <code>break</code> 中斷的情況下執行。</li>
-					<li>若迴圈因 <code>break</code>、<code>return</code> 或拋出例外 (<code>raise</code>) 而提前結束，<code>else</code> 子句將不會執行。</li>
-				</ul>
-			</section>
-		
-			<section>
-				<h2>常見問題與解答</h2>
-				<h3>問題 1：如何避免 <code>while</code> 迴圈無限執行？</h3>
-				<p>確保迴圈條件會在某個時候變為 <code>False</code>，例如：</p>
-				<pre class="line-numbers"><code class="language-python">count = 0
-while count < 5:
-    print(count)
-    count += 1  # 確保條件會改變</code></pre>
-
-				<h3>問題 2：如何走訪串列中的每個元素？</h3>
-				<p>使用 <code>for</code> 迴圈：</p>
-				<pre class="line-numbers"><code class="language-python">fruits = ["apple", "banana", "cherry"]
-for fruit in fruits:
-    print(fruit)</code></pre>
-				<p>輸出結果：<br><code>apple<br>banana<br>cherry</code></p>
-
-				<h3>問題 3：如何在巢狀迴圈中結束所有迴圈？</h3>
-				<p>當我們在巢狀迴圈（Nested Loops）中，想要從內部迴圈跳出並終止所有外部迴圈， <code>break</code>  只能終止當前的迴圈，無法直接影響外部的迴圈。因此，我們需要使用旗標變數（flag variable）來標記某個條件是否達成，然後在外部迴圈判斷該變數來決定是否跳出。</p>
-				<pre class="line-numbers"><code class="language-python">found = False
-for i in range(3):
-    for j in range(3):
-        if i == 1 and j == 1:
-            found = True
-            break
-    if found:
-        break
-print("結束所有迴圈")</code></pre>				
-
-			</section>
-
-			<section>
-				<h2>挑戰題目</h2>
-				<h3 class="caption">挑戰 1：計算總和 <span class="icon">🛈</span></h3>
-    <p>寫一段程式碼，使用 <code>for</code> 迴圈計算從 1 到 100 的總和。</p>
-    <div class="answer">
-        <pre class="line-numbers"><code class="language-python"># 解答
-total = 0
-for i in range(1, 101):
-    total += i
-print(f"1 到 100 的總和是：{total}")</code></pre>
-    </div>
-
-    <h3 class="caption">挑戰 2：九九乘法表 <span class="icon">🛈</span></h3>
-    <p>使用巢狀迴圈輸出完整的九九乘法表。</p>
-    <div class="answer">
-        <pre class="line-numbers"><code class="language-python"># 解答
+                <div class="challenge-item" id="challenge-6">
+                    <h3 class="caption">挑戰 6：巢狀迴圈：九九乘法表 <span class="icon">🛈</span></h3>
+                    <p>使用**巢狀 `for` 迴圈**，輸出一個完整的九九乘法表（不需排版，每行輸出一個算式即可）。</p>
+                    <div class="answer">
+                        <pre class="line-numbers"><code class="language-python"># 解答
 for i in range(1, 10):
     for j in range(1, 10):
-        print(f"{i} x {j} = {i * j}", end="\t")
-    print()  # 換行</code></pre>
+        result = i * j
+        print(f"{i} x {j} = {result}")</code></pre>
+                    </div>
+                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+                        💬 需要引導？找學習助手
+                    </button>
+                </div>
+				
+                <div class="challenge-item" id="challenge-7">
+                    <h3 class="caption">挑戰 7：從後向前遍歷 <span class="icon">🛈</span></h3>
+                    <p>使用 **`for` 迴圈**，遍歷列表 `letters = ['A', 'B', 'C', 'D']` 並依序輸出，然後使用 **`range()`** 函式從後向前倒序輸出索引和元素。</p>
+                    <div class="answer">
+                        <pre class="line-numbers"><code class="language-python"># 解答
+letters = ['A', 'B', 'C', 'D']
+
+print("--- 依序輸出 ---")
+for letter in letters:
+    print(letter)
+
+print("\n--- 倒序輸出（使用 range() 和索引）---")
+# len(letters) - 1 是最後一個索引 (3)
+# -1 是迴圈終止條件 (不包含 -1)
+# -1 是步長 (每次減 1)
+for i in range(len(letters) - 1, -1, -1):
+    print(f"索引 {i}: {letters[i]}")
+
+# 也可以使用 reversed()
+# print("\n--- 倒序輸出（使用 reversed()）---")
+# for letter in reversed(letters):
+#     print(letter)</code></pre>
+                    </div>
+                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+                        💬 需要引導？找學習助手
+                    </button>
+                </div>
+
+            </section>
+
+            <section>
+                <h2>結語</h2>
+                <p>迴圈是程式設計中自動化和處理重複任務的基石。掌握 `for` 和 `while` 迴圈，以及 `break`、`continue` 和 `else` 等控制語句，將能讓你撰寫出強大而靈活的程式碼。</p>
+            </section>
+        </main>
+		
+		<div id="chatbot-container" class="chatbot-docked chatbot-docked-right" style="display: none;">
+			<div class="chatbot-window">
+				<div class="chatbot-header">
+					<div class="chatbot-header-left">
+						<span class="chatbot-title" id="chatbot-title">🤖 Python 學習助手</span>
+						
+					</div>
+					<div class="chatbot-header-right">
+						<button class="chatbot-jump-btn" id="chatbot-jump-btn" onclick="jumpToChallenge()" title="跳轉到挑戰位置">🚩</button>
+						<button class="chatbot-dock-btn" id="dock-right-btn" onclick="dockChatbot('right')" title="停靠右側">
+							▷
+						</button>
+						<button class="chatbot-dock-btn" id="dock-bottom-btn" onclick="dockChatbot('bottom')" title="停靠底部">
+							▽
+						</button>
+						<button class="chatbot-close" onclick="closeChatbot()">✕</button>
+					</div>
+				</div>
+								
+				<div class="chatbot-resizer" id="chatbot-resizer"></div>
+				
+				<div class="chatbot-messages" id="chatbot-messages"></div>
+				<div class="chatbot-input">
+					<textarea 
+						id="chatbot-input" 
+						placeholder="輸入你的回答或問題...（Shift+Enter 換行，Enter 發送）" 
+						onkeydown="handleKeyPress(event)"
+						rows="1"></textarea>
+					<button id="chatbot-send-btn" onclick="sendMessage()">發送</button>
+					<button id="chatbot-summary-btn" onclick="generateSummary()">📊</button>
+				</div>
+			</div>
+		</div>
+
+		<script src="js/auth.js"></script>
+		<script src="js/chatbot.js"></script>
+		
     </div>
-
-    <h3 class="caption">挑戰 3：尋找質數 <span class="icon">🛈</span></h3>
-    <p>設計一個程式，找出 1 到 50 範圍內的所有質數。</p>
-    <div class="answer">
-        <pre class="line-numbers"><code class="language-python"># 解答
-for num in range(2, 51):
-    is_prime = True
-    for i in range(2, int(num ** 0.5) + 1):
-        if num % i == 0:
-            is_prime = False
-            break
-    if is_prime:
-        print(num, end=" ")</code></pre>
-    </div>
-
-    <h3 class="caption">挑戰 4：反向輸出 <span class="icon">🛈</span></h3>
-    <p>設計一個程式，使用 <code>for</code> 迴圈，輸出 10 到 1 的數字（反向遞減）。</p>
-    <div class="answer">
-        <pre class="line-numbers"><code class="language-python"># 解答
-for i in range(10, 0, -1):
-    print(i, end=" ")</code></pre>
-    </div>
-
-    <h3 class="caption">挑戰 5：計算階乘 <span class="icon">🛈</span></h3>
-    <p>撰寫一段程式碼，讓使用者輸入一個正整數，並使用 <code>while</code> 迴圈計算該數字的階乘（例如 5! = 5 × 4 × 3 × 2 × 1）。</p>
-    <div class="answer">
-        <pre class="line-numbers"><code class="language-python"># 解答
-num = int(input("請輸入一個正整數："))
-factorial = 1
-while num > 0:
-    factorial *= num
-    num -= 1
-print(f"階乘結果是：{factorial}")</code></pre>
-    </div>
-
-    <h3 class="caption">挑戰 6：數字金字塔 <span class="icon">🛈</span></h3>
-    <p>使用巢狀迴圈，輸出以下格式的數字金字塔：</p>
-    <pre class="line-numbers"><code class="language-python">1
-22
-333
-4444
-55555</code></pre>
-    <div class="answer">
-        <pre class="line-numbers"><code class="language-python"># 解答
-for i in range(1, 6):
-    print(str(i) * i)</code></pre>
-    </div>
-
-    <h3 class="caption">挑戰 7：質數檢查 <span class="icon">🛈</span></h3>
-    <p>設計一個程式，讓使用者輸入一個正整數，檢查該數字是否為質數。</p>
-    <div class="answer">
-        <pre class="line-numbers"><code class="language-python"># 解答
-num = int(input("請輸入一個正整數："))
-if num < 2:
-    print("不是質數")
-else:
-    is_prime = True
-    for i in range(2, int(num ** 0.5) + 1):
-        if num % i == 0:
-            is_prime = False
-            break
-    if is_prime:
-        print(f"{num} 是質數")
-    else:
-        print(f"{num} 不是質數")</code></pre>
-    </div>
-
-    <h3 class="caption">挑戰 8：數字猜猜樂 <span class="icon">🛈</span></h3>
-    <p>撰寫一個程式，讓電腦隨機生成一個 1 到 100 之間的數字，並讓使用者猜測，程式應提示使用者猜得太高或太低，直到猜對為止。</p>
-    <div class="answer">
-        <pre class="line-numbers"><code class="language-python"># 解答
-import random
-
-target = random.randint(1, 100)
-guess = 0
-while guess != target:
-    guess = int(input("請猜一個 1 到 100 的數字："))
-    if guess < target:
-        print("太低了！")
-    elif guess > target:
-        print("太高了！")
-    else:
-        print("恭喜你，猜對了！")</code></pre>
-    </div>
-			</section>
-			
-			
-			<section>
-				<h2>結語</h2>
-				<p>透過本章的學習，我們深入探討了 <code>for</code> 迴圈、 <code>while</code> 迴圈及其在 Python 中的應用，並學習了 <code>break</code>、<code>continue</code> 以及巢狀迴圈 的使用方式。這些概念不僅讓程式更加簡潔，也提升了我們解決問題的能力。</p>
-			</section>
-		</main>
-    </div>			
-	
-
-	
 </body>
 </html>
