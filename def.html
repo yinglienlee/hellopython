@@ -9,11 +9,16 @@
 	<link rel="stylesheet" href="css/chatbot.css">	
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 	<script type="text/javascript" src="js/script.js"></script>	
+	<!-- MSAL.js Library -->
 	<script src="https://alcdn.msauth.net/browser/2.38.1/js/msal-browser.min.js"></script>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css">
+	<!-- Prism.js CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css">
+    <!-- Prism.js Line Numbers CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
+    <!-- Prism.js Syntax Highlighting -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <!-- Prism.js Line Numbers Plugin -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
 	<script>
 		document.addEventListener("DOMContentLoaded", (event) => {
@@ -25,6 +30,7 @@
 </head>
 <body>
     <div class="d-flex">
+        <!-- Floating Button -->
         <button id="toggleNav" class="btn btn-primary">&#8212;</button>
         <nav id="sidebar" class="bg-light border-end" style="display: block;">
             <div>
@@ -117,43 +123,43 @@ print(words)  # 輸出：['date', 'apple', 'banana', 'cherry']</code></pre>
 
             </section>
 
-            <section>
-            <h2>位置參數與關鍵字參數</h2>
+<section>
+<h2>位置參數與關鍵字參數</h2>
 
-            <h3 class="caption">位置參數</h3>
-            <p>位置參數（<strong>positional arguments</strong>）是根據參數出現的順序來傳遞值。第一個值對應第一個參數，第二個值對應第二個參數，依此類推。</p>
-            <pre class="line-numbers"><code class="language-python">def greet(name, age):
+<h3 class="caption">位置參數</h3>
+<p>位置參數（<strong>positional arguments</strong>）是根據參數出現的順序來傳遞值。第一個值對應第一個參數，第二個值對應第二個參數，依此類推。</p>
+<pre class="line-numbers"><code class="language-python">def greet(name, age):
     print(f"Hello, {name}. You are {age} years old.")
 
 greet("Alice", 12)
 </code></pre>
-            <p><strong>輸出結果：</strong><br>Hello, Alice. You are 12 years old.</p>
+<p><strong>輸出結果：</strong><br>Hello, Alice. You are 12 years old.</p>
 
-            <h3 class="caption">關鍵字參數</h3>
-            <p>關鍵字參數（<strong>keyword arguments</strong>）是使用參數名稱來指定值。即使順序不同也能正確對應到參數。</p>
-            <pre class="line-numbers"><code class="language-python">greet(age=12, name="Alice")
+<h3 class="caption">關鍵字參數</h3>
+<p>關鍵字參數（<strong>keyword arguments</strong>）是使用參數名稱來指定值。即使順序不同也能正確對應到參數。</p>
+<pre class="line-numbers"><code class="language-python">greet(age=12, name="Alice")
 </code></pre>
-            <p><strong>輸出結果：</strong><br>Hello, Alice. You are 12 years old.</p>
+<p><strong>輸出結果：</strong><br>Hello, Alice. You are 12 years old.</p>
 
-            <h3 class="caption">混合使用位置參數與關鍵字參數</h3>
-            <p>你可以先使用位置參數，再使用關鍵字參數，但不能顛倒順序。</p>
+<h3 class="caption">混合使用位置參數與關鍵字參數</h3>
+<p>你可以先使用位置參數，再使用關鍵字參數，但不能顛倒順序。</p>
 
-            <p><strong>合法寫法：</strong></p>
-            <pre class="line-numbers"><code class="language-python">greet("Alice", age=12)
-</code></pre>
-
-            <p><strong>錯誤寫法（會出錯）：</strong></p>
-            <pre class="line-numbers"><code class="language-python">greet(age=12, "Alice")  # SyntaxError
+<p><strong>合法寫法：</strong></p>
+<pre class="line-numbers"><code class="language-python">greet("Alice", age=12)
 </code></pre>
 
-            <h3 class="caption">小結</h3>
-            <p>
-              <ul>
-                <li><strong>位置參數：</strong>按順序傳值，簡潔但不直觀</li>
-                <li><strong>關鍵字參數：</strong>指定參數名稱，清楚明確，順序可調換</li>
-              </ul>
-            </p>
-            </section>
+<p><strong>錯誤寫法（會出錯）：</strong></p>
+<pre class="line-numbers"><code class="language-python">greet(age=12, "Alice")  # SyntaxError
+</code></pre>
+
+<h3 class="caption">小結</h3>
+<p>
+  <ul>
+    <li><strong>位置參數：</strong>按順序傳值，簡潔但不直觀</li>
+    <li><strong>關鍵字參數：</strong>指定參數名稱，清楚明確，順序可調換</li>
+  </ul>
+</p>
+</section>
 		
             <section>
                 <h2>常見問題與解答</h2>
@@ -169,121 +175,83 @@ greet("Alice", 12)
 
             <section>
                 <h2>挑戰題目</h2>
-                
-                <div class="challenge-item" id="challenge-1">
-                    <h3 class="caption">挑戰 1：溫度轉換 <span class="icon">🛈</span></h3>
-                    <p>設計一個函式，將攝氏溫度轉換為華氏溫度，並回傳結果。</p>
-                    <div class="answer">
-                        <pre class="line-numbers"><code class="language-python"># 解答
+    <h3 class="caption">挑戰 1：溫度轉換 <span class="icon">🛈</span></h3>
+    <p>設計一個函式，將攝氏溫度轉換為華氏溫度，並回傳結果。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
 def celsius_to_fahrenheit(celsius):
     return celsius * 9/5 + 32
 
 print(celsius_to_fahrenheit(25))  # 輸出：77.0</code></pre>
-                    </div>
-                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-                        💬 需要引導？找學習助手
-                    </button>
-                </div>
+    </div>
 
-                <div class="challenge-item" id="challenge-2">
-                    <h3 class="caption">挑戰 2：應用 Lambda 函式 <span class="icon">🛈</span></h3>
-                    <p>使用 <code>lambda</code> 函式，實現一個功能，接收圓的半徑，並返回圓的面積。</p>
-                    <div class="answer">
-                        <pre class="line-numbers"><code class="language-python"># 解答
+    <h3 class="caption">挑戰 2：應用 Lambda 函式 <span class="icon">🛈</span></h3>
+    <p>使用 <code>lambda</code> 函式，實現一個功能，接收圓的半徑，並返回圓的面積。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
 circle_area = lambda radius: 3.14159 * radius ** 2
 print(circle_area(5))  # 輸出：78.53975</code></pre>
-                    </div>
-                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-                        💬 需要引導？找學習助手
-                    </button>
-                </div>
+    </div>
 
-                <div class="challenge-item" id="challenge-3">
-                    <h3 class="caption">挑戰 3：應用 Lambda 函式 <span class="icon">🛈</span></h3>
-                    <p>給定一組數字 <code>numbers = [5, -10, 3, -1, 7]</code>，使用 <code>sorted</code> 函式和 <code>lambda</code>，將數字按照它們的絕對值進行排序，並輸出排序結果。</p>
-                    <div class="answer">
-                        <pre class="line-numbers"><code class="language-python"># 解答
+    <h3 class="caption">挑戰 3：應用 Lambda 函式 <span class="icon">🛈</span></h3>
+    <p>給定一組數字 <code>numbers = [5, -10, 3, -1, 7]</code>，使用 <code>sorted</code> 函式和 <code>lambda</code>，將數字按照它們的絕對值進行排序，並輸出排序結果。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
 numbers = [5, -10, 3, -1, 7]
 sorted_numbers = sorted(numbers, key=lambda x: abs(x))
 print(sorted_numbers)  # 輸出：[3, -1, 5, 7, -10]</code></pre>
-                    </div>
-                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-                        💬 需要引導？找學習助手
-                    </button>
-                </div>
+    </div>
 
-                <div class="challenge-item" id="challenge-4">
-                    <h3 class="caption">挑戰 4：判斷閏年 <span class="icon">🛈</span></h3>
-                    <p>撰寫一個函式，接收一個年份作為參數，並回傳該年份是否為閏年。若未提供年份，則預設為 2025。</p>
-                    <div class="answer">
-                        <pre class="line-numbers"><code class="language-python"># 解答
+    <h3 class="caption">挑戰 4：判斷閏年 <span class="icon">🛈</span></h3>
+    <p>撰寫一個函式，接收一個年份作為參數，並回傳該年份是否為閏年。若未提供年份，則預設為 2025。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
 def is_leap_year(year=2025):
     return (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0)
 
 print(is_leap_year(2024))  # 輸出：True</code></pre>
-                    </div>
-                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-                        💬 需要引導？找學習助手
-                    </button>
-                </div>
+    </div>
 
-                <div class="challenge-item" id="challenge-5">
-                    <h3 class="caption">挑戰 5：清單中的最大值 <span class="icon">🛈</span></h3>
-                    <p>撰寫一個函式，接收一個數字清單，並回傳該清單中的最大值。</p>
-                    <div class="answer">
-                        <pre class="line-numbers"><code class="language-python"># 解答
+    <h3 class="caption">挑戰 5：清單中的最大值 <span class="icon">🛈</span></h3>
+    <p>撰寫一個函式，接收一個數字清單，並回傳該清單中的最大值。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
 def max_in_list(numbers):
     return max(numbers)
 
 print(max_in_list([10, 20, 5, 30]))  # 輸出：30</code></pre>
-                    </div>
-                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-                        💬 需要引導？找學習助手
-                    </button>
-                </div>
+    </div>
 
-                <div class="challenge-item" id="challenge-6">
-                    <h3 class="caption">挑戰 6：使用 Lambda 過濾清單 <span class="icon">🛈</span></h3>
-                    <p>給定一個數字清單 <code>numbers = [10, -5, 15, -20, 30]</code>，使用 <code>filter</code> 和 <code>lambda</code>，篩選出清單中所有大於 0 的數字，並輸出結果。</p>
-                    <div class="answer">
-                        <pre class="line-numbers"><code class="language-python"># 解答
+    <h3 class="caption">挑戰 6：使用 Lambda 過濾清單 <span class="icon">🛈</span></h3>
+    <p>給定一個數字清單 <code>numbers = [10, -5, 15, -20, 30]</code>，使用 <code>filter</code> 和 <code>lambda</code>，篩選出清單中所有大於 0 的數字，並輸出結果。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
 numbers = [10, -5, 15, -20, 30]
 positive_numbers = list(filter(lambda x: x > 0, numbers))
 print(positive_numbers)  # 輸出：[10, 15, 30]</code></pre>
-                    </div>
-                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-                        💬 需要引導？找學習助手
-                    </button>
-                </div>
+    </div>
 
-                <div class="challenge-item" id="challenge-7">
-                    <h3 class="caption">挑戰 7：計算多個矩形的面積 <span class="icon">🛈</span></h3>
-                    <p>撰寫一個函式，接收多個矩形的長與寬（作為一個清單），並回傳所有矩形面積的總和。</p>
-                    <div class="answer">
-                        <pre class="line-numbers"><code class="language-python"># 解答
+    <h3 class="caption">挑戰 7：計算多個矩形的面積 <span class="icon">🛈</span></h3>
+    <p>撰寫一個函式，接收多個矩形的長與寬（作為一個清單），並回傳所有矩形面積的總和。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
 def total_area(rectangles):
     return sum(length * width for length, width in rectangles)
 
 print(total_area([(5, 10), (3, 4), (2, 6)]))  # 輸出：62</code></pre>
-                    </div>
-                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-                        💬 需要引導？找學習助手
-                    </button>
-                </div>
+    </div>
 
-                <div class="challenge-item" id="challenge-8">
-                    <h3 class="caption">挑戰 8：應用 Lambda 進行資料轉換 <span class="icon">🛈</span></h3>
-                    <p>設計一段程式碼，使用 <code>map</code> 和 <code>lambda</code> 將一組攝氏溫度清單 <code>[0, 20, 37, 100]</code> 轉換為華氏溫度，並輸出結果。</p>
-                    <div class="answer">
-                        <pre class="line-numbers"><code class="language-python"># 解答
+    <h3 class="caption">挑戰 8：應用 Lambda 進行資料轉換 <span class="icon">🛈</span></h3>
+    <p>設計一段程式碼，使用 <code>map</code> 和 <code>lambda</code> 將一組攝氏溫度清單 <code>[0, 20, 37, 100]</code> 轉換為華氏溫度，並輸出結果。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
 celsius_list = [0, 20, 37, 100]
 fahrenheit_list = list(map(lambda c: c * 9/5 + 32, celsius_list))
 print(fahrenheit_list)  # 輸出：[32.0, 68.0, 98.6, 212.0]</code></pre>
-                    </div>
-                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-                        💬 需要引導？找學習助手
-                    </button>
-                </div>
+    </div>
+				
+
+
 				
             </section>
 
@@ -293,6 +261,7 @@ print(fahrenheit_list)  # 輸出：[32.0, 68.0, 98.6, 212.0]</code></pre>
             </section>
         </main>
 		
+		<!-- 全域聊天機器人容器（只需要一個） -->
 		<div id="chatbot-container" class="chatbot-docked chatbot-docked-right" style="display: none;">
 			<div class="chatbot-window">
 				<div class="chatbot-header">
@@ -302,16 +271,21 @@ print(fahrenheit_list)  # 輸出：[32.0, 68.0, 98.6, 212.0]</code></pre>
 					</div>
 					<div class="chatbot-header-right">
 						<button class="chatbot-jump-btn" id="chatbot-jump-btn" onclick="jumpToChallenge()" title="跳轉到挑戰位置">🚩</button>
+						<!-- 停靠位置按鈕 -->
 						<button class="chatbot-dock-btn" id="dock-right-btn" onclick="dockChatbot('right')" title="停靠右側">
 							▷
 						</button>
 						<button class="chatbot-dock-btn" id="dock-bottom-btn" onclick="dockChatbot('bottom')" title="停靠底部">
 							▽
 						</button>
+						<!--button class="chatbot-dock-btn" onclick="dockChatbot('top')" title="停靠頂部">
+							△
+						</button-->
 						<button class="chatbot-close" onclick="closeChatbot()">✕</button>
 					</div>
 				</div>
 								
+				<!-- 調整大小的拖曳柄 -->
 				<div class="chatbot-resizer" id="chatbot-resizer"></div>
 				
 				<div class="chatbot-messages" id="chatbot-messages"></div>

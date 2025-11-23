@@ -9,11 +9,16 @@
 	<link rel="stylesheet" href="css/chatbot.css">	
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 	<script type="text/javascript" src="js/script.js"></script>	
+	<!-- MSAL.js Library -->
 	<script src="https://alcdn.msauth.net/browser/2.38.1/js/msal-browser.min.js"></script>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css">
+	<!-- Prism.js CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css">
+    <!-- Prism.js Line Numbers CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
+    <!-- Prism.js Syntax Highlighting -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <!-- Prism.js Line Numbers Plugin -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
 	<script>
 		document.addEventListener("DOMContentLoaded", (event) => {
@@ -25,6 +30,7 @@
 </head>
 <body>
     <div class="d-flex">
+        <!-- Floating Button -->
         <button id="toggleNav" class="btn btn-primary">&#8212;</button>
         <nav id="sidebar" class="bg-light border-end" style="display: block;">
             <div>
@@ -105,149 +111,107 @@ print(my_tuple)  # 輸出：(1, 2, 3)</code></pre>
             </section>
 
             <section>
-                <h2>挑戰題目</h2>
-
-                <div class="challenge-item" id="challenge-1">
-                    <h3 class="caption">挑戰 1：資料分類 <span class="icon">🛈</span></h3>
-                    <p>定義一個元組，其中包含多種類型的資料，並依序輸出其類型。</p>
-                    <div class="answer">
-                        <pre class="line-numbers"><code class="language-python"># 解答
+                <h3 class="caption">挑戰 1：資料分類 <span class="icon">🛈</span></h3>
+    <p>定義一個元組，其中包含多種類型的資料，並依序輸出其類型。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
 data_tuple = (42, 3.14, "Python", True)
 for item in data_tuple:
     print(f"元素: {item}, 類型: {type(item)}")</code></pre>
-                    </div>
-                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-                        💬 需要引導？找學習助手
-                    </button>
-                </div>
+    </div>
 
-                <div class="challenge-item" id="challenge-2">
-                    <h3 class="caption">挑戰 2：成績排序 <span class="icon">🛈</span></h3>
-                    <p>建立一個包含多位學生成績的元組，依成績排序後輸出結果。</p>
-                    <div class="answer">
-                        <pre class="line-numbers"><code class="language-python"># 解答
+                <h3 class="caption">挑戰 2：成績排序 <span class="icon">🛈</span></h3>
+    <p>建立一個包含多位學生成績的元組，依成績排序後輸出結果。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
 grades_tuple = (85, 92, 78, 99, 88)
 sorted_grades = tuple(sorted(grades_tuple, reverse=True))
 print("排序後的成績:", sorted_grades)</code></pre>
-                    </div>
-                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-                        💬 需要引導？找學習助手
-                    </button>
-                </div>
+    </div>
 
-                <div class="challenge-item" id="challenge-3">
-                    <h3 class="caption">挑戰 3：座標計算 <span class="icon">🛈</span></h3>
-                    <p>設計一個程式，輸入兩個座標元組，計算它們之間的距離。</p>
-                    <div class="answer">
-                        <pre class="line-numbers"><code class="language-python"># 解答
+                <h3 class="caption">挑戰 3：座標計算 <span class="icon">🛈</span></h3>
+    <p>設計一個程式，輸入兩個座標元組，計算它們之間的距離。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
 import math
 point1 = (3, 4)
 point2 = (7, 1)
 distance = math.sqrt((point2[0] - point1[0])**2 + (point2[1] - point1[1])**2)
 print("座標間的距離:", distance)</code></pre>
-                    </div>
-                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-                        💬 需要引導？找學習助手
-                    </button>
-                </div>
+    </div>
 				
-                <div class="challenge-item" id="challenge-4">
-                    <h3 class="caption">挑戰 4：去除重複元素 <span class="icon">🛈</span></h3>
-                    <p>建立一個包含重複元素的元組，設計一個程式移除重複的元素並保持原順序輸出結果。</p>
-                    <pre class="line-numbers"><code class="language-python"># 範例輸入
+				<h3 class="caption">挑戰 4：去除重複元素 <span class="icon">🛈</span></h3>
+				<p>建立一個包含重複元素的元組，設計一個程式移除重複的元素並保持原順序輸出結果。</p>
+				<pre class="line-numbers"><code class="language-python"># 範例輸入
 input_tuple = (1, 2, 2, 3, 4, 4, 5)
 # 預期輸出
 (1, 2, 3, 4, 5)</code></pre>
-                    <div class="answer">
-                        <pre class="line-numbers"><code class="language-python"># 解答
+				<div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
 input_tuple = (1, 2, 2, 3, 4, 4, 5)
 unique_tuple = tuple(set(input_tuple))
 print("移除重複後的元組:", unique_tuple)</code></pre>
-                    </div>
-                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-                        💬 需要引導？找學習助手
-                    </button>
-                </div>
+    </div>
 
-                <div class="challenge-item" id="challenge-5">
-                    <h3 class="caption">挑戰 5：元素查找 <span class="icon">🛈</span></h3>
-                    <p>定義一個元組與一個目標值，撰寫程式檢查目標值是否存在於元組中，若存在則輸出其索引，否則提示目標值不存在。</p>
-                    <pre class="line-numbers"><code class="language-python"># 範例輸入
+				<h3 class="caption">挑戰 5：元素查找 <span class="icon">🛈</span></h3>
+				<p>定義一個元組與一個目標值，撰寫程式檢查目標值是否存在於元組中，若存在則輸出其索引，否則提示目標值不存在。</p>
+				<pre class="line-numbers"><code class="language-python"># 範例輸入
 my_tuple = ('apple', 'banana', 'cherry', 'date')
 target = 'cherry'
 # 預期輸出
 元素 'cherry' 的索引為 2</code></pre>
-                    <div class="answer">
-                        <pre class="line-numbers"><code class="language-python"># 解答
+				<div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
 my_tuple = ('apple', 'banana', 'cherry', 'date')
 target = 'cherry'
 if target in my_tuple:
     print(f"元素 '{target}' 的索引為 {my_tuple.index(target)}")
 else:
     print(f"元素 '{target}' 不存在於元組中")</code></pre>
-                    </div>
-                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-                        💬 需要引導？找學習助手
-                    </button>
-                </div>
+    </div>
 
-                <div class="challenge-item" id="challenge-6">
-                    <h3 class="caption">挑戰 6：元組切片 <span class="icon">🛈</span></h3>
-                    <p>給定一個元組與兩個索引範圍，實作程式切片該元組並輸出結果。</p>
-                    <pre class="line-numbers"><code class="language-python"># 範例輸入
+				<h3 class="caption">挑戰 6：元組切片 <span class="icon">🛈</span></h3>
+				<p>給定一個元組與兩個索引範圍，實作程式切片該元組並輸出結果。</p>
+				<pre class="line-numbers"><code class="language-python"># 範例輸入
 sample_tuple = (10, 20, 30, 40, 50, 60)
 start = 1
 end = 4
 # 預期輸出
 (20, 30, 40)</code></pre>
-                    <div class="answer">
-                        <pre class="line-numbers"><code class="language-python"># 解答
+				<div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
 sample_tuple = (10, 20, 30, 40, 50, 60)
 start, end = 1, 4
 sliced_tuple = sample_tuple[start:end]
 print("切片後的元組:", sliced_tuple)</code></pre>
-                    </div>
-                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-                        💬 需要引導？找學習助手
-                    </button>
-                </div>
+    </div>
 
-                <div class="challenge-item" id="challenge-7">
-                    <h3 class="caption">挑戰 7：動態解包 <span class="icon">🛈</span></h3>
-                    <p>設計程式實現動態解包，給定元組並指定若干變數進行解包，未指定變數的部分使用串列接收。</p>
-                    <pre class="line-numbers"><code class="language-python"># 範例資料
+				<h3 class="caption">挑戰 7：動態解包 <span class="icon">🛈</span></h3>
+				<p>設計程式實現動態解包，給定元組並指定若干變數進行解包，未指定變數的部分使用串列接收。</p>
+				<pre class="line-numbers"><code class="language-python"># 範例資料
 input_tuple = (1, 2, 3, 4, 5)
 # 預期輸出
 a: 1, b: 2, 剩餘: [3, 4, 5]</code></pre>
-                    <div class="answer">
-                        <pre class="line-numbers"><code class="language-python"># 解答
+				<div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
 input_tuple = (1, 2, 3, 4, 5)
 a, b, *rest = input_tuple
 print(f"a: {a}, b: {b}, 剩餘: {rest}")</code></pre>
-                    </div>
-                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-                        💬 需要引導？找學習助手
-                    </button>
-                </div>
+    </div>
 
-                <div class="challenge-item" id="challenge-8">
-                    <h3 class="caption">挑戰 8：最小與最大值 <span class="icon">🛈</span></h3>
-                    <p>建立一個元組，實作程式找出該元組的最小值與最大值並輸出結果。</p>
-                    <pre class="line-numbers"><code class="language-python"># 範例輸入
+				<h3 class="caption">挑戰 8：最小與最大值 <span class="icon">🛈</span></h3>
+				<p>建立一個元組，實作程式找出該元組的最小值與最大值並輸出結果。</p>
+				<pre class="line-numbers"><code class="language-python"># 範例輸入
 numbers = (34, 1, 78, 56, 99, 12)
 # 預期輸出
 最小值：1, 最大值：99</code></pre>
-                    <div class="answer">
-                        <pre class="line-numbers"><code class="language-python"># 解答
+				<div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
 numbers = (34, 1, 78, 56, 99, 12)
 min_value = min(numbers)
 max_value = max(numbers)
 print(f"最小值: {min_value}, 最大值: {max_value}")</code></pre>
-                    </div>
-                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-                        💬 需要引導？找學習助手
-                    </button>
-                </div>
+    </div>
 				
             </section>
 
@@ -257,6 +221,7 @@ print(f"最小值: {min_value}, 最大值: {max_value}")</code></pre>
             </section>
         </main>
 		
+		<!-- 全域聊天機器人容器（只需要一個） -->
 		<div id="chatbot-container" class="chatbot-docked chatbot-docked-right" style="display: none;">
 			<div class="chatbot-window">
 				<div class="chatbot-header">
@@ -266,16 +231,21 @@ print(f"最小值: {min_value}, 最大值: {max_value}")</code></pre>
 					</div>
 					<div class="chatbot-header-right">
 						<button class="chatbot-jump-btn" id="chatbot-jump-btn" onclick="jumpToChallenge()" title="跳轉到挑戰位置">🚩</button>
+						<!-- 停靠位置按鈕 -->
 						<button class="chatbot-dock-btn" id="dock-right-btn" onclick="dockChatbot('right')" title="停靠右側">
 							▷
 						</button>
 						<button class="chatbot-dock-btn" id="dock-bottom-btn" onclick="dockChatbot('bottom')" title="停靠底部">
 							▽
 						</button>
+						<!--button class="chatbot-dock-btn" onclick="dockChatbot('top')" title="停靠頂部">
+							△
+						</button-->
 						<button class="chatbot-close" onclick="closeChatbot()">✕</button>
 					</div>
 				</div>
 								
+				<!-- 調整大小的拖曳柄 -->
 				<div class="chatbot-resizer" id="chatbot-resizer"></div>
 				
 				<div class="chatbot-messages" id="chatbot-messages"></div>

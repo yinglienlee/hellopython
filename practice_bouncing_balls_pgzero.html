@@ -9,11 +9,16 @@
 	<link rel="stylesheet" href="css/chatbot.css">	
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 	<script type="text/javascript" src="js/script.js"></script>	
+	<!-- MSAL.js Library -->
 	<script src="https://alcdn.msauth.net/browser/2.38.1/js/msal-browser.min.js"></script>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css">
+	<!-- Prism.js CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css">
+    <!-- Prism.js Line Numbers CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
+    <!-- Prism.js Syntax Highlighting -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <!-- Prism.js Line Numbers Plugin -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
 	<script>
 		document.addEventListener("DOMContentLoaded", (event) => {
@@ -25,14 +30,14 @@
 </head>
 <body>
     <div class="d-flex">
+        <!-- Floating Button -->
         <button id="toggleNav" class="btn btn-primary">&#8212;</button>
         <nav id="sidebar" class="bg-light border-end" style="display: block;">
             <div>
                 <div w3-include-html="navigation.html"></div>
             </div>
         </nav>
-        
-        <main class="flex-grow-1" id="teaching-content">
+        <main class="flex-grow-1">
             <header>
                 <h1>綜合練習：Bouncing Balls 模擬</h1>
             </header>
@@ -76,7 +81,7 @@ dragged_ball = None  # 目前被拖曳的小球</code></pre>
     <p>清空畫布後，繪製所有小球並顯示操作提示文字。</p>
 
     <h3>3. 更新小球狀態</h3>
-        <pre class="line-numbers"><code class="language-python">def update():
+    <pre class="line-numbers"><code class="language-python">def update():
     for i, ball in enumerate(balls):
         ball["x"] += ball["vx"]
         ball["y"] += ball["vy"]
@@ -256,11 +261,10 @@ pgzrun.go()
             <section>
                 <h2>挑戰題目</h2>
 
-                <div class="challenge-item" id="challenge-1">
-                    <h3 class="caption">挑戰 1：處理球重疊時產生的怪異現象 <span class="icon">🛈</span></h3>
-                                        <p>如果生成球時距離很近，球會以怪異的方式移動，嘗試解決這個問題。</p>
-                    <div class="answer">
-                        <pre class="line-numbers"><code class="language-python"># 解答
+    <h3 class="caption">挑戰 1：處理球重疊時產生的怪異現象 <span class="icon">🛈</span></h3>
+    <p>如果生成球時距離很近，球會以怪異的方式移動，嘗試解決這個問題。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
 def update():
     for i, ball in enumerate(balls):
         # Update ball position
@@ -302,56 +306,54 @@ def update():
                     ball["vy"] -= impulse * ny
                     other["vx"] += impulse * nx
                     other["vy"] += impulse * ny</code></pre>
-                            
-            <p>以下是程式中處理球重疊時使用的新增變數及其功能解釋：</p>
+					
+    <p>以下是程式中處理球重疊時使用的新增變數及其功能解釋：</p>
+    <ul>
+        <li>
+            <strong>min_distance：</strong>兩顆球之間的最小距離，等於兩顆球的半徑之和。
             <ul>
-                <li>
-                    <strong>min_distance：</strong>兩顆球之間的最小距離，等於兩顆球的半徑之和。
-                    <ul>
-                        <li>當球心距離小於 <code>min_distance</code> 時，表示兩顆球發生了重疊，需要進行分離。</li>
-                    </ul>
-                </li>
-                <li>
-                    <strong>overlap：</strong>重疊的距離，表示兩顆球超出其最小距離的部分。
-                    <ul>
-                        <li>計算方式為：<code>overlap = min_distance - distance</code>，其中 <code>distance</code> 為兩顆球的中心距離。</li>
-                        <li>該值用於計算每顆球需要移動的距離，以分離重疊部分。</li>
-                    </ul>
-                </li>
-                <li>
-                    <strong>relative_vx, relative_vy：</strong>兩顆球的相對速度分量，分別表示在水平方向和垂直方向上的相對速度。
-                    <ul>
-                        <li>計算方式為：<code>relative_vx = ball["vx"] - other["vx"]</code> 和 <code>relative_vy = ball["vy"] - other["vy"]</code>。</li>
-                        <li>這些變數用於計算兩顆球沿碰撞軸方向的相對運動情況。</li>
-                    </ul>
-                </li>
-                <li>
-                    <strong>dot_product：</strong>兩顆球速度向量在碰撞軸方向上的內積。
-                    <ul>
-                        <li>計算方式為：<code>dot_product = relative_vx * nx + relative_vy * ny</code>。</li>
-                        <li>內積值用於判斷兩顆球是否正在相互接近（<code>dot_product > 0</code> 表示接近，否則表示遠離）。</li>
-                    </ul>
-                </li>
-                <li>
-                    <strong>impulse：</strong>表示碰撞時速度交換的衝量，基於動量守恆計算。
-                    <ul>
-                        <li>計算方式為：<code>impulse = 2 * dot_product / 2</code>。</li>
-                        <li>該值用於調整兩顆球的速度，使其在碰撞後沿碰撞軸方向分離。</li>
-                    </ul>
-                </li>
+                <li>當球心距離小於 <code>min_distance</code> 時，表示兩顆球發生了重疊，需要進行分離。</li>
             </ul>
-                    </div>
-                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-                        💬 需要引導？找學習助手
-                    </button>
-                </div>
+        </li>
+        <li>
+            <strong>overlap：</strong>重疊的距離，表示兩顆球超出其最小距離的部分。
+            <ul>
+                <li>計算方式為：<code>overlap = min_distance - distance</code>，其中 <code>distance</code> 為兩顆球的中心距離。</li>
+                <li>該值用於計算每顆球需要移動的距離，以分離重疊部分。</li>
+            </ul>
+        </li>
+        <li>
+            <strong>relative_vx, relative_vy：</strong>兩顆球的相對速度分量，分別表示在水平方向和垂直方向上的相對速度。
+            <ul>
+                <li>計算方式為：<code>relative_vx = ball["vx"] - other["vx"]</code> 和 <code>relative_vy = ball["vy"] - other["vy"]</code>。</li>
+                <li>這些變數用於計算兩顆球沿碰撞軸方向的相對運動情況。</li>
+            </ul>
+        </li>
+        <li>
+            <strong>dot_product：</strong>兩顆球速度向量在碰撞軸方向上的內積。
+            <ul>
+                <li>計算方式為：<code>dot_product = relative_vx * nx + relative_vy * ny</code>。</li>
+                <li>內積值用於判斷兩顆球是否正在相互接近（<code>dot_product > 0</code> 表示接近，否則表示遠離）。</li>
+            </ul>
+        </li>
+        <li>
+            <strong>impulse：</strong>表示碰撞時速度交換的衝量，基於動量守恆計算。
+            <ul>
+                <li>計算方式為：<code>impulse = 2 * dot_product / 2</code>。</li>
+                <li>該值用於調整兩顆球的速度，使其在碰撞後沿碰撞軸方向分離。</li>
+            </ul>
+        </li>
+    </ul>
+
+					
+					
+    </div>
 
 
-                <div class="challenge-item" id="challenge-2">
-                    <h3 class="caption">挑戰 2：增加重力效果 <span class="icon">🛈</span></h3>
-                                        <p>在程式中加入重力，使小球在畫布內受到重力影響，並在碰到地面時反彈。</p>
-                    <div class="answer">
-                        <pre class="line-numbers"><code class="language-python"># 解答
+    <h3 class="caption">挑戰 2：增加重力效果 <span class="icon">🛈</span></h3>
+    <p>在程式中加入重力，使小球在畫布內受到重力影響，並在碰到地面時反彈。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
 GRAVITY = 0.5  # 定義重力加速度
 
 def update():
@@ -366,36 +368,31 @@ def update():
         if ball["y"] + ball["radius"] > HEIGHT:  # 碰到地面時反彈
             ball["vy"] = -ball["vy"] * 0.9  # 速度衰減，模擬能量損失
             ball["y"] = HEIGHT - ball["radius"]  # 防止穿透地面
-        </code></pre>
+</code></pre>
 
-        <p>以下是程式中模擬重力效果時使用的主要變數及其角色：</p>
+<p>以下是程式中模擬重力效果時使用的主要變數及其角色：</p>
+    <ul>
+        <li>
+            <strong>GRAVITY：</strong>重力加速度，影響球在垂直方向（y 軸）的速度變化。
             <ul>
-                <li>
-                    <strong>GRAVITY：</strong>重力加速度，影響球在垂直方向（y 軸）的速度變化。
-                    <ul>
-                        <li>定義為 <code>GRAVITY = 0.5</code>，表示每幀球的 y 軸速度增加 0.5。</li>
-                        <li>模擬現實中物體受到重力影響時的加速運動，使球自然落下。</li>
-                    </ul>
-                </li>
-                <li>
-                    <strong>ball["vy"]：</strong>球在 y 軸的速度，受到重力影響而逐漸增加。
-                    <ul>
-                        <li>每次更新時，<code>ball["vy"] += GRAVITY</code>，讓球在垂直方向加速下降。</li>
-                        <li>當球碰到地面時，<code>ball["vy"]</code> 會反轉並乘以 0.9（能量損失係數），模擬彈跳時能量損失。現實中，每次彈跳時球的動能會減少，因此在程式中減少 y 軸速度，以逐漸減弱彈跳高度。</li>
-                    </ul>
-                </li>        
+                <li>定義為 <code>GRAVITY = 0.5</code>，表示每幀球的 y 軸速度增加 0.5。</li>
+                <li>模擬現實中物體受到重力影響時的加速運動，使球自然落下。</li>
             </ul>
-                    </div>
-                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-                        💬 需要引導？找學習助手
-                    </button>
-                </div>
+        </li>
+        <li>
+            <strong>ball["vy"]：</strong>球在 y 軸的速度，受到重力影響而逐漸增加。
+            <ul>
+                <li>每次更新時，<code>ball["vy"] += GRAVITY</code>，讓球在垂直方向加速下降。</li>
+                <li>當球碰到地面時，<code>ball["vy"]</code> 會反轉並乘以 0.9（能量損失係數），模擬彈跳時能量損失。現實中，每次彈跳時球的動能會減少，因此在程式中減少 y 軸速度，以逐漸減弱彈跳高度。</li>
+            </ul>
+        </li>        
+    </ul>
+    </div>
 
-                <div class="challenge-item" id="challenge-3">
-                    <h3 class="caption">挑戰 3：顯示速度向量 <span class="icon">🛈</span></h3>
-                    <p>在小球上繪製其速度向量，顯示當前運動方向與速度大小。</p>
-                    <div class="answer">
-                        <pre class="line-numbers"><code class="language-python"># 解答
+    <h3 class="caption">挑戰 3：顯示速度向量 <span class="icon">🛈</span></h3>
+    <p>在小球上繪製其速度向量，顯示當前運動方向與速度大小。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
 def draw():
     screen.fill("black")
     for ball in balls:
@@ -411,24 +408,20 @@ def draw():
         fontsize=24,
         color="white"
     )
-        </code></pre>
+</code></pre>
 
-            <p>在繪製過程中，以下變數用於顯示小球及其速度向量：</p>
+	<p>在繪製過程中，以下變數用於顯示小球及其速度向量：</p>
+    <ul>
+        <li>
+            <strong>end_x, end_y：</strong>速度向量的終點座標，計算方式如下：
             <ul>
-                <li>
-                    <strong>end_x, end_y：</strong>速度向量的終點座標，計算方式如下：
-                    <ul>
-                        <li><code>end_x = ball["x"] + ball["vx"] * 10</code></li>
-                        <li><code>end_y = ball["y"] + ball["vy"] * 10</code></li>
-                        <li>這些值決定了速度向量的長度，乘以 10 以提高可視化效果。</li>
-                    </ul>
-                </li>
+                <li><code>end_x = ball["x"] + ball["vx"] * 10</code></li>
+                <li><code>end_y = ball["y"] + ball["vy"] * 10</code></li>
+                <li>這些值決定了速度向量的長度，乘以 10 以提高可視化效果。</li>
             </ul>
-                    </div>
-                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-                        💬 需要引導？找學習助手
-                    </button>
-                </div>
+        </li>
+    </ul>
+    </div>
 
             </section>
 
@@ -438,6 +431,7 @@ def draw():
             </section>
         </main>
 		
+		<!-- 全域聊天機器人容器（只需要一個） -->
 		<div id="chatbot-container" class="chatbot-docked chatbot-docked-right" style="display: none;">
 			<div class="chatbot-window">
 				<div class="chatbot-header">
@@ -447,16 +441,21 @@ def draw():
 					</div>
 					<div class="chatbot-header-right">
 						<button class="chatbot-jump-btn" id="chatbot-jump-btn" onclick="jumpToChallenge()" title="跳轉到挑戰位置">🚩</button>
+						<!-- 停靠位置按鈕 -->
 						<button class="chatbot-dock-btn" id="dock-right-btn" onclick="dockChatbot('right')" title="停靠右側">
 							▷
 						</button>
 						<button class="chatbot-dock-btn" id="dock-bottom-btn" onclick="dockChatbot('bottom')" title="停靠底部">
 							▽
 						</button>
+						<!--button class="chatbot-dock-btn" onclick="dockChatbot('top')" title="停靠頂部">
+							△
+						</button-->
 						<button class="chatbot-close" onclick="closeChatbot()">✕</button>
 					</div>
 				</div>
 								
+				<!-- 調整大小的拖曳柄 -->
 				<div class="chatbot-resizer" id="chatbot-resizer"></div>
 				
 				<div class="chatbot-messages" id="chatbot-messages"></div>

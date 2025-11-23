@@ -9,11 +9,16 @@
 	<link rel="stylesheet" href="css/chatbot.css">	
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 	<script type="text/javascript" src="js/script.js"></script>	
+	<!-- MSAL.js Library -->
 	<script src="https://alcdn.msauth.net/browser/2.38.1/js/msal-browser.min.js"></script>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css">
+	<!-- Prism.js CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css">
+    <!-- Prism.js Line Numbers CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
+    <!-- Prism.js Syntax Highlighting -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <!-- Prism.js Line Numbers Plugin -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
 	<script>
 		document.addEventListener("DOMContentLoaded", (event) => {
@@ -25,6 +30,7 @@
 </head>
 <body>
     <div class="d-flex">
+        <!-- Floating Button -->
         <button id="toggleNav" class="btn btn-primary">&#8212;</button>
         <nav id="sidebar" class="bg-light border-end" style="display: block;">
             <div>
@@ -98,12 +104,10 @@ print(my_dict2)  # 輸出：{"x": 10, "y": 20}</code></pre>
 
             <section>
                 <h2>挑戰題目</h2>
-                
-                <div class="challenge-item" id="challenge-1">
-                    <h3 class="caption">挑戰 1：建立資料集合 <span class="icon">🛈</span></h3>
-                    <p>建立一個包含五個數字的 <code>list</code>、<code>set</code> 和 <code>tuple</code>，並列印它們。</p>
-                    <div class="answer">
-                        <pre class="line-numbers"><code class="language-python"># 建立 list、set 和 tuple
+				<h3 class="caption">挑戰 1：建立資料集合 <span class="icon">🛈</span></h3>
+    <p>建立一個包含五個數字的 <code>list</code>、<code>set</code> 和 <code>tuple</code>，並列印它們。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 建立 list、set 和 tuple
 list_data = [1, 2, 3, 4, 5]
 set_data = {1, 2, 3, 4, 5}
 tuple_data = (1, 2, 3, 4, 5)
@@ -111,17 +115,12 @@ tuple_data = (1, 2, 3, 4, 5)
 print("List:", list_data)
 print("Set:", set_data)
 print("Tuple:", tuple_data)</code></pre>
-                    </div>
-                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-                        💬 需要引導？找學習助手
-                    </button>
-                </div>
+    </div>
 
-                <div class="challenge-item" id="challenge-2">
-                    <h3 class="caption">挑戰 2：操作鍵值組 <span class="icon">🛈</span></h3>
-                    <p>建立一個 <code>dict</code>，包含三個鍵值組，並嘗試新增、更新與刪除鍵值。</p>
-                    <div class="answer">
-                        <pre class="line-numbers"><code class="language-python"># 操作字典
+    <h3 class="caption">挑戰 2：操作鍵值組 <span class="icon">🛈</span></h3>
+    <p>建立一個 <code>dict</code>，包含三個鍵值組，並嘗試新增、更新與刪除鍵值。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 操作字典
 dict_data = {"name": "Alice", "age": 25, "city": "Taipei"}
 
 # 新增
@@ -134,17 +133,12 @@ dict_data["age"] = 26
 del dict_data["city"]
 
 print("Updated Dict:", dict_data)</code></pre>
-                    </div>
-                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-                        💬 需要引導？找學習助手
-                    </button>
-                </div>
+    </div>
 
-                <div class="challenge-item" id="challenge-3">
-                    <h3 class="caption">挑戰 3：結合多種資料結構 <span class="icon">🛈</span></h3>
-                    <p>設計一個結構，使用 <code>list</code> 儲存多個 <code>dict</code>，每個 <code>dict</code> 表示一位學生的資料（例如姓名與年齡）。</p>
-                    <div class="answer">
-                        <pre class="line-numbers"><code class="language-python"># 儲存多位學生的資料
+    <h3 class="caption">挑戰 3：結合多種資料結構 <span class="icon">🛈</span></h3>
+    <p>設計一個結構，使用 <code>list</code> 儲存多個 <code>dict</code>，每個 <code>dict</code> 表示一位學生的資料（例如姓名與年齡）。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 儲存多位學生的資料
 students = [
     {"name": "Alice", "age": 20},
     {"name": "Bob", "age": 22},
@@ -152,17 +146,12 @@ students = [
 ]
 
 print("Students Data:", students)</code></pre>
-                    </div>
-                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-                        💬 需要引導？找學習助手
-                    </button>
-                </div>
+    </div>
 
-                <div class="challenge-item" id="challenge-4">
-                    <h3 class="caption">挑戰 4：轉換資料結構 <span class="icon">🛈</span></h3>
-                    <p>給定一個 <code>list</code>，將其轉換為 <code>set</code> 和 <code>tuple</code>，並列印轉換後的結果。</p>
-                    <div class="answer">
-                        <pre class="line-numbers"><code class="language-python"># 原始列表
+    <h3 class="caption">挑戰 4：轉換資料結構 <span class="icon">🛈</span></h3>
+    <p>給定一個 <code>list</code>，將其轉換為 <code>set</code> 和 <code>tuple</code>，並列印轉換後的結果。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 原始列表
 original_list = [1, 2, 2, 3, 4, 4, 5]
 
 # 轉換為 set 和 tuple
@@ -172,34 +161,24 @@ converted_tuple = tuple(original_list)
 print("Original List:", original_list)
 print("Converted Set:", converted_set)
 print("Converted Tuple:", converted_tuple)</code></pre>
-                    </div>
-                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-                        💬 需要引導？找學習助手
-                    </button>
-                </div>
+    </div>
 
-                <div class="challenge-item" id="challenge-5">
-                    <h3 class="caption">挑戰 5：移除重複元素 <span class="icon">🛈</span></h3>
-                    <p>設計一個程式，將一個包含重複元素的 <code>list</code> 轉換為不包含重複元素的 <code>set</code>，再轉回 <code>list</code> 並保持原順序。</p>
-                    <div class="answer">
-                        <pre class="line-numbers"><code class="language-python"># 原始列表
+    <h3 class="caption">挑戰 5：移除重複元素 <span class="icon">🛈</span></h3>
+    <p>設計一個程式，將一個包含重複元素的 <code>list</code> 轉換為不包含重複元素的 <code>set</code>，再轉回 <code>list</code> 並保持原順序。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 原始列表
 original_list = [1, 2, 2, 3, 4, 4, 5]
 
 # 移除重複並保持順序
 unique_list = list(dict.fromkeys(original_list))
 
 print("Unique List:", unique_list)</code></pre>
-                    </div>
-                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-                        💬 需要引導？找學習助手
-                    </button>
-                </div>
+    </div>
 
-                <div class="challenge-item" id="challenge-6">
-                    <h3 class="caption">挑戰 6：合併與更新字典 <span class="icon">🛈</span></h3>
-                    <p>給定兩個 <code>dict</code>，將它們合併，若有相同的鍵，保留較大的值。</p>
-                    <div class="answer">
-                        <pre class="line-numbers"><code class="language-python"># 合併兩個字典
+    <h3 class="caption">挑戰 6：合併與更新字典 <span class="icon">🛈</span></h3>
+    <p>給定兩個 <code>dict</code>，將它們合併，若有相同的鍵，保留較大的值。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 合併兩個字典
 dict1 = {"a": 1, "b": 2}
 dict2 = {"b": 3, "c": 4}
 
@@ -212,34 +191,25 @@ print(merged)
 # 使用字典推導式		
 merged = {k: max(dict1.get(k, -float('inf')), dict2.get(k, -float('inf'))) for k in dict1.keys() | dict2.keys()}
 print(merged)</code></pre>
-                    </div>
-                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-                        💬 需要引導？找學習助手
-                    </button>
-                </div>
+    </div>
 
-                <div class="challenge-item" id="challenge-7">
-                    <h3 class="caption">挑戰 7：排序元組中的數字 <span class="icon">🛈</span></h3>
-                    <p>給定一個由多個數字組成的 <code>tuple</code>，將其排序後轉換為 <code>list</code> 並列印。</p>
-                    <div class="answer">
-                        <pre class="line-numbers"><code class="language-python"># 原始元組
+    <h3 class="caption">挑戰 7：排序元組中的數字 <span class="icon">🛈</span></h3>
+    <p>給定一個由多個數字組成的 <code>tuple</code>，將其排序後轉換為 <code>list</code> 並列印。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 原始元組
 unsorted_tuple = (34, 12, 56, 78, 1)
 
 # 排序並轉換為列表
 sorted_list = sorted(unsorted_tuple)
 
 print("Sorted List:", sorted_list)</code></pre>
-                    </div>
-                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-                        💬 需要引導？找學習助手
-                    </button>
-                </div>
+    </div>
 
-                <div class="challenge-item" id="challenge-8">
-                    <h3 class="caption">挑戰 8：統計字母出現次數 <span class="icon">🛈</span></h3>
-                    <p>設計一個程式，讓使用者輸入一段文字，計算每個字母（a-z）的出現次數，並以字母順序列印結果，忽略大小寫與非字母字元。</p>
-                    <div class="answer">
-                        <pre class="line-numbers"><code class="language-python"># 讓使用者輸入文字
+				
+	<h3 class="caption">挑戰 8：統計字母出現次數 <span class="icon">🛈</span></h3>
+    <p>設計一個程式，讓使用者輸入一段文字，計算每個字母（a-z）的出現次數，並以字母順序列印結果，忽略大小寫與非字母字元。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 讓使用者輸入文字
 text = input("請輸入一段文字: ").lower()  # 轉換為小寫
 
 # 建立字母計數字典
@@ -253,11 +223,7 @@ for char in text:
 print("字母出現次數：")
 for letter in sorted(letter_counts):
     print(f"{letter}: {letter_counts[letter]}")</code></pre>
-                    </div>
-                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-                        💬 需要引導？找學習助手
-                    </button>
-                </div>				
+    </div>				
 
             </section>
 
@@ -267,6 +233,7 @@ for letter in sorted(letter_counts):
             </section>
         </main>
 		
+		<!-- 全域聊天機器人容器（只需要一個） -->
 		<div id="chatbot-container" class="chatbot-docked chatbot-docked-right" style="display: none;">
 			<div class="chatbot-window">
 				<div class="chatbot-header">
@@ -276,16 +243,21 @@ for letter in sorted(letter_counts):
 					</div>
 					<div class="chatbot-header-right">
 						<button class="chatbot-jump-btn" id="chatbot-jump-btn" onclick="jumpToChallenge()" title="跳轉到挑戰位置">🚩</button>
+						<!-- 停靠位置按鈕 -->
 						<button class="chatbot-dock-btn" id="dock-right-btn" onclick="dockChatbot('right')" title="停靠右側">
 							▷
 						</button>
 						<button class="chatbot-dock-btn" id="dock-bottom-btn" onclick="dockChatbot('bottom')" title="停靠底部">
 							▽
 						</button>
+						<!--button class="chatbot-dock-btn" onclick="dockChatbot('top')" title="停靠頂部">
+							△
+						</button-->
 						<button class="chatbot-close" onclick="closeChatbot()">✕</button>
 					</div>
 				</div>
 								
+				<!-- 調整大小的拖曳柄 -->
 				<div class="chatbot-resizer" id="chatbot-resizer"></div>
 				
 				<div class="chatbot-messages" id="chatbot-messages"></div>

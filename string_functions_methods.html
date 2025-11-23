@@ -9,11 +9,16 @@
 	<link rel="stylesheet" href="css/chatbot.css">	
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 	<script type="text/javascript" src="js/script.js"></script>	
+	<!-- MSAL.js Library -->
 	<script src="https://alcdn.msauth.net/browser/2.38.1/js/msal-browser.min.js"></script>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css">
+	<!-- Prism.js CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css">
+    <!-- Prism.js Line Numbers CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
+    <!-- Prism.js Syntax Highlighting -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <!-- Prism.js Line Numbers Plugin -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
 	<script>
 		document.addEventListener("DOMContentLoaded", (event) => {
@@ -25,13 +30,14 @@
 </head>
 <body>
     <div class="d-flex">
+        <!-- Floating Button -->
         <button id="toggleNav" class="btn btn-primary">&#8212;</button>
         <nav id="sidebar" class="bg-light border-end" style="display: block;">
             <div>
                 <div w3-include-html="navigation.html"></div>
             </div>
         </nav>
-        <main class="flex-grow-1" id="teaching-content">
+        <main class="flex-grow-1">
             <header>
                 <h1>字串方法與函式</h1>
             </header>
@@ -132,35 +138,28 @@ print(message)</code></pre>
 
             <section>
                 <h2>挑戰題目</h2>
-				
-				<div class="challenge-item" id="challenge-1">
-					<h3 class="caption">挑戰 1：處理字串串列 <span class="icon">🛈</span></h3>
-					<p>撰寫程式，將一段以逗號分隔的字串拆分為串列，並重新組合為以空格分隔的字串。</p>
-					<pre class="line-numbers"><code class="language-python"># 範例輸入
+                <h3 class="caption">挑戰 1：處理字串串列 <span class="icon">🛈</span></h3>
+    <p>撰寫程式，將一段以逗號分隔的字串拆分為串列，並重新組合為以空格分隔的字串。</p>
+    <pre class="line-numbers"><code class="language-python"># 範例輸入
 text = "apple,banana,cherry"
 # 預期輸出
 "apple banana cherry"</code></pre>
-					<div class="answer">
-						<pre class="line-numbers"><code class="language-python"># 解答
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
 text = "apple,banana,cherry"
 words = text.split(",")
 result = " ".join(words)
 print(result)  # 輸出：apple banana cherry</code></pre>
-					</div>
-					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-						💬 需要引導？找學習助手
-					</button>
-				</div>
-				
-				<div class="challenge-item" id="challenge-2">
-					<h3 class="caption">挑戰 2：統計字元頻率 <span class="icon">🛈</span></h3>
-					<p>設計一個函式，接收一段文字，計算並輸出每個字元出現的次數。</p>
-					<pre class="line-numbers"><code class="language-python"># 範例輸入
+    </div>
+
+    <h3 class="caption">挑戰 2：統計字元頻率 <span class="icon">🛈</span></h3>
+    <p>設計一個函式，接收一段文字，計算並輸出每個字元出現的次數。</p>
+    <pre class="line-numbers"><code class="language-python"># 範例輸入
 text = "hello"
 # 預期輸出
 {'h': 1, 'e': 1, 'l': 2, 'o': 1}</code></pre>
-					<div class="answer">
-						<pre class="line-numbers"><code class="language-python"># 解答
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
 def count_characters(text):
     freq = {}
     for char in text:
@@ -169,147 +168,100 @@ def count_characters(text):
 
 text = "hello"
 print(count_characters(text))</code></pre>
-					</div>
-					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-						💬 需要引導？找學習助手
-					</button>
-				</div>
+    </div>
 
-				<div class="challenge-item" id="challenge-3">
-					<h3 class="caption">挑戰 3：格式化輸出 <span class="icon">🛈</span></h3>
-					<p>撰寫程式，使用 <code>format()</code> 或 <code>f-string</code> 動態生成介紹自己的句子。</p>
-					<pre class="line-numbers"><code class="language-python"># 範例輸入
+    <h3 class="caption">挑戰 3：格式化輸出 <span class="icon">🛈</span></h3>
+    <p>撰寫程式，使用 <code>format()</code> 或 <code>f-string</code> 動態生成介紹自己的句子。</p>
+    <pre class="line-numbers"><code class="language-python"># 範例輸入
 name = "Alice"
 age = 25
 # 預期輸出
 "My name is Alice and I am 25 years old."</code></pre>
-					<div class="answer">
-						<pre class="line-numbers"><code class="language-python"># 解答
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
 name = "Alice"
 age = 25
 message = f"My name is {name} and I am {age} years old."
 print(message)</code></pre>
-					</div>
-					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-						💬 需要引導？找學習助手
-					</button>
-				</div>
+    </div>
 
-				<div class="challenge-item" id="challenge-4">
-					<h3 class="caption">挑戰 4：去除重複的空白 <span class="icon">🛈</span></h3>
-					<p>撰寫一個函式，將輸入的字串中多餘的空白移除，只保留單個空格作為間隔。</p>
-					<pre class="line-numbers"><code class="language-python"># 範例輸入
+    <h3 class="caption">挑戰 4：去除重複的空白 <span class="icon">🛈</span></h3>
+    <p>撰寫一個函式，將輸入的字串中多餘的空白移除，只保留單個空格作為間隔。</p>
+    <pre class="line-numbers"><code class="language-python"># 範例輸入
 text = "This   is   a   test."
 # 預期輸出
 "This is a test."</code></pre>
-					<div class="answer">
-						<pre class="line-numbers"><code class="language-python"># 解答
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
 def remove_extra_spaces(text):
     return " ".join(text.split())
 
 text = "This   is   a   test."
 print(remove_extra_spaces(text))</code></pre>
-					</div>
-					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-						💬 需要引導？找學習助手
-					</button>
-				</div>
+    </div>
 
-				<div class="challenge-item" id="challenge-5">
-					<h3 class="caption">挑戰 5：檢查回文 <span class="icon">🛈</span></h3>
-					<p>設計一個函式，判斷給定的字串是否為回文（正讀與反讀相同）。忽略大小寫與空格。</p>
-					<pre class="line-numbers"><code class="language-python"># 範例輸入
+    <h3 class="caption">挑戰 5：檢查回文 <span class="icon">🛈</span></h3>
+    <p>設計一個函式，判斷給定的字串是否為回文（正讀與反讀相同）。忽略大小寫與空格。</p>
+    <pre class="line-numbers"><code class="language-python"># 範例輸入
 text = "人人為我、我為人人"
 # 預期輸出
 True</code></pre>
-					<div class="answer">
-						<pre class="line-numbers"><code class="language-python"># 解答
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
 def is_palindrome(text):
     cleaned = text.lower().replace(" ", "")
-    # 移除中文標點符號可能會更複雜，但對於範例輸入，只需處理空格和大小寫。
-    # 更嚴謹的做法可能需要 import re 或 string
-    
-    # 針對中文範例，移除中文字串中所有標點符號後再檢查
-    import re
-    cleaned = re.sub(r'[^\w\s]', '', text).lower().replace(" ", "")
-
     return cleaned == cleaned[::-1]
 
 text = "人人為我、我為人人"
 print(is_palindrome(text))</code></pre>
-					</div>
-					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-						💬 需要引導？找學習助手
-					</button>
-				</div>
+    </div>
 
-				<div class="challenge-item" id="challenge-6">
-					<h3 class="caption">挑戰 6：大寫轉小寫 <span class="icon">🛈</span></h3>
-					<p>撰寫程式，將一段包含大小寫字母的文字轉換為全小寫，並移除所有標點符號。</p>
-					<pre class="line-numbers"><code class="language-python"># 範例輸入
+    <h3 class="caption">挑戰 6：大寫轉小寫 <span class="icon">🛈</span></h3>
+    <p>撰寫程式，將一段包含大小寫字母的文字轉換為全小寫，並移除所有標點符號。</p>
+    <pre class="line-numbers"><code class="language-python"># 範例輸入
 text = "Hello, World!"
 # 預期輸出
 "hello world"</code></pre>
-					<div class="answer">
-						<pre class="line-numbers"><code class="language-python"># 解答
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
 import string
 
 def to_lowercase(text):
-    # 先轉小寫
-    lower_text = text.lower()
-    # 移除標點符號
-    return "".join(c for c in lower_text if c not in string.punctuation)
+    return "".join(c for c in text.lower() if c not in string.punctuation)
 
 text = "Hello, World!"
 print(to_lowercase(text))</code></pre>
-					</div>
-					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-						💬 需要引導？找學習助手
-					</button>
-				</div>
+    </div>
 
-				<div class="challenge-item" id="challenge-7">
-					<h3 class="caption">挑戰 7：字串中的最大字元 <span class="icon">🛈</span></h3>
-					<p>設計一個程式，找出字串中 Unicode 編碼值最大的字元。</p>
-					<pre class="line-numbers"><code class="language-python"># 範例輸入
+    <h3 class="caption">挑戰 7：字串中的最大字元 <span class="icon">🛈</span></h3>
+    <p>設計一個程式，找出字串中 Unicode 編碼值最大的字元。</p>
+    <pre class="line-numbers"><code class="language-python"># 範例輸入
 text = "Python123"
 # 預期輸出
 "y"</code></pre>
-					<div class="answer">
-						<pre class="line-numbers"><code class="language-python"># 解答
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
 text = "Python123"
-# max() 函式會根據字元的 Unicode 值來決定最大值
 max_char = max(text)
 print(max_char)  # 輸出：y</code></pre>
-					</div>
-					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-						💬 需要引導？找學習助手
-					</button>
-				</div>
+    </div>
 
-				<div class="challenge-item" id="challenge-8">
-					<h3 class="caption">挑戰 8：反轉單詞順序 <span class="icon">🛈</span></h3>
-					<p>撰寫一個函式，將字串中的單詞順序反轉，但保持單詞內的字母順序不變。</p>
-					<pre class="line-numbers"><code class="language-python"># 範例輸入
+    <h3 class="caption">挑戰 8：反轉單詞順序 <span class="icon">🛈</span></h3>
+    <p>撰寫一個函式，將字串中的單詞順序反轉，但保持單詞內的字母順序不變。</p>
+    <pre class="line-numbers"><code class="language-python"># 範例輸入
 text = "Hello World Python"
 # 預期輸出
 "Python World Hello"</code></pre>
-					<div class="answer">
-						<pre class="line-numbers"><code class="language-python"># 解答
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
 def reverse_word_order(text):
-    # split() 預設以空白符號分隔成單詞串列
     words = text.split()
-    # reversed() 將串列元素順序反轉
-    # join() 以單個空格重新組合成字串
     return " ".join(reversed(words))
 
 text = "Hello World Python"
 print(reverse_word_order(text))</code></pre>
-					</div>
-					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-						💬 需要引導？找學習助手
-					</button>
-				</div>
+    </div>
+				
 				
             </section>
 
@@ -319,6 +271,7 @@ print(reverse_word_order(text))</code></pre>
             </section>
         </main>
 		
+		<!-- 全域聊天機器人容器（只需要一個） -->
 		<div id="chatbot-container" class="chatbot-docked chatbot-docked-right" style="display: none;">
 			<div class="chatbot-window">
 				<div class="chatbot-header">
@@ -328,16 +281,21 @@ print(reverse_word_order(text))</code></pre>
 					</div>
 					<div class="chatbot-header-right">
 						<button class="chatbot-jump-btn" id="chatbot-jump-btn" onclick="jumpToChallenge()" title="跳轉到挑戰位置">🚩</button>
+						<!-- 停靠位置按鈕 -->
 						<button class="chatbot-dock-btn" id="dock-right-btn" onclick="dockChatbot('right')" title="停靠右側">
 							▷
 						</button>
 						<button class="chatbot-dock-btn" id="dock-bottom-btn" onclick="dockChatbot('bottom')" title="停靠底部">
 							▽
 						</button>
+						<!--button class="chatbot-dock-btn" onclick="dockChatbot('top')" title="停靠頂部">
+							△
+						</button-->
 						<button class="chatbot-close" onclick="closeChatbot()">✕</button>
 					</div>
 				</div>
 								
+				<!-- 調整大小的拖曳柄 -->
 				<div class="chatbot-resizer" id="chatbot-resizer"></div>
 				
 				<div class="chatbot-messages" id="chatbot-messages"></div>

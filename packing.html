@@ -9,11 +9,16 @@
 	<link rel="stylesheet" href="css/chatbot.css">	
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 	<script type="text/javascript" src="js/script.js"></script>	
+	<!-- MSAL.js Library -->
 	<script src="https://alcdn.msauth.net/browser/2.38.1/js/msal-browser.min.js"></script>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css">
+	<!-- Prism.js CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css">
+    <!-- Prism.js Line Numbers CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
+    <!-- Prism.js Syntax Highlighting -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <!-- Prism.js Line Numbers Plugin -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
 	<script>
 		document.addEventListener("DOMContentLoaded", (event) => {
@@ -25,14 +30,14 @@
 </head>
 <body>
     <div class="d-flex">
-		<button id="toggleNav" class="btn btn-primary">&#8212;</button>
+		<!-- Floating Button -->
+        <button id="toggleNav" class="btn btn-primary">&#8212;</button>
         <nav id="sidebar" class="bg-light border-end" style="display: block;">
             <div>
                 <div w3-include-html="navigation.html"></div>
             </div>
         </nav>
-        
-        <main class="flex-grow-1" id="teaching-content">
+        <main class="flex-grow-1">
             <header>
                 <h1>指定、多重指定、打包與解包</h1>
             </header>
@@ -65,8 +70,8 @@ print(x, y, z)  # 輸出：1 2 3</code></pre>
             </section>
 
             <section>
-                <h2>打包與解包</h2>
-                                <p>在 Python 中，「打包」(packing)與「解包」(unpacking)是針對多個值與變數之間的相互操作方式。打包 (Packing) 是把多個值合併成一個單一集合（通常為tuple或list），而解包 (Unpacking) 是將集合（例如tuple、list）中的元素分配給多個變數。</p>
+                <h2>打包與解包</h2>                
+                <p>在 Python 中，「打包」(packing)與「解包」(unpacking)是針對多個值與變數之間的相互操作方式。打包 (Packing) 是把多個值合併成一個單一集合（通常為tuple或list），而解包 (Unpacking) 是將集合（例如tuple、list）中的元素分配給多個變數。</p>
                 <pre class="line-numbers"><code class="language-python"># 打包成元組
 packed_tuple = 1, 2, 3, 4 # 逗號自動生成元組
 print(packed_tuple)  # 輸出：(1, 2, 3, 4)
@@ -140,50 +145,39 @@ display_info(**person_info)
             <section>
                 <h2>挑戰題目</h2>
 
-                <div class="challenge-item" id="challenge-1">
-                    <h3 class="caption">挑戰 1：基礎多重指定 <span class="icon">🛈</span></h3>
-                    <p>一次為三個變數賦值，並輸出這些變數的值。</p>
-                    <pre class="line-numbers"><code class="language-python"># 範例輸入
+				<h3 class="caption">挑戰 1：基礎多重指定 <span class="icon">🛈</span></h3>
+    <p>一次為三個變數賦值，並輸出這些變數的值。</p>
+    <pre class="line-numbers"><code class="language-python"># 範例輸入
 x, y, z = 10, 20, 30
 # 預期輸出
 x: 10, y: 20, z: 30</code></pre>
-                    <div class="answer">
-                        <pre class="line-numbers"><code class="language-python"># 解答
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
 x, y, z = 10, 20, 30
 print(f"x: {x}, y: {y}, z: {z}")</code></pre>
-                    </div>
-                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-                        💬 需要引導？找學習助手
-                    </button>
-                </div>
+    </div>
 
-                <div class="challenge-item" id="challenge-2">
-                    <h3 class="caption">挑戰 2：動態解包與剩餘收集 <span class="icon">🛈</span></h3>
-                    <p>使用動態解包將第一個值指定給 <code>a</code>，最後一個值指定給 <code>b</code>，其餘值收集到 <code>middle</code> 中，並分別輸出它們。</p>
-                    <pre class="line-numbers"><code class="language-python"># 範例輸入
+				<h3 class="caption">挑戰 2：動態解包與剩餘收集 <span class="icon">🛈</span></h3>
+    <p>使用動態解包將第一個值指定給 <code>a</code>，最後一個值指定給 <code>b</code>，其餘值收集到 <code>middle</code> 中，並分別輸出它們。</p>
+    <pre class="line-numbers"><code class="language-python"># 範例輸入
 data = [5, 10, 15, 20, 25]
 # 預期輸出
 a: 5, middle: [10, 15, 20], b: 25</code></pre>
-                    <div class="answer">
-                        <pre class="line-numbers"><code class="language-python"># 解答
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
 data = [5, 10, 15, 20, 25]
 a, *middle, b = data
 print(f"a: {a}, middle: {middle}, b: {b}")</code></pre>
-                    </div>
-                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-                        💬 需要引導？找學習助手
-                    </button>
-                </div>
+    </div>
 
-                <div class="challenge-item" id="challenge-3">
-                    <h3 class="caption">挑戰 3：解包與元素交換 <span class="icon">🛈</span></h3>
-                    <p>使用多重指定與解包交換兩個變數的值，並輸出交換後的結果。</p>
-                    <pre class="line-numbers"><code class="language-python"># 範例輸入
+				<h3 class="caption">挑戰 3：解包與元素交換 <span class="icon">🛈</span></h3>
+    <p>使用多重指定與解包交換兩個變數的值，並輸出交換後的結果。</p>
+    <pre class="line-numbers"><code class="language-python"># 範例輸入
 x, y = 1, 2
 # 預期輸出
 x: 2, y: 1</code></pre>
-                    <div class="answer">
-                        <pre class="line-numbers"><code class="language-python"># 解答
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
 x, y = 1, 2
 x, y = y, x
 print(f"x: {x}, y: {y}")
@@ -196,39 +190,29 @@ x = y
 y = tmp
 
 print(f"x: {x}, y: {y}")</code></pre>
-                    </div>
-                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-                        💬 需要引導？找學習助手
-                    </button>
-                </div>
+    </div>
 
-                <div class="challenge-item" id="challenge-4">
-                    <h3 class="caption">挑戰 4：函式參數中的打包與解包 <span class="icon">🛈</span></h3>
-                    <p>撰寫一個函式接收可變參數，計算所有參數的平均值，並輸出結果。</p>
-                    <pre class="line-numbers"><code class="language-python"># 範例輸入
+				<h3 class="caption">挑戰 4：函式參數中的打包與解包 <span class="icon">🛈</span></h3>
+    <p>撰寫一個函式接收可變參數，計算所有參數的平均值，並輸出結果。</p>
+    <pre class="line-numbers"><code class="language-python"># 範例輸入
 def calculate_average(*args):
     pass
 
 calculate_average(10, 20, 30, 40)
 # 預期輸出
 平均值：25.0</code></pre>
-                    <div class="answer">
-                        <pre class="line-numbers"><code class="language-python"># 解答
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
 def calculate_average(*args):
     avg = sum(args) / len(args)
     print(f"平均值：{avg}")
 
 calculate_average(10, 20, 30, 40)</code></pre>
-                    </div>
-                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-                        💬 需要引導？找學習助手
-                    </button>
-                </div>
+    </div>
 
-                <div class="challenge-item" id="challenge-5">
-                    <h3 class="caption">挑戰 5：解包字典參數 <span class="icon">🛈</span></h3>
-                    <p>定義一個函式，接受不定數量的參數，並使用解包傳遞元組和字典給函式。</p>
-                    <pre class="line-numbers"><code class="language-python"># 範例輸入
+				<h3 class="caption">挑戰 5：解包字典參數 <span class="icon">🛈</span></h3>
+    <p>定義一個函式，接受不定數量的參數，並使用解包傳遞元組和字典給函式。</p>
+    <pre class="line-numbers"><code class="language-python"># 範例輸入
 def display_info(name, age, city, job):
     pass
 
@@ -237,8 +221,8 @@ person_data = ("Alice", 25)
 person_details = {"city": "Taipei", "job": "Engineer"}
 # 預期輸出
 # Name: Alice, Age: 25, City: Taipei, Job: Engineer</code></pre>
-                    <div class="answer">
-                        <pre class="line-numbers"><code class="language-python"># 解答
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
 def display_info(name, age, city, job):
     print(f"Name: {name}, Age: {age}, City: {city}, Job: {job}")
 
@@ -249,22 +233,17 @@ person_details = {"city": "Taipei", "job": "Engineer"}
 # 使用解包傳遞參數
 display_info(*person_data, **person_details)
 </code></pre>
-                    </div>
-                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-                        💬 需要引導？找學習助手
-                    </button>
-                </div>
+    </div>
 
-                <div class="challenge-item" id="challenge-6">
-                    <h3 class="caption">挑戰 6：計算座標距離 <span class="icon">🛈</span></h3>
-                    <p>使用解包從元組中提取座標，並撰寫程式計算兩點之間的距離。</p>
-                    <pre class="line-numbers"><code class="language-python"># 範例輸入
+				<h3 class="caption">挑戰 6：計算座標距離 <span class="icon">🛈</span></h3>
+    <p>使用解包從元組中提取座標，並撰寫程式計算兩點之間的距離。</p>
+    <pre class="line-numbers"><code class="language-python"># 範例輸入
 point1 = (3, 4)
 point2 = (0, 0)
 # 預期輸出
 距離：5.0</code></pre>
-                    <div class="answer">
-                        <pre class="line-numbers"><code class="language-python"># 解答
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
 import math
 
 point1 = (3, 4)
@@ -273,43 +252,33 @@ x1, y1 = point1
 x2, y2 = point2
 distance = math.sqrt((x2 - x1)**2 + (y2 - y1)**2)
 print(f"距離：{distance:.1f}")</code></pre>
-                    </div>
-                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-                        💬 需要引導？找學習助手
-                    </button>
-                </div>
+    </div>
 
-                <div class="challenge-item" id="challenge-7">
-                    <h3 class="caption">挑戰 7：合併與打包 <span class="icon">🛈</span></h3>
-                    <p>將兩個元組進行合併，並使用打包操作將結果存入一個變數。</p>
-                    <pre class="line-numbers"><code class="language-python"># 範例輸入
+				<h3 class="caption">挑戰 7：合併與打包 <span class="icon">🛈</span></h3>
+    <p>將兩個元組進行合併，並使用打包操作將結果存入一個變數。</p>
+    <pre class="line-numbers"><code class="language-python"># 範例輸入
 tuple1 = (1, 2, 3)
 tuple2 = (4, 5, 6)
 # 預期輸出
 合併結果：(1, 2, 3, 4, 5, 6)</code></pre>
-                    <div class="answer">
-                        <pre class="line-numbers"><code class="language-python"># 解答
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
 tuple1 = (1, 2, 3)
 tuple2 = (4, 5, 6)
 merged_tuple = (*tuple1, *tuple2)
 print(f"合併結果：{merged_tuple}")</code></pre>
-                    </div>
-                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-                        💬 需要引導？找學習助手
-                    </button>
-                </div>
+    </div>
 
-                <div class="challenge-item" id="challenge-8">
-                    <h3 class="caption">挑戰 8：分組與解包 <span class="icon">🛈</span></h3>
-                    <p>將一個包含多個數字的串列分組，每組包含兩個元素，並解包每組輸出結果。</p>
+				<h3 class="caption">挑戰 8：分組與解包 <span class="icon">🛈</span></h3>
+    <p>將一個包含多個數字的串列分組，每組包含兩個元素，並解包每組輸出結果。</p>
 		    <pre class="line-numbers"><code class="language-python"># 範例輸入
 numbers = [1, 2, 3, 4, 5, 6]
 # 預期輸出
 組 1: 1, 2
 組 2: 3, 4
 組 3: 5, 6</code></pre>
-                    <div class="answer">
-                        <pre class="line-numbers"><code class="language-python"># 範例輸入
+<div class="answer">
+    <pre class="line-numbers"><code class="language-python"># 範例輸入
 numbers = [1, 2, 3, 4, 5, 6]
 groups = {}
 
@@ -319,11 +288,7 @@ for i in range(0, len(numbers), 2):
 for g, m in groups.items():
     print(f"組 {g}: ", end="")
     print(*m, sep=", ")</code></pre>
-                    </div>
-                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-                        💬 需要引導？找學習助手
-                    </button>
-                </div>
+</div>
 
             </section>
 
@@ -333,6 +298,7 @@ for g, m in groups.items():
             </section>
         </main>
 		
+		<!-- 全域聊天機器人容器（只需要一個） -->
 		<div id="chatbot-container" class="chatbot-docked chatbot-docked-right" style="display: none;">
 			<div class="chatbot-window">
 				<div class="chatbot-header">
@@ -342,16 +308,21 @@ for g, m in groups.items():
 					</div>
 					<div class="chatbot-header-right">
 						<button class="chatbot-jump-btn" id="chatbot-jump-btn" onclick="jumpToChallenge()" title="跳轉到挑戰位置">🚩</button>
+						<!-- 停靠位置按鈕 -->
 						<button class="chatbot-dock-btn" id="dock-right-btn" onclick="dockChatbot('right')" title="停靠右側">
 							▷
 						</button>
 						<button class="chatbot-dock-btn" id="dock-bottom-btn" onclick="dockChatbot('bottom')" title="停靠底部">
 							▽
 						</button>
+						<!--button class="chatbot-dock-btn" onclick="dockChatbot('top')" title="停靠頂部">
+							△
+						</button-->
 						<button class="chatbot-close" onclick="closeChatbot()">✕</button>
 					</div>
 				</div>
 								
+				<!-- 調整大小的拖曳柄 -->
 				<div class="chatbot-resizer" id="chatbot-resizer"></div>
 				
 				<div class="chatbot-messages" id="chatbot-messages"></div>

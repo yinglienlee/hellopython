@@ -9,11 +9,16 @@
 	<link rel="stylesheet" href="css/chatbot.css">	
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 	<script type="text/javascript" src="js/script.js"></script>	
+	<!-- MSAL.js Library -->
 	<script src="https://alcdn.msauth.net/browser/2.38.1/js/msal-browser.min.js"></script>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css">
+	<!-- Prism.js CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css">
+    <!-- Prism.js Line Numbers CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
+    <!-- Prism.js Syntax Highlighting -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <!-- Prism.js Line Numbers Plugin -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
 	<script>
 		document.addEventListener("DOMContentLoaded", (event) => {
@@ -25,13 +30,14 @@
 </head>
 <body>
 	<div class="d-flex">
+		<!-- Floating Button -->
 		<button id="toggleNav" class="btn btn-primary">&#8212;</button>
         <nav id="sidebar" class="bg-light border-end" style="display: block;">
             <div>
 				<div w3-include-html="navigation.html"></div>
             </div>
         </nav>
-        <main class="flex-grow-1" id="teaching-content">
+        <main class="flex-grow-1">
 			<header>
 				<h1>print 進階</h1>
 			</header>
@@ -43,7 +49,7 @@
 					<li>了解如何使用特殊字元（如換行符號和定位符號）。</li>
 					<li>掌握格式化輸出的方法，讓輸出內容更加美觀。</li>
 				</ul>
-							</section>
+			</section>
 
 			<section>
 
@@ -111,8 +117,6 @@ print("A\tB\tC")</code></pre>
 
 			<section>
 				<h2>挑戰題目</h2>
-				
-				<div class="challenge-item" id="challenge-1">
 				    <h3 class="caption">挑戰 1：使用 <code>print()</code> 繪製一個矩形 <span class="icon">🛈</span></h3>
     <p>輸出如下圖案：</p>
     <pre class="line-numbers"><code class="language-python">****
@@ -124,28 +128,18 @@ print("A\tB\tC")</code></pre>
 for _ in range(4):
     print("****")</code></pre>
     </div>
-    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-        💬 需要引導？找學習助手
-    </button>
-				</div>
 
-				<div class="challenge-item" id="challenge-2">
-				    <h3 class="caption">挑戰 2：創建進度條 <span class="icon">🛈</span></h3>
+				<h3 class="caption">挑戰 2：創建進度條 <span class="icon">🛈</span></h3>
     <p>讓程式輸出類似以下的進度條：</p>
-    <pre class="line-numbers"><code class="language-python">1/5 -&gt; 2/5 -&gt; 3/5 -&gt; 4/5 -&gt; 5/5 -&gt; 完成!</code></pre>
+    <pre class="line-numbers"><code class="language-python">1/5 -> 2/5 -> 3/5 -> 4/5 -> 5/5 -> 完成!</code></pre>
     <div class="answer">
         <pre class="line-numbers"><code class="language-python"># 解答
 for i in range(1, 6):
     print(f"{i}/5", end=" -> ")
 print("完成!")</code></pre>
     </div>
-    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-        💬 需要引導？找學習助手
-    </button>
-				</div>
-    
-				<div class="challenge-item" id="challenge-3">
-				    <h3 class="caption">挑戰 3：格式化日期輸出 <span class="icon">🛈</span></h3>
+
+				<h3 class="caption">挑戰 3：格式化日期輸出 <span class="icon">🛈</span></h3>
     <p>設計程式輸出以下格式的日期：<br><code>今天是：2025/01/04</code></p>
     <div class="answer">
         <pre class="line-numbers"><code class="language-python"># 解答
@@ -156,13 +150,9 @@ month = today.month
 day = today.day
 print("今天是：", year, "/", month, "/", day, sep="")</code></pre>
     </div>
-    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-        💬 需要引導？找學習助手
-    </button>
-				</div>
-    
-				<div class="challenge-item" id="challenge-4">
-				    <h3 class="caption">挑戰 4：多行輸出 <span class="icon">🛈</span></h3>
+
+
+				<h3 class="caption">挑戰 4：多行輸出 <span class="icon">🛈</span></h3>
     <p>設計程式輸出以下格式的內容，使用 <code>\n</code> 實現換行：</p>
     <pre class="line-numbers"><code class="language-python">Hello
 Python
@@ -171,26 +161,16 @@ World</code></pre>
         <pre class="line-numbers"><code class="language-python"># 解答
 print("Hello\nPython\nWorld")</code></pre>
     </div>
-    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-        💬 需要引導？找學習助手
-    </button>
-				</div>
-    
-				<div class="challenge-item" id="challenge-5">
-				    <h3 class="caption">挑戰 5：自訂分隔符號 <span class="icon">🛈</span></h3>
+
+				<h3 class="caption">挑戰 5：自訂分隔符號 <span class="icon">🛈</span></h3>
     <p>讓程式輸出以下內容，使用 <code>sep</code> 參數自訂分隔符號：</p>
     <pre class="line-numbers"><code class="language-python">Apple | Banana | Cherry</code></pre>
     <div class="answer">
         <pre class="line-numbers"><code class="language-python"># 解答
 print("Apple", "Banana", "Cherry", sep=" | ")</code></pre>
     </div>
-    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-        💬 需要引導？找學習助手
-    </button>
-				</div>
-    
-				<div class="challenge-item" id="challenge-6">
-				    <h3 class="caption">挑戰 6：使用定位符號格式化輸出 <span class="icon">🛈</span></h3>
+
+				<h3 class="caption">挑戰 6：使用定位符號格式化輸出 <span class="icon">🛈</span></h3>
     <p>設計程式輸出以下對齊的內容，使用 <code>\t</code> 格式化：</p>
 	<pre><code>Name	Age	City
 Alice	25	New York
@@ -201,36 +181,23 @@ print("Name\tAge\tCity")
 print("Alice\t25\tNew York")
 print("Bob\t30\tSan Francisco")</code></pre>
     </div>
-    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-        💬 需要引導？找學習助手
-    </button>
-				</div>
-    
-				<div class="challenge-item" id="challenge-7">
-				    <h3 class="caption">挑戰 7：顯示引號 <span class="icon">🛈</span></h3>
+
+				<h3 class="caption">挑戰 7：顯示引號 <span class="icon">🛈</span></h3>
     <p>讓程式輸出以下內容，使用 Escape Sequence 插入雙引號：</p>
     <pre class="line-numbers"><code class="language-python">She said, "Hello, World!"</code></pre>
     <div class="answer">
         <pre class="line-numbers"><code class="language-python"># 解答
 print("She said, \"Hello, World!\"")</code></pre>
     </div>
-    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-        💬 需要引導？找學習助手
-    </button>
-				</div>
-    
-				<div class="challenge-item" id="challenge-8">
-				    <h3 class="caption">挑戰 8：綜合使用 <code>end</code> 和 <code>sep</code> <span class="icon">🛈</span></h3>
+
+				<h3 class="caption">挑戰 8：綜合使用 <code>end</code> 和 <code>sep</code> <span class="icon">🛈</span></h3>
     <p>讓程式輸出以下內容，使用 <code>sep</code> 設置分隔符號，並用 <code>end</code> 控制行尾：</p>
     <pre class="line-numbers"><code class="language-python">Apple - Banana - Cherry !</code></pre>
     <div class="answer">
         <pre class="line-numbers"><code class="language-python"># 解答
 print("Apple", "Banana", "Cherry", sep=" - ", end=" !")</code></pre>
     </div>
-    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-        💬 需要引導？找學習助手
-    </button>
-				</div>
+
 			</section>
 
 			<section>
@@ -239,6 +206,7 @@ print("Apple", "Banana", "Cherry", sep=" - ", end=" !")</code></pre>
 			</section>
 		</main>
 		
+		<!-- 全域聊天機器人容器（只需要一個） -->
 		<div id="chatbot-container" class="chatbot-docked chatbot-docked-right" style="display: none;">
 			<div class="chatbot-window">
 				<div class="chatbot-header">
@@ -248,16 +216,21 @@ print("Apple", "Banana", "Cherry", sep=" - ", end=" !")</code></pre>
 					</div>
 					<div class="chatbot-header-right">
 						<button class="chatbot-jump-btn" id="chatbot-jump-btn" onclick="jumpToChallenge()" title="跳轉到挑戰位置">🚩</button>
+						<!-- 停靠位置按鈕 -->
 						<button class="chatbot-dock-btn" id="dock-right-btn" onclick="dockChatbot('right')" title="停靠右側">
 							▷
 						</button>
 						<button class="chatbot-dock-btn" id="dock-bottom-btn" onclick="dockChatbot('bottom')" title="停靠底部">
 							▽
 						</button>
+						<!--button class="chatbot-dock-btn" onclick="dockChatbot('top')" title="停靠頂部">
+							△
+						</button-->
 						<button class="chatbot-close" onclick="closeChatbot()">✕</button>
 					</div>
 				</div>
 								
+				<!-- 調整大小的拖曳柄 -->
 				<div class="chatbot-resizer" id="chatbot-resizer"></div>
 				
 				<div class="chatbot-messages" id="chatbot-messages"></div>

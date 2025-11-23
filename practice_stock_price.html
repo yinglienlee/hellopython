@@ -9,11 +9,16 @@
 	<link rel="stylesheet" href="css/chatbot.css">	
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 	<script type="text/javascript" src="js/script.js"></script>	
+	<!-- MSAL.js Library -->
 	<script src="https://alcdn.msauth.net/browser/2.38.1/js/msal-browser.min.js"></script>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css">
+	<!-- Prism.js CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css">
+    <!-- Prism.js Line Numbers CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
+    <!-- Prism.js Syntax Highlighting -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <!-- Prism.js Line Numbers Plugin -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
 	<script>
 		document.addEventListener("DOMContentLoaded", (event) => {
@@ -25,13 +30,14 @@
 </head>
 <body>
     <div class="d-flex">
+        <!-- Floating Button -->
         <button id="toggleNav" class="btn btn-primary">&#8212;</button>
         <nav id="sidebar" class="bg-light border-end" style="display: block;">
             <div>
                 <div w3-include-html="navigation.html"></div>
             </div>
         </nav>
-        <main class="flex-grow-1" id="teaching-content">
+        <main class="flex-grow-1">
             <header>
                 <h1>綜合練習：抓取 TSMC 股票歷史價格</h1>
             </header>
@@ -44,7 +50,7 @@
                     <li>將抓取的數據儲存到 CSV 文件中。</li>
                     <li>處理例外狀況，確保程式穩定執行。</li>
                 </ul>
-                                <p>完成本章後，你將能熟練使用 Python 抓取並分析股票數據。</p>
+                <p>完成本章後，你將能熟練使用 Python 抓取並分析股票數據。</p>
             </section>           
 
 			<section>
@@ -100,7 +106,7 @@ CSV_FILE = "tsmc_stock_data.csv"</code></pre>
     except Exception as e:
         print(f"無法抓取數據: {e}")
         return None</code></pre>
-                        <p>主要步驟：</p>
+            <p>主要步驟：</p>
             <ol>
                 <li>利用 <code>yfinance.Ticker</code> 初始化股票物件。</li>
                 <li>抓取指定日期範圍內的歷史數據。</li>
@@ -117,7 +123,7 @@ CSV_FILE = "tsmc_stock_data.csv"</code></pre>
         print(f"數據已儲存到 {filename}")
     except Exception as e:
         print(f"無法儲存數據到 CSV: {e}")</code></pre>
-                        <p>主要步驟：</p>
+            <p>主要步驟：</p>
             <ol>
                 <li>重設索引，將日期列提取出來。</li>
                 <li>格式化日期為 <code>YYYY-MM-DD</code> 格式。</li>
@@ -194,12 +200,10 @@ if __name__ == "__main__":
 
             <section>
                 <h2>挑戰題目</h2>
-                
-                <div class="challenge-item" id="challenge-1">
-                    <h3 class="caption">挑戰 1：抓取其他股票數據 <span class="icon">🛈</span></h3>
-                    <p>嘗試修改程式以抓取其他股票的歷史數據，例如 Apple (<code>AAPL</code>)。</p>
-                    <div class="answer">
-                        <pre class="line-numbers"><code class="language-python"># 解答
+                <h3 class="caption">挑戰 1：抓取其他股票數據 <span class="icon">🛈</span></h3>
+    <p>嘗試修改程式以抓取其他股票的歷史數據，例如 Apple (<code>AAPL</code>)。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
 import yfinance as yf
 
 # 股票代碼
@@ -217,17 +221,12 @@ def fetch_stock_data(stock_code, start_date, end_date):
 
 fetch_stock_data(STOCK_CODE, START_DATE, END_DATE)
 </code></pre>
-                    </div>
-                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-                        💬 需要引導？找學習助手
-                    </button>
-                </div>
-    
-                <div class="challenge-item" id="challenge-2">
-                    <h3 class="caption">挑戰 2：增加數據分析功能 <span class="icon">🛈</span></h3>
-                    <p>將抓取的數據進行基本的統計分析，例如計算平均價格或最大漲跌幅。</p>
-                    <div class="answer">
-                        <pre class="line-numbers"><code class="language-python"># 解答
+    </div>
+
+    <h3 class="caption">挑戰 2：增加數據分析功能 <span class="icon">🛈</span></h3>
+    <p>將抓取的數據進行基本的統計分析，例如計算平均價格或最大漲跌幅。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
 import yfinance as yf
 
 STOCK_CODE = "2330.TW"  # 台積電
@@ -249,17 +248,12 @@ def fetch_and_analyze(stock_code, start_date, end_date):
 
 fetch_and_analyze(STOCK_CODE, START_DATE, END_DATE)
 </code></pre>
-                    </div>
-                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-                        💬 需要引導？找學習助手
-                    </button>
-                </div>
+    </div>
 
-                <div class="challenge-item" id="challenge-3">
-                    <h3 class="caption">挑戰 3：可視化數據 <span class="icon">🛈</span></h3>
-                    <p>使用 <code>matplotlib</code> 或其他繪圖工具將數據可視化，例如繪製股價趨勢圖。</p>
-                    <div class="answer">
-                        <pre class="line-numbers"><code class="language-python"># 解答
+    <h3 class="caption">挑戰 3：可視化數據 <span class="icon">🛈</span></h3>
+    <p>使用 <code>matplotlib</code> 或其他繪圖工具將數據可視化，例如繪製股價趨勢圖。</p>
+    <div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
 import yfinance as yf
 import matplotlib.pyplot as plt
 
@@ -285,12 +279,7 @@ def fetch_and_visualize(stock_code, start_date, end_date):
 
 fetch_and_visualize(STOCK_CODE, START_DATE, END_DATE)
 </code></pre>
-                    </div>
-                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-                        💬 需要引導？找學習助手
-                    </button>
-                </div>
-
+    </div>
             </section>
 
             <section>
@@ -299,6 +288,7 @@ fetch_and_visualize(STOCK_CODE, START_DATE, END_DATE)
             </section>
         </main>
 		
+		<!-- 全域聊天機器人容器（只需要一個） -->
 		<div id="chatbot-container" class="chatbot-docked chatbot-docked-right" style="display: none;">
 			<div class="chatbot-window">
 				<div class="chatbot-header">
@@ -308,16 +298,21 @@ fetch_and_visualize(STOCK_CODE, START_DATE, END_DATE)
 					</div>
 					<div class="chatbot-header-right">
 						<button class="chatbot-jump-btn" id="chatbot-jump-btn" onclick="jumpToChallenge()" title="跳轉到挑戰位置">🚩</button>
+						<!-- 停靠位置按鈕 -->
 						<button class="chatbot-dock-btn" id="dock-right-btn" onclick="dockChatbot('right')" title="停靠右側">
 							▷
 						</button>
 						<button class="chatbot-dock-btn" id="dock-bottom-btn" onclick="dockChatbot('bottom')" title="停靠底部">
 							▽
 						</button>
+						<!--button class="chatbot-dock-btn" onclick="dockChatbot('top')" title="停靠頂部">
+							△
+						</button-->
 						<button class="chatbot-close" onclick="closeChatbot()">✕</button>
 					</div>
 				</div>
 								
+				<!-- 調整大小的拖曳柄 -->
 				<div class="chatbot-resizer" id="chatbot-resizer"></div>
 				
 				<div class="chatbot-messages" id="chatbot-messages"></div>

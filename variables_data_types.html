@@ -9,11 +9,16 @@
 	<link rel="stylesheet" href="css/chatbot.css">	
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 	<script type="text/javascript" src="js/script.js"></script>	
+	<!-- MSAL.js Library -->
 	<script src="https://alcdn.msauth.net/browser/2.38.1/js/msal-browser.min.js"></script>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css">
+	<!-- Prism.js CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css">
+    <!-- Prism.js Line Numbers CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
+    <!-- Prism.js Syntax Highlighting -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <!-- Prism.js Line Numbers Plugin -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
 	<script>
 		document.addEventListener("DOMContentLoaded", (event) => {
@@ -25,13 +30,14 @@
 </head>
 <body>
 	<div class="d-flex">
+		<!-- Floating Button -->
 		<button id="toggleNav" class="btn btn-primary">&#8212;</button>
         <nav id="sidebar" class="bg-light border-end" style="display: block;">
             <div>
 				<div w3-include-html="navigation.html"></div>
             </div>
         </nav>
-        <main class="flex-grow-1" id="teaching-content">
+        <main class="flex-grow-1">
 			<header>
 				<h1>變數與資料型態</h1>
 			</header>
@@ -131,49 +137,38 @@ print(id(x))  # 與之前不同</code></pre>
 			<section>
 
 				<h2>挑戰題</h2>
-				<div class="challenge-item" id="challenge-1">
-					<h3 class="caption">挑戰 1：定義並輸出變數 <span class="icon">🛈</span></h3>
-					<p>定義一個整數、一個浮點數、一個字串和一個布林值的變數，然後輸出它們的值和型態。</p>
-					<div class="answer">
-        				<pre class="line-numbers"><code class="language-python"># 解答
+				<h3 class="caption">挑戰 1：定義並輸出變數 <span class="icon">🛈</span></h3>
+				<p>定義一個整數、一個浮點數、一個字串和一個布林值的變數，然後輸出它們的值和型態。</p>
+				<div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
 x = 42  # 整數
 y = 3.14  # 浮點數
 z = "Hello"  # 字串
 b = True  # 布林值
 
-print(x, type(x))  # 42 &lt;class 'int'&gt;
-print(y, type(y))  # 3.14 &lt;class 'float'&gt;
-print(z, type(z))  # Hello &lt;class 'str'&gt;
-print(b, type(b))  # True &lt;class 'bool'&gt;</code></pre>
-    				</div>
-					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-						💬 需要引導？找學習助手
-					</button>
-				</div>
+print(x, type(x))  # 42 <class 'int'>
+print(y, type(y))  # 3.14 <class 'float'>
+print(z, type(z))  # Hello <class 'str'>
+print(b, type(b))  # True <class 'bool'></code></pre>
+    </div>
 
-				<div class="challenge-item" id="challenge-2">
-					<h3 class="caption">挑戰 2：型態轉換 <span class="icon">🛈</span></h3>
-					<p>定義一個變數，將它從整數轉換為字串，然後再轉換為浮點數，最後輸出每一步的結果。</p>
-					<div class="answer">
-        				<pre class="line-numbers"><code class="language-python"># 解答
+				<h3 class="caption">挑戰 2：型態轉換 <span class="icon">🛈</span></h3>
+				<p>定義一個變數，將它從整數轉換為字串，然後再轉換為浮點數，最後輸出每一步的結果。</p>
+				<div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
 x = 10  # 整數
 x_str = str(x)  # 轉換為字串
 x_float = float(x_str)  # 再轉換為浮點數
 
-print(x, type(x))  # 10 &lt;class 'int'&gt;
-print(x_str, type(x_str))  # '10' &lt;class 'str'&gt;
-print(x_float, type(x_float))  # 10.0 &lt;class 'float'&gt;</code></pre>
-    				</div>
-					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-						💬 需要引導？找學習助手
-					</button>
-				</div>
+print(x, type(x))  # 10 <class 'int'>
+print(x_str, type(x_str))  # '10' <class 'str'>
+print(x_float, type(x_float))  # 10.0 <class 'float'></code></pre>
+    </div>
 				
-				<div class="challenge-item" id="challenge-3">
-					<h3 class="caption">挑戰 3：觀察參照位址 <span class="icon">🛈</span></h3>
-					<p>定義兩個相等的整數變數，檢查它們的參照位址是否相同。嘗試改變其中一個變數的值，然後再次檢查。</p>
-					<div class="answer">
-        				<pre class="line-numbers"><code class="language-python"># 解答
+				<h3 class="caption">挑戰 3：觀察參照位址 <span class="icon">🛈</span></h3>
+				<p>定義兩個相等的整數變數，檢查它們的參照位址是否相同。嘗試改變其中一個變數的值，然後再次檢查。</p>
+				<div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
 a = 42
 b = 42
 
@@ -182,17 +177,12 @@ print(id(b))  # 與 a 相同
 
 b = 43
 print(id(b))  # b 的位址改變</code></pre>
-    				</div>
-					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-						💬 需要引導？找學習助手
-					</button>
-				</div>
+    </div>
 				
-				<div class="challenge-item" id="challenge-4">
-					<h3 class="caption">挑戰 4：變數命名挑戰 <span class="icon">🛈</span></h3>
-					<p>嘗試定義三個有效的變數名稱和三個無效的變數名稱，並觀察執行結果。</p>
-					<div class="answer">
-        				<pre class="line-numbers"><code class="language-python"># 解答
+				<h3 class="caption">挑戰 4：變數命名挑戰 <span class="icon">🛈</span></h3>
+				<p>嘗試定義三個有效的變數名稱和三個無效的變數名稱，並觀察執行結果。</p>
+				<div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
 # 有效變數名稱
 my_var = 10
 _var2 = "hello"
@@ -202,73 +192,53 @@ num_3 = 3.14
 # 3num = 10
 # my-var = 20
 # if = 30  # 保留字</code></pre>
-    				</div>
-					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-						💬 需要引導？找學習助手
-					</button>
-				</div>
+    </div>
 
-				<div class="challenge-item" id="challenge-5">
-					<h3 class="caption">挑戰 5：布林運算 <span class="icon">🛈</span></h3>
-					<p>定義兩個布林值變數，進行與運算（and）、或運算（or）和非運算（not），輸出結果。</p>
-					<div class="answer">
-        				<pre class="line-numbers"><code class="language-python"># 解答
+				<h3 class="caption">挑戰 5：布林運算 <span class="icon">🛈</span></h3>
+				<p>定義兩個布林值變數，進行與運算（and）、或運算（or）和非運算（not），輸出結果。</p>
+				<div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
 a = True
 b = False
 
 print(a and b)  # 輸出：False
 print(a or b)  # 輸出：True
 print(not a)  # 輸出：False</code></pre>
-    				</div>
-					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-						💬 需要引導？找學習助手
-					</button>
-				</div>
+    </div>
 
-				<div class="challenge-item" id="challenge-6">
-					<h3 class="caption">挑戰 6：多重型態轉換 <span class="icon">🛈</span></h3>
-					<p>定義一個變數 <code>x = 10.5</code>，將它轉換為整數，再轉換為字串，最後轉換回浮點數，並輸出每一步的型態與值。</p>
-					<div class="answer">
-					<pre class="line-numbers"><code class="language-python"># 解答
+				<h3 class="caption">挑戰 6：多重型態轉換 <span class="icon">🛈</span></h3>
+				<p>定義一個變數 <code>x = 10.5</code>，將它轉換為整數，再轉換為字串，最後轉換回浮點數，並輸出每一步的型態與值。</p>
+				<div class="answer">
+				<pre class="line-numbers"><code class="language-python"># 解答
 x = 10.5  # 浮點數
 x_int = int(x)  # 轉換為整數
 x_str = str(x_int)  # 轉換為字串
 x_float = float(x_str)  # 轉回浮點數
 
-print(x, type(x))       # 10.5 &lt;class 'float'&gt;
-print(x_int, type(x_int))   # 10 &lt;class 'int'&gt;
-print(x_str, type(x_str))   # '10' &lt;class 'str'&gt;
-print(x_float, type(x_float)) # 10.0 &lt;class 'float'&gt;</code></pre>
-    				</div>
-					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-						💬 需要引導？找學習助手
-					</button>
-				</div>
+print(x, type(x))       # 10.5 <class 'float'>
+print(x_int, type(x_int))   # 10 <class 'int'>
+print(x_str, type(x_str))   # '10' <class 'str'>
+print(x_float, type(x_float)) # 10.0 <class 'float'></code></pre>
+    </div>
 
-				<div class="challenge-item" id="challenge-7">
-					<h3 class="caption">挑戰 7：動態變數型態 <span class="icon">🛈</span></h3>
-					<p>定義一個變數，賦值為整數、浮點數和字串，依次輸出變數的型態與值，觀察 Python 如何處理。</p>
-					<div class="answer">
-        				<pre class="line-numbers"><code class="language-python"># 解答
+				<h3 class="caption">挑戰 7：動態變數型態 <span class="icon">🛈</span></h3>
+				<p>定義一個變數，賦值為整數、浮點數和字串，依次輸出變數的型態與值，觀察 Python 如何處理。</p>
+				<div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
 x = 42  # 整數
-print(x, type(x))  # 42 &lt;class 'int'&gt;
+print(x, type(x))  # 42 <class 'int'>
 
 x = 3.14  # 浮點數
-print(x, type(x))  # 3.14 &lt;class 'float'&gt;
+print(x, type(x))  # 3.14 <class 'float'>
 
 x = "Hello, Python!"  # 字串
-print(x, type(x))  # 'Hello, Python!' &lt;class 'str'&gt;</code></pre>
-    				</div>
-					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-						💬 需要引導？找學習助手
-					</button>
-				</div>
+print(x, type(x))  # 'Hello, Python!' <class 'str'></code></pre>
+    </div>
 
-				<div class="challenge-item" id="challenge-8">
-					<h3 class="caption">挑戰 8：檢查記憶體參照 <span class="icon">🛈</span></h3>
-					<p>定義兩個變數分別指向相同的浮點數值，檢查它們的記憶體參照位址是否相同。嘗試改變其中一個變數，並重新檢查。</p>
-					<div class="answer">
-        				<pre class="line-numbers"><code class="language-python"># 解答
+				<h3 class="caption">挑戰 8：檢查記憶體參照 <span class="icon">🛈</span></h3>
+				<p>定義兩個變數分別指向相同的浮點數值，檢查它們的記憶體參照位址是否相同。嘗試改變其中一個變數，並重新檢查。</p>
+				<div class="answer">
+        <pre class="line-numbers"><code class="language-python"># 解答
 a = 3.14
 b = 3.14
 
@@ -278,11 +248,9 @@ print(id(b))  # 與 a 相同，因為它們指向相同的物件
 b = 3.15  # 改變 b 的值
 print(id(a))  # a 的位址保持不變
 print(id(b))  # b 的位址改變，指向新物件</code></pre>
-    				</div>
-					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-						💬 需要引導？找學習助手
-					</button>
-				</div>
+    </div>
+
+
 			</section>
 
 			<section>
@@ -292,6 +260,7 @@ print(id(b))  # b 的位址改變，指向新物件</code></pre>
 			</section>
 		</main>
 		
+		<!-- 全域聊天機器人容器（只需要一個） -->
 		<div id="chatbot-container" class="chatbot-docked chatbot-docked-right" style="display: none;">
 			<div class="chatbot-window">
 				<div class="chatbot-header">
@@ -301,16 +270,21 @@ print(id(b))  # b 的位址改變，指向新物件</code></pre>
 					</div>
 					<div class="chatbot-header-right">
 						<button class="chatbot-jump-btn" id="chatbot-jump-btn" onclick="jumpToChallenge()" title="跳轉到挑戰位置">🚩</button>
+						<!-- 停靠位置按鈕 -->
 						<button class="chatbot-dock-btn" id="dock-right-btn" onclick="dockChatbot('right')" title="停靠右側">
 							▷
 						</button>
 						<button class="chatbot-dock-btn" id="dock-bottom-btn" onclick="dockChatbot('bottom')" title="停靠底部">
 							▽
 						</button>
+						<!--button class="chatbot-dock-btn" onclick="dockChatbot('top')" title="停靠頂部">
+							△
+						</button-->
 						<button class="chatbot-close" onclick="closeChatbot()">✕</button>
 					</div>
 				</div>
 								
+				<!-- 調整大小的拖曳柄 -->
 				<div class="chatbot-resizer" id="chatbot-resizer"></div>
 				
 				<div class="chatbot-messages" id="chatbot-messages"></div>
@@ -332,3 +306,4 @@ print(id(b))  # b 的位址改變，指向新物件</code></pre>
     </div>			
 </body>
 </html>
+

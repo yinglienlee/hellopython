@@ -9,11 +9,16 @@
 	<link rel="stylesheet" href="css/chatbot.css">	
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 	<script type="text/javascript" src="js/script.js"></script>	
+	<!-- MSAL.js Library -->
 	<script src="https://alcdn.msauth.net/browser/2.38.1/js/msal-browser.min.js"></script>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css">
+	<!-- Prism.js CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css">
+    <!-- Prism.js Line Numbers CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
+    <!-- Prism.js Syntax Highlighting -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <!-- Prism.js Line Numbers Plugin -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
 	<script>
 		document.addEventListener("DOMContentLoaded", (event) => {
@@ -25,6 +30,7 @@
 </head>
 <body>
     <div class="d-flex">
+        <!-- Floating Button -->
         <button id="toggleNav" class="btn btn-primary">&#8212;</button>
         <nav id="sidebar" class="bg-light border-end" style="display: block;">
             <div>
@@ -101,113 +107,66 @@
 
             <section>
                 <h2>挑戰題目</h2>
-
-                <div class="challenge-item" id="challenge-1">
-                    <h3 class="caption">挑戰 1：檢查變數值 <span class="icon">🛈</span></h3>
-                    <p>編寫以下程式碼，使用除錯模式檢查變數 <code>total</code> 的值：</p>
-                    <pre class="line-numbers"><code class="language-python">def add_numbers(a, b):
+                <h3>挑戰 1：檢查變數值</h3>
+                <p>編寫以下程式碼，使用除錯模式檢查變數 <code>total</code> 的值：</p>
+                <pre class="line-numbers"><code class="language-python">def add_numbers(a, b):
     total = a + b
     return total
 
 result = add_numbers(3, 5)
 print(result)</code></pre>
-                    <div class="answer">
-                        <p><strong>解答說明：</strong></p>
-                        <p>在 <code>total = a + b</code> 這一行設置中斷點或使用 <strong>Step Into</strong> 進入函式。當程式執行到該行時，觀察 Variables 面板，你會看到：</p>
-                        <ul>
-                            <li><code>a</code> 的值為 3</li>
-                            <li><code>b</code> 的值為 5</li>
-                        </ul>
-                        <p>執行該行後，<code>total</code> 的值會變為 8。</p>
-                    </div>
-                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-                        💬 需要引導？找學習助手
-                    </button>
-                </div>
 
-                <div class="challenge-item" id="challenge-2">
-                    <h3 class="caption">挑戰 2：修正錯誤 <span class="icon">🛈</span></h3>
-                    <p>以下程式碼有一個錯誤，使用 Thonny 的除錯功能找出並修正它：</p>
-                    <pre class="line-numbers"><code class="language-python">def divide_numbers(a, b):
+                <h3>挑戰 2：修正錯誤</h3>
+                <p>以下程式碼有一個錯誤，使用 Thonny 的除錯功能找出並修正它：</p>
+                <pre class="line-numbers"><code class="language-python">def divide_numbers(a, b):
     result = a / b
     return result
 
 print(divide_numbers(5, 0))  # 錯誤：除以零</code></pre>
-                    <div class="answer">
-                        <pre class="line-numbers"><code class="language-python"># 解答
-def divide_numbers(a, b):
-    # 增加檢查以避免除以零的錯誤
-    if b == 0:
-        return "錯誤：除數不能為 0"
-    result = a / b
-    return result
 
-print(divide_numbers(5, 0))</code></pre>
-                    </div>
-                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-                        💬 需要引導？找學習助手
-                    </button>
-                </div>
 
-                <div class="challenge-item" id="challenge-3">
-                    <h3 class="caption">挑戰 3：數字累加問題 <span class="icon">🛈</span></h3>
-                    
-                    <p>以下程式碼試圖計算數列的總和，但程式中有些邏輯錯誤，導致結果不正確。</p>
-                    <p>請使用 <strong>中斷點</strong> 和 <strong>變數觀察功能</strong>，找出並修正這些錯誤。</p>
-                    
-                    <pre class="line-numbers"><code class="language-python">def calculate_sum(numbers):
-    total = 0
-    for i in range(len(numbers)):
-        total += numbers[i]  # 累加數列元素
+				<h3>挑戰 3：數字累加問題</h3>
+				
+				<p>以下程式碼試圖計算數列的總和，但程式中有些邏輯錯誤，導致結果不正確。</p>
+				<p>請使用 <strong>中斷點</strong> 和 <strong>變數觀察功能</strong>，找出並修正這些錯誤。</p>
+				
+				<pre class="line-numbers"><code class="language-python">def calculate_sum(numbers):
+	total = 0
+	for i in range(len(numbers)):
+		total += numbers[i]  # 累加數列元素
 
-        # 錯誤：嘗試存取不存在的索引
-        if i > len(numbers):
-            print("發生錯誤：索引超出範圍！")
+		# 錯誤：嘗試存取不存在的索引
+		if i > len(numbers):
+			print("發生錯誤：索引超出範圍！")
 
-    return total
+	return total
 
 # 測試數列
 numbers = [1, 2, 3, 4, 5]
 result = calculate_sum(numbers)
 
-print(f"數列總和：{result}")</code></pre>
+print(f"數列總和：{result}")
+</code></pre>
 
-                    <h4>任務目標</h4>
-                    <ul>
-                        <li><strong>設置斷點</strong>：在 <code>for</code> 迴圈內的 <code>total += numbers[i]</code> 行設置斷點，觀察變數 <code>total</code> 的變化。</li>
-                        <li><strong>變數監控</strong>：檢查 <code>numbers[i]</code> 和 <code>total</code> 在每次迭代中的值。</li>
-                        <li><strong>追蹤執行流程</strong>：使用單步執行功能，確保程式執行邏輯正確。</li>
-                        <li><strong>修正程式錯誤</strong>：
-                            <ul>
-                                <li>移除不必要的條件檢查 <code>if i > len(numbers)</code>。</li>
-                                <li>確保程式正確計算數列的總和。</li>
-                            </ul>
-                        </li>
-                    </ul>
-                    
-                    <h4>提示</h4>
-                    <ul>
-                        <li>觀察條件 <code>if i > len(numbers)</code> 是否有意義。</li>
-                        <li>確保程式邏輯只在有效索引範圍內運行。</li>
-                    </ul>
+				<h3>任務目標</h3>
+				<ul>
+					<li><strong>設置斷點</strong>：在 <code>for</code> 迴圈內的 <code>total += numbers[i]</code> 行設置斷點，觀察變數 <code>total</code> 的變化。</li>
+					<li><strong>變數監控</strong>：檢查 <code>numbers[i]</code> 和 <code>total</code> 在每次迭代中的值。</li>
+					<li><strong>追蹤執行流程</strong>：使用單步執行功能，確保程式執行邏輯正確。</li>
+					<li><strong>修正程式錯誤</strong>：
+						<ul>
+							<li>移除不必要的條件檢查 <code>if i > len(numbers)</code>。</li>
+							<li>確保程式正確計算數列的總和。</li>
+						</ul>
+					</li>
+				</ul>
+				
+				<h3>提示</h3>
+				<ul>
+					<li>觀察條件 <code>if i > len(numbers)</code> 是否有意義。</li>
+					<li>確保程式邏輯只在有效索引範圍內運行。</li>
+				</ul>
 
-                    <div class="answer">
-                        <pre class="line-numbers"><code class="language-python"># 解答
-def calculate_sum(numbers):
-    total = 0
-    for i in range(len(numbers)):
-        total += numbers[i]
-    # 移除了錯誤的 if 判斷邏輯
-    return total
-
-numbers = [1, 2, 3, 4, 5]
-result = calculate_sum(numbers)
-print(f"數列總和：{result}")</code></pre>
-                    </div>
-                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-                        💬 需要引導？找學習助手
-                    </button>
-                </div>
 
             </section>
 
@@ -217,6 +176,7 @@ print(f"數列總和：{result}")</code></pre>
             </section>
         </main>
 		
+		<!-- 全域聊天機器人容器（只需要一個） -->
 		<div id="chatbot-container" class="chatbot-docked chatbot-docked-right" style="display: none;">
 			<div class="chatbot-window">
 				<div class="chatbot-header">
@@ -226,16 +186,21 @@ print(f"數列總和：{result}")</code></pre>
 					</div>
 					<div class="chatbot-header-right">
 						<button class="chatbot-jump-btn" id="chatbot-jump-btn" onclick="jumpToChallenge()" title="跳轉到挑戰位置">🚩</button>
+						<!-- 停靠位置按鈕 -->
 						<button class="chatbot-dock-btn" id="dock-right-btn" onclick="dockChatbot('right')" title="停靠右側">
 							▷
 						</button>
 						<button class="chatbot-dock-btn" id="dock-bottom-btn" onclick="dockChatbot('bottom')" title="停靠底部">
 							▽
 						</button>
+						<!--button class="chatbot-dock-btn" onclick="dockChatbot('top')" title="停靠頂部">
+							△
+						</button-->
 						<button class="chatbot-close" onclick="closeChatbot()">✕</button>
 					</div>
 				</div>
 								
+				<!-- 調整大小的拖曳柄 -->
 				<div class="chatbot-resizer" id="chatbot-resizer"></div>
 				
 				<div class="chatbot-messages" id="chatbot-messages"></div>
