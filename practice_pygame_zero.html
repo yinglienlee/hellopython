@@ -6,24 +6,22 @@
     <title>綜合練習：Pygame Zero 基礎教學</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <script type="text/javascript" src="js/script.js"></script>
-	<!-- Prism.js CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css">
-    <!-- Prism.js Line Numbers CSS -->
+	<link rel="stylesheet" href="css/chatbot.css">	
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+	<script type="text/javascript" src="js/script.js"></script>	
+	<script src="https://alcdn.msauth.net/browser/2.38.1/js/msal-browser.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
-    <!-- Prism.js Syntax Highlighting -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
-    <!-- Prism.js Line Numbers Plugin -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", (event) => {
-            includeHTML(highlightItem);
-            document.getElementById("toggleNav").addEventListener("click", navClick);
-            enableAnswerRevealer();
-        });
-    </script>
+	<script>
+		document.addEventListener("DOMContentLoaded", (event) => {
+			includeHTML(highlightItem);			
+			document.getElementById("toggleNav").addEventListener("click", navClick);		
+			enableAnswerRevealer();
+		});
+	</script>	
 	<script type="module">
 		import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
 		mermaid.initialize({ startOnLoad: true });
@@ -37,7 +35,8 @@
                 <div w3-include-html="navigation.html"></div>
             </div>
         </nav>
-        <main class="flex-grow-1">
+        
+        <main class="flex-grow-1" id="teaching-content">
             <header>
                 <h1>綜合練習：Pygame Zero 基礎教學</h1>
             </header>
@@ -137,7 +136,7 @@ pgzrun.go()
 				
 				
                 <h3>1. 定義視窗大小</h3>
-                <p>使用 <code>WIDTH</code> 和 <code>HEIGHT</code> 變數定義遊戲視窗的寬度與高度。</p>
+                                <p>使用 <code>WIDTH</code> 和 <code>HEIGHT</code> 變數定義遊戲視窗的寬度與高度。</p>
 
 
 <h3>2. 特定目錄結構</h3>
@@ -363,10 +362,12 @@ pgzrun.go()</code></pre>
 
             <section>
                 <h2>挑戰題目</h2>
-				<h3 class="caption">挑戰 1：簡單計分機制 <span class="icon">🛈</span></h3>
-    <p>設計一個遊戲，當角色碰撞到目標物時，計分增加 1 並將目標物移動到隨機位置。</p>
-    <div class="answer">
-        <pre class="line-numbers"><code class="language-python"># 解答
+                
+                <div class="challenge-item" id="challenge-1">
+                    <h3 class="caption">挑戰 1：簡單計分機制 <span class="icon">🛈</span></h3>
+                    <p>設計一個遊戲，當角色碰撞到目標物時，計分增加 1 並將目標物移動到隨機位置。</p>
+                    <div class="answer">
+                        <pre class="line-numbers"><code class="language-python"># 解答
 import random
 
 WIDTH = 800
@@ -395,13 +396,18 @@ def update():
     if player.colliderect(goal):
         score += 1
         goal.pos = (random.randint(50, WIDTH - 50), random.randint(50, HEIGHT - 50))
-</code></pre>
-    </div>
+                        </code></pre>
+                    </div>
+                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+                        💬 需要引導？找學習助手
+                    </button>
+                </div>
 
-    <h3 class="caption">挑戰 2：計時遊戲 <span class="icon">🛈</span></h3>
-    <p>設計一個遊戲，在 30 秒內計算角色能碰撞目標物幾次，並在時間結束時顯示結果。</p>
-    <div class="answer">
-        <pre class="line-numbers"><code class="language-python"># 解答
+                <div class="challenge-item" id="challenge-2">
+                    <h3 class="caption">挑戰 2：計時遊戲 <span class="icon">🛈</span></h3>
+                    <p>設計一個遊戲，在 30 秒內計算角色能碰撞目標物幾次，並在時間結束時顯示結果。</p>
+                    <div class="answer">
+                        <pre class="line-numbers"><code class="language-python"># 解答
 import random
 import time
 
@@ -438,13 +444,18 @@ def update():
         if player.colliderect(goal):
             score += 1
             goal.pos = (random.randint(50, WIDTH - 50), random.randint(50, HEIGHT - 50))
-</code></pre>
-    </div>
+                        </code></pre>
+                    </div>
+                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+                        💬 需要引導？找學習助手
+                    </button>
+                </div>
 
-    <h3 class="caption">挑戰 3：避開敵人 <span class="icon">🛈</span></h3>
-    <p>新增一個敵人角色，敵人會隨機移動，玩家需要在不碰到敵人的情況下盡可能碰撞目標物。</p>
-    <div class="answer">
-        <pre class="line-numbers"><code class="language-python"># 解答
+                <div class="challenge-item" id="challenge-3">
+                    <h3 class="caption">挑戰 3：避開敵人 <span class="icon">🛈</span></h3>
+                    <p>新增一個敵人角色，敵人會隨機移動，玩家需要在不碰到敵人的情況下盡可能碰撞目標物。</p>
+                    <div class="answer">
+                        <pre class="line-numbers"><code class="language-python"># 解答
 import random
 
 WIDTH = 800
@@ -487,8 +498,12 @@ def update():
     enemy.y += random.choice([-3, -2, -1, 0, 1, 2, 3])
     enemy.x = max(0, min(WIDTH, enemy.x))
     enemy.y = max(0, min(HEIGHT, enemy.y))
-</code></pre>
-    </div>
+                        </code></pre>
+                    </div>
+                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+                        💬 需要引導？找學習助手
+                    </button>
+                </div>
 
 
             </section>
@@ -498,6 +513,43 @@ def update():
                 <p>透過本教學，你學會了 Pygame Zero 的基本操作，了解了如何使用 <code>draw</code> 和 <code>update</code> 函數，以及如何控制遊戲邏輯和 FPS。接下來，可以嘗試新增更多元素，例如音效、計分系統或更複雜的遊戲邏輯，讓你的遊戲更有趣！</p>
             </section>
         </main>
+		
+		<div id="chatbot-container" class="chatbot-docked chatbot-docked-right" style="display: none;">
+			<div class="chatbot-window">
+				<div class="chatbot-header">
+					<div class="chatbot-header-left">
+						<span class="chatbot-title" id="chatbot-title">🤖 Python 學習助手</span>
+						
+					</div>
+					<div class="chatbot-header-right">
+						<button class="chatbot-jump-btn" id="chatbot-jump-btn" onclick="jumpToChallenge()" title="跳轉到挑戰位置">🚩</button>
+						<button class="chatbot-dock-btn" id="dock-right-btn" onclick="dockChatbot('right')" title="停靠右側">
+							▷
+						</button>
+						<button class="chatbot-dock-btn" id="dock-bottom-btn" onclick="dockChatbot('bottom')" title="停靠底部">
+							▽
+						</button>
+						<button class="chatbot-close" onclick="closeChatbot()">✕</button>
+					</div>
+				</div>
+								
+				<div class="chatbot-resizer" id="chatbot-resizer"></div>
+				
+				<div class="chatbot-messages" id="chatbot-messages"></div>
+				<div class="chatbot-input">
+					<textarea 
+						id="chatbot-input" 
+						placeholder="輸入你的回答或問題...（Shift+Enter 換行，Enter 發送）" 
+						onkeydown="handleKeyPress(event)"
+						rows="1"></textarea>
+					<button id="chatbot-send-btn" onclick="sendMessage()">發送</button>
+					<button id="chatbot-summary-btn" onclick="generateSummary()">📊</button>
+				</div>
+			</div>
+		</div>
+
+		<script src="js/auth.js"></script>
+		<script src="js/chatbot.js"></script>
     </div>
 </body>
 </html>

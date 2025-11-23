@@ -6,20 +6,18 @@
     <title>問題導向練習題組 3</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/chatbot.css">	
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-	<script type="text/javascript" src="js/script.js"></script>
-	<!-- Prism.js CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css">
-    <!-- Prism.js Line Numbers CSS -->
+	<script type="text/javascript" src="js/script.js"></script>	
+	<script src="https://alcdn.msauth.net/browser/2.38.1/js/msal-browser.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
-    <!-- Prism.js Syntax Highlighting -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
-    <!-- Prism.js Line Numbers Plugin -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
 	<script>
 		document.addEventListener("DOMContentLoaded", (event) => {
-			includeHTML(highlightItem);		
+			includeHTML(highlightItem);			
 			document.getElementById("toggleNav").addEventListener("click", navClick);		
 			enableAnswerRevealer();
 		});
@@ -27,14 +25,14 @@
 </head>
 <body>
 	<div class="d-flex">
-		<!-- Floating Button -->
 		<button id="toggleNav" class="btn btn-primary">&#8212;</button>
         <nav id="sidebar" class="bg-light border-end" style="display: block;">
             <div>
 				<div w3-include-html="navigation.html"></div>
             </div>
         </nav>
-        <main class="flex-grow-1">
+        
+        <main class="flex-grow-1" id="teaching-content">
 			<header>
 				<h1>問題導向練習題組 3</h1>				
 			</header>
@@ -46,39 +44,44 @@
 					
 			<section>
 
-<h3 class="caption">挑戰題 1：點餐小幫手 🥤 <span class="icon">🛈</span></h3>
-<p>你點了一杯「珍珠奶茶 大杯 微糖 去冰」，系統會用一段文字紀錄這筆訂單如下：</p>
-<pre>"珍珠奶茶, 大杯, 微糖, 去冰"</pre>
-<p>請你：</p>
-<ul><li>使用 <code>split()</code> 方法把這段文字拆成四個變數</li>
-<li>用「多重指定（unpacking）」一次指派給四個變數：<code>drink</code>, <code>size</code>, <code>sugar</code>, <code>ice</code></li>
-<li>最後印出格式化的訂單確認訊息：</li></ul>
-<pre>您點的是：大杯珍珠奶茶（微糖／去冰）</pre>
-<div class="answer">
-  <pre class="line-numbers"><code class="language-python">order = "珍珠奶茶, 大杯, 微糖, 去冰"
+                <div class="challenge-item" id="challenge-1">
+                    <h3 class="caption">挑戰題 1：點餐小幫手 🥤 <span class="icon">🛈</span></h3>
+                    <p>你點了一杯「珍珠奶茶 大杯 微糖 去冰」，系統會用一段文字紀錄這筆訂單如下：</p>
+                    <pre>"珍珠奶茶, 大杯, 微糖, 去冰"</pre>
+                    <p>請你：</p>
+                    <ul><li>使用 <code>split()</code> 方法把這段文字拆成四個變數</li>
+                    <li>用「多重指定（unpacking）」一次指派給四個變數：<code>drink</code>, <code>size</code>, <code>sugar</code>, <code>ice</code></li>
+                    <li>最後印出格式化的訂單確認訊息：</li></ul>
+                    <pre>您點的是：大杯珍珠奶茶（微糖／去冰）</pre>
+                    <div class="answer">
+                    <pre class="line-numbers"><code class="language-python">order = "珍珠奶茶, 大杯, 微糖, 去冰"
 drink, size, sugar, ice = order.split(", ")
 
 print(f"您點的是：{size}{drink}（{sugar}／{ice}）")</code></pre>
-</div>
+                    </div>
+                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+                        💬 需要引導？找學習助手
+                    </button>
+                </div>
 
-<hr/>
-<h3 class="caption">挑戰題 2：氣象小幫手 ☀️🌧️ <span class="icon">🛈</span></h3>
-<p>你正在開發一個氣象小程式，用來協助使用者查看最近一週的高溫資料。</p>
-<pre>[30, 32, 31, 33, 34, 29, 28]</pre>
-<p>請你：</p>
-<ul><li>使用 <code>list()</code> 建構這份資料</li>
-<li>使用切片技巧取得：
-	<ul>
-		<li>前三天的氣溫</li>
-		<li>最後三天的氣溫</li>
-		<li>間隔一天的氣溫（從第 1 天開始，每隔一天擷取一次）</li></ul>
-	</ul>
-</li>
-<pre>前三天氣溫： [30, 32, 31]
+                <div class="challenge-item" id="challenge-2">
+                    <h3 class="caption">挑戰題 2：氣象小幫手 ☀️🌧️ <span class="icon">🛈</span></h3>
+                                        <p>你正在開發一個氣象小程式，用來協助使用者查看最近一週的高溫資料。</p>
+                    <pre>[30, 32, 31, 33, 34, 29, 28]</pre>
+                    <p>請你：</p>
+                    <ul><li>使用 <code>list()</code> 建構這份資料</li>
+                    <li>使用切片技巧取得：
+                        <ul>
+                            <li>前三天的氣溫</li>
+                            <li>最後三天的氣溫</li>
+                            <li>間隔一天的氣溫（從第 1 天開始，每隔一天擷取一次）</li></ul>
+                        </ul>
+                    </li>
+                    <pre>前三天氣溫： [30, 32, 31]
 最後三天氣溫： [34, 29, 28]
 隔日氣溫： [30, 31, 34, 28]</pre>
-<div class="answer">
-  <pre class="line-numbers"><code class="language-python">temperatures = list([30, 32, 31, 33, 34, 29, 28])
+                    <div class="answer">
+                    <pre class="line-numbers"><code class="language-python">temperatures = list([30, 32, 31, 33, 34, 29, 28])
 
 # 前三天
 print("前三天氣溫：", temperatures[:3])
@@ -88,22 +91,26 @@ print("最後三天氣溫：", temperatures[-3:])
 
 # 每隔一天的氣溫
 print("隔日氣溫：", temperatures[::2])</code></pre>
-</div>
+                    </div>
+                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+                        💬 需要引導？找學習助手
+                    </button>
+                </div>
 
-<hr/>
-<h3 class="caption">挑戰題 3：名字解碼器 ✂️ <span class="icon">🛈</span></h3>
-<p>你拿到一份輸入名單，都是大小寫混亂的名字，請你將其正確格式化為「名 姓」。</p>
-<pre>"mEssi, lIOnel"
+                <div class="challenge-item" id="challenge-3">
+                    <h3 class="caption">挑戰題 3：名字解碼器 ✂️ <span class="icon">🛈</span></h3>
+                    <p>你拿到一份輸入名單，都是大小寫混亂的名字，請你將其正確格式化為「名 姓」。</p>
+                    <pre>"mEssi, lIOnel"
 "swIFt, taYLoR"</pre>
-<p>請你：</p>
-<ul><li>使用 <code>split()</code> 拆開姓與名</li>
-<li>使用多重指定分別指派給 <code>last</code> 和 <code>first</code></li>
-<li>使用 <code>capitalize()</code> 字串方法為字串做首字母大寫處理</li>
-<li>重新輸出為「名 姓」格式</li></ul>
-<pre>Lionel Messi
+                    <p>請你：</p>
+                    <ul><li>使用 <code>split()</code> 拆開姓與名</li>
+                    <li>使用多重指定分別指派給 <code>last</code> 和 <code>first</code></li>
+                    <li>使用 <code>capitalize()</code> 字串方法為字串做首字母大寫處理</li>
+                    <li>重新輸出為「名 姓」格式</li></ul>
+                    <pre>Lionel Messi
 Taylor Swift</pre>
-<div class="answer">
-  <pre class="line-numbers"><code class="language-python">names = [
+                    <div class="answer">
+                    <pre class="line-numbers"><code class="language-python">names = [
     "mEssi, lIOnel",
     "swIFt, taYLoR"
 ]
@@ -111,78 +118,88 @@ Taylor Swift</pre>
 for name in names:
     last, first = name.split(", ")
     print(f"{first.capitalize()} {last.capitalize()}")</code></pre>
-</div>
+                    </div>
+                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+                        💬 需要引導？找學習助手
+                    </button>
+                </div>
 
-<hr/>
-<h3 class="caption">挑戰題 4：字串切片練習 🧵 <span class="icon">🛈</span></h3>
-<p>給定一段字串，請使用切片操作取得特定部分。</p>
-<pre>"Python is powerful!"</pre>
-<p>請你：</p>
-<ul><li>取出前 6 個字元</li>
-<li>取出最後 9 個字元</li>
-<li>每隔一個字元擷取一次</li></ul>
-<pre>Python
+                <div class="challenge-item" id="challenge-4">
+                    <h3 class="caption">挑戰題 4：字串切片練習 🧵 <span class="icon">🛈</span></h3>
+                    <p>給定一段字串，請使用切片操作取得特定部分。</p>
+                    <pre>"Python is powerful!"</pre>
+                    <p>請你：</p>
+                    <ul><li>取出前 6 個字元</li>
+                    <li>取出最後 9 個字元</li>
+                    <li>每隔一個字元擷取一次</li></ul>
+                    <pre>Python
 powerful!
 Pto spwru!</pre>
-<div class="answer">
-  <pre class="line-numbers"><code class="language-python">text = "Python is powerful!"
+                    <div class="answer">
+                    <pre class="line-numbers"><code class="language-python">text = "Python is powerful!"
 
 print(text[:6])
 print(text[-9:])
 print(text[::2])</code></pre>
-</div>
+                    </div>
+                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+                        💬 需要引導？找學習助手
+                    </button>
+                </div>
 
-<hr/>
-<h3 class="caption">挑戰題 5：神祕訊息解碼器 🕵️‍♂️ <span class="icon">🛈</span></h3>
-<p>你收到一份檔案，每三個字元才有一個真正的訊息字元。請讀取檔案並還原訊息。</p>
-<pre>Txxhxxixxsxx xxixxsxx xxaxx xxsxxexxcxxrxxexxt
+                <div class="challenge-item" id="challenge-5">
+                    <h3 class="caption">挑戰題 5：神祕訊息解碼器 🕵️‍♂️ <span class="icon">🛈</span></h3>
+                    <p>你收到一份檔案，每三個字元才有一個真正的訊息字元。請讀取檔案並還原訊息。</p>
+                    <pre>Txxhxxixxsxx xxixxsxx xxaxx xxsxxexxcxxrxxexxt
 Pxxyxxtxxhxxoxxnxx xxixxsxx xxfxxuxxnxx!</pre>
-<p>請你：</p>
-<ul><li>使用 <code>with open()</code> 開啟 <code>secrets.txt</code></li>
-<li>移除換行並使用 <code>[::3]</code> 邏輯進行解碼</li>
-<li>列出所有解碼後的訊息</li></ul>
-<pre>This is a secret
+                    <p>請你：</p>
+                    <ul><li>使用 <code>with open()</code> 開啟 <code>secrets.txt</code></li>
+                    <li>移除換行並使用 <code>[::3]</code> 邏輯進行解碼</li>
+                    <li>列出所有解碼後的訊息</li></ul>
+                    <pre>This is a secret
 Python is fun!</pre>
-<div class="answer">
-  <pre class="line-numbers"><code class="language-python">with open("secrets.txt", "r", encoding="utf-8") as f:
+                    <div class="answer">
+                    <pre class="line-numbers"><code class="language-python">with open("secrets.txt", "r", encoding="utf-8") as f:
     for line in f:
         clean = line.strip()[::3]
         print(clean)</code></pre>
-</div>
+                    </div>
+                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+                        💬 需要引導？找學習助手
+                    </button>
+                </div>
 
-<hr/>
-<h3 class="caption">挑戰題 6：每日健身任務追蹤器 🏋️‍♀️ <span class="icon">🛈</span></h3>
+                <div class="challenge-item" id="challenge-6">
+                    <h3 class="caption">挑戰題 6：每日健身任務追蹤器 🏋️‍♀️ <span class="icon">🛈</span></h3>
+                                        <p>你正在建立一個健身App，用來追蹤使用者今天完成哪些健身任務。</p>
 
-
-<p>你正在建立一個健身App，用來追蹤使用者今天完成哪些健身任務。</p>
-
-<p>已知每天的指定健身清單如下：</p>
-<pre>
+                    <p>已知每天的指定健身清單如下：</p>
+                    <pre>
 expected = {'push-up', 'sit-up', 'squat', 'plank'}
 </pre>
 
-<p>請依照使用者輸入的清單比對完成情況：</p>
-<ul>
-  <li>列出完成了哪些項目</li>
-  <li>列出尚未完成的項目</li>
-  <li>若全數完成，顯示鼓勵訊息 "太棒了！你完成了全部任務！"</li>
-  <li>若部分完成，則顯示鼓勵訊息 "加油！還差一點點就完成所有任務了！"</li>
-</ul>
+                    <p>請依照使用者輸入的清單比對完成情況：</p>
+                    <ul>
+                    <li>列出完成了哪些項目</li>
+                    <li>列出尚未完成的項目</li>
+                    <li>若全數完成，顯示鼓勵訊息 "太棒了！你完成了全部任務！"</li>
+                    <li>若部分完成，則顯示鼓勵訊息 "加油！還差一點點就完成所有任務了！"</li>
+                    </ul>
 
-<p><strong>範例輸入：</strong></p>
-<pre>
+                    <p><strong>範例輸入：</strong></p>
+                    <pre>
 done = {'push-up', 'plank', 'sit-up'}
 </pre>
 
-<p><strong>預期輸出：</strong></p>
-<pre>
+                    <p><strong>預期輸出：</strong></p>
+                    <pre>
 已完成：{'push-up', 'plank', 'sit-up'}
 尚未完成：{'squat'}
 加油！還差一點點就完成所有任務了！
 </pre>
 
-<div class="answer">
-  <pre class="line-numbers"><code class="language-python">expected = {'push-up', 'sit-up', 'squat', 'plank'}
+                    <div class="answer">
+                    <pre class="line-numbers"><code class="language-python">expected = {'push-up', 'sit-up', 'squat', 'plank'}
 done = {'push-up', 'plank', 'sit-up'}
 
 completed = done & expected
@@ -195,34 +212,36 @@ if not incomplete:
     print("太棒了！你完成了全部任務！")
 else:
     print("加油！還差一點點就完成所有任務了！")</code></pre>
-</div>
+                    </div>
+                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+                        💬 需要引導？找學習助手
+                    </button>
+                </div>
 
 
-<hr/>
+                <div class="challenge-item" id="challenge-7">
+                    <h3 class="caption">挑戰題 7：怪名字清洗器 🧼 <span class="icon">🛈</span></h3>
 
-<h3 class="caption">挑戰題 7：怪名字清洗器 🧼 <span class="icon">🛈</span></h3>
-
-
-<p>你接手一份包含奇怪名字的名單，例如：</p>
-<pre>
+                    <p>你接手一份包含奇怪名字的名單，例如：</p>
+                    <pre>
 @aMy!
 #B_ob23
 chA_rLie##
 </pre>
 
-<p>請撰寫一個函式 <code>clean_name()</code>，具備以下功能：</p>
-<ul>
-  <li>去除所有非英文字母的字元（只保留 a-z 和 A-Z）</li>
-  <li>將字首轉為大寫，其餘字母小寫（使用 <code>.capitalize()</code>）</li>
-  <li>若名字長度少於 2 或過長（超過 10 個字母），則回傳 <code>"Invalid"</code></li>
-</ul>
+                    <p>請撰寫一個函式 <code>clean_name()</code>，具備以下功能：</p>
+                    <ul>
+                    <li>去除所有非英文字母的字元（只保留 a-z 和 A-Z）</li>
+                    <li>將字首轉為大寫，其餘字母小寫（使用 <code>.capitalize()</code>）</li>
+                    <li>若名字長度少於 2 或過長（超過 10 個字母），則回傳 <code>"Invalid"</code></li>
+                    </ul>
 
-<p>對以下串列進行處理並列印結果：</p>
-<pre>
+                    <p>對以下串列進行處理並列印結果：</p>
+                    <pre>
 ["@aMy!", "#B_ob23", "chA_rLie##", "x", "thisisaverylongname"]
 </pre>
 
-<pre>
+                    <pre>
 Amy
 Bob
 Charlie
@@ -230,8 +249,8 @@ Invalid
 Invalid
 </pre>
 
-<div class="answer">
-  <pre class="line-numbers"><code class="language-python">def clean_name(raw):
+                    <div class="answer">
+                    <pre class="line-numbers"><code class="language-python">def clean_name(raw):
     clean = "".join([c for c in raw if c.isalpha()])
     if len(clean) < 2 or len(clean) > 10:
         return "Invalid"
@@ -241,29 +260,32 @@ names = ["@aMy!", "#B_ob23", "chA_rLie##", "x", "thisisaverylongname"]
 
 for name in names:
     print(clean_name(name))</code></pre>
-</div>
+                    </div>
+                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+                        💬 需要引導？找學習助手
+                    </button>
+                </div>
 				
 				
-<hr/>
+                <div class="challenge-item" id="challenge-8">
+                    <h3 class="caption">挑戰題 8：帳號健檢系統 🛡️ <span class="icon">🛈</span></h3>
 
-<h3 class="caption">挑戰題 8：帳號健檢系統 🛡️ <span class="icon">🛈</span></h3>
+                    <p>設計一個帳號健檢工具，幫助使用者確認帳號是否符合格式標準。</p>
 
-<p>設計一個帳號健檢工具，幫助使用者確認帳號是否符合格式標準。</p>
+                    <pre>usernames = ['goodUser1', 'no space', 'short', 'toolongusername123', 'Valid_User']</pre>
 
-<pre>usernames = ['goodUser1', 'no space', 'short', 'toolongusername123', 'Valid_User']</pre>
+                    <p>請你：</p>
+                    <ul>
+                    <li>撰寫函式 <code>is_valid_username()</code>，條件如下：</li>
+                    <ol>
+                        <li>長度需介於 6～15 字元之間</li>
+                        <li>不可包含空格或特殊符號（僅可使用英文字母與數字）</li>
+                        <li>必須至少含有一個英文字母</li>
+                        <li>使用迴圈印出每個帳號是否有效</li>
+                    </ol>
+                    </ul>
 
-<p>請你：</p>
-<ul>
-  <li>撰寫函式 <code>is_valid_username()</code>，條件如下：</li>
-  <ol>
-	<li>長度需介於 6～15 字元之間</li>
-  	<li>不可包含空格或特殊符號（僅可使用英文字母與數字）</li>
-  	<li>必須至少含有一個英文字母</li>
-  	<li>使用迴圈印出每個帳號是否有效</li>
-   </ol>
-</ul>
-
-<pre>
+                    <pre>
 goodUser1 ✅
 no space ❌
 short ❌
@@ -271,8 +293,8 @@ toolongusername123 ❌
 Valid_User ❌
 </pre>
 
-<div class="answer">
-  <pre class="line-numbers"><code class="language-python">def is_valid_username(username):
+                    <div class="answer">
+                    <pre class="line-numbers"><code class="language-python">def is_valid_username(username):
     if not (6 <= len(username) <= 15):
         return False
     if not username.isalnum():
@@ -286,33 +308,36 @@ usernames = ['goodUser1', 'no space', 'short', 'toolongusername123', 'Valid_User
 for name in usernames:
     status = "✅" if is_valid_username(name) else "❌"
     print(f"{name} {status}")</code></pre>
-</div>
+                    </div>
+                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+                        💬 需要引導？找學習助手
+                    </button>
+                </div>
 
 
-<hr/>
-<h3 class="caption">挑戰題 9：訂單分類器 🛍️ <span class="icon">🛈</span></h3>
+                <div class="challenge-item" id="challenge-9">
+                    <h3 class="caption">挑戰題 9：訂單分類器 🛍️ <span class="icon">🛈</span></h3>
+                                        <p>你正在開發一個訂單分類系統。訂單由顧客輸入產品名稱，例如 <code>'tea'</code>、<code>'sandwich'</code>。</p>
 
-<p>你正在開發一個訂單分類系統。訂單由顧客輸入產品名稱，例如 <code>'tea'</code>、<code>'sandwich'</code>。</p>
+                    <p>你已經定義好產品的類別對應如下：</p>
 
-<p>你已經定義好產品的類別對應如下：</p>
-
-<pre>
+                    <pre>
 types = {
     'drink': ['tea', 'coffee'],
     'food': ['sandwich', 'cake']
 }
 </pre>
 
-<p>請你完成程式：</p>
-<ul>
-  <li>定義輸入串列 <code>orders = ['tea', 'sandwich', 'phone']</code></li>
-  <li>建立分類結果字典 <code>result</code>，初始為空串列</li>
-  <li>只處理在已知類別串列中的項目（忽略未知項目，如 'phone'）</li>
-  <li>最後輸出分類結果，如：<code>{'drink': ['tea'], 'food': ['sandwich']}</code></li>
-</ul>
+                    <p>請你完成程式：</p>
+                    <ul>
+                    <li>定義輸入串列 <code>orders = ['tea', 'sandwich', 'phone']</code></li>
+                    <li>建立分類結果字典 <code>result</code>，初始為空串列</li>
+                    <li>只處理在已知類別串列中的項目（忽略未知項目，如 'phone'）</li>
+                    <li>最後輸出分類結果，如：<code>{'drink': ['tea'], 'food': ['sandwich']}</code></li>
+                    </ul>
 
-<div class="answer">
-  <pre class="line-numbers"><code class="language-python">orders = ['tea', 'sandwich', 'phone']
+                    <div class="answer">
+                    <pre class="line-numbers"><code class="language-python">orders = ['tea', 'sandwich', 'phone']
 types = {
     'drink': ['tea', 'coffee'],
     'food': ['sandwich', 'cake']
@@ -326,151 +351,169 @@ for item in orders:
             result[category].append(item)
 
 print(result)</code></pre>
-</div>
+                    </div>
+                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+                        💬 需要引導？找學習助手
+                    </button>
+                </div>
 
-<hr/>
+                <div class="challenge-item" id="challenge-10">
+                    <h3 class="caption">挑戰題 10：排行榜產生器 🏆 <span class="icon">🛈</span></h3>
 
-<h3 class="caption">挑戰題 10：排行榜產生器 🏆 <span class="icon">🛈</span></h3>
+                    <p>你有一份選手與得分的對照資料如下：</p>
 
-<p>你有一份選手與得分的對照資料如下：</p>
-
-<pre>
+                    <pre>
 {'Amy': 90, 'Bob': 85, 'Charlie': 95, 'Diana': 88}
 </pre>
 
-<p>請你：</p>
-<ul>
-  <li>依得分由高到低排序選手</li>
-  <li>取出前 3 名，並輸出格式如下：</li>
-</ul>
+                    <p>請你：</p>
+                    <ul>
+                    <li>依得分由高到低排序選手</li>
+                    <li>取出前 3 名，並輸出格式如下：</li>
+                    </ul>
 
-<pre>
+                    <pre>
 🥇 Charlie - 95
 🥈 Amy - 90
 🥉 Diana - 88
 </pre>
 
-<p>提示：使用 <code>sorted()</code> 搭配 <code>lambda</code> 排序，搭配 <code>enumerate()</code> 列出前三名。</p>
-<p>你可以使用 <code>enumerate()</code> 同時取得每個元素的編號（從 0 開始）和元素本身：</p>
+                    <p>提示：使用 <code>sorted()</code> 搭配 <code>lambda</code> 排序，搭配 <code>enumerate()</code> 列出前三名。</p>
+                    <p>你可以使用 <code>enumerate()</code> 同時取得每個元素的編號（從 0 開始）和元素本身：</p>
 
-<pre>
+                    <pre>
 for i, item in enumerate(某串列):
     # i 是索引編號（第幾題），item 是該位置的值
 </pre>
 
-<p>例如：</p>
+                    <p>例如：</p>
 
-<pre>
+                    <pre>
 lst = ['A', 'B', 'C']
 for i, val in enumerate(lst):
     print(i, val)
 </pre>
 
-<p>會輸出：</p>
+                    <p>會輸出：</p>
 
-<pre>
+                    <pre>
 0 A
 1 B
 2 C
 </pre>
-				
-<div class="answer">
-  <pre class="line-numbers"><code class="language-python">scores = {'Amy': 90, 'Bob': 85, 'Charlie': 95, 'Diana': 88}
+                                    
+                    <div class="answer">
+                    <pre class="line-numbers"><code class="language-python">scores = {'Amy': 90, 'Bob': 85, 'Charlie': 95, 'Diana': 88}
 
 sorted_scores = sorted(scores.items(), key=lambda x: x[1], reverse=True)
 medals = ["🥇", "🥈", "🥉"]
 
 for i, (name, score) in enumerate(sorted_scores[:3]):
     print(f"{medals[i]} {name} - {score}")</code></pre>
-</div>
+                    </div>
+                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+                        💬 需要引導？找學習助手
+                    </button>
+                </div>
 
 				
-
-<hr/>
-<h3 class="caption">挑戰題 11：錯誤紀錄過濾器 ❌ <span class="icon">🛈</span></h3>
-<p>你需要過濾一份紀錄檔 log.txt 中的錯誤記錄，這些行包含關鍵字 'error'。</p>
-<pre>System started successfully
+                <div class="challenge-item" id="challenge-11">
+                    <h3 class="caption">挑戰題 11：錯誤紀錄過濾器 ❌ <span class="icon">🛈</span></h3>
+                    <p>你需要過濾一份紀錄檔 log.txt 中的錯誤記錄，這些行包含關鍵字 'error'。</p>
+                    <pre>System started successfully
 Warning: Low memory
 Error found in line 3
 User login detected
 Critical error in system
 Process completed without issues</pre>
-<p>請你：</p>
-<ul><li>逐行讀取檔案</li>
-<li>印出包含 'error' 的行</li></ul>
-<pre>Error found in line 3
+                    <p>請你：</p>
+                    <ul><li>逐行讀取檔案</li>
+                    <li>印出包含 'error' 的行</li></ul>
+                    <pre>Error found in line 3
 Critical error in system</pre>
-<div class="answer">
-  <pre class="line-numbers"><code class="language-python">with open("log.txt", "r", encoding="utf-8") as f:
+                    <div class="answer">
+                    <pre class="line-numbers"><code class="language-python">with open("log.txt", "r", encoding="utf-8") as f:
     for line in f:
         if "error" in line.lower():
             print(line.strip())</code></pre>
-</div>
+                    </div>
+                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+                        💬 需要引導？找學習助手
+                    </button>
+                </div>
 
-<hr/>
 
-<h3 class="caption">挑戰題 12：商品資訊讀取 🧾 <span class="icon">🛈</span></h3>
+                <div class="challenge-item" id="challenge-12">
+                    <h3 class="caption">挑戰題 12：商品資訊讀取 🧾 <span class="icon">🛈</span></h3>
 
-<p>你有一份檔案 <code>products.txt</code>，每行儲存一筆商品資訊，格式如下：</p>
+                    <p>你有一份檔案 <code>products.txt</code>，每行儲存一筆商品資訊，格式如下：</p>
 
-<pre>
+                    <pre>
 apple,10,15
 banana,5,10
 grape,12,8
 </pre>
 
-<p>請你：</p>
-<ul>
-  <li>使用 <code>with open()</code> 讀取檔案內容</li>
-  <li>使用 <code>split()</code> 拆分每行</li>
-  <li>使用多重指定（unpacking）將資料指派給 <code>name</code>, <code>qty</code>, <code>price</code></li>
-  <li>格式化輸出每筆商品的說明句：</li>
-</ul>
+                    <p>請你：</p>
+                    <ul>
+                    <li>使用 <code>with open()</code> 讀取檔案內容</li>
+                    <li>使用 <code>split()</code> 拆分每行</li>
+                    <li>使用多重指定（unpacking）將資料指派給 <code>name</code>, <code>qty</code>, <code>price</code></li>
+                    <li>格式化輸出每筆商品的說明句：</li>
+                    </ul>
 
-<pre>
+                    <pre>
 apple 有 10 個，單價為 15 元
 banana 有 5 個，單價為 10 元
 grape 有 12 個，單價為 8 元
 </pre>
 
-<div class="answer">
-  <pre class="line-numbers"><code class="language-python">with open("products.txt", "r", encoding="utf-8") as f:
+                    <div class="answer">
+                    <pre class="line-numbers"><code class="language-python">with open("products.txt", "r", encoding="utf-8") as f:
     for line in f:
         name, qty, price = line.strip().split(",")
         print(f"{name} 有 {qty} 個，單價為 {price} 元")</code></pre>
-</div>
+                    </div>
+                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+                        💬 需要引導？找學習助手
+                    </button>
+                </div>
 
 				
-<hr/>
-<h3 class="caption">挑戰題 13：類別化顧客名單 🧑‍💼 <span class="icon">🛈</span></h3>
-<p>將顧客資料存成類別，每筆資料包含姓名與會員等級，並印出格式化結果。</p>
-<pre>Alice,Gold
+                <div class="challenge-item" id="challenge-13">
+                    <h3 class="caption">挑戰題 13：類別化顧客名單 🧑‍💼 <span class="icon">🛈</span></h3>
+                    <p>將顧客資料存成類別，每筆資料包含姓名與會員等級，並印出格式化結果。</p>
+                    <pre>Alice,Gold
 Bob,Silver</pre>
-<p>請你：</p>
-<ul><li>定義 <code>Customer</code> 類別並初始化姓名與等級</li>
-<li>讀取資料後建立物件</li>
-<li>格式化輸出顧客資訊</li></ul>
-<pre>Alice (Gold 會員)
+                    <p>請你：</p>
+                    <ul><li>定義 <code>Customer</code> 類別並初始化姓名與等級</li>
+                    <li>讀取資料後建立物件</li>
+                    <li>格式化輸出顧客資訊</li></ul>
+                    <pre>Alice (Gold 會員)
 Bob (Silver 會員)</pre>
-<div class="answer">
-  <pre class="line-numbers"><code class="language-python">class Customer:
+                    <div class="answer">
+                    <pre class="line-numbers"><code class="language-python">class Customer:
     def __init__(self, name, level):
         self.name = name
         self.level = level
 
-data = ["Alice,Gold", "Bob,Silver"]
-for line in data:
-    name, level = line.split(",")
-    c = Customer(name, level)
-    print(f"{c.name} ({c.level} 會員)")</code></pre>
-</div>
+    data = ["Alice,Gold", "Bob,Silver"]
+    for line in data:
+        name, level = line.split(",")
+        c = Customer(name, level)
+        print(f"{c.name} ({c.level} 會員)")</code></pre>
+                    </div>
+                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+                        💬 需要引導？找學習助手
+                    </button>
+                </div>
 
-<hr/>
-<h3 class="caption">挑戰題 14：每日銷售報表生成器 📊 <span class="icon">🛈</span></h3>
+                <div class="challenge-item" id="challenge-14">
+                    <h3 class="caption">挑戰題 14：每日銷售報表生成器 📊 <span class="icon">🛈</span></h3>
 
-<p>你收到來自某日銷售系統的原始資料，格式如下：</p>
+                    <p>你收到來自某日銷售系統的原始資料，格式如下：</p>
 
-<pre>
+                    <pre>
 sales = [
     ("apple", 3, 20),
     ("banana", 5, 12),
@@ -478,23 +521,23 @@ sales = [
 ]
 </pre>
 
-<p>每筆紀錄為：<code>(品項, 數量, 單價)</code>。請你撰寫程式：</p>
-<ul>
-  <li>使用 <code>for</code> 迴圈與解包技巧處理每筆資料</li>
-  <li>計算每項總金額（數量 × 單價）</li>
-  <li>格式化輸出每筆明細</li>
-  <li>最後加總總銷售金額並輸出</li>
-</ul>
+                    <p>每筆紀錄為：<code>(品項, 數量, 單價)</code>。請你撰寫程式：</p>
+                    <ul>
+                    <li>使用 <code>for</code> 迴圈與解包技巧處理每筆資料</li>
+                    <li>計算每項總金額（數量 × 單價）</li>
+                    <li>格式化輸出每筆明細</li>
+                    <li>最後加總總銷售金額並輸出</li>
+                    </ul>
 
-<pre>
+                    <pre>
 apple：3 個 × 20 元 = 60 元
 banana：5 個 × 12 元 = 60 元
 grape：10 個 × 8 元 = 80 元
 總銷售金額：200 元
 </pre>
 
-<div class="answer">
-  <pre class="line-numbers"><code class="language-python">sales = [
+                    <div class="answer">
+                    <pre class="line-numbers"><code class="language-python">sales = [
     ("apple", 3, 20),
     ("banana", 5, 12),
     ("grape", 10, 8)
@@ -507,29 +550,32 @@ for name, qty, price in sales:
     total += subtotal
 
 print(f"總銷售金額：{total} 元")</code></pre>
-</div>
+                    </div>
+                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+                        💬 需要引導？找學習助手
+                    </button>
+                </div>
 
 
-<hr/>
+                <div class="challenge-item" id="challenge-15">
+                    <h3 class="caption">挑戰題 15：登入追蹤與報告產生器 🔎 <span class="icon">🛈</span></h3>
 
-<h3 class="caption">挑戰題 15：登入追蹤與報告產生器 🔎 <span class="icon">🛈</span></h3>
+                    <p>公司有一份全體員工名單與當日登入的員工串列如下：</p>
 
-<p>公司有一份全體員工名單與當日登入的員工串列如下：</p>
-
-<pre>
+                    <pre>
 all_users = ["Amy", "Bob", "Charlie", "Diana", "Ethan"]
 logged_in_users = ["Bob", "Charlie", "Ethan"]
 </pre>
 
-<p>請你撰寫程式：</p>
-<ul>
-  <li>使用迴圈與 <code>in</code> 運算子檢查哪些人有登入、哪些沒登入</li>
-  <li>使用字典統整登入狀態，每位員工對應 True 或 False</li>
-  <li>印出每位員工的登入狀態</li>
-  <li>統計登入總人數與未登入總人數</li>
-</ul>
+                    <p>請你撰寫程式：</p>
+                    <ul>
+                    <li>使用迴圈與 <code>in</code> 運算子檢查哪些人有登入、哪些沒登入</li>
+                    <li>使用字典統整登入狀態，每位員工對應 True 或 False</li>
+                    <li>印出每位員工的登入狀態</li>
+                    <li>統計登入總人數與未登入總人數</li>
+                    </ul>
 
-<pre>
+                    <pre>
 Amy: ❌
 Bob: ✅
 Charlie: ✅
@@ -539,8 +585,8 @@ Ethan: ✅
 未登入人數：2
 </pre>
 
-<div class="answer">
-  <pre class="line-numbers"><code class="language-python">all_users = ["Amy", "Bob", "Charlie", "Diana", "Ethan"]
+                    <div class="answer">
+                    <pre class="line-numbers"><code class="language-python">all_users = ["Amy", "Bob", "Charlie", "Diana", "Ethan"]
 logged_in_users = ["Bob", "Charlie", "Ethan"]
 
 status_report = {}
@@ -555,34 +601,38 @@ for name, status in status_report.items():
 total_logged_in = sum(status_report.values())
 print(f"登入人數：{total_logged_in}")
 print(f"未登入人數：{len(all_users) - total_logged_in}")</code></pre>
-</div>
+                    </div>
+                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+                        💬 需要引導？找學習助手
+                    </button>
+                </div>
 
 				
 
-<hr/>
-<h3 class="caption">挑戰題 16：密碼強度檢查器 🔐 <span class="icon">🛈</span></h3>
+                <div class="challenge-item" id="challenge-16">
+                    <h3 class="caption">挑戰題 16：密碼強度檢查器 🔐 <span class="icon">🛈</span></h3>
 
 
-<p>你正在設計一個模組 <code>password_tool.py</code>，它能幫助網站或 App 檢查使用者密碼是否符合強度要求。</p>
+                    <p>你正在設計一個模組 <code>password_tool.py</code>，它能幫助網站或 App 檢查使用者密碼是否符合強度要求。</p>
 
-<p><strong>請你：</strong></p>
-<ol>
-  <li>定義函式 <code>is_strong(password)</code>，檢查密碼是否同時包含：
-    <ul>
-      <li>至少 8 個字元</li>
-      <li>大寫英文</li>
-      <li>小寫英文</li>
-      <li>數字</li>
-      <li>符號（如 !, @, #, $, %, etc.）</li>
-    </ul>
-  </li>
-  <li>使用者可匯入此模組並呼叫 <code>is_strong("Hello123!")</code></li>
-  <li>若直接執行此檔案，提示使用者輸入密碼並立即檢查結果，分別顯示"密碼強度足夠 ✅"或"密碼太弱，請加強！ ❌"。</li>
-  <li>設計程式使用此模組，檢查密碼 P@ssw0rd</li>
-</ol>
+                    <p><strong>請你：</strong></p>
+                    <ol>
+                    <li>定義函式 <code>is_strong(password)</code>，檢查密碼是否同時包含：
+                        <ul>
+                        <li>至少 8 個字元</li>
+                        <li>大寫英文</li>
+                        <li>小寫英文</li>
+                        <li>數字</li>
+                        <li>符號（如 !, @, #, $, %, etc.）</li>
+                        </ul>
+                    </li>
+                    <li>使用者可匯入此模組並呼叫 <code>is_strong("Hello123!")</code></li>
+                    <li>若直接執行此檔案，提示使用者輸入密碼並立即檢查結果，分別顯示"密碼強度足夠 ✅"或"密碼太弱，請加強！ ❌"。</li>
+                    <li>設計程式使用此模組，檢查密碼 P@ssw0rd</li>
+                    </ol>
 
-<p><strong>範例：</strong></p>
-<pre>
+                    <p><strong>範例：</strong></p>
+                    <pre>
 # 匯入後使用：
 True
 
@@ -591,8 +641,8 @@ True
 密碼太弱，請加強！
 </pre>
 
-<div class="answer">
-  <pre class="line-numbers"><code class="language-python">import string
+                    <div class="answer">
+                    <pre class="line-numbers"><code class="language-python">import string
 
 def is_strong(password):
     return (
@@ -609,24 +659,28 @@ if __name__ == "__main__":
         print("密碼強度足夠 ✅")
     else:
         print("密碼太弱，請加強！ ❌")</code></pre>
-</div>
+                    </div>
+                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+                        💬 需要引導？找學習助手
+                    </button>
+                </div>
 
-<hr/>
-<h3 class="caption">挑戰題 17：動物的多重身分 🦁🎤 <span class="icon">🛈</span></h3>
-<p>請定義兩個類別：</p>
-<ul>
-  <li><code>Animal</code>：有屬性 <code>name</code>，方法 <code>who()</code> 印出「我是動物，名字叫 {name}」</li>
-  <li><code>Singer</code>：有屬性 <code>style</code>，方法 <code>sing()</code> 印出「我會唱 {style}」</li>
-</ul>
-<p>再定義一個子類別 <code>LionSinger</code>，同時繼承 <code>Animal</code> 和 <code>Singer</code>。</p>
-<p>請建立一個 <code>LionSinger</code> 的物件，並呼叫 <code>who()</code> 與 <code>sing()</code> 方法。</p>
-<p>預期輸出結果：</p>
-<pre>
+                <div class="challenge-item" id="challenge-17">
+                    <h3 class="caption">挑戰題 17：動物的多重身分 🦁🎤 <span class="icon">🛈</span></h3>
+                                        <p>請定義兩個類別：</p>
+                    <ul>
+                    <li><code>Animal</code>：有屬性 <code>name</code>，方法 <code>who()</code> 印出「我是動物，名字叫 {name}」</li>
+                    <li><code>Singer</code>：有屬性 <code>style</code>，方法 <code>sing()</code> 印出「我會唱 {style}」</li>
+                    </ul>
+                    <p>再定義一個子類別 <code>LionSinger</code>，同時繼承 <code>Animal</code> 和 <code>Singer</code>。</p>
+                    <p>請建立一個 <code>LionSinger</code> 的物件，並呼叫 <code>who()</code> 與 <code>sing()</code> 方法。</p>
+                    <p>預期輸出結果：</p>
+                    <pre>
 我是動物，名字叫 Leo
 我會唱 搖滾
 </pre>
-<div class="answer">
-  <pre class="line-numbers"><code class="language-python">class Animal:
+                    <div class="answer">
+                    <pre class="line-numbers"><code class="language-python">class Animal:
     def __init__(self, name):
         self.name = name
 
@@ -648,24 +702,28 @@ class LionSinger(Animal, Singer):
 leo = LionSinger("Leo", "搖滾")
 leo.who()
 leo.sing()</code></pre>
-</div>
+                    </div>
+                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+                        💬 需要引導？找學習助手
+                    </button>
+                </div>
 
-<hr/>
-<h3 class="caption">挑戰題 18：智慧交通工具 🚗📡 <span class="icon">🛈</span></h3>
-<p>請定義兩個類別：</p>
-<ul>
-  <li><code>Vehicle</code>：有屬性 <code>brand</code>，方法 <code>drive()</code> 印出「這是一輛 {brand} 的交通工具」</li>
-  <li><code>GPS</code>：有屬性 <code>version</code>，方法 <code>navigate()</code> 印出「啟動 GPS 導航，版本：{version}」</li>
-</ul>
-<p>再定義一個子類別 <code>SmartCar</code>，同時繼承 <code>Vehicle</code> 和 <code>GPS</code>。</p>
-<p>請建立一個 <code>SmartCar</code> 的物件，並呼叫 <code>drive()</code> 與 <code>navigate()</code> 方法。</p>
-<p>預期輸出結果：</p>
-<pre>
+                <div class="challenge-item" id="challenge-18">
+                    <h3 class="caption">挑戰題 18：智慧交通工具 🚗📡 <span class="icon">🛈</span></h3>
+                    <p>請定義兩個類別：</p>
+                    <ul>
+                    <li><code>Vehicle</code>：有屬性 <code>brand</code>，方法 <code>drive()</code> 印出「這是一輛 {brand} 的交通工具」</li>
+                    <li><code>GPS</code>：有屬性 <code>version</code>，方法 <code>navigate()</code> 印出「啟動 GPS 導航，版本：{version}」</li>
+                    </ul>
+                    <p>再定義一個子類別 <code>SmartCar</code>，同時繼承 <code>Vehicle</code> 和 <code>GPS</code>。</p>
+                    <p>請建立一個 <code>SmartCar</code> 的物件，並呼叫 <code>drive()</code> 與 <code>navigate()</code> 方法。</p>
+                    <p>預期輸出結果：</p>
+                    <pre>
 這是一輛 Tesla 的交通工具
 啟動 GPS 導航，版本：2.1
 </pre>
-<div class="answer">
-  <pre class="line-numbers"><code class="language-python">class Vehicle:
+                    <div class="answer">
+                    <pre class="line-numbers"><code class="language-python">class Vehicle:
     def __init__(self, brand):
         self.brand = brand
 
@@ -687,24 +745,28 @@ class SmartCar(Vehicle, GPS):
 car = SmartCar("Tesla", "2.1")
 car.drive()
 car.navigate()</code></pre>
-</div>
+                    </div>
+                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+                        💬 需要引導？找學習助手
+                    </button>
+                </div>
 
-<hr/>
-<h3 class="caption">挑戰題 19：公司職員介紹 👩‍💼 <span class="icon">🛈</span></h3>
-<p>請定義一個基礎類別 <code>Employee</code>，包含：</p>
-<ul>
-  <li>屬性：<code>name</code>（姓名）、<code>salary</code>（薪資）</li>
-  <li>方法：<code>get_info()</code>，印出「員工：{name}，薪資：{salary}」</li>
-</ul>
-<p>再定義一個繼承類別 <code>Manager</code>，新增：</p>
-<ul>
-  <li>屬性：<code>department</code>（部門）</li>
-  <li>覆寫 <code>get_info()</code> 印出「經理：{name}，薪資：{salary}，部門：{department}」</li>
-</ul>
-<p>預期輸出結果：</p>
-<pre>經理：Alice，薪資：80000，部門：行銷部</pre>
-<div class="answer">
-  <pre class="line-numbers"><code class="language-python">class Employee:
+                <div class="challenge-item" id="challenge-19">
+                    <h3 class="caption">挑戰題 19：公司職員介紹 👩‍💼 <span class="icon">🛈</span></h3>
+                    <p>請定義一個基礎類別 <code>Employee</code>，包含：</p>
+                    <ul>
+                    <li>屬性：<code>name</code>（姓名）、<code>salary</code>（薪資）</li>
+                    <li>方法：<code>get_info()</code>，印出「員工：{name}，薪資：{salary}」</li>
+                    </ul>
+                    <p>再定義一個繼承類別 <code>Manager</code>，新增：</p>
+                    <ul>
+                    <li>屬性：<code>department</code>（部門）</li>
+                    <li>覆寫 <code>get_info()</code> 印出「經理：{name}，薪資：{salary}，部門：{department}」</li>
+                    </ul>
+                    <p>預期輸出結果：</p>
+                    <pre>經理：Alice，薪資：80000，部門：行銷部</pre>
+                    <div class="answer">
+                    <pre class="line-numbers"><code class="language-python">class Employee:
     def __init__(self, name, salary):
         self.name = name
         self.salary = salary
@@ -722,26 +784,30 @@ class Manager(Employee):
 
 m = Manager("Alice", 80000, "行銷部")
 m.get_info()</code></pre>
-</div>
+                    </div>
+                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+                        💬 需要引導？找學習助手
+                    </button>
+                </div>
 
-<hr/>
-<h3 class="caption">挑戰題 20：圖形面積計算 📐 <span class="icon">🛈</span></h3>
-<p>請定義一個基礎類別 <code>Shape</code>，其中：</p>
-<ul>
-  <li>方法：<code>area()</code>，回傳 0</li>
-</ul>
-<p>再定義兩個繼承類別：</p>
-<ul>
-  <li><code>Rectangle</code>：屬性為 <code>width</code> 和 <code>height</code>，<code>area()</code> 回傳 <code>width * height</code></li>
-  <li><code>Circle</code>：屬性為 <code>radius</code>，<code>area()</code> 回傳 <code>3.14 * radius * radius</code></li>
-</ul>
-<p>預期輸出結果：</p>
-<pre>
+                <div class="challenge-item" id="challenge-20">
+                    <h3 class="caption">挑戰題 20：圖形面積計算 📐 <span class="icon">🛈</span></h3>
+                                        <p>請定義一個基礎類別 <code>Shape</code>，其中：</p>
+                    <ul>
+                    <li>方法：<code>area()</code>，回傳 0</li>
+                    </ul>
+                    <p>再定義兩個繼承類別：</p>
+                    <ul>
+                    <li><code>Rectangle</code>：屬性為 <code>width</code> 和 <code>height</code>，<code>area()</code> 回傳 <code>width * height</code></li>
+                    <li><code>Circle</code>：屬性為 <code>radius</code>，<code>area()</code> 回傳 <code>3.14 * radius * radius</code></li>
+                    </ul>
+                    <p>預期輸出結果：</p>
+                    <pre>
 矩形面積： 20
 圓形面積： 28.26
 </pre>
-<div class="answer">
-  <pre class="line-numbers"><code class="language-python">class Shape:
+                    <div class="answer">
+                    <pre class="line-numbers"><code class="language-python">class Shape:
     def area(self):
         return 0
 
@@ -764,7 +830,11 @@ rect = Rectangle(4, 5)
 circle = Circle(3)
 print("矩形面積：", rect.area())
 print("圓形面積：", circle.area())</code></pre>
-</div>
+                    </div>
+                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+                        💬 需要引導？找學習助手
+                    </button>
+                </div>
 
 
 				
@@ -772,6 +842,44 @@ print("圓形面積：", circle.area())</code></pre>
 			</section>
 
 		</main>
+		
+		<div id="chatbot-container" class="chatbot-docked chatbot-docked-right" style="display: none;">
+			<div class="chatbot-window">
+				<div class="chatbot-header">
+					<div class="chatbot-header-left">
+						<span class="chatbot-title" id="chatbot-title">🤖 Python 學習助手</span>
+						
+					</div>
+					<div class="chatbot-header-right">
+						<button class="chatbot-jump-btn" id="chatbot-jump-btn" onclick="jumpToChallenge()" title="跳轉到挑戰位置">🚩</button>
+						<button class="chatbot-dock-btn" id="dock-right-btn" onclick="dockChatbot('right')" title="停靠右側">
+							▷
+						</button>
+						<button class="chatbot-dock-btn" id="dock-bottom-btn" onclick="dockChatbot('bottom')" title="停靠底部">
+							▽
+						</button>
+						<button class="chatbot-close" onclick="closeChatbot()">✕</button>
+					</div>
+				</div>
+								
+				<div class="chatbot-resizer" id="chatbot-resizer"></div>
+				
+				<div class="chatbot-messages" id="chatbot-messages"></div>
+				<div class="chatbot-input">
+					<textarea 
+						id="chatbot-input" 
+						placeholder="輸入你的回答或問題...（Shift+Enter 換行，Enter 發送）" 
+						onkeydown="handleKeyPress(event)"
+						rows="1"></textarea>
+					<button id="chatbot-send-btn" onclick="sendMessage()">發送</button>
+					<button id="chatbot-summary-btn" onclick="generateSummary()">📊</button>
+				</div>
+			</div>
+		</div>
+
+		<script src="js/auth.js"></script>
+		<script src="js/chatbot.js"></script>
+		
     </div>			
 </body>
 </html>

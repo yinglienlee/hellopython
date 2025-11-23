@@ -6,41 +6,39 @@
     <title>綜合練習：Hering Illusion</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <script type="text/javascript" src="js/script.js"></script>
-	<!-- Prism.js CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css">
-    <!-- Prism.js Line Numbers CSS -->
+	<link rel="stylesheet" href="css/chatbot.css">	
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+	<script type="text/javascript" src="js/script.js"></script>	
+	<script src="https://alcdn.msauth.net/browser/2.38.1/js/msal-browser.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
-    <!-- Prism.js Syntax Highlighting -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
-    <!-- Prism.js Line Numbers Plugin -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", (event) => {
-            includeHTML(highlightItem);
-            document.getElementById("toggleNav").addEventListener("click", navClick);
-            enableAnswerRevealer();
-        });
-    </script>
+	<script>
+		document.addEventListener("DOMContentLoaded", (event) => {
+			includeHTML(highlightItem);			
+			document.getElementById("toggleNav").addEventListener("click", navClick);		
+			enableAnswerRevealer();
+		});
+	</script>	
 </head>
 <body>
     <div class="d-flex">
-        <!-- Floating Button -->
         <button id="toggleNav" class="btn btn-primary">&#8212;</button>
         <nav id="sidebar" class="bg-light border-end" style="display: block;">
             <div>
                 <div w3-include-html="navigation.html"></div>
             </div>
         </nav>
-        <main class="flex-grow-1">
+        
+        <main class="flex-grow-1" id="teaching-content">
             <header>
                 <h1>綜合練習：Hering Illusion</h1>
             </header>
             <section>
                 <h2>學習導覽</h2>
-                <p>在這一章中，我們將學習如何使用 <code>pgzero</code> 模組設計一個互動式的 Hering Illusion 範例。此範例將幫助你了解如何處理鍵盤輸入、動態繪圖，以及基礎的幾何計算。</p>
+                                <p>在這一章中，我們將學習如何使用 <code>pgzero</code> 模組設計一個互動式的 Hering Illusion 範例。此範例將幫助你了解如何處理鍵盤輸入、動態繪圖，以及基礎的幾何計算。</p>
                 <ul>
                     <li>如何捕捉鍵盤事件。</li>
                     <li>繪製幾何圖形以形成錯覺效果。</li>
@@ -107,7 +105,7 @@ show_radiating_lines = False # 是否顯示放射線</code></pre>
             <p>用戶可以使用方向鍵調整平行線偏移距離和放射線的間距。</p>
 
             <h3>6. 放射線繪製函式</h3>
-            <pre class="line-numbers"><code class="language-python">def draw_radiating_lines(center, spacing):
+                        <pre class="line-numbers"><code class="language-python">def draw_radiating_lines(center, spacing):
     for angle in range(-90, 91, spacing):
         x1 = center[0] + WIDTH * math.cos(math.radians(angle))
         y1 = center[1] + WIDTH * math.sin(math.radians(angle))
@@ -209,10 +207,12 @@ pgzrun.go()
 
             <section>
     <h2>挑戰題目</h2>
-    <h3 class="caption">挑戰 1：改變放射線顏色 <span class="icon">🛈</span></h3>
-    <p>讓每條放射線根據角度有不同的顏色。</p>
-    <div class="answer">
-        <pre class="line-numbers"><code class="language-python"># 解答
+    
+    <div class="challenge-item" id="challenge-1">
+        <h3 class="caption">挑戰 1：改變放射線顏色 <span class="icon">🛈</span></h3>
+        <p>讓每條放射線根據角度有不同的顏色。</p>
+        <div class="answer">
+            <pre class="line-numbers"><code class="language-python"># 解答
 def draw_radiating_lines(center, spacing):
     for angle in range(-90, 91, spacing):
         # 根據角度生成顏色
@@ -222,13 +222,18 @@ def draw_radiating_lines(center, spacing):
         x2 = center[0] - WIDTH * math.cos(math.radians(angle))
         y2 = center[1] - WIDTH * math.sin(math.radians(angle))
         screen.draw.line((x1, y1), (x2, y2), color)
-</code></pre>
+    </code></pre>
+        </div>
+        <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+            💬 需要引導？找學習助手
+        </button>
     </div>
 
-    <h3 class="caption">挑戰 2：增加更多平行線 <span class="icon">🛈</span></h3>
-    <p>讓畫面中顯示更多組平行線，觀察錯覺效果如何改變。</p>
-    <div class="answer">
-        <pre class="line-numbers"><code class="language-python"># 解答
+    <div class="challenge-item" id="challenge-2">
+        <h3 class="caption">挑戰 2：增加更多平行線 <span class="icon">🛈</span></h3>
+        <p>讓畫面中顯示更多組平行線，觀察錯覺效果如何改變。</p>
+        <div class="answer">
+            <pre class="line-numbers"><code class="language-python"># 解答
 def draw_parallel_lines(center, offset, count):
     for i in range(-count, count + 1):
         offset_y = i * offset
@@ -237,13 +242,18 @@ def draw_parallel_lines(center, offset, count):
             (center[0] + 300, center[1] + offset_y), 
             BLACK
         )
-</code></pre>
+    </code></pre>
+        </div>
+        <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+            💬 需要引導？找學習助手
+        </button>
     </div>
 
-    <h3 class="caption">挑戰 3：添加動態背景 <span class="icon">🛈</span></h3>
-    <p>設計一個背景，讓放射線隨時間旋轉，增加錯覺的動態視覺效果。</p>
-    <div class="answer">
-        <pre class="line-numbers"><code class="language-python"># 解答
+    <div class="challenge-item" id="challenge-3">
+        <h3 class="caption">挑戰 3：添加動態背景 <span class="icon">🛈</span></h3>
+        <p>設計一個背景，讓放射線隨時間旋轉，增加錯覺的動態視覺效果。</p>
+        <div class="answer">
+            <pre class="line-numbers"><code class="language-python"># 解答
 angle_offset = 0
 
 def draw_radiating_lines(center, spacing, angle_offset):
@@ -259,8 +269,13 @@ def update():
     global angle_offset
 	
     angle_offset += 1  # 每幀旋轉
-</code></pre>
+    </code></pre>
+        </div>
+        <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+            💬 需要引導？找學習助手
+        </button>
     </div>
+
 </section>
 
 
@@ -269,6 +284,44 @@ def update():
                 <p>透過這份教材，你學會了如何使用 Pygame Zero 設計互動式視覺錯覺。你可以進一步探索其他視覺效果，打造更有趣的專案！</p>
             </section>
         </main>
+		
+		<div id="chatbot-container" class="chatbot-docked chatbot-docked-right" style="display: none;">
+			<div class="chatbot-window">
+				<div class="chatbot-header">
+					<div class="chatbot-header-left">
+						<span class="chatbot-title" id="chatbot-title">🤖 Python 學習助手</span>
+						
+					</div>
+					<div class="chatbot-header-right">
+						<button class="chatbot-jump-btn" id="chatbot-jump-btn" onclick="jumpToChallenge()" title="跳轉到挑戰位置">🚩</button>
+						<button class="chatbot-dock-btn" id="dock-right-btn" onclick="dockChatbot('right')" title="停靠右側">
+							▷
+						</button>
+						<button class="chatbot-dock-btn" id="dock-bottom-btn" onclick="dockChatbot('bottom')" title="停靠底部">
+							▽
+						</button>
+						<button class="chatbot-close" onclick="closeChatbot()">✕</button>
+					</div>
+				</div>
+								
+				<div class="chatbot-resizer" id="chatbot-resizer"></div>
+				
+				<div class="chatbot-messages" id="chatbot-messages"></div>
+				<div class="chatbot-input">
+					<textarea 
+						id="chatbot-input" 
+						placeholder="輸入你的回答或問題...（Shift+Enter 換行，Enter 發送）" 
+						onkeydown="handleKeyPress(event)"
+						rows="1"></textarea>
+					<button id="chatbot-send-btn" onclick="sendMessage()">發送</button>
+					<button id="chatbot-summary-btn" onclick="generateSummary()">📊</button>
+				</div>
+			</div>
+		</div>
+
+		<script src="js/auth.js"></script>
+		<script src="js/chatbot.js"></script>
+		
     </div>
 </body>
 </html>

@@ -6,24 +6,22 @@
     <title>綜合練習：Stroop Task</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <script type="text/javascript" src="js/script.js"></script>
-	<!-- Prism.js CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css">
-    <!-- Prism.js Line Numbers CSS -->
+	<link rel="stylesheet" href="css/chatbot.css">	
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+	<script type="text/javascript" src="js/script.js"></script>	
+	<script src="https://alcdn.msauth.net/browser/2.38.1/js/msal-browser.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
-    <!-- Prism.js Syntax Highlighting -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
-    <!-- Prism.js Line Numbers Plugin -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
 	<script>
-        document.addEventListener("DOMContentLoaded", (event) => {
-            includeHTML(highlightItem);
-            document.getElementById("toggleNav").addEventListener("click", navClick);
-            enableAnswerRevealer();
-        });
-    </script>
+		document.addEventListener("DOMContentLoaded", (event) => {
+			includeHTML(highlightItem);			
+			document.getElementById("toggleNav").addEventListener("click", navClick);		
+			enableAnswerRevealer();
+		});
+	</script>	
 </head>
 <body>
     <div class="d-flex">
@@ -33,345 +31,502 @@
                 <div w3-include-html="navigation.html"></div>
             </div>
         </nav>
-        <main class="flex-grow-1">
+        
+        <main class="flex-grow-1" id="teaching-content">
             <header>
                 <h1>綜合練習：Stroop Task</h1>
             </header>
             <section>
                 <h2>學習導覽</h2>
-                <p>在這一章中，我們將使用 <code>pgzero</code>（Pygame Zero）設計一個 Stroop Task 測驗程式。程式結合圖形化介面與互動設計，並能將結果儲存到 CSV 檔案。</p>
+                
+                <p>在本章中，我們將學習如何使用 Pygame Zero 實作經典的 **Stroop Task**（史楚普實驗）。Stroop Task 是一種心理學實驗，用於證明干擾對認知處理速度的影響。我們將會涵蓋以下技術細節：</p>
                 <ul>
-                    <li>什麼是 Stroop Task？</li>
-                    <li>如何設計互動式圖形界面？</li>
-                    <li>如何記錄反應時間與結果到 CSV？</li>
+                    <li>管理遊戲狀態（State Machine）。</li>
+                    <li>處理時間與計時器 (<code>clock</code>)。</li>
+                    <li>動態生成隨機的文字內容和顏色。</li>
+                    <li>處理鍵盤輸入和計分。</li>
                 </ul>
-                <p>完成本章後，你將能設計一個具有數據蒐集功能的心理學測驗應用。</p>
+                <p>完成本章後，你將能夠設計一個功能完整的心理學實驗模擬程式。</p>
             </section>
 
             <section>
-                <h2>什麼是 Stroop Task？</h2>
-                <p>Stroop Task 是一種心理學測驗，用於測試認知控制與注意力。在此測驗中，參與者需要回答字體顏色，而非字的內容。例如：</p>
-                <ul>
-                    <li>顯示「<span style="color:red;">藍色</span>」，正確答案是「紅色」，而非「藍色」。</li>
-                </ul>
-                <p>此任務考驗參與者是否能忽略字義的干擾，快速專注於顏色辨識。</p>
+                <h2>程式碼說明</h2>
+                
+                <h3>1. 全域參數與狀態管理</h3>
+                
+                <pre class="line-numbers"><code class="language-python">WIDTH = 800
+HEIGHT = 600
+
+# 定義顏色
+COLORS = {
+    "紅": (255, 0, 0),
+    "藍": (0, 0, 255),
+    "綠": (0, 255, 0),
+    "黃": (255, 255, 0)
+}
+COLOR_NAMES = list(COLORS.keys())
+KEYS = {
+    keys.R: "紅",
+    keys.B: "藍",
+    keys.G: "綠",
+    keys.Y: "黃"
+}
+
+# 遊戲狀態 (State Machine)
+GAME_STATE = "START"
+score = 0
+current_word = ""
+current_color = (0, 0, 0)
+start_time = 0
+trial_duration = 1.0  # 每次嘗試的秒數
+trial_timer = 0
+max_trials = 10
+trial_count = 0</code></pre>
+                <p>程式的核心是遊戲狀態機（<code>GAME_STATE</code>），它控制了程式是在開始畫面（<code>START</code>）、實驗階段（<code>TRIAL</code>）還是結束畫面（<code>END</code>）。</p>
+                
+                <h3>2. 隨機生成實驗項目</h3>
+                <p>此函式從 <code>COLORS</code> 中隨機選取一個作為「文字」內容，並隨機選取一個顏色作為「文字顏色」。</p>
+                <pre class="line-numbers"><code class="language-python">import random
+import time
+
+def generate_trial():
+    global current_word, current_color, trial_timer, trial_count
+    
+    # 隨機選取要顯示的文字 (例如: "紅")
+    text_choice = random.choice(COLOR_NAMES)
+    current_word = text_choice
+    
+    # 隨機選取文字的顏色 (例如: 藍色的顏色碼)
+    color_choice = random.choice(COLOR_NAMES)
+    current_color = COLORS[color_choice]
+    
+    # 重設計時器並增加嘗試次數
+    trial_timer = time.time()
+    trial_count += 1</code></pre>
+
+                <h3>3. 繪圖函式 (`draw`)</h3>
+                <p><code>draw</code> 函式根據當前的 <code>GAME_STATE</code> 繪製不同的畫面。</p>
+                <pre class="line-numbers"><code class="language-python">def draw():
+    screen.fill((255, 255, 255)) # 白色背景
+    
+    if GAME_STATE == "START":
+        draw_start_screen()
+    elif GAME_STATE == "TRIAL":
+        draw_trial_screen()
+    elif GAME_STATE == "END":
+        draw_end_screen()</code></pre>
+                
+                <h3>4. 鍵盤輸入處理 (`on_key_down`)</h3>
+                <p>只在 <code>TRIAL</code> 狀態下，才處理鍵盤輸入並檢查答案是否正確。</p>
+                <pre class="line-numbers"><code class="language-python">def on_key_down(key):
+    global GAME_STATE, score
+    
+    if GAME_STATE == "START" and key == keys.SPACE:
+        # 開始實驗
+        GAME_STATE = "TRIAL"
+        generate_trial()
+    
+    elif GAME_STATE == "TRIAL":
+        # 檢查答案，用戶按下按鍵所對應的顏色
+        user_answer_color_name = KEYS.get(key)
+        
+        # 正確答案是文字的「顏色」，而不是文字的「內容」
+        # 我們要找的是 current_color 對應的顏色名稱
+        correct_color_name = next((name for name, color in COLORS.items() if color == current_color), None)
+        
+        if user_answer_color_name == correct_color_name:
+            # 答對了
+            score += 1
+            print("正確！")
+            handle_next_trial()
+        else:
+            # 答錯了
+            print("錯誤！")
+            handle_next_trial()</code></pre>
+                
+                <h3>5. 更新邏輯 (`update`)</h3>
+                <p>在 <code>TRIAL</code> 狀態下，檢查是否超時或達到最大嘗試次數。</p>
+                <pre class="line-numbers"><code class="language-python">def update():
+    global GAME_STATE
+    
+    if GAME_STATE == "TRIAL":
+        # 檢查是否超時
+        if time.time() - trial_timer > trial_duration:
+            print("超時！")
+            handle_next_trial()
+            
+        # 檢查是否達到最大嘗試次數
+        if trial_count > max_trials:
+            GAME_STATE = "END"
+            print("實驗結束！")</code></pre>
+                
+                <h3>6. 輔助繪圖函式</h3>
+                <p>這部分定義了三個輔助函式，用於繪製不同狀態下的畫面。</p>
+                <pre class="line-numbers"><code class="language-python">def draw_start_screen():
+    screen.draw.text(
+        "史楚普實驗：請按下文字「顏色」對應的按鍵", 
+        (WIDTH // 2 - 300, HEIGHT // 2 - 100), 
+        fontsize=40, 
+        color=(0, 0, 0)
+    )
+    # ... [其他繪圖指令]
+
+def draw_trial_screen():
+    # 顯示當前問題
+    screen.draw.text(
+        current_word, 
+        (WIDTH // 2 - 50, HEIGHT // 2), 
+        fontsize=80, 
+        color=current_color
+    )
+    # ... [其他繪圖指令]
+
+def draw_end_screen():
+    # 顯示結果
+    screen.draw.text(
+        f"實驗結束！總分：{score}/{max_trials}", 
+        (WIDTH // 2 - 200, HEIGHT // 2), 
+        fontsize=60, 
+        color=(0, 0, 0)
+    )</code></pre>
+                
+
             </section>
 
-<section>
-    <h2>程式碼詳細說明</h2>
-
-    <h3>1. 模組與全域變數定義</h3>
-    <pre class="line-numbers"><code class="language-python">import pgzrun
-import random
-import time
-import csv
-
-WIDTH = 900
-HEIGHT = 400
-
-COLORS = ["red", "blue", "green", "yellow"]
-WORDS = ["紅色", "藍色", "綠色", "黃色"]
-
-number_of_tasks = 20
-tasks = []  # 儲存所有任務
-results = []  # 儲存使用者反應結果
-reaction_start_time = 0  # 記錄反應時間起點
-current_color = None
-current_word = None
-is_waiting = True  # 判斷是否等待按鍵
-buttons = []  # 儲存按鈕的區域</code></pre>
-    <p>匯入必要模組，定義畫面寬高和顏色選項，並初始化測驗任務、按鈕和反應時間等全域變數。</p>
-
-    <h3>2. 測驗任務生成</h3>
-    <pre class="line-numbers"><code class="language-python">for _ in range(number_of_tasks//2):
-    color = random.choice(COLORS)
-    word = WORDS[COLORS.index(color)]
-    tasks.append((color, word))
-for _ in range(number_of_tasks//2):
-    color = random.choice(COLORS)
-    word = random.choice([WORDS[COLORS.index(w)] for w in COLORS if w != color])
-    tasks.append((color, word))
-random.shuffle(tasks)</code></pre>
-    <p>生成 20 個測驗任務，其中 10 個是顏色與文字一致，另 10 個是顏色與文字不一致，並將任務隨機排序。</p>
-
-    <h3>3. 畫面繪製與按鈕設置</h3>
-    <pre class="line-numbers"><code class="language-python">def draw():
-    screen.clear()
-    screen.fill("white")
-	
-    progress_text = f"答題進度：{len(results)}/{number_of_tasks}"
-    screen.draw.text(
-        progress_text,
-        (10, 10),
-        fontsize=24,
-        color="black",
-        fontname="notosans.ttf"
-    )
-	
-    if is_waiting:
-        instructions = "點擊下方按鈕選擇顏色以回答。\n按空白鍵開始..."
-        screen.draw.text(instructions, center=(WIDTH // 2, HEIGHT // 2 - 50), fontsize=30, color="black")
-    else:
-        screen.draw.text(current_word, center=(WIDTH // 2, HEIGHT // 2 - 100), fontsize=48, color=current_color)
-    draw_buttons()</code></pre>
-    <p>根據狀態顯示答題進度，說明文字或測驗單詞，並繪製顏色按鈕。</p>
-
-    <pre class="line-numbers"><code class="language-python">def draw_buttons():
-    button_width = 100
-    button_height = 50
-    spacing = 20
-    total_width = len(COLORS) * (button_width + spacing) - spacing
-    start_x = (WIDTH - total_width) // 2
-    y = HEIGHT // 2 + 50
-
-    buttons = []
-    for i, color in enumerate(COLORS):
-        x = start_x + i * (button_width + spacing)
-        rect = Rect((x, y), (button_width, button_height))
-        buttons.append((rect, color))
-        screen.draw.filled_rect(rect, color)
-        screen.draw.text(
-            WORDS[i],
-            center=(rect.centerx, rect.centery),
-            fontsize=24,
-            color="white" if color != "yellow" else "black",
-        )</code></pre>
-    <p>計算按鈕位置與大小，為每個顏色繪製按鈕及文字。</p>
-
-    <h3>4. 按鍵與滑鼠事件處理</h3>
-    <pre class="line-numbers"><code class="language-python">def on_mouse_down(pos):
-    if is_waiting:
-        return
-    for rect, color in buttons:
-        if rect.collidepoint(pos):
-            handle_response(color)
-
-def on_key_down(key):
-    if is_waiting and key == keys.SPACE:
-        show_next_word()</code></pre>
-    <p>根據使用者輸入處理按鈕點擊或空白鍵按下事件，啟動測驗或記錄回應。</p>
-
-    <h3>5. 測驗邏輯與結果記錄</h3>
-    <pre class="line-numbers"><code class="language-python">def show_next_word():
-    if not tasks:
-        save_results()
-        exit()
-    is_waiting = False
-    current_color, current_word = tasks.pop(0)
-    reaction_start_time = time.time()
-
-def handle_response(selected_color):
-    reaction_time = time.time() - reaction_start_time
-    correct = (selected_color == current_color)
-    results.append((current_color, current_word, COLORS[WORDS.index(current_word)], selected_color, correct, reaction_time))
-    is_waiting = True</code></pre>
-    <p>依序顯示測驗單詞，並記錄使用者的反應時間與答案正確性。</p>
-
-    <h3>6. 結果儲存</h3>
-    <pre class="line-numbers"><code class="language-python">def save_results():
-    """儲存結果到 CSV 檔案"""
-    with open("stroop_results.csv", "w", newline="", encoding="utf-8") as file:
-        writer = csv.writer(file)
-        writer.writerow(["Color (English)", "Word (Chinese)", "Word (English)", "Selected Color", "Correct", "Reaction Time"])
-        writer.writerows(results)
-    print("結果已保存到 stroop_results.csv")</code></pre>
-
-	<h3>7. 啟動程式</h3>
-            <pre class="line-numbers"><code class="language-python">pgzrun.go()</code></pre>
-            <p>這一行啟動 Pygame Zero，進入程式的事件循環。</p>
-        </section>
 
             <section>
                 <h2>完整範例程式碼</h2>
                 <pre class="line-numbers"><code class="language-python">import pgzrun
 import random
 import time
-import csv
 
-WIDTH = 900
-HEIGHT = 400
+WIDTH = 800
+HEIGHT = 600
 
-# 顏色與字詞選項
-COLORS = ["red", "blue", "green", "yellow"]
-WORDS = ["紅色", "藍色", "綠色", "黃色"]
+# 顏色定義 (文字內容與實際顏色)
+COLORS = {
+    "紅": (255, 0, 0),
+    "藍": (0, 0, 255),
+    "綠": (0, 255, 0),
+    "黃": (255, 255, 0)
+}
+COLOR_NAMES = list(COLORS.keys())
 
-# 全域變數
-number_of_tasks = 20
-tasks = []  # 儲存所有任務
-results = []  # 儲存使用者反應結果
-reaction_start_time = 0  # 記錄反應時間起點
-current_color = None
-current_word = None
-is_waiting = True  # 判斷是否等待按鍵
-buttons = []  # 儲存按鈕的區域
+# 按鍵對應 (用戶輸入)
+KEYS = {
+    keys.R: "紅",
+    keys.B: "藍",
+    keys.G: "綠",
+    keys.Y: "黃"
+}
+KEY_HINTS = "R: 紅 (Red), B: 藍 (Blue), G: 綠 (Green), Y: 黃 (Yellow)"
 
-# 生成測驗任務
-for _ in range(number_of_tasks//2):
-    color = random.choice(COLORS)
-    word = WORDS[COLORS.index(color)]
-    tasks.append((color, word))
-for _ in range(number_of_tasks//2):
-    color = random.choice(COLORS)
-    word = random.choice([WORDS[COLORS.index(w)] for w in COLORS if w != color])
-    tasks.append((color, word))
-random.shuffle(tasks)
 
-def draw():
-    screen.clear()
-    screen.fill("white")  # 背景設為白色
+# 遊戲狀態與變數
+GAME_STATE = "START"  # "START", "TRIAL", "END"
+score = 0
+current_word = ""     # 顯示的文字內容，如 "紅"
+current_color = (0, 0, 0) # 顯示文字的顏色
+start_time = 0
+trial_duration = 1.0  # 每次嘗試的秒數
+trial_timer = 0
+max_trials = 10
+trial_count = 0
 
-    # 顯示答題進度（目前完成題數/總題數）
-    progress_text = f"答題進度：{len(results)}/{number_of_tasks}"
+
+def generate_trial():
+    """隨機生成一次新的實驗嘗試 (顏色和文字)"""
+    global current_word, current_color, trial_timer, trial_count
+    
+    # 隨機選取要顯示的文字 (例如: "紅")
+    text_choice = random.choice(COLOR_NAMES)
+    current_word = text_choice
+    
+    # 隨機選取文字的顏色 (例如: 藍色的顏色碼)
+    color_choice = random.choice(COLOR_NAMES)
+    current_color = COLORS[color_choice]
+    
+    # 重設計時器並增加嘗試次數
+    trial_timer = time.time()
+    trial_count += 1
+
+def handle_next_trial():
+    """處理下一次嘗試或結束實驗"""
+    if trial_count < max_trials:
+        generate_trial()
+    else:
+        global GAME_STATE
+        GAME_STATE = "END"
+
+
+# 繪圖函式
+def draw_start_screen():
     screen.draw.text(
-        progress_text,
-        (10, 10),
-        fontsize=24,
-        color="black",
-        fontname="notosans.ttf"
+        "史楚普實驗：請按下文字「顏色」對應的按鍵", 
+        (WIDTH // 2 - 300, HEIGHT // 2 - 100), 
+        fontsize=40, 
+        color=(0, 0, 0)
+    )
+    screen.draw.text(
+        KEY_HINTS,
+        (WIDTH // 2 - 200, HEIGHT // 2 + 50),
+        fontsize=30,
+        color=(100, 100, 100)
+    )
+    screen.draw.text(
+        "按下 SPACE 開始",
+        (WIDTH // 2 - 100, HEIGHT // 2 + 150),
+        fontsize=30,
+        color=(0, 0, 0)
     )
 
-    if is_waiting:
-        # 顯示說明文字
-        instructions = "點擊下方按鈕選擇顏色以回答。\n按空白鍵開始..."
-        screen.draw.text(
-            instructions,
-            center=(WIDTH // 2, HEIGHT // 2 - 50),
-            fontsize=30,
-            color="black",
-            align="center",
-            fontname="notosans.ttf"
-        )
-    else:
-        # 顯示單詞
-        screen.draw.text(
-            current_word,
-            center=(WIDTH // 2, HEIGHT // 2 - 100),
-            fontsize=48,
-            color=current_color,
-            align="center",
-            fontname="notosans.ttf"
-        )
-    draw_buttons()
+def draw_trial_screen():
+    # 顯示當前問題
+    screen.draw.text(
+        current_word, 
+        (WIDTH // 2 - 50, HEIGHT // 2), 
+        fontsize=80, 
+        color=current_color
+    )
+    # 顯示計分與次數
+    screen.draw.text(
+        f"分數: {score} / {max_trials}",
+        (10, 10),
+        fontsize=30,
+        color=(0, 0, 0)
+    )
+    screen.draw.text(
+        f"次數: {trial_count} / {max_trials}",
+        (10, 50),
+        fontsize=30,
+        color=(0, 0, 0)
+    )
+    # 顯示按鍵提示
+    screen.draw.text(
+        KEY_HINTS,
+        (WIDTH // 2 - 200, HEIGHT - 50),
+        fontsize=30,
+        color=(100, 100, 100)
+    )
+    
+def draw_end_screen():
+    screen.draw.text(
+        "實驗結束！", 
+        (WIDTH // 2 - 100, HEIGHT // 2 - 100), 
+        fontsize=60, 
+        color=(0, 0, 0)
+    )
+    screen.draw.text(
+        f"總分：{score}/{max_trials}", 
+        (WIDTH // 2 - 100, HEIGHT // 2), 
+        fontsize=60, 
+        color=(0, 0, 0)
+    )
 
-def draw_buttons():
-    """繪製顏色按鈕"""
-    global buttons
-    button_width = 100
-    button_height = 50
-    spacing = 20
-    total_width = len(COLORS) * (button_width + spacing) - spacing
-    start_x = (WIDTH - total_width) // 2
-    y = HEIGHT // 2 + 50
 
-    buttons = []
-    for i, color in enumerate(COLORS):
-        x = start_x + i * (button_width + spacing)
-        rect = Rect((x, y), (button_width, button_height))
-        buttons.append((rect, color))
-        screen.draw.filled_rect(rect, color)
-        screen.draw.text(
-            WORDS[i],
-            center=(rect.centerx, rect.centery),
-            fontsize=24,
-            color="white" if color != "yellow" else "black",
-            align="center",
-            fontname="notosans.ttf"
-        )
+def draw():
+    screen.fill((255, 255, 255))
+    
+    if GAME_STATE == "START":
+        draw_start_screen()
+    elif GAME_STATE == "TRIAL":
+        draw_trial_screen()
+    elif GAME_STATE == "END":
+        draw_end_screen()
 
-def on_mouse_down(pos):
-    """處理點擊按鈕事件"""
-    global is_waiting, reaction_start_time
 
-    if is_waiting:
-        return
-
-    for rect, color in buttons:
-        if rect.collidepoint(pos):
-            handle_response(color)
+# 更新與事件處理
+def update():
+    global GAME_STATE
+    
+    if GAME_STATE == "TRIAL":
+        # 檢查是否超時
+        if time.time() - trial_timer > trial_duration:
+            print(f"嘗試 {trial_count}: 超時！")
+            handle_next_trial()
 
 def on_key_down(key):
-    """按下空白鍵開始測驗"""
-    global is_waiting
-    if is_waiting and key == keys.SPACE:
-        show_next_word()
+    global GAME_STATE, score
+    
+    if GAME_STATE == "START" and key == keys.SPACE:
+        # 開始實驗
+        score = 0
+        global trial_count
+        trial_count = 0
+        GAME_STATE = "TRIAL"
+        generate_trial()
+    
+    elif GAME_STATE == "TRIAL":
+        user_answer_color_name = KEYS.get(key)
+        
+        # 找到正確答案 (文字的「顏色」所對應的名稱)
+        # current_color 是 (R, G, B) 值
+        correct_color_name = next((name for name, color in COLORS.items() if color == current_color), None)
+        
+        if user_answer_color_name:
+            if user_answer_color_name == correct_color_name:
+                print(f"嘗試 {trial_count}: 正確！")
+                score += 1
+            else:
+                print(f"嘗試 {trial_count}: 錯誤！ 正確答案是: {correct_color_name}")
+            
+            # 無論對錯，進入下一次嘗試
+            handle_next_trial()
+        
+    elif GAME_STATE == "END" and key == keys.SPACE:
+        # 重新開始
+        GAME_STATE = "START"
 
-def show_next_word():
-    """顯示下一個測驗單詞"""
-    global is_waiting, current_color, current_word, reaction_start_time
-
-    if not tasks:
-        save_results()
-        exit()
-
-    is_waiting = False
-    current_color, current_word = tasks.pop(0)
-    reaction_start_time = time.time()
-
-def handle_response(selected_color):
-    """處理使用者的回應"""
-    global is_waiting, reaction_start_time
-
-    reaction_time = time.time() - reaction_start_time
-    correct = (selected_color == current_color)
-
-    results.append((current_color, current_word, COLORS[WORDS.index(current_word)], selected_color, correct, reaction_time))
-    is_waiting = True
-
-def save_results():
-    """儲存結果到 CSV 檔案"""
-    with open("stroop_results.csv", "w", newline="", encoding="utf-8") as file:
-        writer = csv.writer(file)
-        writer.writerow(["Color (English)", "Word (Chinese)", "Word (English)", "Selected Color", "Correct", "Reaction Time"])
-        writer.writerows(results)
-    print("結果已保存到 stroop_results.csv")
 
 pgzrun.go()
 </code></pre>
-            </section>
+            </section>    
 
 
             <section>
                 <h2>挑戰題目</h2>
-                <h3 class="caption">挑戰 1：新增更多顏色選項 <span class="icon">🛈</span></h3>
-                <p>在現有選項中，新增「紫色」與「橙色」作為新的顏色選項。</p>
-                <div class="answer">
-                    <pre class="line-numbers"><code class="language-python"># 解答
-COLORS.append("purple")
-COLORS.append("orange")
-WORDS.append("紫色")
-WORDS.append("橙色")
-# 確保任務生成邏輯包含新顏色即可。
-                    </code></pre>
+                
+                <div class="challenge-item" id="challenge-1">
+                    <h3 class="caption">挑戰 1：加入一致性試驗 <span class="icon">🛈</span></h3>
+                    <p>在 <code>generate_trial()</code> 函式中，加入一個條件，確保有 50% 的機率讓文字內容與文字顏色一致（例如：文字「紅」顯示為紅色）。這有助於比較干擾與非干擾情境的反應時間。</p>
+                    <div class="answer">
+                        <pre class="line-numbers"><code class="language-python"># 解答
+def generate_trial():
+    global current_word, current_color, trial_timer, trial_count
+    
+    # 隨機選取要顯示的文字
+    text_choice = random.choice(COLOR_NAMES)
+    current_word = text_choice
+    
+    if random.random() < 0.5:
+        # 50% 機率，文字內容與顏色一致 (Congruent Trial)
+        current_color = COLORS[text_choice]
+    else:
+        # 50% 機率，文字內容與顏色不一致 (Incongruent Trial)
+        # 確保顏色與文字內容不同
+        available_colors = [name for name in COLOR_NAMES if name != text_choice]
+        color_choice = random.choice(available_colors)
+        current_color = COLORS[color_choice]
+    
+    trial_timer = time.time()
+    trial_count += 1
+</code></pre>
+                    </div>
+                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+                        💬 需要引導？找學習助手
+                    </button>
+                </div>
+    
+                <div class="challenge-item" id="challenge-2">
+                    <h3 class="caption">挑戰 2：記錄反應時間 <span class="icon">🛈</span></h3>
+                    <p>修改程式，在每次成功或失敗的嘗試中，記錄下玩家的反應時間（從問題出現到按下按鍵的時間）。</p>
+                    <div class="answer">
+                        <pre class="line-numbers"><code class="language-python"># 解答
+# 在全域變數中加入一個列表來儲存反應時間
+# response_times = []
+
+def on_key_down(key):
+    global GAME_STATE, score, trial_timer
+    
+    # ... [其他程式碼保持不變]
+    
+    elif GAME_STATE == "TRIAL":
+        user_answer_color_name = KEYS.get(key)
+        
+        # ... [檢查答案的邏輯保持不變]
+        
+        if user_answer_color_name:
+            reaction_time = time.time() - trial_timer
+            # response_times.append(reaction_time) # 儲存時間
+            print(f"嘗試 {trial_count}: 反應時間: {reaction_time:.3f} 秒") 
+            
+            # ... [處理對錯和 handle_next_trial() 保持不變]
+</code></pre>
+                    </div>
+                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+                        💬 需要引導？找學習助手
+                    </button>
                 </div>
 
-                <h3 class="caption">挑戰 2：自定義測驗次數 <span class="icon">🛈</span></h3>
-                <p>讓使用者可以設定測驗題目數量。</p>
-                <div class="answer">
-                    <pre class="line-numbers"><code class="language-python"># 解答
-num_tasks = int(input("請輸入測驗題目數量："))
-for _ in range(num_tasks // 2):
-    ...
-                    </code></pre>
+                <div class="challenge-item" id="challenge-3">
+                    <h3 class="caption">挑戰 3：顯示平均反應時間 <span class="icon">🛈</span></h3>
+                    <p>結合挑戰 2 的反應時間記錄，在實驗結束（<code>END</code> 狀態）時，計算並顯示玩家的平均反應時間，讓結果更具科學分析意義。</p>
+                    <div class="answer">
+                        <pre class="line-numbers"><code class="language-python"># 解答
+# 假設 response_times 已經在 Challenge 2 被設置和使用了
+response_times = [] # 假設已在全域定義並在 on_key_down 中記錄
+
+def draw_end_screen():
+    # ... [原有的 draw_end_screen 程式碼]
+    
+    if response_times:
+        avg_rt = sum(response_times) / len(response_times)
+        screen.draw.text(
+            f"平均反應時間：{avg_rt:.3f} 秒", 
+            (WIDTH // 2 - 200, HEIGHT // 2 + 100), 
+            fontsize=50, 
+            color=(0, 0, 0)
+        )
+    else:
+        screen.draw.text(
+            "無反應時間數據", 
+            (WIDTH // 2 - 100, HEIGHT // 2 + 100), 
+            fontsize=50, 
+            color=(0, 0, 0)
+        )
+</code></pre>
+                    </div>
+                    <button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+                        💬 需要引導？找學習助手
+                    </button>
                 </div>
 
-                <h3 class="caption">挑戰 3：顯示測驗報告 <span class="icon">🛈</span></h3>
-                <p>在測驗結束後，顯示總答對題數與平均反應時間。</p>
-                <div class="answer">
-                    <pre class="line-numbers"><code class="language-python"># 解答
-def calculate_report(results):
-    correct = sum(1 for r in results if r[3])
-    avg_time = sum(r[4] for r in results) / len(results)
-    print(f"總答對數：{correct}/{len(results)}")
-    print(f"平均反應時間：{avg_time:.2f} 秒")
-                    </code></pre>
-                </div>
             </section>
+
 
             <section>
                 <h2>結語</h2>
-                <p>透過這份練習，你學會了如何設計一個完整的 Stroop Task 測驗程式。希望你能進一步優化並拓展這個應用！</p>
+                <p>透過這個 Stroop Task 練習，你已經掌握了 Pygame Zero 中狀態管理、時間處理和事件回饋的綜合運用。這些技術對於開發任何互動式遊戲或心理學實驗都是非常重要的！</p>
             </section>
         </main>
+		
+		<div id="chatbot-container" class="chatbot-docked chatbot-docked-right" style="display: none;">
+			<div class="chatbot-window">
+				<div class="chatbot-header">
+					<div class="chatbot-header-left">
+						<span class="chatbot-title" id="chatbot-title">🤖 Python 學習助手</span>
+						
+					</div>
+					<div class="chatbot-header-right">
+						<button class="chatbot-jump-btn" id="chatbot-jump-btn" onclick="jumpToChallenge()" title="跳轉到挑戰位置">🚩</button>
+						<button class="chatbot-dock-btn" id="dock-right-btn" onclick="dockChatbot('right')" title="停靠右側">
+							▷
+						</button>
+						<button class="chatbot-dock-btn" id="dock-bottom-btn" onclick="dockChatbot('bottom')" title="停靠底部">
+							▽
+						</button>
+						<button class="chatbot-close" onclick="closeChatbot()">✕</button>
+					</div>
+				</div>
+								
+				<div class="chatbot-resizer" id="chatbot-resizer"></div>
+				
+				<div class="chatbot-messages" id="chatbot-messages"></div>
+				<div class="chatbot-input">
+					<textarea 
+						id="chatbot-input" 
+						placeholder="輸入你的回答或問題...（Shift+Enter 換行，Enter 發送）" 
+						onkeydown="handleKeyPress(event)"
+						rows="1"></textarea>
+					<button id="chatbot-send-btn" onclick="sendMessage()">發送</button>
+					<button id="chatbot-summary-btn" onclick="generateSummary()">📊</button>
+				</div>
+			</div>
+		</div>
+
+		<script src="js/auth.js"></script>
+		<script src="js/chatbot.js"></script>
+		
     </div>
 </body>
 </html>

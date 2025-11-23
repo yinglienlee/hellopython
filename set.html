@@ -6,45 +6,42 @@
     <title>集合容器</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <script type="text/javascript" src="js/script.js"></script>
-	<!-- Prism.js CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css">
-    <!-- Prism.js Line Numbers CSS -->
+	<link rel="stylesheet" href="css/chatbot.css">	
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+	<script type="text/javascript" src="js/script.js"></script>	
+	<script src="https://alcdn.msauth.net/browser/2.38.1/js/msal-browser.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
-    <!-- Prism.js Syntax Highlighting -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
-    <!-- Prism.js Line Numbers Plugin -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", (event) => {
-            includeHTML(highlightItem);
-            document.getElementById("toggleNav").addEventListener("click", navClick);
+	<script>
+		document.addEventListener("DOMContentLoaded", (event) => {
+			includeHTML(highlightItem);			
+			document.getElementById("toggleNav").addEventListener("click", navClick);		
 			enableAnswerRevealer();
-        });
-    </script>
+		});
+	</script>	
 </head>
 <body>
     <div class="d-flex">
-        <!-- Floating Button -->
         <button id="toggleNav" class="btn btn-primary">&#8212;</button>
         <nav id="sidebar" class="bg-light border-end" style="display: block;">
             <div>
                 <div w3-include-html="navigation.html"></div>
             </div>
         </nav>
-        <main class="flex-grow-1">
+        <main class="flex-grow-1" id="teaching-content">
             <header>
                 <h1>集合容器</h1>
             </header>
             <section>
                 <h2>學習導覽</h2>
-                <p>在這一章中，我們將探索集合 (set)，這是一種無序且不重複的資料結構，適合用來處理需要快速查詢的資料集合。</p>
+                <p>在這一章中，我們將探索**集合 (set)**，這是一種無序且不重複的資料結構，適合用來處理需要快速查詢的資料集合。</p>
                 <ul>
                     <li>了解如何建立集合。</li>
                     <li>學習集合的基本操作，如新增、刪除與查詢。</li>
-                    <li>熟悉集合的數學操作，例如交集、聯集與差集。</li>
+                    <li>熟悉集合的數學操作，例如**交集**、**聯集**與**差集**。</li>
                     <li>探索集合在去除重複資料中的應用。</li>
                 </ul>
             </section>
@@ -56,191 +53,203 @@
                 <pre class="line-numbers"><code class="language-python"># 使用大括號建立集合
 my_set = {1, 2, 3, 4, 5}
 
-# 使用 set 函數建立集合
-another_set = set([3, 4, 5, 6, 7])</code></pre>
-
-                <h3>2. 新增與刪除元素</h3>
-                <p>使用 <code>add()</code> 新增元素，使用 <code>remove()</code> 或 <code>discard()</code> 刪除元素：</p>
-                <pre class="line-numbers"><code class="language-python"># 新增元素
-my_set.add(6)
-print(my_set)  # 輸出：{1, 2, 3, 4, 5, 6}
-
-# 刪除元素
-my_set.remove(3)
-print(my_set)  # 輸出：{1, 2, 4, 5, 6}</code></pre>
-
-                <h3>3. 集合運算</h3>
-                <p>集合支援數學運算，如交集、聯集與差集：</p>
-                <pre class="line-numbers"><code class="language-python"># 交集
-print(my_set & another_set)  # 輸出：{4, 5, 6}
-
-# 聯集
-print(my_set | another_set)  # 輸出：{1, 2, 3, 4, 5, 6, 7}
-
-# 差集
-print(my_set - another_set)  # 輸出：{1, 2}</code></pre>
-
-                <h3>4. 集合的其他方法</h3>
-                <p>例如檢查元素是否存在於集合中：</p>
-                <pre class="line-numbers"><code class="language-python"># 檢查元素是否存在
-print(2 in my_set)  # 輸出：True
-print(10 in my_set)  # 輸出：False</code></pre>
-            </section>
-
-		<section>
-  <h2>進階語法：集合推導式</h2>
-  <p>集合推導式（Set Comprehension）是 Python 提供的一種簡潔語法，用於建立不重複元素的集合。其語法與串列推導式相似，但使用大括號 <code>{}</code>。</p>
-  <pre class="line-numbers"><code class="language-python">{expression for item in iterable if condition}</code></pre>
-  <p>解析語法：</p>
-  <ul>
-    <li><code>expression</code>：定義集合中每個元素的值。</li>
-    <li><code>item</code>：來自可迭代物件的元素。</li>
-    <li><code>iterable</code>：任何可迭代物件（例如串列、範圍、字串）。</li>
-    <li><code>condition</code>（可選）：篩選條件，僅包含滿足條件的元素。</li>
-  </ul>
-  <p>舉例：</p>
-  <pre class="line-numbers"><code class="language-python"># 範例 1：平方數組成的集合
-squares_set = {x**2 for x in range(5)}
-print(squares_set)  # 輸出：{0, 1, 4, 9, 16}
-
-# 範例 2：平方偶數
-even_squares_set = {x**2 for x in range(10) if x % 2 == 0}
-print(even_squares_set)  # 輸出：{0, 64, 4, 36, 16}
-</code></pre>
-</section>
-
-		
-            <section>
-                <h2>常見問題與解答</h2>
-                <h3>問題 1：為什麼集合中的元素是無序的？</h3>
-                <p>集合使用雜湊表來儲存資料，因此元素的順序不可預測。</p>
-
-                <h3>問題 2：如何去除串列中的重複元素？</h3>
-                <p>可以將串列轉換為集合，再轉回串列：</p>
-                <pre class="line-numbers"><code class="language-python"># 去除重複元素
+# 使用 set 函數將串列轉換為集合 (自動去除重複元素)
 my_list = [1, 2, 2, 3, 4, 4, 5]
-unique_list = list(set(my_list))
-print(unique_list)  # 輸出：[1, 2, 3, 4, 5]</code></pre>
+unique_set = set(my_list)
+print(unique_set) # 輸出: {1, 2, 3, 4, 5}
 
-                <h3>問題 3：集合是否允許包含可變的資料類型？</h3>
-                <p>集合中的元素必須是不可變的，因此像串列這樣的可變資料類型不能作為集合的元素。</p>
+# 注意: 建立空集合必須使用 set()，因為 {} 會建立空字典
+empty_set = set()</code></pre>
+                
+                <h3>2. 新增與移除元素</h3>
+                <p>使用 <code>add()</code> 增加單一元素，使用 <code>remove()</code> 或 <code>discard()</code> 移除元素：</p>
+                <pre class="line-numbers"><code class="language-python">s = {1, 2, 3}
+s.add(4)
+print(s)  # 輸出: {1, 2, 3, 4}
+
+s.remove(2) # 移除元素 2。若元素不存在會引發 KeyError
+s.discard(5) # 移除元素 5。若元素不存在不會報錯
+print(s) # 輸出: {1, 3, 4}</code></pre>
+
+                <h3>3. 集合長度</h3>
+                <p>使用 <code>len()</code> 函式取得集合中的元素數量：</p>
+                <pre class="line-numbers"><code class="language-python">s = {10, 20, 30}
+length = len(s)
+print(length)  # 輸出: 3</code></pre>
+            </section>
+            
+            <section>
+                <h2>集合的數學運算</h2>
+                <p>集合最常用於執行數學上的集合運算，可以選擇使用方法或運算子符號。</p>
+
+                <h3>1. 聯集 (Union)</h3>
+                <p>包含所有集合中的所有元素：</p>
+                <pre class="line-numbers"><code class="language-python">A = {1, 2, 3}
+B = {3, 4, 5}
+
+union_set = A.union(B)
+# 或使用運算子
+union_set_op = A | B
+
+print(union_set) # 輸出: {1, 2, 3, 4, 5}</code></pre>
+
+                <h3>2. 交集 (Intersection)</h3>
+                <p>包含所有集合中的共同元素：</p>
+                <pre class="line-numbers"><code class="language-python">A = {1, 2, 3}
+B = {3, 4, 5}
+
+intersection_set = A.intersection(B)
+# 或使用運算子
+intersection_set_op = A & B
+
+print(intersection_set) # 輸出: {3}</code></pre>
+                
+                <h3>3. 差集 (Difference)</h3>
+                <p>包含在第一個集合中，但不在第二個集合中的元素：</p>
+                <pre class="line-numbers"><code class="language-python">A = {1, 2, 3}
+B = {3, 4, 5}
+
+difference_set = A.difference(B)
+# 或使用運算子
+difference_set_op = A - B
+
+print(difference_set) # 輸出: {1, 2}
+print(B - A)         # 輸出: {4, 5}</code></pre>
+
+                <h3>4. 對稱差集 (Symmetric Difference)</h3>
+                <p>包含在任一集合中，但不同時在兩個集合中的元素：</p>
+                <pre class="line-numbers"><code class="language-python">A = {1, 2, 3}
+B = {3, 4, 5}
+
+symmetric_difference_set = A.symmetric_difference(B)
+# 或使用運算子
+symmetric_difference_set_op = A ^ B
+
+print(symmetric_difference_set) # 輸出: {1, 2, 4, 5}</code></pre>
             </section>
 
             <section>
                 <h2>挑戰題目</h2>
-                <h3 class="caption">挑戰 1：統計唯一字母數量 <span class="icon">🛈</span></h3>
-    <p>讓使用者輸入一段文字，統計該文字中包含的唯一字母數量（忽略大小寫）。</p>
-    <div class="answer">
-        <pre class="line-numbers"><code class="language-python"># 解答
-text = input("請輸入一段文字: ").lower()
-unique_letters = set(char for char in text if char.isalpha())
-print("唯一字母數量:", len(unique_letters))</code></pre>
-    </div>
+				
+				<div class="challenge-item" id="challenge-1">
+					<h3 class="caption">挑戰 1：找出唯一元素 <span class="icon">🛈</span></h3>
+					<p>給定一個包含重複數字的串列，使用集合找出其中所有唯一的數字。</p>
+					<pre class="line-numbers"><code class="language-python"># 範例輸入
+numbers = [1, 5, 2, 1, 3, 5, 4, 2]
+# 預期輸出
+{1, 2, 3, 4, 5}</code></pre>
+					<div class="answer">
+						<pre class="line-numbers"><code class="language-python"># 解答
+numbers = [1, 5, 2, 1, 3, 5, 4, 2]
+unique_numbers = set(numbers)
+print(unique_numbers)</code></pre>
+					</div>
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
+				
+				<div class="challenge-item" id="challenge-2">
+					<h3 class="caption">挑戰 2：好友名單比對 <span class="icon">🛈</span></h3>
+					<p>給定兩組好友名單（集合 A 和集合 B），找出它們的共同好友（交集）。</p>
+					<pre class="line-numbers"><code class="language-python"># 範例輸入
+group_a = {"Alice", "Bob", "Charlie", "David"}
+group_b = {"Charlie", "David", "Eve", "Frank"}
+# 預期輸出
+{'David', 'Charlie'}</code></pre>
+					<div class="answer">
+						<pre class="line-numbers"><code class="language-python"># 解答
+group_a = {"Alice", "Bob", "Charlie", "David"}
+group_b = {"Charlie", "David", "Eve", "Frank"}
+# 使用 intersection() 方法
+common_friends = group_a.intersection(group_b)
+# 或者使用符號運算: common_friends = group_a & group_b
+print(common_friends)</code></pre>
+					</div>
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
-    <h3 class="caption">挑戰 2：好友名單比對 <span class="icon">🛈</span></h3>
-    <p>設計一個程式，讓使用者輸入兩組好友名單，輸出共同好友、只屬於第一組的好友，以及只屬於第二組的好友。</p>
-    <div class="answer">
-        <pre class="line-numbers"><code class="language-python"># 解答
-friends1 = set(input("請輸入第一組好友名單（以空格分隔）: ").split())
-friends2 = set(input("請輸入第二組好友名單（以空格分隔）: ").split())
-print("共同好友:", friends1 & friends2)
-print("只屬於第一組的好友:", friends1 - friends2)
-print("只屬於第二組的好友:", friends2 - friends1)</code></pre>
-    </div>
+				<div class="challenge-item" id="challenge-3">
+					<h3 class="caption">挑戰 3：檢查是否為不相交集合 <span class="icon">🛈</span></h3>
+					<p>設計一個程式，檢查兩個集合是否有任何共同元素，即判斷它們是否為不相交集合 (disjoint sets)。</p>
+					<pre class="line-numbers"><code class="language-python"># 範例輸入 1: 不相交
+set1 = {1, 2, 3}
+set2 = {4, 5, 6}
+# 預期輸出 1
+True
 
-    <h3 class="caption">挑戰 3：集合運算模擬 <span class="icon">🛈</span></h3>
-    <p>模擬集合的聯集、交集與差集操作，並將結果以人性化的方式輸出。</p>
-    <div class="answer">
-        <pre class="line-numbers"><code class="language-python"># 解答
-set1 = set(input("請輸入第一組集合元素（以空格分隔）: ").split())
-set2 = set(input("請輸入第二組集合元素（以空格分隔）: ").split())
-print("聯集:", set1 | set2)
-print("交集:", set1 & set2)
-print("差集（第一組 - 第二組）:", set1 - set2)</code></pre>
-    </div>
+# 範例輸入 2: 相交
+set3 = {1, 2, 3}
+set4 = {3, 4, 5}
+# 預期輸出 2
+False</code></pre>
+					<div class="answer">
+						<pre class="line-numbers"><code class="language-python"># 解答
+def are_disjoint(s1, s2):
+    return s1.isdisjoint(s2)
 
-    <h3 class="caption">挑戰 4：單字頻率統計 <span class="icon">🛈</span></h3>
-    <p>設計一個程式，讓使用者輸入一段文字，統計每個單字出現的次數，並以降序顯示頻率最高的單字。</p>
-    <div class="answer">
-        <pre class="line-numbers"><code class="language-python"># 解答
-text = input("請輸入一段文字: ")
+# 範例 1
+set1 = {1, 2, 3}
+set2 = {4, 5, 6}
+print(f"Set 1 and Set 2 are disjoint: {are_disjoint(set1, set2)}")
 
-# Define characters to remove
-punctuation = ".,!?;:\"'()[]{}"
-
-# Process input text: remove punctuation and split into words
-words = [word.strip(punctuation) for word in text.split()]
-
-# Manually count word occurrences
-word_counts = {}
-for word in words:
-    if word:  # Ignore empty strings after stripping
-        word_counts[word] = word_counts.get(word, 0) + 1
-
-# Sort words by frequency in descending order
-sorted_words = sorted(word_counts.items(), key=lambda x: x[1], reverse=True)
-
-# Print results
-print("單字頻率:")
-for word, count in sorted_words:
-    print(f"{word}: {count}")
-
-</code></pre>
-    </div>
-
-    <h3 class="caption">挑戰 5：集合相等性檢查 <span class="icon">🛈</span></h3>
-    <p>讓使用者輸入兩組數字，檢查這兩組是否包含完全相同的元素，並輸出結果。</p>
-    <div class="answer">
-        <pre class="line-numbers"><code class="language-python"># 解答
-set1 = set(input("請輸入第一組數字（以空格分隔）: ").split())
-set2 = set(input("請輸入第二組數字（以空格分隔）: ").split())
-print("集合相等:" if set1 == set2 else "集合不相等")</code></pre>
-    </div>
-
-    <h3 class="caption">挑戰 6：移除多餘元素 <span class="icon">🛈</span></h3>
-    <p>設計一個程式，讓使用者輸入一組數字，移除其中的重複元素，並以升序輸出結果。</p>
-    <div class="answer">
-        <pre class="line-numbers"><code class="language-python"># 解答
-numbers = list(map(int, input("請輸入一組數字（以空格分隔）: ").split()))
-unique_numbers = sorted(set(numbers))
-print("移除重複後的數字:", unique_numbers)</code></pre>
-    </div>
-
-    <h3 class="caption">挑戰 7：英文字母缺失檢查 <span class="icon">🛈</span></h3>
-    <p>讓使用者輸入一段文字，檢查該文字是否包含所有 26 個英文字母，並輸出缺失的字母。</p>
-    <div class="answer">
-        <pre class="line-numbers"><code class="language-python"># 解答
-text = input("請輸入一段文字: ").lower()
-
-# Define lowercase alphabet manually
-alphabet = "abcdefghijklmnopqrstuvwxyz"
-
-# Get missing letters by checking which ones are not in the input
-missing_letters = {letter for letter in alphabet if letter not in text}
-
-# Print results
-print("缺失的字母:", missing_letters if missing_letters else "無缺失")
-</code></pre>
-    </div>
-
-    <h3 class="caption">挑戰 8：電影收藏分析 <span class="icon">🛈</span></h3>
-    <p>設計一個程式，讓使用者輸入兩組電影收藏，輸出這兩組電影的共同收藏、僅屬於第一組的收藏，及僅屬於第二組的收藏。</p>
-    <div class="answer">
-        <pre class="line-numbers"><code class="language-python"># 解答
-movies1 = set(input("請輸入第一組電影收藏（以空格分隔）: ").split())
-movies2 = set(input("請輸入第二組電影收藏（以空格分隔）: ").split())
-print("共同收藏:", movies1 & movies2)
-print("僅屬於第一組的收藏:", movies1 - movies2)
-print("僅屬於第二組的收藏:", movies2 - movies1)</code></pre>
-    </div>
+# 範例 2
+set3 = {1, 2, 3}
+set4 = {3, 4, 5}
+print(f"Set 3 and Set 4 are disjoint: {are_disjoint(set3, set4)}")</code></pre>
+					</div>
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 				
             </section>
 
             <section>
                 <h2>結語</h2>
-                <p>集合是一種強大的工具，能幫助我們快速處理無序且不重複的資料。透過本章學習，你將能夠運用集合處理多種情境，並提升程式的效率與可讀性。</p>
+                <p>集合是處理唯一性元素和執行關係運算的強大工具。熟練掌握集合操作符和方法，將有助於您更高效地解決資料處理問題。</p>
             </section>
         </main>
+		
+		<div id="chatbot-container" class="chatbot-docked chatbot-docked-right" style="display: none;">
+			<div class="chatbot-window">
+				<div class="chatbot-header">
+					<div class="chatbot-header-left">
+						<span class="chatbot-title" id="chatbot-title">🤖 Python 學習助手</span>
+						
+					</div>
+					<div class="chatbot-header-right">
+						<button class="chatbot-jump-btn" id="chatbot-jump-btn" onclick="jumpToChallenge()" title="跳轉到挑戰位置">🚩</button>
+						<button class="chatbot-dock-btn" id="dock-right-btn" onclick="dockChatbot('right')" title="停靠右側">
+							▷
+						</button>
+						<button class="chatbot-dock-btn" id="dock-bottom-btn" onclick="dockChatbot('bottom')" title="停靠底部">
+							▽
+						</button>
+						<button class="chatbot-close" onclick="closeChatbot()">✕</button>
+					</div>
+				</div>
+								
+				<div class="chatbot-resizer" id="chatbot-resizer"></div>
+				
+				<div class="chatbot-messages" id="chatbot-messages"></div>
+				<div class="chatbot-input">
+					<textarea 
+						id="chatbot-input" 
+						placeholder="輸入你的回答或問題...（Shift+Enter 換行，Enter 發送）" 
+						onkeydown="handleKeyPress(event)"
+						rows="1"></textarea>
+					<button id="chatbot-send-btn" onclick="sendMessage()">發送</button>
+					<button id="chatbot-summary-btn" onclick="generateSummary()">📊</button>
+				</div>
+			</div>
+		</div>
+
+		<script src="js/auth.js"></script>
+		<script src="js/chatbot.js"></script>
+		
     </div>
 </body>
 </html>
