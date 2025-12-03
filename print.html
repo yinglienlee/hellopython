@@ -117,6 +117,7 @@ print("A\tB\tC")</code></pre>
 
 			<section>
 				<h2>挑戰題目</h2>
+				<div class="challenge-item" id="challenge-1">
 				    <h3 class="caption">挑戰 1：使用 <code>print()</code> 繪製一個矩形 <span class="icon">🛈</span></h3>
     <p>輸出如下圖案：</p>
     <pre class="line-numbers"><code class="language-python">****
@@ -128,7 +129,13 @@ print("A\tB\tC")</code></pre>
 for _ in range(4):
     print("****")</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
+				<div class="challenge-item" id="challenge-2">
 				<h3 class="caption">挑戰 2：創建進度條 <span class="icon">🛈</span></h3>
     <p>讓程式輸出類似以下的進度條：</p>
     <pre class="line-numbers"><code class="language-python">1/5 -> 2/5 -> 3/5 -> 4/5 -> 5/5 -> 完成!</code></pre>
@@ -138,7 +145,13 @@ for i in range(1, 6):
     print(f"{i}/5", end=" -> ")
 print("完成!")</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
+				<div class="challenge-item" id="challenge-3">
 				<h3 class="caption">挑戰 3：格式化日期輸出 <span class="icon">🛈</span></h3>
     <p>設計程式輸出以下格式的日期：<br><code>今天是：2025/01/04</code></p>
     <div class="answer">
@@ -150,8 +163,13 @@ month = today.month
 day = today.day
 print("今天是：", year, "/", month, "/", day, sep="")</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
-
+				<div class="challenge-item" id="challenge-4">
 				<h3 class="caption">挑戰 4：多行輸出 <span class="icon">🛈</span></h3>
     <p>設計程式輸出以下格式的內容，使用 <code>\n</code> 實現換行：</p>
     <pre class="line-numbers"><code class="language-python">Hello
@@ -161,7 +179,13 @@ World</code></pre>
         <pre class="line-numbers"><code class="language-python"># 解答
 print("Hello\nPython\nWorld")</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
+				<div class="challenge-item" id="challenge-5">
 				<h3 class="caption">挑戰 5：自訂分隔符號 <span class="icon">🛈</span></h3>
     <p>讓程式輸出以下內容，使用 <code>sep</code> 參數自訂分隔符號：</p>
     <pre class="line-numbers"><code class="language-python">Apple | Banana | Cherry</code></pre>
@@ -169,7 +193,13 @@ print("Hello\nPython\nWorld")</code></pre>
         <pre class="line-numbers"><code class="language-python"># 解答
 print("Apple", "Banana", "Cherry", sep=" | ")</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
+				<div class="challenge-item" id="challenge-6">
 				<h3 class="caption">挑戰 6：使用定位符號格式化輸出 <span class="icon">🛈</span></h3>
     <p>設計程式輸出以下對齊的內容，使用 <code>\t</code> 格式化：</p>
 	<pre><code>Name	Age	City
@@ -181,7 +211,13 @@ print("Name\tAge\tCity")
 print("Alice\t25\tNew York")
 print("Bob\t30\tSan Francisco")</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
+				<div class="challenge-item" id="challenge-7">
 				<h3 class="caption">挑戰 7：顯示引號 <span class="icon">🛈</span></h3>
     <p>讓程式輸出以下內容，使用 Escape Sequence 插入雙引號：</p>
     <pre class="line-numbers"><code class="language-python">She said, "Hello, World!"</code></pre>
@@ -189,7 +225,13 @@ print("Bob\t30\tSan Francisco")</code></pre>
         <pre class="line-numbers"><code class="language-python"># 解答
 print("She said, \"Hello, World!\"")</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
+				<div class="challenge-item" id="challenge-8">
 				<h3 class="caption">挑戰 8：綜合使用 <code>end</code> 和 <code>sep</code> <span class="icon">🛈</span></h3>
     <p>讓程式輸出以下內容，使用 <code>sep</code> 設置分隔符號，並用 <code>end</code> 控制行尾：</p>
     <pre class="line-numbers"><code class="language-python">Apple - Banana - Cherry !</code></pre>
@@ -197,6 +239,11 @@ print("She said, \"Hello, World!\"")</code></pre>
         <pre class="line-numbers"><code class="language-python"># 解答
 print("Apple", "Banana", "Cherry", sep=" - ", end=" !")</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
 			</section>
 

@@ -101,6 +101,7 @@ print("你好,", name, "! 你今年", age, "歲。")</code></pre>
 			<section>
 
 				<h2>挑戰題</h2>
+				<div class="challenge-item" id="challenge-1">
 				<h3 class="caption">挑戰 1：簡單的問答程式 <span class="icon">🛈</span></h3>
 				<p>建立一個程式，詢問使用者的名字與興趣，然後輸出一段包含這些資訊的訊息。</p>
 				<div class="answer">
@@ -109,7 +110,13 @@ name = input("請輸入你的名字：")
 hobby = input("請輸入你的興趣：")
 print("你好,", name, "! 你的興趣是", hobby, "。")</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
+				<div class="challenge-item" id="challenge-2">
 				<h3 class="caption">挑戰 2：計算 BMI <span class="icon">🛈</span></h3>
 				<p>建立一個程式，要求使用者輸入身高（公分）和體重（公斤），計算並輸出 BMI 值。</p>
 				<div class="answer">
@@ -119,7 +126,13 @@ weight = float(input("請輸入你的體重（公斤）："))
 bmi = weight / (height/100 * height/100)
 print("你的身高是", height, "公分，體重是", weight, "公斤，BMI 值是", round(bmi, 2))</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
+				<div class="challenge-item" id="challenge-3">
 				<h3 class="caption">挑戰 3：簡易計算機 <span class="icon">🛈</span></h3>
 				<p>建立一個程式，要求使用者輸入兩個數字，然後進行加法、減法、乘法及除法運算，並輸出結果。</p>
 				<div class="answer">
@@ -132,7 +145,13 @@ print("減法結果：", num1 - num2)
 print("乘法結果：", num1 * num2)
 print("除法結果：", num1 / num2)</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
+				<div class="challenge-item" id="challenge-4">
 				<h3 class="caption">挑戰 4：檢查輸入是否為數字 <span class="icon">🛈</span></h3>
 				<p>建立一個程式，要求使用者輸入一個值，檢查該值是否為數字。如果是數字則輸出「這是一個數字」，否則輸出「這不是數字」。</p>
 				<div class="answer">
@@ -143,7 +162,13 @@ if value.isdigit():
 else:
     print("這不是數字")</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
+				<div class="challenge-item" id="challenge-5">
 				<h3 class="caption">挑戰 5：計算未來的年齡 <span class="icon">🛈</span></h3>
 				<p>建立一個程式，要求使用者輸入目前的年齡，然後計算並輸出 5 年後的年齡。</p>
 				<div class="answer">
@@ -153,7 +178,13 @@ future_age = current_age + 5
 print("5 年後你的年齡將是", future_age)
 </code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
+				<div class="challenge-item" id="challenge-6">
 				<h3 class="caption">挑戰 6：字串操作 <span class="icon">🛈</span></h3>
 				<p>建立一個程式，要求使用者輸入一段文字，並輸出該文字的長度以及全大寫版本。</p>
 				<div class="answer">
@@ -162,7 +193,13 @@ text = input("請輸入一段文字：")
 print("文字長度為", len(text))
 print("全大寫文字為", text.upper())</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
+				<div class="challenge-item" id="challenge-7">
 				<h3 class="caption">挑戰 7：分數平均計算 <span class="icon">🛈</span></h3>
 				<p>建立一個程式，要求使用者輸入三個分數，然後計算並輸出它們的平均值。</p>
 				<div class="answer">
@@ -174,6 +211,7 @@ average = (score1 + score2 + score3) / 3
 print("平均分數是：", average)</code></pre>
     </div>
 
+				<div class="challenge-item" id="challenge-8">
 				<h3 class="caption">挑戰 8：使用分隔符號處理多輸入 <span class="icon">🛈</span></h3>
 				<p>建立一個程式，要求使用者輸入三個以逗號分隔的數字，分別儲存到三個變數，然後輸出它們的總和。</p>
 				<div class="answer">
@@ -185,6 +223,11 @@ num3 = float(numbers[2])
 total = num1 + num2 + num3
 print("總和是：", total)</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
 
 			</section>
