@@ -290,6 +290,7 @@ print("結束所有迴圈")</code></pre>
 
 			<section>
 				<h2>挑戰題目</h2>
+				<div class="challenge-item" id="challenge-1">
 				<h3 class="caption">挑戰 1：計算總和 <span class="icon">🛈</span></h3>
     <p>寫一段程式碼，使用 <code>for</code> 迴圈計算從 1 到 100 的總和。</p>
     <div class="answer">
@@ -299,8 +300,14 @@ for i in range(1, 101):
     total += i
 print(f"1 到 100 的總和是：{total}")</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
-    <h3 class="caption">挑戰 2：九九乘法表 <span class="icon">🛈</span></h3>
+    <div class="challenge-item" id="challenge-2">
+	<h3 class="caption">挑戰 2：九九乘法表 <span class="icon">🛈</span></h3>
     <p>使用巢狀迴圈輸出完整的九九乘法表。</p>
     <div class="answer">
         <pre class="line-numbers"><code class="language-python"># 解答
@@ -309,8 +316,14 @@ for i in range(1, 10):
         print(f"{i} x {j} = {i * j}", end="\t")
     print()  # 換行</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
-    <h3 class="caption">挑戰 3：尋找質數 <span class="icon">🛈</span></h3>
+    <div class="challenge-item" id="challenge-3">
+	<h3 class="caption">挑戰 3：尋找質數 <span class="icon">🛈</span></h3>
     <p>設計一個程式，找出 1 到 50 範圍內的所有質數。</p>
     <div class="answer">
         <pre class="line-numbers"><code class="language-python"># 解答
@@ -323,16 +336,28 @@ for num in range(2, 51):
     if is_prime:
         print(num, end=" ")</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
-    <h3 class="caption">挑戰 4：反向輸出 <span class="icon">🛈</span></h3>
+    <div class="challenge-item" id="challenge-4">
+	<h3 class="caption">挑戰 4：反向輸出 <span class="icon">🛈</span></h3>
     <p>設計一個程式，使用 <code>for</code> 迴圈，輸出 10 到 1 的數字（反向遞減）。</p>
     <div class="answer">
         <pre class="line-numbers"><code class="language-python"># 解答
 for i in range(10, 0, -1):
     print(i, end=" ")</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
-    <h3 class="caption">挑戰 5：計算階乘 <span class="icon">🛈</span></h3>
+    <div class="challenge-item" id="challenge-5">
+	<h3 class="caption">挑戰 5：計算階乘 <span class="icon">🛈</span></h3>
     <p>撰寫一段程式碼，讓使用者輸入一個正整數，並使用 <code>while</code> 迴圈計算該數字的階乘（例如 5! = 5 × 4 × 3 × 2 × 1）。</p>
     <div class="answer">
         <pre class="line-numbers"><code class="language-python"># 解答
@@ -343,8 +368,14 @@ while num > 0:
     num -= 1
 print(f"階乘結果是：{factorial}")</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
-    <h3 class="caption">挑戰 6：數字金字塔 <span class="icon">🛈</span></h3>
+    <div class="challenge-item" id="challenge-6">
+	<h3 class="caption">挑戰 6：數字金字塔 <span class="icon">🛈</span></h3>
     <p>使用巢狀迴圈，輸出以下格式的數字金字塔：</p>
     <pre class="line-numbers"><code class="language-python">1
 22
@@ -356,8 +387,14 @@ print(f"階乘結果是：{factorial}")</code></pre>
 for i in range(1, 6):
     print(str(i) * i)</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
-    <h3 class="caption">挑戰 7：質數檢查 <span class="icon">🛈</span></h3>
+    <div class="challenge-item" id="challenge-7">
+	<h3 class="caption">挑戰 7：質數檢查 <span class="icon">🛈</span></h3>
     <p>設計一個程式，讓使用者輸入一個正整數，檢查該數字是否為質數。</p>
     <div class="answer">
         <pre class="line-numbers"><code class="language-python"># 解答
@@ -375,8 +412,14 @@ else:
     else:
         print(f"{num} 不是質數")</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
-    <h3 class="caption">挑戰 8：數字猜猜樂 <span class="icon">🛈</span></h3>
+    <div class="challenge-item" id="challenge-8">
+	<h3 class="caption">挑戰 8：數字猜猜樂 <span class="icon">🛈</span></h3>
     <p>撰寫一個程式，讓電腦隨機生成一個 1 到 100 之間的數字，並讓使用者猜測，程式應提示使用者猜得太高或太低，直到猜對為止。</p>
     <div class="answer">
         <pre class="line-numbers"><code class="language-python"># 解答
@@ -393,6 +436,11 @@ while guess != target:
     else:
         print("恭喜你，猜對了！")</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 			</section>
 			
 			

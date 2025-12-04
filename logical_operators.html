@@ -294,6 +294,7 @@ print(2 + 3 > 1 * 4 and 10 / 2 >= 5)  # 計算過程：(2+3) > (1*4) and (10/2) 
 
 			<section>
 				<h2>挑戰題目</h2>
+				<div class="challenge-item" id="challenge-1">
 				<h3 class="caption">挑戰 1：檢查條件成立 <span class="icon">🛈</span></h3>
     <p>寫一段程式碼，檢查一個數字是否同時為偶數且大於 10。</p>
     <div class="answer">
@@ -304,7 +305,13 @@ if number % 2 == 0 and number > 10:
 else:
     print("條件不成立")</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
+	<div class="challenge-item" id="challenge-2">
     <h3 class="caption">挑戰 2：實現複雜邏輯判斷 <span class="icon">🛈</span></h3>
     <p>設計一個程式，檢查一個數字是否在範圍 [10, 20] 內，或者是否為負數。</p>
     <div class="answer">
@@ -322,8 +329,14 @@ if (10 <= number and number <= 20) or number < 0:
 else:
     print("條件不成立")</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
-    <h3 class="caption">挑戰 3：模擬登入系統 <span class="icon">🛈</span></h3>
+    <div class="challenge-item" id="challenge-3">
+	<h3 class="caption">挑戰 3：模擬登入系統 <span class="icon">🛈</span></h3>
     <p>定義兩個變數 <code>username</code> 和 <code>password</code>，並設計一段程式，只有當兩者同時正確時，輸出 "登入成功"。</p>
     <div class="answer">
         <pre class="line-numbers"><code class="language-python"># 解答
@@ -335,8 +348,14 @@ if username == "admin" and password == "1234":
 else:
     print("登入失敗")</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
    
-    <h3 class="caption">挑戰 4：布林值運算 <span class="icon">🛈</span></h3>
+    <div class="challenge-item" id="challenge-4">
+	<h3 class="caption">挑戰 4：布林值運算 <span class="icon">🛈</span></h3>
     <p>定義三個布林值變數 <code>a</code>、<code>b</code> 和 <code>c</code>，計算以下邏輯表達式的結果，並輸出：<br><code>a and not b or c</code></p>
     <div class="answer">
         <pre class="line-numbers"><code class="language-python"># 解答
@@ -347,8 +366,14 @@ c = True
 result = a and not b or c
 print(f"結果：{result}")</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
-    <h3 class="caption">挑戰 5：綜合布林運算 <span class="icon">🛈</span></h3>
+    <div class="challenge-item" id="challenge-5">
+	<h3 class="caption">挑戰 5：綜合布林運算 <span class="icon">🛈</span></h3>
     <p>模擬一個抽獎程式，當使用者已註冊（<code>is_registered = True</code>）且持有有效票券（<code>has_ticket = True</code>）時，顯示 "參加抽獎"，否則顯示 "資格不符"。</p>
     <div class="answer">
         <pre class="line-numbers"><code class="language-python"># 解答
@@ -360,8 +385,14 @@ if is_registered and has_ticket:
 else:
     print("資格不符")</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
-    <h3 class="caption">挑戰 6：空值檢查 <span class="icon">🛈</span></h3>
+    <div class="challenge-item" id="challenge-6">
+	<h3 class="caption">挑戰 6：空值檢查 <span class="icon">🛈</span></h3>
     <p>設計程式檢查一個變數是否為 <code>None</code> 或空字串，並輸出 "無效輸入" 或 "有效輸入"。</p>
     <div class="answer">
         <pre class="line-numbers"><code class="language-python"># 解答
@@ -372,7 +403,13 @@ if value == "" or value is None:
 else:
     print("有效輸入")</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 				
+				<div class="challenge-item" id="challenge-7">
 				<h3 class="caption">挑戰 7：比較運算符綜合應用 <span class="icon">🛈</span></h3>
     <p>設計程式，輸入三個數字，判斷它們是否可以構成一個三角形（任意兩邊之和大於第三邊）。</p>
     <div class="answer">
@@ -386,7 +423,13 @@ if a + b > c and a + c > b and b + c > a:
 else:
     print("這三個數字不能構成三角形")</code></pre>
     </div>
-
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
+				
+	<div class="challenge-item" id="challenge-8">
     <h3 class="caption">挑戰 8：複雜條件判斷 <span class="icon">🛈</span></h3>
     <p>設計程式，模擬一個電影院的門票系統。兒童（12歲以下）和老人（65歲以上）享有50%折扣，學生（持有學生證）享有30%折扣，其他人則需支付全額票價。</p>
     <div class="answer">
@@ -405,6 +448,11 @@ else:
     price = full_price
     print(f"您需支付全額票價 {price} 元")</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
 				
 			</section>

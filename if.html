@@ -160,6 +160,7 @@ if x > 5 and x < 15:
 
 			<section>
 				<h2>挑戰題目</h2>
+				<div class="challenge-item" id="challenge-1">
 				<h3 class="caption">挑戰 1：判斷奇偶數 <span class="icon">🛈</span></h3>
     <p>寫一個程式，輸入一個數字並判斷它是奇數還是偶數。</p>
     <div class="answer">
@@ -170,7 +171,13 @@ if number % 2 == 0:
 else:
     print(f"{number} 是奇數")</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
+	<div class="challenge-item" id="challenge-2">
     <h3 class="caption">挑戰 2：多條件檢查 <span class="icon">🛈</span></h3>
     <p>設計一個程式，檢查一個數字是否：</p>
     <ul>
@@ -188,8 +195,14 @@ elif 0 <= number <= 100:
 else:
     print("數字大於 100")</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
-    <h3 class="caption">挑戰 3：巢狀條件 <span class="icon">🛈</span></h3>
+    <div class="challenge-item" id="challenge-3">
+	<h3 class="caption">挑戰 3：巢狀條件 <span class="icon">🛈</span></h3>
     <p>撰寫一個程式，輸入三個數字並找出最大值。</p>
     <div class="answer">
         <pre class="line-numbers"><code class="language-python"># 解答
@@ -208,8 +221,14 @@ else:
     else:
         print(f"最大值是 {num3}")</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
-    <h3 class="caption">挑戰 4：判斷分數等級 <span class="icon">🛈</span></h3>
+    <div class="challenge-item" id="challenge-4">
+	<h3 class="caption">挑戰 4：判斷分數等級 <span class="icon">🛈</span></h3>
     <p>設計一個程式，讓使用者輸入分數，並根據以下規則判斷等級：</p>
     <ul>
         <li>90 分以上為 A 級</li>
@@ -232,8 +251,14 @@ elif score >= 60:
 else:
     print("F 級")</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
-    <h3 class="caption">挑戰 5：簡單的計算機 <span class="icon">🛈</span></h3>
+    <div class="challenge-item" id="challenge-5">
+	<h3 class="caption">挑戰 5：簡單的計算機 <span class="icon">🛈</span></h3>
     <p>撰寫一個程式，讓使用者輸入兩個數字和一個運算符號（+、-、*、/），然後根據使用者的輸入進行相應的運算，並輸出結果。</p>
     <div class="answer">
         <pre class="line-numbers"><code class="language-python"># 解答
@@ -255,8 +280,14 @@ elif operator == "/":
 else:
     print("無效的運算符號")</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
-    <h3 class="caption">挑戰 6：檢查三角形 <span class="icon">🛈</span></h3>
+    <div class="challenge-item" id="challenge-6">
+	<h3 class="caption">挑戰 6：檢查三角形 <span class="icon">🛈</span></h3>
     <p>設計一個程式，讓使用者輸入三邊長，檢查它們是否能構成一個有效的三角形（任意兩邊之和大於第三邊）。</p>
     <div class="answer">
         <pre class="line-numbers"><code class="language-python"># 解答
@@ -269,8 +300,14 @@ if a + b > c and a + c > b and b + c > a:
 else:
     print("不能構成三角形")</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
-    <h3 class="caption">挑戰 7：閏年判斷 <span class="icon">🛈</span></h3>
+    <div class="challenge-item" id="challenge-7">
+	<h3 class="caption">挑戰 7：閏年判斷 <span class="icon">🛈</span></h3>
     <p>撰寫一個程式，讓使用者輸入年份，判斷是否為閏年（能被 4 整除但不能被 100 整除，或者能被 400 整除）。</p>
     <div class="answer">
         <pre class="line-numbers"><code class="language-python"># 解答
@@ -281,8 +318,14 @@ if (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0):
 else:
     print(f"{year} 不是閏年")</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
-    <h3 class="caption">挑戰 8：巢狀條件 - 找最小值 <span class="icon">🛈</span></h3>
+    <div class="challenge-item" id="challenge-8">
+	<h3 class="caption">挑戰 8：巢狀條件 - 找最小值 <span class="icon">🛈</span></h3>
     <p>設計一個程式，讓使用者輸入三個數字，使用巢狀條件判斷並輸出最小值。</p>
     <div class="answer">
         <pre class="line-numbers"><code class="language-python"># 解答
@@ -301,6 +344,11 @@ else:
     else:
         print(f"最小值是 {num3}")</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 				
 				
 			</section>
