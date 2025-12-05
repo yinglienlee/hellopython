@@ -149,7 +149,8 @@ function enableAnswerRevealer() {
 	const overrideKey = parseInt(urlParams.get("override"));
 	const fileName = window.location.pathname.split('/').pop();
 	const GOOGLE_SHEETS_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSF-MJYb-3c-teT8X6Te8eqIoP4UC8BsgMUI0pcpo2VYKrf178ACOjLEfuFpuRPu3QSy5DDk2KY1jTO/pub?gid=0&single=true&output=csv";
-	let showAnswers = false, hideKey = false;
+	
+    let isOverrideActive = false; // Flag to determine if the global override is active
 
 	fetch(GOOGLE_SHEETS_CSV_URL)
 		.then(response => response.text()) // Read CSV as text
@@ -158,84 +159,34 @@ function enableAnswerRevealer() {
 			const result = {};
 
 			rows.forEach(row => {
-				// console.log(row);
 				const [key, ...values] = row.split(","); // Split by comma
 				result[key.trim()] = values.map(value => value.trim())
 								.filter(value => value !== "")
 								.map(Number);
 			});
 			
-			console.log(result);
+			console.log("Parsed CSV Data:", result); // Updated log for clarity
 			
-			if (result.hasOwnProperty(fileName) && result[fileName].length != 0) showAnswers = true;
-			else showAnswers = false;
-
-			if (result["override"]) {
-				if (overrideKey && result["override"].includes(overrideKey)) hideKey = false;
-				else hideKey = true;
-			} else {
-				hideKey = false;
-			}
-
-			console.log(overrideKey, result["override"], hideKey);
-
-			if (showAnswers) {
-				document.querySelectorAll('.caption .icon').forEach((icon, index) => {
-					let clickCount = 0;
-					let isAnswerVisible = false;
-					const numClicksToReveal = 1;
+            // 1. Determine if the global override is active
+            if (result["reveal"] && overrideKey && result["reveal"].includes(overrideKey)) {
+                isOverrideActive = true;
+                console.log("Global Answer Override is Active.");
+            }
+            
+            // 2. Get the list of problems to reveal on this specific page
+            const revealedProblems = result[fileName] || []; 
+			
+            // Use revealedProblems and isOverrideActive to determine visibility
+			document.querySelectorAll('.caption .icon').forEach((icon, index) => {
+				const problemIndex = index + 1; // 1-based index
+                
+                // Condition to HIDE the answer/icon:
+                // Hide if: 
+                // a) The global override is NOT active, AND
+                // b) The problem's index is NOT in the page-specific revealed list.
+                const shouldHide = !isOverrideActive && !revealedProblems.includes(problemIndex);
 					
-					if (!result[fileName].includes(index+1) || hideKey) {
-						icon.style.display = 'none'; // Hide the icon
-						const caption = icon.closest('.caption');
-						let answerElement = caption.nextElementSibling;
-						while (answerElement && !answerElement.classList.contains('answer')) {
-							answerElement = answerElement.nextElementSibling;
-						}
-						if (answerElement) {
-							answerElement.style.display = 'none'; // Hide the answer
-						}
-					} else {
-						icon.addEventListener('click', function (event) {
-							// Prevent bubbling to the parent `.caption` click handler
-							event.stopPropagation();
-
-							clickCount++;
-
-							if (clickCount === numClicksToReveal) {
-								// Find the parent `.caption` element
-								const caption = icon.closest('.caption');
-
-								// Find the next sibling `.answer` element
-								let answerElement = caption.nextElementSibling;
-								while (answerElement && !answerElement.classList.contains('answer')) {
-									answerElement = answerElement.nextElementSibling;
-								}
-
-								if (answerElement) {
-									if (!isAnswerVisible) {
-										answerElement.style.display = 'block';
-										icon.classList.add('revealed');
-									} else {
-										answerElement.style.display = 'none';
-										icon.classList.remove('revealed');
-									}
-
-									caption.classList.toggle('active');
-									isAnswerVisible = !isAnswerVisible;
-								}
-
-								// Reset the click count after toggling
-								clickCount = 0;
-							}
-						});
-					}
-					
-							
-					
-				});				
-			} else {
-				document.querySelectorAll('.caption .icon').forEach(icon => {
+				if (shouldHide) {
 					icon.style.display = 'none'; // Hide the icon
 					const caption = icon.closest('.caption');
 					let answerElement = caption.nextElementSibling;
@@ -245,13 +196,53 @@ function enableAnswerRevealer() {
 					if (answerElement) {
 						answerElement.style.display = 'none'; // Hide the answer
 					}
-				});
-			}
+				} else {
+                    // Answer is visible/clickable (either via override or page-specific list)
+					let clickCount = 0;
+					let isAnswerVisible = false;
+					const numClicksToReveal = 1;
+					
+					icon.addEventListener('click', function (event) {
+						// Prevent bubbling to the parent `.caption` click handler
+						event.stopPropagation();
+
+						clickCount++;
+
+						if (clickCount === numClicksToReveal) {
+							// Find the parent `.caption` element
+							const caption = icon.closest('.caption');
+
+							// Find the next sibling `.answer` element
+							let answerElement = caption.nextElementSibling;
+							while (answerElement && !answerElement.classList.contains('answer')) {
+								answerElement = answerElement.nextElementSibling;
+							}
+
+							if (answerElement) {
+								if (!isAnswerVisible) {
+									answerElement.style.display = 'block';
+									icon.classList.add('revealed');
+								} else {
+									answerElement.style.display = 'none';
+									icon.classList.remove('revealed');
+								}
+
+								caption.classList.toggle('active');
+								isAnswerVisible = !isAnswerVisible;
+							}
+
+							// Reset the click count after toggling
+							clickCount = 0;
+						}
+					});
+				}					
+			});
 			
 		})
 		.catch(error => {
 			console.error("Error fetching CSV:", error);
 			
+			// Default behavior on error: hide all answers
 			document.querySelectorAll('.caption .icon').forEach(icon => {
 				icon.style.display = 'none'; // Hide the icon
 				const caption = icon.closest('.caption');
