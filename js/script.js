@@ -172,6 +172,8 @@ function enableAnswerRevealer() {
                 isOverrideActive = true;
                 console.log("Global Answer Override is Active.");
             }
+			
+			console.log(result["reveal"], overrideKey);
             
             // 2. Get the list of problems to reveal on this specific page
             const revealedProblems = result[fileName] || []; 
