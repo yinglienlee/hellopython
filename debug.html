@@ -107,6 +107,7 @@
 
             <section>
                 <h2>挑戰題目</h2>
+				<div class="challenge-item" id="challenge-1">
                 <h3>挑戰 1：檢查變數值</h3>
                 <p>編寫以下程式碼，使用除錯模式檢查變數 <code>total</code> 的值：</p>
                 <pre class="line-numbers"><code class="language-python">def add_numbers(a, b):
@@ -115,7 +116,38 @@
 
 result = add_numbers(3, 5)
 print(result)</code></pre>
+				<div class="answer">
+你是一位資深程式設計導師，專精於 Python 教學和除錯工具（特別是 Thonny IDE）。
 
+**目標 (Goal):**
+分析並逐步解釋以下 Python 程式碼在 Thonny IDE **除錯模式**下的執行流程。特別要追蹤並指出變數 `total` 何時被賦值以及其最終數值。
+
+**程式碼 (Code):**
+def add_numbers(a, b):
+    total = a + b
+    return total
+
+result = add_numbers(3, 5)
+print(result)
+
+**要求與輸出格式 (Requirements and Output Format):**
+1.  **使用 Markdown 格式** 輸出，包含標題。
+2.  將步驟分為兩個主要階段：**「進入函式前」** 和 **「函式內部的變數追蹤」**。
+3.  對每個關鍵執行步驟，明確說明：
+    * **執行的程式碼行**。
+    * **變數視窗 (Variables View) 的變化**（例如：區域變數 a, b 的值，以及變數 total 的建立和數值）。
+4.  最後，總結變數 `total` 的最終數值。
+
+**請從模擬除錯器啟動的第一行程式碼開始分析。**	
+				</div>
+
+<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
+
+				<div class="challenge-item" id="challenge-2">
                 <h3>挑戰 2：修正錯誤</h3>
                 <p>以下程式碼有一個錯誤，使用 Thonny 的除錯功能找出並修正它：</p>
                 <pre class="line-numbers"><code class="language-python">def divide_numbers(a, b):
@@ -123,8 +155,39 @@ print(result)</code></pre>
     return result
 
 print(divide_numbers(5, 0))  # 錯誤：除以零</code></pre>
+				<div class="answer">
+你是一位資深程式設計導師，專精於 Python 程式碼的除錯、錯誤處理（Error Handling）以及 Thonny IDE 的使用。
+
+**目標 (Goal):**
+分析以下 Python 程式碼，識別潛在的執行時錯誤 (Runtime Error)。模擬在 Thonny IDE 除錯模式下，程式碼執行到錯誤發生點的過程，並提供標準的錯誤修正方案。
+
+**程式碼 (Code):**
+def divide_numbers(a, b):
+    result = a / b
+    return result
+
+print(divide_numbers(5, 0))
+
+**要求與輸出格式 (Requirements and Output Format):**
+1.  **使用 Markdown 格式** 輸出，包含標題。
+2.  **錯誤識別：** 明確指出錯誤類型（例如：ZeroDivisionError）。
+3.  **Thonny 除錯模擬：**
+    * 說明除錯器執行到哪一行時會**停止**並拋出錯誤。
+    * 簡述此時**變數視窗**中 `a` 和 `b` 的值。
+4.  **錯誤修正：** 提供**使用 `try...except` 區塊**來修正此錯誤的完整、修正後的 Python 程式碼。
+5.  **修正說明：** 簡要解釋 `try...except` 區塊在這個情境下的作用。
+
+**請提供修正後的程式碼作為主要輸出結果。**
+				</div>
+
+<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
 
+				<div class="challenge-item" id="challenge-3">
 				<h3>挑戰 3：數字累加問題</h3>
 				
 				<p>以下程式碼試圖計算數列的總和，但程式中有些邏輯錯誤，導致結果不正確。</p>
@@ -166,6 +229,47 @@ print(f"數列總和：{result}")
 					<li>觀察條件 <code>if i > len(numbers)</code> 是否有意義。</li>
 					<li>確保程式邏輯只在有效索引範圍內運行。</li>
 				</ul>
+				
+				<div class="answer">
+你是一位資深程式設計導師，精通 Python 邏輯分析和 Thonny IDE 的除錯技巧，特別是斷點 (Breakpoints) 和變數觀察 (Variable Watch)。
+
+**目標 (Goal):**
+分析以下 Python 程式碼，找出並解釋其邏輯錯誤，並提供在 Thonny 中使用斷點進行除錯的詳細步驟。最後，提供修正後的程式碼以確保功能正確。
+
+**原始程式碼 (Original Code):**
+def calculate_sum(numbers):
+	total = 0
+	for i in range(len(numbers)):
+		total += numbers[i]  # 累加數列元素
+
+		# 錯誤：嘗試存取不存在的索引
+		if i > len(numbers):
+			print("發生錯誤：索引超出範圍！")
+
+	return total
+
+# 測試數列
+numbers = [1, 2, 3, 4, 5]
+result = calculate_sum(numbers)
+print(f"數列總和：{result}")
+
+**要求與輸出格式 (Requirements and Output Format):**
+1.  **使用 Markdown 格式** 輸出，包含標題。
+2.  **邏輯錯誤分析：** 詳細解釋程式碼中 `if i > len(numbers)` 條件的**錯誤或冗餘之處**，說明它為什麼永遠不會被觸發。
+3.  **除錯模擬步驟 (Thonny Focus):**
+    * 指導使用者應在哪一行設置**斷點 (Breakpoint)**。
+    * 創建一個**表格**，模擬迴圈執行過程中的變數追蹤。表格欄位必須包含：**i (索引)**、**numbers[i] (元素值)**、和 **total (累加值)**。
+4.  **最終修正程式碼：** 提供修正後的 Python 程式碼，確保程式邏輯正確且簡潔。
+5.  **總結：** 簡要說明修正後的程式碼如何解決了原始問題。
+
+**請確保所有的解釋和代碼都是準確無誤的。**				
+				</div>
+				
+				<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
 
             </section>

@@ -111,7 +111,7 @@ outer()  # 輸出：15</code></pre>
 
             <section>
                 <h2>挑戰題目</h2>
-				
+				<div class="challenge-item" id="challenge-1">
 				<h3 class="caption">挑戰 1：計數器功能 <span class="icon">🛈</span></h3>
 				<p>設計一個簡單的計數器程式：</p>
 				<ol>
@@ -137,8 +137,13 @@ increment_counter()  # Counter: 1
 increment_counter()  # Counter: 2
 increment_counter()  # Counter: 3</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
-
+				<div class="challenge-item" id="challenge-2">
 				<h3 class="caption">挑戰 2：巢狀函式 <span class="icon">🛈</span></h3>
 				<p>撰寫一個能修改外層變數的巢狀函式程式：</p>
 				<ol>
@@ -165,7 +170,13 @@ def outer_function():
 
 outer_function()  # Updated value: 15</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
+				<div class="challenge-item" id="challenge-3">
 				<h3 class="caption">挑戰 3：全域變數與區域變數互動 <span class="icon">🛈</span></h3>
 				<p>撰寫一個程式，展示全域與區域變數如何互動：</p>
 				<ol>
@@ -194,7 +205,13 @@ print(f"Before function call: {total}")
 modify_total()
 print(f"After function call: {total}")</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 				
+				<div class="challenge-item" id="challenge-4">
 				<h3 class="caption">挑戰 4：函式呼叫次數 <span class="icon">🛈</span></h3>
 				<p>撰寫一個記錄函式被呼叫次數的程式：</p>
 				<ol>
@@ -220,7 +237,13 @@ track_calls()  # Function called 1 times
 track_calls()  # Function called 2 times
 track_calls()  # Function called 3 times</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
+				<div class="challenge-item" id="challenge-5">
 				<h3 class="caption">挑戰 5：函式內修改串列 <span class="icon">🛈</span></h3>
 				<p>撰寫一個程式，展示如何在函式內修改串列內容：</p>
 				<ol>
@@ -244,7 +267,13 @@ def add_to_list(value):
 add_to_list(5)  # Current list: [5]
 add_to_list(10)  # Current list: [5, 10]</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 							
+				<div class="challenge-item" id="challenge-6">
 				<h3 class="caption">挑戰 6：區域與全域變數的範圍實驗 <span class="icon">🛈</span></h3>
 				<p>撰寫一個程式來測試區域變數與全域變數的範圍：</p>
 				<ol>
@@ -270,7 +299,13 @@ print(f"Global test_var before function: {test_var}")
 scope_experiment()
 print(f"Global test_var after function: {test_var}")</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
+				<div class="challenge-item" id="challenge-7">
 				<h3 class="caption">挑戰 7：動態範圍測試 <span class="icon">🛈</span></h3>
 				<p>撰寫一個程式，展示如何在函式間傳遞值並進行動態範圍測試：</p>
 				<ol>
@@ -295,7 +330,13 @@ def function_b(value):
 
 function_a()  # Doubled value: 60</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
+				<div class="challenge-item" id="challenge-8">
 				<h3 class="caption">挑戰 8：參數也屬於區域變數 <span class="icon">🛈</span></h3>
 				<p>撰寫一個程式，說明函式的參數也屬於區域變數：</p>
 				<ol>
@@ -321,6 +362,11 @@ greet_user("Alice", "Hi")  # Hi, Alice!
 print(name)  # NameError: name is not defined
 print(greeting)  # NameError: greeting is not defined</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 							
             </section>
 

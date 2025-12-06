@@ -175,6 +175,7 @@ except Exception as e:
 
             <section>
                 <h2>挑戰題目</h2>
+				<div class="challenge-item" id="challenge-1">
                 <h3 class="caption">挑戰 1：例外處理的基礎 <span class="icon">🛈</span></h3>
                 <p>設計一個程式，要求使用者輸入兩個數字，然後進行除法運算。如果輸入的不是數字或除以零，則捕獲例外並提示錯誤訊息。</p>
 				<div class="answer">
@@ -189,8 +190,14 @@ except ValueError:
 except ZeroDivisionError:
     print("除數不能為零！")</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
 
+				<div class="challenge-item" id="challenge-2">
 				<h3 class="caption">挑戰 2：多層次例外處理 <span class="icon">🛈</span></h3>
 				<p>設計一個程式，模擬 ATM 提款流程：</p>
 				<ol>
@@ -222,9 +229,15 @@ except ValueError as e:
 except Exception:
     print("發生未知錯誤！")</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
               
 
-                <h3 class="caption">挑戰 3：自訂例外 <span class="icon">🛈</span></h3>
+				<div class="challenge-item" id="challenge-3">
+				<h3 class="caption">挑戰 3：自訂例外 <span class="icon">🛈</span></h3>
                 <p>建立一個自訂例外類別，模擬當使用者年齡小於 18 歲時，拋出 "未滿 18 歲不可註冊" 的例外。</p>
 				<div class="answer">
         <pre class="line-numbers"><code class="language-python"># 解答
@@ -241,8 +254,14 @@ except AgeRestrictionError as e:
 except ValueError:
     print("請輸入有效的數字！")</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 				
 							
+				<div class="challenge-item" id="challenge-4">
 				<h3 class="caption">挑戰 4：分數計算 <span class="icon">🛈</span></h3>
 				<p>設計一個程式來計算兩個分數的加總，並處理可能的例外：</p>
 				<ol>
@@ -272,7 +291,13 @@ except ValueError:
 except ZeroDivisionError as e:
     print(e)</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
+				<div class="challenge-item" id="challenge-5">
 				<h3 class="caption">挑戰 5：例外處理中的多個 <code>except</code> <span class="icon">🛈</span></h3>
 				<p>撰寫一個程式，模擬簡單的計算機操作：</p>
 				<ol>
@@ -309,7 +334,13 @@ except ValueError as e:
 except ZeroDivisionError as e:
     print(e)</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
+				<div class="challenge-item" id="challenge-6">
 				<h3 class="caption">挑戰 6：自訂例外處理邏輯 <span class="icon">🛈</span></h3>
 				<p>設計一個程式來模擬簡單的密碼驗證系統：</p>
 				<ol>
@@ -330,7 +361,13 @@ try:
 except PasswordTooShortError as e:
     print(e)</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
+				<div class="challenge-item" id="challenge-7">
 				<h3 class="caption">挑戰 7：巢狀例外處理 <span class="icon">🛈</span></h3>
 				<p>設計一個程式，模擬巢狀例外的處理過程：</p>
 				<ol>
@@ -358,7 +395,13 @@ try:
 except ValueError:
     print("請輸入有效的數字！")</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
+				<div class="challenge-item" id="challenge-8">
 				<h3 class="caption">挑戰 8：條件式錯誤驗證 <span class="icon">🛈</span></h3>
 				<p>設計一個程式來驗證使用者輸入的年齡是否符合條件：</p>
 				<ol>
@@ -380,7 +423,12 @@ try:
     print("年齡有效！")
 except ValueError as e:
     print(e)</code></pre>
-    </div>				
+    </div>			
+<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>	
 				
             </section>
 
