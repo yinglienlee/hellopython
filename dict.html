@@ -179,6 +179,7 @@ print(combined)  # 輸出：{'a': 1, 'b': 3, 'c': 4}</code></pre>
 
             <section>
                 <h2>挑戰題目</h2>
+				<div class="challenge-item" id="challenge-1">
                 <h3 class="caption">挑戰 1：學生成績管理 <span class="icon">🛈</span></h3>
                 <p>設計一個程式，讓使用者輸入多位學生的名字與成績，儲存於字典中，並輸出所有學生的平均成績。</p>
 				<div class="answer">
@@ -194,8 +195,14 @@ while True:
 average_score = sum(students.values()) / len(students)
 print("學生平均成績：", average_score)</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
-                <h3 class="caption">挑戰 2：單字翻譯 <span class="icon">🛈</span></h3>
+                <div class="challenge-item" id="challenge-2">
+				<h3 class="caption">挑戰 2：單字翻譯 <span class="icon">🛈</span></h3>
                 <p>建立一個字典儲存英文單字與中文翻譯，讓使用者輸入英文單字並查詢對應的中文翻譯。</p>
 				<div class="answer">
         <pre class="line-numbers"><code class="language-python"># 解答
@@ -204,8 +211,14 @@ word = input("請輸入英文單字：")
 translation = dictionary.get(word, "該單字不存在於字典中")
 print(f"{word} 的翻譯是：{translation}")</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
-                <h3 class="caption">挑戰 3：購物清單 <span class="icon">🛈</span></h3>
+                <div class="challenge-item" id="challenge-3">
+				<h3 class="caption">挑戰 3：購物清單 <span class="icon">🛈</span></h3>
                 <p>設計一個購物清單程式，讓使用者新增商品與數量，並列出完整的購物清單與總數量。</p>
 				<div class="answer">
         <pre class="line-numbers"><code class="language-python"># 解答
@@ -221,7 +234,13 @@ total_quantity = sum(shopping_list.values())
 print("購物清單：", shopping_list)
 print("總數量：", total_quantity)</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 				
+				<div class="challenge-item" id="challenge-4">
 				<h3 class="caption">挑戰 4：熱門單字統計 <span class="icon">🛈</span></h3>
 				<p>給定一段文字，計算其中每個單字出現的次數，並使用字典儲存結果。</p>
 				<pre class="line-numbers"><code class="language-python"># 範例輸入
@@ -237,7 +256,13 @@ for word in words:
     word_count[word] = word_count.get(word, 0) + 1
 print(word_count)</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
+				<div class="challenge-item" id="challenge-5">
 				<h3 class="caption">挑戰 5：電話簿管理 <span class="icon">🛈</span></h3>
 				<p>設計一個程式，允許使用者新增聯絡人（姓名與電話），查詢聯絡人電話，並列出所有聯絡人。</p>
 				<pre class="line-numbers"><code class="language-python"># 範例輸入
@@ -262,7 +287,13 @@ add_contact("Alice", "12345678")
 get_contact("Alice")
 list_contacts()</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
+				<div class="challenge-item" id="challenge-6">
 				<h3 class="caption">挑戰 6：反轉鍵值 <span class="icon">🛈</span></h3>
 				<p>給定一個字典，將其鍵與值進行交換，並輸出結果。</p>
 				<pre class="line-numbers"><code class="language-python"># 範例輸入
@@ -275,7 +306,13 @@ original = {"a": 1, "b": 2, "c": 3}
 reversed_dict = {v: k for k, v in original.items()}
 print(reversed_dict)</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
+				<div class="challenge-item" id="challenge-7">
 				<h3 class="caption">挑戰 7：成績排名 <span class="icon">🛈</span></h3>
 				<p>給定一個包含學生名字與成績的字典，將學生按成績從高到低排序並輸出結果。</p>
 				<pre class="line-numbers"><code class="language-python"># 範例輸入
@@ -288,7 +325,13 @@ grades = {"Alice": 85, "Bob": 92, "Charlie": 88}
 sorted_grades = sorted(grades.items(), key=lambda x: x[1], reverse=True)
 print(sorted_grades)</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
+				<div class="challenge-item" id="challenge-8">
 				<h3 class="caption">挑戰 8：合併字典 <span class="icon">🛈</span></h3>
 				<p>給定兩個字典，將它們合併，若有重複的鍵則保留較大的值。</p>
 				<pre class="line-numbers"><code class="language-python"># 範例輸入
@@ -303,6 +346,11 @@ dict2 = {"b": 3, "c": 4}
 merged = {k: max(dict1.get(k, 0), dict2.get(k, 0)) for k in dict1.keys() | dict2.keys()}
 print(merged)</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 				
             </section>
 

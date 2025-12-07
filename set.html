@@ -131,6 +131,7 @@ print(unique_list)  # 輸出：[1, 2, 3, 4, 5]</code></pre>
 
             <section>
                 <h2>挑戰題目</h2>
+				<div class="challenge-item" id="challenge-1">
                 <h3 class="caption">挑戰 1：統計唯一字母數量 <span class="icon">🛈</span></h3>
     <p>讓使用者輸入一段文字，統計該文字中包含的唯一字母數量（忽略大小寫）。</p>
     <div class="answer">
@@ -139,8 +140,14 @@ text = input("請輸入一段文字: ").lower()
 unique_letters = set(char for char in text if char.isalpha())
 print("唯一字母數量:", len(unique_letters))</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
-    <h3 class="caption">挑戰 2：好友名單比對 <span class="icon">🛈</span></h3>
+    <div class="challenge-item" id="challenge-2">
+	<h3 class="caption">挑戰 2：好友名單比對 <span class="icon">🛈</span></h3>
     <p>設計一個程式，讓使用者輸入兩組好友名單，輸出共同好友、只屬於第一組的好友，以及只屬於第二組的好友。</p>
     <div class="answer">
         <pre class="line-numbers"><code class="language-python"># 解答
@@ -150,8 +157,14 @@ print("共同好友:", friends1 & friends2)
 print("只屬於第一組的好友:", friends1 - friends2)
 print("只屬於第二組的好友:", friends2 - friends1)</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
-    <h3 class="caption">挑戰 3：集合運算模擬 <span class="icon">🛈</span></h3>
+    <div class="challenge-item" id="challenge-3">
+	<h3 class="caption">挑戰 3：集合運算模擬 <span class="icon">🛈</span></h3>
     <p>模擬集合的聯集、交集與差集操作，並將結果以人性化的方式輸出。</p>
     <div class="answer">
         <pre class="line-numbers"><code class="language-python"># 解答
@@ -161,8 +174,14 @@ print("聯集:", set1 | set2)
 print("交集:", set1 & set2)
 print("差集（第一組 - 第二組）:", set1 - set2)</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
-    <h3 class="caption">挑戰 4：單字頻率統計 <span class="icon">🛈</span></h3>
+    <div class="challenge-item" id="challenge-4">
+	<h3 class="caption">挑戰 4：單字頻率統計 <span class="icon">🛈</span></h3>
     <p>設計一個程式，讓使用者輸入一段文字，統計每個單字出現的次數，並以降序顯示頻率最高的單字。</p>
     <div class="answer">
         <pre class="line-numbers"><code class="language-python"># 解答
@@ -190,8 +209,14 @@ for word, count in sorted_words:
 
 </code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
-    <h3 class="caption">挑戰 5：集合相等性檢查 <span class="icon">🛈</span></h3>
+    <div class="challenge-item" id="challenge-5">
+	<h3 class="caption">挑戰 5：集合相等性檢查 <span class="icon">🛈</span></h3>
     <p>讓使用者輸入兩組數字，檢查這兩組是否包含完全相同的元素，並輸出結果。</p>
     <div class="answer">
         <pre class="line-numbers"><code class="language-python"># 解答
@@ -199,8 +224,14 @@ set1 = set(input("請輸入第一組數字（以空格分隔）: ").split())
 set2 = set(input("請輸入第二組數字（以空格分隔）: ").split())
 print("集合相等:" if set1 == set2 else "集合不相等")</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
-    <h3 class="caption">挑戰 6：移除多餘元素 <span class="icon">🛈</span></h3>
+    <div class="challenge-item" id="challenge-6">
+	<h3 class="caption">挑戰 6：移除多餘元素 <span class="icon">🛈</span></h3>
     <p>設計一個程式，讓使用者輸入一組數字，移除其中的重複元素，並以升序輸出結果。</p>
     <div class="answer">
         <pre class="line-numbers"><code class="language-python"># 解答
@@ -208,8 +239,14 @@ numbers = list(map(int, input("請輸入一組數字（以空格分隔）: ").sp
 unique_numbers = sorted(set(numbers))
 print("移除重複後的數字:", unique_numbers)</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
-    <h3 class="caption">挑戰 7：英文字母缺失檢查 <span class="icon">🛈</span></h3>
+    <div class="challenge-item" id="challenge-7">
+	<h3 class="caption">挑戰 7：英文字母缺失檢查 <span class="icon">🛈</span></h3>
     <p>讓使用者輸入一段文字，檢查該文字是否包含所有 26 個英文字母，並輸出缺失的字母。</p>
     <div class="answer">
         <pre class="line-numbers"><code class="language-python"># 解答
@@ -225,8 +262,14 @@ missing_letters = {letter for letter in alphabet if letter not in text}
 print("缺失的字母:", missing_letters if missing_letters else "無缺失")
 </code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
-    <h3 class="caption">挑戰 8：電影收藏分析 <span class="icon">🛈</span></h3>
+    <div class="challenge-item" id="challenge-8">
+	<h3 class="caption">挑戰 8：電影收藏分析 <span class="icon">🛈</span></h3>
     <p>設計一個程式，讓使用者輸入兩組電影收藏，輸出這兩組電影的共同收藏、僅屬於第一組的收藏，及僅屬於第二組的收藏。</p>
     <div class="answer">
         <pre class="line-numbers"><code class="language-python"># 解答
@@ -236,6 +279,11 @@ print("共同收藏:", movies1 & movies2)
 print("僅屬於第一組的收藏:", movies1 - movies2)
 print("僅屬於第二組的收藏:", movies2 - movies1)</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 				
             </section>
 
