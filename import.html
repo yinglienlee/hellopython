@@ -135,7 +135,7 @@ print(m.sqrt(16))  # 輸出：4.0</code></pre>
 
             <section>
                 <h2>挑戰題目</h2>
-				
+<div class="challenge-item" id="challenge-1">				
 <h3 class="caption">挑戰 1：計算圓的面積 <span class="icon">🛈</span></h3>
 <p>撰寫一個程式，匯入 <code>math</code> 模組，要求使用者輸入半徑，並計算圓的面積。</p>
 <pre class="line-numbers"><code class="language-python"># 範例輸入
@@ -153,7 +153,13 @@ radius = float(input("請輸入圓的半徑："))
 area = math.pi * (radius ** 2)
 print(f"圓的面積為：{area:.2f}")</code></pre>
 </div>
+<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
+<div class="challenge-item" id="challenge-2">
 <h3 class="caption">挑戰 2：下載網頁內容 <span class="icon">🛈</span></h3>
 <p>使用 <code>requests</code> 模組，建立一個程式，下載並顯示特定網址的內容。</p>
 <pre class="line-numbers"><code class="language-python"># 範例輸入
@@ -177,7 +183,13 @@ response = requests.get(url)
 print("網站內容：")
 print(response.text)</code></pre>
 </div>
+<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
+<div class="challenge-item" id="challenge-3">
 <h3 class="caption">挑戰 3：建立與匯入自訂模組 <span class="icon">🛈</span></h3>
 <p>建立一個包含函式的自訂模組，該函式接收數字串列並回傳其平均值，然後在主程式中匯入並使用此模組。</p>
 <pre class="line-numbers"><code class="language-python"># 範例輸入
@@ -205,7 +217,14 @@ numbers = [float(num) for num in input("請輸入數字串列（以逗號分隔�
 # 計算並輸出平均值
 print(f"平均值：{calculate_average(numbers):.2f}")</code></pre>
 </div>
+<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
+
+<div class="challenge-item" id="challenge-4">
 <h3 class="caption">挑戰 4：匯入 <code>datetime</code> 模組 <span class="icon">🛈</span></h3>
 <p>設計一個程式，匯入 <code>datetime</code> 模組，並輸出當前的日期與時間。</p>
 <pre class="line-numbers"><code class="language-python"># 範例輸入
@@ -224,7 +243,13 @@ current_datetime = datetime.now()
 # 輸出結果
 print(f"當前日期與時間：{current_datetime.strftime('%Y-%m-%d %H:%M:%S')}")</code></pre>
 </div>
+<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
+<div class="challenge-item" id="challenge-5">
 <h3 class="caption">挑戰 5：匯入與重命名模組 <span class="icon">🛈</span></h3>
 <p>匯入 <code>math</code> 模組並使用別名，例如 <code>m</code>，計算兩個數字的平方根之和。</p>
 <pre class="line-numbers"><code class="language-python"># 範例輸入
@@ -243,7 +268,14 @@ result = m.sqrt(num1) + m.sqrt(num2)
 # 輸出結果
 print(f"平方根之和為：{result}")</code></pre>
 </div>
+<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
+
+<div class="challenge-item" id="challenge-6">
 <h3 class="caption">挑戰 6：檢查外部模組版本 <span class="icon">🛈</span></h3>
 <p>撰寫程式，使用 <code>requests</code> 模組並顯示其版本。</p>
 <pre class="line-numbers"><code class="language-python"># 預期輸出
@@ -256,7 +288,13 @@ import requests
 # 獲取並顯示版本
 print(f"requests 模組版本：{requests.__version__}")</code></pre>
 </div>
+<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
+<div class="challenge-item" id="challenge-7">
 <h3 class="caption">挑戰 7：使用 <code>os</code> 模組操作檔案 <span class="icon">🛈</span></h3>
 <p>設計一個程式，匯入 <code>os</code> 模組，並列出當前目錄中的所有檔案與資料夾。</p>
 <pre class="line-numbers"><code class="language-python"># 預期輸出
@@ -271,7 +309,13 @@ contents = os.listdir(".")
 # 輸出結果
 print(f"當前目錄內容：{contents}")</code></pre>
 </div>
+<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
+<div class="challenge-item" id="challenge-8">
 <h3 class="caption">挑戰 8：建立與匯入多層模組 <span class="icon">🛈</span></h3>
 <p>建立多層目錄結構，匯入模組並使用其中的函式。例如，建立 <code>utils/math_utils.py</code>，實現一個加法函式。</p>
 <pre class="line-numbers"><code class="language-python"># 範例輸入
@@ -298,6 +342,12 @@ from utils.math_utils import add
 result = add(3, 4)
 print(f"加法結果：{result}")</code></pre>
 </div>
+<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
+
 				
             </section>
 

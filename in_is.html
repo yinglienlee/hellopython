@@ -96,6 +96,7 @@ print("Alice" in data.values())  # 輸出 True</code></pre>
 
             <section>
                 <h2>挑戰題目</h2>
+				<div class="challenge-item" id="challenge-1">
 				<h3 class="caption">挑戰 1：檢查物件身分 <span class="icon">🛈</span></h3>
     <p>撰寫程式，建立兩個串列並檢查它們是否為同一物件。</p>
     <pre class="line-numbers"><code class="language-python"># 範例輸入
@@ -109,8 +110,14 @@ list1 = [1, 2, 3]
 list2 = [1, 2, 3]
 print(f"list1 is list2：{list1 is list2}")</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
-    <h3 class="caption">挑戰 2：檢查成員 <span class="icon">🛈</span></h3>
+    <div class="challenge-item" id="challenge-2">
+	<h3 class="caption">挑戰 2：檢查成員 <span class="icon">🛈</span></h3>
     <p>撰寫程式，檢查一個字串是否包含某些特定單詞。</p>
     <pre class="line-numbers"><code class="language-python"># 範例輸入
 text = "The quick brown fox"
@@ -123,8 +130,14 @@ text = "The quick brown fox"
 word = "quick"
 print(f'"{word}" 是否存在：{word in text}')</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
-    <h3 class="caption">挑戰 3：條件篩選 <span class="icon">🛈</span></h3>
+    <div class="challenge-item" id="challenge-3">
+	<h3 class="caption">挑戰 3：條件篩選 <span class="icon">🛈</span></h3>
     <p>設計程式，從一個串列中篩選出所有偶數，並檢查特定值是否在結果中。</p>
     <pre class="line-numbers"><code class="language-python"># 範例輸入
 numbers = [1, 2, 3, 4, 5, 6]
@@ -140,8 +153,14 @@ evens = [num for num in numbers if num % 2 == 0]
 print(f"篩選後的偶數：{evens}")
 print(f"{value} 是否存在：{value in evens}")</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
-    <h3 class="caption">挑戰 4：檢查字典中的鍵與值 <span class="icon">🛈</span></h3>
+    <div class="challenge-item" id="challenge-4">
+	<h3 class="caption">挑戰 4：檢查字典中的鍵與值 <span class="icon">🛈</span></h3>
     <p>設計一個程式，檢查一個字典中是否存在特定的鍵與值。</p>
     <pre class="line-numbers"><code class="language-python"># 範例輸入
 data = {"name": "Alice", "age": 30}
@@ -154,8 +173,14 @@ data = {"name": "Alice", "age": 30}
 print(f'"name" 是否為鍵：{"name" in data}')
 print(f'"Alice" 是否為值：{"Alice" in data.values()}')</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
-    <h3 class="caption">挑戰 5：比較物件身分與內容 <span class="icon">🛈</span></h3>
+    <div class="challenge-item" id="challenge-5">
+	<h3 class="caption">挑戰 5：比較物件身分與內容 <span class="icon">🛈</span></h3>
     <p>建立兩個內容相同但記憶體位置不同的串列，使用 <code>is</code> 和 <code>==</code> 比較它們，並解釋結果。</p>
     <pre class="line-numbers"><code class="language-python"># 範例輸入
 a = [1, 2, 3]
@@ -170,8 +195,14 @@ b = [1, 2, 3]
 print(f"a == b：{a == b}")
 print(f"a is b：{a is b}")</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
-    <h3 class="caption">挑戰 6：判斷成員的多層結構 <span class="icon">🛈</span></h3>
+    <div class="challenge-item" id="challenge-6">
+	<h3 class="caption">挑戰 6：判斷成員的多層結構 <span class="icon">🛈</span></h3>
     <p>給定一個巢狀串列，檢查某個值是否存在於其中的任何一層。</p>
     <pre class="line-numbers"><code class="language-python"># 範例輸入
 nested_list = [1, [2, [3, 4]], 5]
@@ -192,8 +223,14 @@ nested_list = [1, [2, [3, 4]], 5]
 value = 3
 print(f"{value} 是否存在：{contains_value(nested_list, value)}")</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
-    <h3 class="caption">挑戰 7：清單移除重複並檢查成員 <span class="icon">🛈</span></h3>
+    <div class="challenge-item" id="challenge-7">
+	<h3 class="caption">挑戰 7：清單移除重複並檢查成員 <span class="icon">🛈</span></h3>
     <p>給定一個包含重複元素的串列，移除重複後檢查某個值是否仍然存在。</p>
     <pre class="line-numbers"><code class="language-python"># 範例輸入
 data = [1, 2, 2, 3, 4, 4, 5]
@@ -208,7 +245,13 @@ value = 5
 print(f"清單移除重複後：{unique_data}")
 print(f"{value} 是否存在：{value in unique_data}")</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
+	<div class="challenge-item" id="challenge-8">
     <h3 class="caption">挑戰 8：檢查字串中的模式 <span class="icon">🛈</span></h3>
     <p>撰寫一個程式，檢查字串中是否包含某個子字串（區分大小寫與否）。</p>
     <pre class="line-numbers"><code class="language-python"># 範例輸入
@@ -224,6 +267,11 @@ substring2 = "python"
 print(f'"{substring1}" 是否存在：{substring1 in text}')
 print(f'"{substring2}" 是否存在：{substring2 in text}')</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 				
             </section>
 

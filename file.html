@@ -164,6 +164,7 @@ else:
 
             <section>
                 <h2>挑戰題目</h2>
+				<div class="challenge-item" id="challenge-1">
 				<h3 class="caption">挑戰 1：檔案複製 <span class="icon">🛈</span></h3>
     <p>撰寫程式，將一個檔案的內容複製到另一個檔案。</p>
     <div class="answer">
@@ -179,8 +180,14 @@ with open(destination_file, "w") as dest:
 
 print(f"檔案 {source_file} 已複製到 {destination_file}。")</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
-    <h3 class="caption">挑戰 2：日誌系統 <span class="icon">🛈</span></h3>
+    <div class="challenge-item" id="challenge-2">
+	<h3 class="caption">挑戰 2：日誌系統 <span class="icon">🛈</span></h3>
     <p>設計一個簡易的日誌系統，將使用者的輸入記錄到檔案中。</p>
     <div class="answer">
         <pre class="line-numbers"><code class="language-python"># 解答
@@ -195,8 +202,14 @@ while True:
 
 print("日誌記錄已完成。")</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
-    <h3 class="caption">挑戰 3：檔案統計 <span class="icon">🛈</span></h3>
+    <div class="challenge-item" id="challenge-3">
+	<h3 class="caption">挑戰 3：檔案統計 <span class="icon">🛈</span></h3>
     <p>撰寫程式，統計一個文字檔案中的行數、單字數和字元數。</p>
     <div class="answer">
         <pre class="line-numbers"><code class="language-python"># 解答
@@ -211,8 +224,14 @@ char_count = sum(len(line) for line in lines)
 
 print(f"行數：{line_count}, 單字數：{word_count}, 字元數：{char_count}")</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
-    <h3 class="caption">挑戰 4：搜尋檔案中的關鍵字 <span class="icon">🛈</span></h3>
+    <div class="challenge-item" id="challenge-4">
+	<h3 class="caption">挑戰 4：搜尋檔案中的關鍵字 <span class="icon">🛈</span></h3>
     <p>撰寫程式，讓使用者輸入關鍵字，並搜尋檔案中是否包含該關鍵字，輸出該關鍵字所在的行數。</p>
     <pre class="line-numbers"><code class="language-python"># 範例輸入
 # example.txt 檔案內容：
@@ -233,8 +252,14 @@ with open(file_name, "r") as file:
         if keyword in line:
             print(f"關鍵字 \"{keyword}\" 出現在第 {line_number} 行。")</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
-    <h3 class="caption">挑戰 5：合併多個檔案 <span class="icon">🛈</span></h3>
+    <div class="challenge-item" id="challenge-5">
+	<h3 class="caption">挑戰 5：合併多個檔案 <span class="icon">🛈</span></h3>
     <p>設計一個程式，將多個文字檔案的內容合併為一個新檔案。</p>
     <pre class="line-numbers"><code class="language-python"># 範例輸入
 # file1.txt 和 file2.txt 的內容分別為：
@@ -256,8 +281,14 @@ with open(output_file, "w") as outfile:
 
 print(f"檔案已合併為 {output_file}。")</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
-    <h3 class="caption">挑戰 6：檢查檔案大小 <span class="icon">🛈</span></h3>
+    <div class="challenge-item" id="challenge-6">
+	<h3 class="caption">挑戰 6：檢查檔案大小 <span class="icon">🛈</span></h3>
     <p>撰寫程式，檢查指定檔案的大小，並輸出檔案大小（以 KB 為單位）。</p>
     <pre class="line-numbers"><code class="language-python"># 範例輸入
 file_name = "example.txt"
@@ -271,7 +302,13 @@ file_name = "example.txt"
 file_size = os.path.getsize(file_name) / 1024  # KB
 print(f"檔案大小：{file_size:.2f} KB")</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
+	<div class="challenge-item" id="challenge-7">
     <h3 class="caption">挑戰 7：移除檔案中的空行 <span class="icon">🛈</span></h3>
     <p>設計一個程式，讀取文字檔案，移除所有的空行，並將結果存入新檔案。</p>
     <pre class="line-numbers"><code class="language-python"># 範例輸入
@@ -295,7 +332,13 @@ with open(input_file, "r") as infile, open(output_file, "w") as outfile:
 
 print(f"空行已移除，結果存入 {output_file}。")</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 	
+	<div class="challenge-item" id="challenge-8">
 	<h3 class="caption">挑戰 8：檔案加密與解密 <span class="icon">🛈</span></h3>
 <p>撰寫一個簡單的程式，將檔案中的內容進行加密（如每個字母移位 3 個位置），並能將加密內容解密回原文。</p>
 <pre class="line-numbers"><code class="language-python"># 範例輸入
@@ -339,6 +382,11 @@ decrypted_content = decrypt(encrypted_content, 3)
 print("加密後內容：", encrypted_content)
 print("解密後內容：", decrypted_content)</code></pre>
 </div>
+<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 					
 				
             </section>

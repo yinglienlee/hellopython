@@ -275,7 +275,8 @@ my_dog.speak()  # 輸出：狗說：汪汪！</code></pre>
 
             <section>
     <h2>挑戰題目</h2>
-    <h3 class="caption">挑戰 1：建立動物類別 <span class="icon">🛈</span></h3>
+    <div class="challenge-item" id="challenge-1">
+	<h3 class="caption">挑戰 1：建立動物類別 <span class="icon">🛈</span></h3>
     <p>建立一個動物類別，並從中繼承建立貓與狗的類別，實作不同的聲音方法。</p>
     <div class="answer">
         <pre class="line-numbers"><code class="language-python"># 解答
@@ -300,8 +301,14 @@ cat.speak()  # 輸出：Kitty 說：喵喵！
 dog.speak()  # 輸出：Buddy 說：汪汪！
 </code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
-    <h3 class="caption">挑戰 2：擴展父類別 <span class="icon">🛈</span></h3>
+    <div class="challenge-item" id="challenge-2">
+	<h3 class="caption">挑戰 2：擴展父類別 <span class="icon">🛈</span></h3>
     <p>設計一個人類類別，包含名字與年齡的屬性，並從中繼承建立學生類別，增加班級與成績的屬性。</p>
     <div class="answer">
         <pre class="line-numbers"><code class="language-python"># 解答
@@ -323,8 +330,14 @@ student = Student("Alice", 16, 90, "高一")
 student.introduce()  # 輸出：我是 Alice，今年 16 歲，就讀 高一，成績是 90 分。
 </code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
-    <h3 class="caption">挑戰 3：使用 super() <span class="icon">🛈</span></h3>
+    <div class="challenge-item" id="challenge-3">
+	<h3 class="caption">挑戰 3：使用 super() <span class="icon">🛈</span></h3>
     <p>撰寫一個程式，使用 <code>super()</code> 初始化父類別的屬性，並在子類別中擴展其功能。</p>
     <div class="answer">
         <pre class="line-numbers"><code class="language-python"># 解答
@@ -344,8 +357,14 @@ car = Car("Toyota", "紅色")
 car.describe()  # 輸出：這是一輛 紅色 的 Toyota 汽車。
 </code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
-    <h3 class="caption">挑戰 4：利用 __del__ 清理資源 <span class="icon">🛈</span></h3>
+    <div class="challenge-item" id="challenge-4">
+	<h3 class="caption">挑戰 4：利用 __del__ 清理資源 <span class="icon">🛈</span></h3>
     <p>設計一個類別，當物件刪除時，顯示一段自訂訊息，模擬資源清理。</p>
     <div class="answer">
         <pre class="line-numbers"><code class="language-python"># 解答
@@ -361,8 +380,14 @@ resource = Resource("測試資源")
 del resource  # 輸出：資源 測試資源 即將清理。
 </code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
-    <h3 class="caption">挑戰 5：建立一個類別的屬性與方法 <span class="icon">🛈</span></h3>
+    <div class="challenge-item" id="challenge-5">
+	<h3 class="caption">挑戰 5：建立一個類別的屬性與方法 <span class="icon">🛈</span></h3>
     <p>設計一個包含多個屬性的類別，例如「書籍」類別，包含標題、作者和價格，並提供一個方法來計算打折後的價格。</p>
     <div class="answer">
         <pre class="line-numbers"><code class="language-python"># 解答
@@ -379,8 +404,14 @@ book = Book("Python Guide", "John Doe", 500)
 print(f"原價：{book.price} 元，打 8 折後價格：{book.discounted_price(0.2)} 元。")
 </code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
-    <h3 class="caption">挑戰 6：子類別的擴展 <span class="icon">🛈</span></h3>
+    <div class="challenge-item" id="challenge-6">
+	<h3 class="caption">挑戰 6：子類別的擴展 <span class="icon">🛈</span></h3>
     <p>建立一個基本的「交通工具」類別，然後從中繼承建立「汽車」和「自行車」類別，並為每個子類別添加獨特的方法。</p>
     <div class="answer">
         <pre class="line-numbers"><code class="language-python"># 解答
@@ -402,8 +433,14 @@ car.start_engine()  # 輸出：Toyota 的引擎已啟動。
 bike.ring_bell()  # 輸出：Giant 的鈴鐺響起了！
 </code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
-    <h3 class="caption">挑戰 7：實現覆寫行為 <span class="icon">🛈</span></h3>
+    <div class="challenge-item" id="challenge-7">
+	<h3 class="caption">挑戰 7：實現覆寫行為 <span class="icon">🛈</span></h3>
     <p>設計一個「動物」類別及其子類別「鳥」和「魚」，覆寫「移動方式」方法來分別展示飛行和游泳的行為。</p>
     <div class="answer">
         <pre class="line-numbers"><code class="language-python"># 解答
@@ -425,8 +462,14 @@ bird.move()  # 輸出：我在飛行！
 fish.move()  # 輸出：我在游泳！
 </code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
-    <h3 class="caption">挑戰 8：使用多重繼承 <span class="icon">🛈</span></h3>
+    <div class="challenge-item" id="challenge-8">
+	<h3 class="caption">挑戰 8：使用多重繼承 <span class="icon">🛈</span></h3>
     <p>設計兩個類別「可飛行的」和「可游泳的」，然後建立一個同時具有這兩個能力的「鴨子」類別。</p>
     <div class="answer">
         <pre class="line-numbers"><code class="language-python"># 解答
@@ -446,6 +489,12 @@ duck.fly()  # 輸出：我會飛！
 duck.swim()  # 輸出：我會游泳！
 </code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
+	
 </section>
 
 			<section>

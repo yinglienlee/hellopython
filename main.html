@@ -125,6 +125,7 @@ if __name__ == "__main__":
 
             <section>
                 <h2>挑戰題目</h2>
+				<div class="challenge-item" id="challenge-1">
                 <h3 class="caption">挑戰 1：模組設計 <span class="icon">🛈</span></h3>
     <p>建立一個模組，其中包含一個函式與主要程式邏輯，並嘗試將它匯入到另一個檔案中。</p>
     <div class="answer">
@@ -140,8 +141,14 @@ if __name__ == "__main__":
 import module1
 print(module1.greet("Bob"))</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
-    <h3 class="caption">挑戰 2：檢查執行模式 <span class="icon">🛈</span></h3>
+    <div class="challenge-item" id="challenge-2">
+	<h3 class="caption">挑戰 2：檢查執行模式 <span class="icon">🛈</span></h3>
     <p>撰寫一個程式，輸出該程式是直接執行還是被匯入。</p>
     <div class="answer">
         <pre class="line-numbers"><code class="language-python"># 解答
@@ -151,8 +158,14 @@ if __name__ == "__main__":
 else:
     print("程式是被匯入")</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
-    <h3 class="caption">挑戰 3：多檔案互動 <span class="icon">🛈</span></h3>
+    <div class="challenge-item" id="challenge-3">
+	<h3 class="caption">挑戰 3：多檔案互動 <span class="icon">🛈</span></h3>
     <p>設計兩個檔案，檔案 A 匯入檔案 B，並檢查 <code>if __name__ == "__main__"</code> 的作用。</p>
     <div class="answer">
         <pre class="line-numbers"><code class="language-python"># 解答
@@ -167,8 +180,14 @@ if __name__ == "__main__":
 else:
     print("file_b.py 被匯入")</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
-    <h3 class="caption">挑戰 4：模組重用 <span class="icon">🛈</span></h3>
+    <div class="challenge-item" id="challenge-4">
+	<h3 class="caption">挑戰 4：模組重用 <span class="icon">🛈</span></h3>
     <p>建立一個模組，該模組包含一個函式計算兩數的乘積，並使用 <code>if __name__ == "__main__"</code> 區塊進行測試。嘗試將此模組匯入至另一個程式中使用其函式。</p>
     <div class="answer">
         <pre class="line-numbers"><code class="language-python"># 解答
@@ -183,8 +202,14 @@ if __name__ == "__main__":
 from multiply_module import multiply
 print(multiply(4, 5))</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
-    <h3 class="caption">挑戰 5：建立模組目錄 <span class="icon">🛈</span></h3>
+    <div class="challenge-item" id="challenge-5">
+	<h3 class="caption">挑戰 5：建立模組目錄 <span class="icon">🛈</span></h3>
     <p>設計一個包含多個模組的專案結構，例如 <code>utils</code> 目錄，並匯入該目錄下的模組來執行相關功能。</p>
     <div class="answer">
         <pre class="line-numbers"><code class="language-python"># 解答
@@ -203,8 +228,14 @@ from utils.string_utils import reverse
 print(add(3, 5))
 print(reverse("Python"))</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
-    <h3 class="caption">挑戰 6：測試模組功能 <span class="icon">🛈</span></h3>
+    <div class="challenge-item" id="challenge-6">
+	<h3 class="caption">挑戰 6：測試模組功能 <span class="icon">🛈</span></h3>
     <p>撰寫一個模組，內含多個函式，並在 <code>if __name__ == "__main__"</code> 區塊中測試所有函式。</p>
     <div class="answer">
         <pre class="line-numbers"><code class="language-python"># 解答
@@ -219,8 +250,14 @@ if __name__ == "__main__":
     print(add(10, 5))
     print(subtract(10, 5))</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
-    <h3 class="caption">挑戰 7：防止無意執行 <span class="icon">🛈</span></h3>
+    <div class="challenge-item" id="challenge-7">
+	<h3 class="caption">挑戰 7：防止無意執行 <span class="icon">🛈</span></h3>
     <p>建立一個模組，包含敏感操作（如刪除檔案），確保只有在主程式執行時才能執行該操作。</p>
     <div class="answer">
         <pre class="line-numbers"><code class="language-python"># 解答
@@ -234,8 +271,14 @@ if __name__ == "__main__":
     print("請確認是否要執行敏感操作")
     # delete_file("important.txt")</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 
-    <h3 class="caption">挑戰 8：檢查模組執行順序 <span class="icon">🛈</span></h3>
+    <div class="challenge-item" id="challenge-8">
+	<h3 class="caption">挑戰 8：檢查模組執行順序 <span class="icon">🛈</span></h3>
     <p>設計三個檔案，分別匯入彼此並使用 <code>print</code> 確認程式執行的順序。</p>
     <div class="answer">
         <pre class="line-numbers"><code class="language-python"># 解答
@@ -250,6 +293,11 @@ import c
 # c.py
 print("執行 c.py")</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+						💬 需要引導？找學習助手
+					</button>
+				</div>
 				
 				
             </section>
