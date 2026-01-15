@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>例外處理</title>
+    <title docid="1300">例外處理</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="css/chatbot.css">	
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
 	<script type="text/javascript" src="js/script.js"></script>	
-	<!-- MSAL.js Library -->
-	<script src="https://alcdn.msauth.net/browser/2.38.1/js/msal-browser.min.js"></script>
 	<!-- Prism.js CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css">
     <!-- Prism.js Line Numbers CSS -->
@@ -192,7 +193,7 @@ except ZeroDivisionError:
     </div>
 	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
 					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-						💬 需要引導？找學習助手
+						💬
 					</button>
 				</div>
 
@@ -231,7 +232,7 @@ except Exception:
     </div>
 	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
 					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-						💬 需要引導？找學習助手
+						💬
 					</button>
 				</div>
               
@@ -256,7 +257,7 @@ except ValueError:
     </div>
 	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
 					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-						💬 需要引導？找學習助手
+						💬
 					</button>
 				</div>
 				
@@ -293,7 +294,7 @@ except ZeroDivisionError as e:
     </div>
 	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
 					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-						💬 需要引導？找學習助手
+						💬
 					</button>
 				</div>
 
@@ -336,7 +337,7 @@ except ZeroDivisionError as e:
     </div>
 	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
 					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-						💬 需要引導？找學習助手
+						💬
 					</button>
 				</div>
 
@@ -363,7 +364,7 @@ except PasswordTooShortError as e:
     </div>
 	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
 					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-						💬 需要引導？找學習助手
+						💬
 					</button>
 				</div>
 
@@ -397,7 +398,7 @@ except ValueError:
     </div>
 	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
 					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-						💬 需要引導？找學習助手
+						💬
 					</button>
 				</div>
 
@@ -426,7 +427,7 @@ except ValueError as e:
     </div>			
 <!-- 聊天機器人按鈕 - 使用 data 屬性 -->
 					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-						💬 需要引導？找學習助手
+						💬
 					</button>
 				</div>	
 				

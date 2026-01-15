@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>切片</title>
+    <title docid="2400">切片</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="css/chatbot.css">	
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
 	<script type="text/javascript" src="js/script.js"></script>	
-	<!-- MSAL.js Library -->
-	<script src="https://alcdn.msauth.net/browser/2.38.1/js/msal-browser.min.js"></script>
 	<!-- Prism.js CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css">
     <!-- Prism.js Line Numbers CSS -->
@@ -106,7 +107,8 @@ print(id(numbers), id(alias_numbers), id(copy_numbers))</code></pre>
             </section>
 
             <section>
-                <h2>挑戰題目</h2>
+                <div class="challenge-item" id="challenge-1">
+				<h2>挑戰題目</h2>
 				<h3 class="caption">挑戰 1：字串切片 <span class="icon">🛈</span></h3>
     <p>讓使用者輸入一段文字，擷取該文字的前 5 個字元與最後 5 個字元。</p>
     <pre class="line-numbers"><code class="language-python"># 範例輸入
@@ -120,7 +122,13 @@ text = "Hello, Python World!"
 print(f"前 5 個字元：{text[:5]}")
 print(f"最後 5 個字元：{text[-5:]}")</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+                    💬
+					</button>
+				</div>
 
+	<div class="challenge-item" id="challenge-2">
     <h3 class="caption">挑戰 2：串列的奇偶數分離 <span class="icon">🛈</span></h3>
     <p>設計一個程式，將一個包含整數的串列分離為奇數與偶數兩個串列。</p>
     <pre class="line-numbers"><code class="language-python"># 範例輸入
@@ -136,7 +144,13 @@ evens = [n for n in numbers if n % 2 == 0]
 print(f"奇數：{odds}")
 print(f"偶數：{evens}")</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+                    💬
+					</button>
+				</div>
 
+	<div class="challenge-item" id="challenge-3">
     <h3 class="caption">挑戰 3：步進值應用 <span class="icon">🛈</span></h3>
     <p>建立一個程式，讓使用者輸入一個字串，並以步進值 2 輸出該字串的每隔一個字元。</p>
     <pre class="line-numbers"><code class="language-python"># 範例輸入
@@ -149,7 +163,13 @@ text = "Python Programming"
 result = text[::2]
 print(result)  # 輸出：Pto rgamn</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+                    💬
+					</button>
+				</div>
 
+	<div class="challenge-item" id="challenge-4">
     <h3 class="caption">挑戰 4：反轉串列 <span class="icon">🛈</span></h3>
     <p>設計一個程式，使用切片將一個串列的元素順序反轉，並輸出結果。</p>
     <pre class="line-numbers"><code class="language-python"># 範例輸入
@@ -162,7 +182,13 @@ numbers = [1, 2, 3, 4, 5]
 reversed_numbers = numbers[::-1]
 print(reversed_numbers)  # 輸出：[5, 4, 3, 2, 1]</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+                    💬
+					</button>
+				</div>
 
+	<div class="challenge-item" id="challenge-5">
     <h3 class="caption">挑戰 5：字串中每個單詞反轉 <span class="icon">🛈</span></h3>
     <p>撰寫一個程式，讓使用者輸入一段文字，並將每個單詞的字母順序反轉，但保持單詞的順序不變。</p>
     <pre class="line-numbers"><code class="language-python"># 範例輸入
@@ -175,7 +201,13 @@ text = "Hello World Python"
 reversed_words = " ".join(word[::-1] for word in text.split())
 print(reversed_words)</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+                    💬
+					</button>
+				</div>
 
+	<div class="challenge-item" id="challenge-6">
     <h3 class="caption">挑戰 6：切分字串為固定長度 <span class="icon">🛈</span></h3>
     <p>設計一個函式，將一段文字切分為每段固定長度的子字串，並將結果存入串列。</p>
     <pre class="line-numbers"><code class="language-python"># 範例輸入
@@ -192,7 +224,13 @@ text = "ABCDEFGHIJK"
 length = 3
 print(split_text(text, length))</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+                    💬
+					</button>
+				</div>
 
+	<div class="challenge-item" id="challenge-7">
     <h3 class="caption">挑戰 7：移除串列的邊界元素 <span class="icon">🛈</span></h3>
     <p>讓使用者輸入一個串列，移除串列的第一個與最後一個元素，並輸出剩餘的子串列。</p>
     <pre class="line-numbers"><code class="language-python"># 範例輸入
@@ -205,7 +243,13 @@ numbers = [10, 20, 30, 40, 50]
 trimmed_numbers = numbers[1:-1]
 print(trimmed_numbers)  # 輸出：[20, 30, 40]</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+                    💬
+					</button>
+				</div>
 
+	<div class="challenge-item" id="challenge-8">
     <h3 class="caption">挑戰 8：奇數索引提取 <span class="icon">🛈</span></h3>
     <p>撰寫程式，從一個串列中提取所有奇數索引的元素，並輸出結果。</p>
     <pre class="line-numbers"><code class="language-python"># 範例輸入
@@ -218,6 +262,11 @@ numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 odd_index_elements = numbers[1::2]
 print(odd_index_elements)  # 輸出：[1, 3, 5, 7, 9]</code></pre>
     </div>
+	<!-- 聊天機器人按鈕 -->
+					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
+                    💬
+					</button>
+				</div>
 				
 				
             </section>

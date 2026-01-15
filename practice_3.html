@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>問題導向練習題組 3</title>
+    <title docid="2900">問題導向練習題組 3</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="css/chatbot.css">	
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
 	<script type="text/javascript" src="js/script.js"></script>	
-	<!-- MSAL.js Library -->
-	<script src="https://alcdn.msauth.net/browser/2.38.1/js/msal-browser.min.js"></script>
 	<!-- Prism.js CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css">
     <!-- Prism.js Line Numbers CSS -->
@@ -49,7 +50,7 @@
 					
 			<section>
 <div class="challenge-item" id="challenge-1">
-<h3 class="caption">挑戰題 1：點餐小幫手 🥤 <span class="icon">🛈</span></h3>
+<h3 class="caption">挑戰 1：點餐小幫手 🥤 <span class="icon">🛈</span></h3>
 <p>你點了一杯「珍珠奶茶 大杯 微糖 去冰」，系統會用一段文字紀錄這筆訂單如下：</p>
 <pre>"珍珠奶茶, 大杯, 微糖, 去冰"</pre>
 <p>請你：</p>
@@ -65,13 +66,13 @@ print(f"您點的是：{size}{drink}（{sugar}／{ice}）")</code></pre>
 </div>
 <!-- 聊天機器人按鈕 - 使用 data 屬性 -->
 					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-						💬 需要引導？找學習助手
+						💬
 					</button>
 				</div>
 
 <hr/>
 <div class="challenge-item" id="challenge-2">
-<h3 class="caption">挑戰題 2：氣象小幫手 ☀️🌧️ <span class="icon">🛈</span></h3>
+<h3 class="caption">挑戰 2：氣象小幫手 ☀️🌧️ <span class="icon">🛈</span></h3>
 <p>你正在開發一個氣象小程式，用來協助使用者查看最近一週的高溫資料。</p>
 <pre>[30, 32, 31, 33, 34, 29, 28]</pre>
 <p>請你：</p>
@@ -100,13 +101,13 @@ print("隔日氣溫：", temperatures[::2])</code></pre>
 </div>
 <!-- 聊天機器人按鈕 - 使用 data 屬性 -->
 					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-						💬 需要引導？找學習助手
+						💬
 					</button>
 				</div>
 
 <hr/>
 <div class="challenge-item" id="challenge-3">
-<h3 class="caption">挑戰題 3：名字解碼器 ✂️ <span class="icon">🛈</span></h3>
+<h3 class="caption">挑戰 3：名字解碼器 ✂️ <span class="icon">🛈</span></h3>
 <p>你拿到一份輸入名單，都是大小寫混亂的名字，請你將其正確格式化為「名 姓」。</p>
 <pre>"mEssi, lIOnel"
 "swIFt, taYLoR"</pre>
@@ -129,13 +130,13 @@ for name in names:
 </div>
 <!-- 聊天機器人按鈕 - 使用 data 屬性 -->
 					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-						💬 需要引導？找學習助手
+						💬
 					</button>
 				</div>
 
 <hr/>
 <div class="challenge-item" id="challenge-4">
-<h3 class="caption">挑戰題 4：字串切片練習 🧵 <span class="icon">🛈</span></h3>
+<h3 class="caption">挑戰 4：字串切片練習 🧵 <span class="icon">🛈</span></h3>
 <p>給定一段字串，請使用切片操作取得特定部分。</p>
 <pre>"Python is powerful!"</pre>
 <p>請你：</p>
@@ -154,13 +155,13 @@ print(text[::2])</code></pre>
 </div>
 <!-- 聊天機器人按鈕 - 使用 data 屬性 -->
 					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-						💬 需要引導？找學習助手
+						💬
 					</button>
 				</div>
 
 <hr/>
 <div class="challenge-item" id="challenge-5">
-<h3 class="caption">挑戰題 5：神祕訊息解碼器 🕵️‍♂️ <span class="icon">🛈</span></h3>
+<h3 class="caption">挑戰 5：神祕訊息解碼器 🕵️‍♂️ <span class="icon">🛈</span></h3>
 <p>你收到一份檔案，每三個字元才有一個真正的訊息字元。請讀取檔案並還原訊息。</p>
 <pre>Txxhxxixxsxx xxixxsxx xxaxx xxsxxexxcxxrxxexxt
 Pxxyxxtxxhxxoxxnxx xxixxsxx xxfxxuxxnxx!</pre>
@@ -178,13 +179,13 @@ Python is fun!</pre>
 </div>
 <!-- 聊天機器人按鈕 - 使用 data 屬性 -->
 					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-						💬 需要引導？找學習助手
+						💬
 					</button>
 				</div>
 
 <hr/>
 <div class="challenge-item" id="challenge-6">
-<h3 class="caption">挑戰題 6：每日健身任務追蹤器 🏋️‍♀️ <span class="icon">🛈</span></h3>
+<h3 class="caption">挑戰 6：每日健身任務追蹤器 🏋️‍♀️ <span class="icon">🛈</span></h3>
 
 
 <p>你正在建立一個健身App，用來追蹤使用者今天完成哪些健身任務。</p>
@@ -231,14 +232,14 @@ else:
 </div>
 <!-- 聊天機器人按鈕 - 使用 data 屬性 -->
 					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-						💬 需要引導？找學習助手
+						💬
 					</button>
 				</div>
 
 
 <hr/>
 <div class="challenge-item" id="challenge-7">
-<h3 class="caption">挑戰題 7：怪名字清洗器 🧼 <span class="icon">🛈</span></h3>
+<h3 class="caption">挑戰 7：怪名字清洗器 🧼 <span class="icon">🛈</span></h3>
 
 
 <p>你接手一份包含奇怪名字的名單，例如：</p>
@@ -282,14 +283,14 @@ for name in names:
 </div>
 <!-- 聊天機器人按鈕 - 使用 data 屬性 -->
 					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-						💬 需要引導？找學習助手
+						💬
 					</button>
 				</div>
 				
 				
 <hr/>
 <div class="challenge-item" id="challenge-8">
-<h3 class="caption">挑戰題 8：帳號健檢系統 🛡️ <span class="icon">🛈</span></h3>
+<h3 class="caption">挑戰 8：帳號健檢系統 🛡️ <span class="icon">🛈</span></h3>
 
 <p>設計一個帳號健檢工具，幫助使用者確認帳號是否符合格式標準。</p>
 
@@ -332,13 +333,13 @@ for name in usernames:
 </div>
 <!-- 聊天機器人按鈕 - 使用 data 屬性 -->
 					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-						💬 需要引導？找學習助手
+						💬
 					</button>
 				</div>
 
 <hr/>
 <div class="challenge-item" id="challenge-9">
-<h3 class="caption">挑戰題 9：訂單分類器 🛍️ <span class="icon">🛈</span></h3>
+<h3 class="caption">挑戰 9：訂單分類器 🛍️ <span class="icon">🛈</span></h3>
 
 <p>你正在開發一個訂單分類系統。訂單由顧客輸入產品名稱，例如 <code>'tea'</code>、<code>'sandwich'</code>。</p>
 
@@ -377,13 +378,13 @@ print(result)</code></pre>
 </div>
 <!-- 聊天機器人按鈕 - 使用 data 屬性 -->
 					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-						💬 需要引導？找學習助手
+						💬
 					</button>
 				</div>
 
 <hr/>
 <div class="challenge-item" id="challenge-10">
-<h3 class="caption">挑戰題 10：排行榜產生器 🏆 <span class="icon">🛈</span></h3>
+<h3 class="caption">挑戰 10：排行榜產生器 🏆 <span class="icon">🛈</span></h3>
 
 <p>你有一份選手與得分的對照資料如下：</p>
 
@@ -438,14 +439,14 @@ for i, (name, score) in enumerate(sorted_scores[:3]):
 </div>
 <!-- 聊天機器人按鈕 - 使用 data 屬性 -->
 					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-						💬 需要引導？找學習助手
+						💬
 					</button>
 				</div>
 				
 
 <hr/>
 <div class="challenge-item" id="challenge-11">
-<h3 class="caption">挑戰題 11：錯誤紀錄過濾器 ❌ <span class="icon">🛈</span></h3>
+<h3 class="caption">挑戰 11：錯誤紀錄過濾器 ❌ <span class="icon">🛈</span></h3>
 <p>你需要過濾一份紀錄檔 log.txt 中的錯誤記錄，這些行包含關鍵字 'error'。</p>
 <pre>System started successfully
 Warning: Low memory
@@ -466,13 +467,13 @@ Critical error in system</pre>
 </div>
 <!-- 聊天機器人按鈕 - 使用 data 屬性 -->
 					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-						💬 需要引導？找學習助手
+						💬
 					</button>
 				</div>
 
 <hr/>
 <div class="challenge-item" id="challenge-12">
-<h3 class="caption">挑戰題 12：商品資訊讀取 🧾 <span class="icon">🛈</span></h3>
+<h3 class="caption">挑戰 12：商品資訊讀取 🧾 <span class="icon">🛈</span></h3>
 
 <p>你有一份檔案 <code>products.txt</code>，每行儲存一筆商品資訊，格式如下：</p>
 
@@ -504,14 +505,14 @@ grape 有 12 個，單價為 8 元
 </div>
 <!-- 聊天機器人按鈕 - 使用 data 屬性 -->
 					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-						💬 需要引導？找學習助手
+						💬
 					</button>
 				</div>
 
 				
 <hr/>
 <div class="challenge-item" id="challenge-13">
-<h3 class="caption">挑戰題 13：類別化顧客名單 🧑‍💼 <span class="icon">🛈</span></h3>
+<h3 class="caption">挑戰 13：類別化顧客名單 🧑‍💼 <span class="icon">🛈</span></h3>
 <p>將顧客資料存成類別，每筆資料包含姓名與會員等級，並印出格式化結果。</p>
 <pre>Alice,Gold
 Bob,Silver</pre>
@@ -535,13 +536,13 @@ for line in data:
 </div>
 <!-- 聊天機器人按鈕 - 使用 data 屬性 -->
 					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-						💬 需要引導？找學習助手
+						💬
 					</button>
 				</div>
 
 <hr/>
 <div class="challenge-item" id="challenge-14">
-<h3 class="caption">挑戰題 14：每日銷售報表生成器 📊 <span class="icon">🛈</span></h3>
+<h3 class="caption">挑戰 14：每日銷售報表生成器 📊 <span class="icon">🛈</span></h3>
 
 <p>你收到來自某日銷售系統的原始資料，格式如下：</p>
 
@@ -585,14 +586,14 @@ print(f"總銷售金額：{total} 元")</code></pre>
 </div>
 <!-- 聊天機器人按鈕 - 使用 data 屬性 -->
 					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-						💬 需要引導？找學習助手
+						💬
 					</button>
 				</div>
 
 
 <hr/>
 <div class="challenge-item" id="challenge-15">
-<h3 class="caption">挑戰題 15：登入追蹤與報告產生器 🔎 <span class="icon">🛈</span></h3>
+<h3 class="caption">挑戰 15：登入追蹤與報告產生器 🔎 <span class="icon">🛈</span></h3>
 
 <p>公司有一份全體員工名單與當日登入的員工串列如下：</p>
 
@@ -638,14 +639,14 @@ print(f"未登入人數：{len(all_users) - total_logged_in}")</code></pre>
 </div>
 <!-- 聊天機器人按鈕 - 使用 data 屬性 -->
 					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-						💬 需要引導？找學習助手
+						💬
 					</button>
 				</div>
 				
 
 <hr/>
 <div class="challenge-item" id="challenge-16">
-<h3 class="caption">挑戰題 16：密碼強度檢查器 🔐 <span class="icon">🛈</span></h3>
+<h3 class="caption">挑戰 16：密碼強度檢查器 🔐 <span class="icon">🛈</span></h3>
 
 <p>你正在設計一個模組 <code>password_tool.py</code>，它能幫助網站或 App 檢查使用者密碼是否符合強度要求。</p>
 
@@ -696,13 +697,13 @@ if __name__ == "__main__":
 </div>
 <!-- 聊天機器人按鈕 - 使用 data 屬性 -->
 					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-						💬 需要引導？找學習助手
+						💬
 					</button>
 				</div>
 
 <hr/>
 <div class="challenge-item" id="challenge-17">
-<h3 class="caption">挑戰題 17：動物的多重身分 🦁🎤 <span class="icon">🛈</span></h3>
+<h3 class="caption">挑戰 17：動物的多重身分 🦁🎤 <span class="icon">🛈</span></h3>
 <p>請定義兩個類別：</p>
 <ul>
   <li><code>Animal</code>：有屬性 <code>name</code>，方法 <code>who()</code> 印出「我是動物，名字叫 {name}」</li>
@@ -741,13 +742,13 @@ leo.sing()</code></pre>
 </div>
 <!-- 聊天機器人按鈕 - 使用 data 屬性 -->
 					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-						💬 需要引導？找學習助手
+						💬
 					</button>
 				</div>
 
 <hr/>
 <div class="challenge-item" id="challenge-18">
-<h3 class="caption">挑戰題 18：智慧交通工具 🚗📡 <span class="icon">🛈</span></h3>
+<h3 class="caption">挑戰 18：智慧交通工具 🚗📡 <span class="icon">🛈</span></h3>
 <p>請定義兩個類別：</p>
 <ul>
   <li><code>Vehicle</code>：有屬性 <code>brand</code>，方法 <code>drive()</code> 印出「這是一輛 {brand} 的交通工具」</li>
@@ -786,13 +787,13 @@ car.navigate()</code></pre>
 </div>
 <!-- 聊天機器人按鈕 - 使用 data 屬性 -->
 					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-						💬 需要引導？找學習助手
+						💬
 					</button>
 				</div>
 
 <hr/>
 <div class="challenge-item" id="challenge-19">
-<h3 class="caption">挑戰題 19：公司職員介紹 👩‍💼 <span class="icon">🛈</span></h3>
+<h3 class="caption">挑戰 19：公司職員介紹 👩‍💼 <span class="icon">🛈</span></h3>
 <p>請定義一個基礎類別 <code>Employee</code>，包含：</p>
 <ul>
   <li>屬性：<code>name</code>（姓名）、<code>salary</code>（薪資）</li>
@@ -827,13 +828,13 @@ m.get_info()</code></pre>
 </div>
 <!-- 聊天機器人按鈕 - 使用 data 屬性 -->
 					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-						💬 需要引導？找學習助手
+						💬
 					</button>
 				</div>
 
 <hr/>
 <div class="challenge-item" id="challenge-20">
-<h3 class="caption">挑戰題 20：圖形面積計算 📐 <span class="icon">🛈</span></h3>
+<h3 class="caption">挑戰 20：圖形面積計算 📐 <span class="icon">🛈</span></h3>
 <p>請定義一個基礎類別 <code>Shape</code>，其中：</p>
 <ul>
   <li>方法：<code>area()</code>，回傳 0</li>
@@ -875,7 +876,7 @@ print("圓形面積：", circle.area())</code></pre>
 </div>
 <!-- 聊天機器人按鈕 - 使用 data 屬性 -->
 					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-						💬 需要引導？找學習助手
+						💬
 					</button>
 				</div>
 

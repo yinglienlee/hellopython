@@ -12,7 +12,7 @@ function includeHTML(cb = null) {
         <li class="nav-item mb-2"><a href="if.html" class="nav-link link-primary">條件判斷</a></li>
         <li class="nav-item mb-2"><a href="loop.html" class="nav-link link-primary">迴圈</a></li>
         <li class="nav-item mb-2"><a href="def.html" class="nav-link link-primary">自訂函式</a></li>
-	<li class="nav-item mb-2"><a href="practice_1.html" class="nav-link link-primary">問題導向練習題組 1</a></li>
+		<li class="nav-item mb-2"><a href="practice_1.html" class="nav-link link-primary">問題導向練習題組 1</a></li>
         <li class="nav-item mb-2"><a href="scope.html" class="nav-link link-primary">區域變數與全域變數</a></li>
         <li class="nav-item mb-2"><a href="exception.html" class="nav-link link-primary">例外處理</a></li>
         <li class="nav-item mb-2"><a href="debug.html" class="nav-link link-primary">追蹤與偵錯</a></li>
@@ -20,7 +20,7 @@ function includeHTML(cb = null) {
         <li class="nav-item mb-2"><a href="tuple.html" class="nav-link link-primary">元組容器</a></li>
         <li class="nav-item mb-2"><a href="set.html" class="nav-link link-primary">集合容器</a></li>
         <li class="nav-item mb-2"><a href="dict.html" class="nav-link link-primary">字典容器</a></li>
-	<li class="nav-item mb-2"><a href="practice_2.html" class="nav-link link-primary">問題導向練習題組 2</a></li>
+		<li class="nav-item mb-2"><a href="practice_2.html" class="nav-link link-primary">問題導向練習題組 2</a></li>
         <li class="nav-item mb-2"><a href="ds_functions.html" class="nav-link link-primary">四大資料結構建構式</a></li>
         <li class="nav-item mb-2"><a href="packing.html" class="nav-link link-primary">指定、多重指定、打包與解包</a></li>
         <li class="nav-item mb-2"><a href="in_is.html" class="nav-link link-primary">身分與成員運算符號</a></li>
@@ -30,7 +30,7 @@ function includeHTML(cb = null) {
         <li class="nav-item mb-2"><a href="import.html" class="nav-link link-primary">匯入模組</a></li>
         <li class="nav-item mb-2"><a href="main.html" class="nav-link link-primary">了解 __name__</a></li>
         <li class="nav-item mb-2"><a href="oo.html" class="nav-link link-primary">類別與物件</a></li>
-	<li class="nav-item mb-2"><a href="practice_3.html" class="nav-link link-primary">問題導向練習題組 3</a></li>
+		<li class="nav-item mb-2"><a href="practice_3.html" class="nav-link link-primary">問題導向練習題組 3</a></li>
         <li class="nav-item mb-2"><a href="practice_stock_price.html" class="nav-link link-primary">綜合練習：抓取 TSMC 股票歷史價格</a></li>
         <li class="nav-item mb-2"><a href="practice_pygame_zero.html" class="nav-link link-primary">綜合練習：Pygame Zero 基礎教學</a></li>
         <li class="nav-item mb-2"><a href="practice_optical_illusions_pgzero.html" class="nav-link link-primary">綜合練習：Hering Illusion</a></li>

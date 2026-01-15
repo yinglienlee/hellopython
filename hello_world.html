@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hello, World!</title>
+    <title docid="100">Hello, World!</title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="css/chatbot.css">	
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
 	<script type="text/javascript" src="js/script.js"></script>	
-	<!-- MSAL.js Library -->
-	<script src="https://alcdn.msauth.net/browser/2.38.1/js/msal-browser.min.js"></script>
 	<!-- Prism.js CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css">
     <!-- Prism.js Line Numbers CSS -->
@@ -191,7 +192,7 @@ print("Welcome to Python programming!")</code></pre>
 					
 					<!-- 聊天機器人按鈕 -->
 					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-                    💬 需要引導？找學習助手
+                    💬
 					</button>
 				</div>
 
@@ -226,7 +227,7 @@ print("Second")  # 兩段會接在同一行</code></pre>
 					
 					<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
 					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-						💬 需要引導？找學習助手
+						💬
 					</button>
 				</div>
 
@@ -241,7 +242,7 @@ print(message)</code></pre>
 					
 					<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
 					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-						💬 需要引導？找學習助手
+						💬
 					</button>
 				</div>
 
@@ -276,7 +277,7 @@ print(multi_line_str)
 					
 					<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
 					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-						💬 需要引導？找學習助手
+						💬
 					</button>
 				</div>
         
@@ -293,7 +294,7 @@ print("Welcome to Python!")</code></pre>
 					
 					<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
 					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-						💬 需要引導？找學習助手
+						💬
 					</button>
 				</div>
 
@@ -310,7 +311,7 @@ print("This line is correctly indented.")</code></pre>
 					
 					<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
 					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-						💬 需要引導？找學習助手
+						💬
 					</button>
 				</div>
 
@@ -330,7 +331,7 @@ print("This is the second message.")</code></pre>
 					
 					<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
 					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-						💬 需要引導？找學習助手
+						💬
 					</button>
 				</div>
 				
@@ -354,7 +355,7 @@ print("計算結果:", result)</code></pre>
 					
 					<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
 					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-						💬 需要引導？找學習助手
+						💬
 					</button>
 				</div>
 

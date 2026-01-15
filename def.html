@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>自訂函式</title>
+    <title docid="1000">自訂函式</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="css/chatbot.css">	
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
 	<script type="text/javascript" src="js/script.js"></script>	
-	<!-- MSAL.js Library -->
-	<script src="https://alcdn.msauth.net/browser/2.38.1/js/msal-browser.min.js"></script>
 	<!-- Prism.js CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css">
     <!-- Prism.js Line Numbers CSS -->
@@ -187,7 +188,7 @@ print(celsius_to_fahrenheit(25))  # 輸出：77.0</code></pre>
     </div>
 	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
 					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-						💬 需要引導？找學習助手
+						💬
 					</button>
 				</div>
 
@@ -202,7 +203,7 @@ print(circle_area(5))  # 輸出：78.53975</code></pre>
     </div>
 	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
 					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-						💬 需要引導？找學習助手
+						💬
 					</button>
 				</div>
 
@@ -218,7 +219,7 @@ print(sorted_numbers)  # 輸出：[3, -1, 5, 7, -10]</code></pre>
     </div>
 	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
 					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-						💬 需要引導？找學習助手
+						💬
 					</button>
 				</div>
 
@@ -235,7 +236,7 @@ print(is_leap_year(2024))  # 輸出：True</code></pre>
     </div>
 	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
 					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-						💬 需要引導？找學習助手
+						💬
 					</button>
 				</div>
 
@@ -252,7 +253,7 @@ print(max_in_list([10, 20, 5, 30]))  # 輸出：30</code></pre>
     </div>
 	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
 					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-						💬 需要引導？找學習助手
+						💬
 					</button>
 				</div>
 
@@ -268,7 +269,7 @@ print(positive_numbers)  # 輸出：[10, 15, 30]</code></pre>
     </div>
 	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
 					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-						💬 需要引導？找學習助手
+						💬
 					</button>
 				</div>
 
@@ -285,7 +286,7 @@ print(total_area([(5, 10), (3, 4), (2, 6)]))  # 輸出：62</code></pre>
     </div>
 	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
 					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-						💬 需要引導？找學習助手
+						💬
 					</button>
 				</div>
 
@@ -301,7 +302,7 @@ print(fahrenheit_list)  # 輸出：[32.0, 68.0, 98.6, 212.0]</code></pre>
     </div>
 	<!-- 聊天機器人按鈕 - 使用 data 屬性 -->
 					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-						💬 需要引導？找學習助手
+						💬
 					</button>
 				</div>
 

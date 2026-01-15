@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>問題導向練習題組 2</title>
+    <title docid="1900">問題導向練習題組 2</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="css/chatbot.css">	
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
 	<script type="text/javascript" src="js/script.js"></script>	
-	<!-- MSAL.js Library -->
-	<script src="https://alcdn.msauth.net/browser/2.38.1/js/msal-browser.min.js"></script>
 	<!-- Prism.js CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css">
     <!-- Prism.js Line Numbers CSS -->
@@ -49,7 +50,7 @@
 					
 			<section>
 			<div class="challenge-item" id="challenge-1">
-<h3 class="caption">挑戰題 1：貓咪的挑食日記 <span class="icon">🛈</span></h3>
+<h3 class="caption">挑戰 1：貓咪的挑食日記 <span class="icon">🛈</span></h3>
 <p>小明家裡有一隻挑食的貓，每天準備五種食物給牠吃（編號1~5），貓咪喜歡吃編號為3的食物。</p>
 <p>使用迴圈隨機餵食（隨機選擇編號1~5），並記錄餵食幾次貓咪才願意吃。</p>
 <p>若隨機選到的食物不是3，則顯示「貓咪轉頭不吃！」並跳過本次，繼續下一次餵食。</p>
@@ -73,12 +74,12 @@ print(f"總共餵食了 {count} 次")</code></pre>
 </div>
 <!-- 聊天機器人按鈕 - 使用 data 屬性 -->
 					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-						💬 需要引導？找學習助手
+						💬
 					</button>
 				</div>
 
 <div class="challenge-item" id="challenge-2">
-<h3 class="caption">挑戰題 2：骰子遊戲大挑戰 <span class="icon">🛈</span></h3>
+<h3 class="caption">挑戰 2：骰子遊戲大挑戰 <span class="icon">🛈</span></h3>
 <p>設計一個簡單的骰子遊戲：</p>
 <p>每次擲骰子（隨機1~6），將數字累加成總分。</p>
 <p>若骰出數字為「4」，玩家「運氣不好」，不加分，顯示「Oops! 擲到4，這回合不加分！」，繼續下一次擲骰。</p>
@@ -108,12 +109,12 @@ while True:
 </div>
 <!-- 聊天機器人按鈕 - 使用 data 屬性 -->
 					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-						💬 需要引導？找學習助手
+						💬
 					</button>
 				</div>
 
 <div class="challenge-item" id="challenge-3">
-<h3 class="caption">挑戰題 3：垃圾郵件清理小幫手 <span class="icon">🛈</span></h3>
+<h3 class="caption">挑戰 3：垃圾郵件清理小幫手 <span class="icon">🛈</span></h3>
 <p>你是郵件管理員，有以下一串收件匣內的郵件標題清單：</p>
 <p>['特價商品', '重要通知', '免費旅遊', '垃圾訊息', '您的發票中獎', '廣告優惠', '緊急郵件', '會議通知', '免費課程']</p>
 <p>使用迴圈篩選郵件，並做以下動作：</p>
@@ -137,12 +138,12 @@ for mail in mails:
 </div>
 <!-- 聊天機器人按鈕 - 使用 data 屬性 -->
 					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-						💬 需要引導？找學習助手
+						💬
 					</button>
 				</div>
 
 <div class="challenge-item" id="challenge-4">
-<h3 class="caption">挑戰題 4：防盜系統模擬器 <span class="icon">🛈</span></h3>
+<h3 class="caption">挑戰 4：防盜系統模擬器 <span class="icon">🛈</span></h3>
 <p>模擬一個密碼鎖系統，使用者最多可輸入密碼三次。</p>
 <p>密碼設為「5566」。</p>
 <p>如果輸入錯誤，顯示「密碼錯誤，再試一次！」並繼續下一輪輸入。</p>
@@ -168,12 +169,12 @@ if attempts == 3:
 </div>
 <!-- 聊天機器人按鈕 - 使用 data 屬性 -->
 					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-						💬 需要引導？找學習助手
+						💬
 					</button>
 				</div>
 
 <div class="challenge-item" id="challenge-5">
-<h3 class="caption">挑戰題 5：製作漢堡 <span class="icon">🛈</span></h3>
+<h3 class="caption">挑戰 5：製作漢堡 <span class="icon">🛈</span></h3>
 <p>建立一個名為 make_burger 的函式，接收麵包、肉排、蔬菜三種材料，回傳組合後的漢堡字串。</p>
 <p>在函式外設定一個全域變數 order_count，初始值為 0。</p>
 <p>每次呼叫 make_burger 時，order_count 加 1，表示多了一份漢堡訂單。</p>
@@ -194,12 +195,12 @@ print(f"目前訂單數量：{order_count}")</code></pre>
 </div>
 <!-- 聊天機器人按鈕 - 使用 data 屬性 -->
 					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-						💬 需要引導？找學習助手
+						💬
 					</button>
 				</div>
 
 <div class="challenge-item" id="challenge-6">
-<h3 class="caption">挑戰題 6：溫度轉換器 <span class="icon">🛈</span></h3>
+<h3 class="caption">挑戰 6：溫度轉換器 <span class="icon">🛈</span></h3>
 <p>建立一個函式 celsius_to_fahrenheit，將攝氏溫度轉換為華氏溫度後回傳。</p>
 <p>轉換公式為 °F = °C × 9⁄5 + 32</p>
 <p>函式內有區域變數 fahrenheit 儲存轉換結果。</p>
@@ -221,12 +222,12 @@ print("所有轉換紀錄：", record)</code></pre>
 </div>
 <!-- 聊天機器人按鈕 - 使用 data 屬性 -->
 					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-						💬 需要引導？找學習助手
+						💬
 					</button>
 				</div>
 
 <div class="challenge-item" id="challenge-7">
-<h3 class="caption">挑戰題 7：庫存管理小幫手 <span class="icon">🛈</span></h3>
+<h3 class="caption">挑戰 7：庫存管理小幫手 <span class="icon">🛈</span></h3>
 <p>建立函式 update_stock，接收產品名稱和數量兩個參數。</p>
 <p>使用全域字典 stock 管理庫存數量，初始時為空字典。</p>
 <p>每次更新庫存時，若產品已存在，則增加數量；若不存在，則新增產品並設定數量。</p>
@@ -248,12 +249,12 @@ print("完整庫存內容：", stock)</code></pre>
 </div>
 <!-- 聊天機器人按鈕 - 使用 data 屬性 -->
 					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-						💬 需要引導？找學習助手
+						💬
 					</button>
 				</div>
 
 <div class="challenge-item" id="challenge-8">
-<h3 class="caption">挑戰題 8：電影票售票系統<span class="icon">🛈</span></h3>
+<h3 class="caption">挑戰 8：電影票售票系統<span class="icon">🛈</span></h3>
 <p>請設計一個簡單的售票系統，使用者可以選擇場次並輸入座位號碼訂票。請包含以下功能與限制：</p>
 <p>1. 場次資訊（dictionary）：使用一個字典 movies 儲存多場電影資訊，每部電影包含時間與可用座位（以清單表示）。</p>
 <p>2. 函式 print_ticket(movie, seat)：輸出格式：「您觀看的電影是《電影名稱》，時間：XX，座位號碼：XX。」</p>
@@ -300,12 +301,12 @@ book_ticket(movie, seat)</code></pre>
 </div>
 <!-- 聊天機器人按鈕 - 使用 data 屬性 -->
 					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-						💬 需要引導？找學習助手
+						💬
 					</button>
 				</div>
 
 <div class="challenge-item" id="challenge-9">
-<h3 class="caption">挑戰題 9：進階計算機 <span class="icon">🛈</span></h3>
+<h3 class="caption">挑戰 9：進階計算機 <span class="icon">🛈</span></h3>
 <p>設計函式 advanced_calculator，接受使用者輸入兩個數字與一個運算子('+', '-', '*', '/')進行計算。</p>
 <p>使用字串格式化輸出結果，例如：「XX + XX = XX」。</p>
 <p>加入例外處理，處理以下狀況：</p>
@@ -344,12 +345,12 @@ advanced_calculator("8", "2", "?")</code></pre>
 </div>
 <!-- 聊天機器人按鈕 - 使用 data 屬性 -->
 					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-						💬 需要引導？找學習助手
+						💬
 					</button>
 				</div>
 
 <div class="challenge-item" id="challenge-10">
-<h3 class="caption">挑戰題 10：日期格式轉換器 <span class="icon">🛈</span></h3>
+<h3 class="caption">挑戰 10：日期格式轉換器 <span class="icon">🛈</span></h3>
 <p>建立一個函式 format_date，接受年、月、日三個整數參數，透過 Python 的 datetime 模組檢查輸入的日期是否正確，並轉換成「YYYY-MM-DD」的格式回傳。</p>
 <p>若輸入了不存在的日期（例如 2 月 30 日或非閏年的 2 月 29 日），則顯示錯誤訊息：「日期輸入錯誤！」</p>
 <div class="answer">
@@ -370,12 +371,12 @@ format_date(2025, 4, 31)  # 不存在的日期</code></pre>
 </div>
 <!-- 聊天機器人按鈕 - 使用 data 屬性 -->
 					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-						💬 需要引導？找學習助手
+						💬
 					</button>
 				</div>
 
 <div class="challenge-item" id="challenge-11">
-<h3 class="caption">挑戰題 11：購物車結帳 <span class="icon">🛈</span></h3>
+<h3 class="caption">挑戰 11：購物車結帳 <span class="icon">🛈</span></h3>
 <p>設計函式 checkout，傳入購買商品名稱與價格的字典，並計算總金額。</p>
 <p>輸出每個商品與價格（價格格式化為兩位小數），最後輸出總金額。</p>
 <p>使用例外處理，若有商品價格無法轉換為數字，顯示錯誤訊息：「商品價格格式錯誤！」並停止結帳。</p>
@@ -399,12 +400,12 @@ checkout(cart2)</code></pre>
 </div>
 <!-- 聊天機器人按鈕 - 使用 data 屬性 -->
 					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-						💬 需要引導？找學習助手
+						💬
 					</button>
 				</div>
 
 <div class="challenge-item" id="challenge-12">
-<h3 class="caption">挑戰題 12：氣球遊戲爆破王 <span class="icon">🛈</span></h3>
+<h3 class="caption">挑戰 12：氣球遊戲爆破王 <span class="icon">🛈</span></h3>
 <p>你有 10 顆氣球，每次遊戲會隨機選一顆氣球進行充氣（每次增加 1~5 單位）。</p>
 <p>如果某顆氣球的氣超過 10，會「Boom!」爆炸，並顯示是哪一顆氣球爆了，然後結束遊戲。</p>
 <p>否則顯示「氣球 X 目前氣量：Y」，繼續遊戲。</p>
@@ -427,12 +428,12 @@ while True:
 </div>
 <!-- 聊天機器人按鈕 - 使用 data 屬性 -->
 					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-						💬 需要引導？找學習助手
+						💬
 					</button>
 				</div>
 
 <div class="challenge-item" id="challenge-13">
-<h3 class="caption">挑戰題 13：果汁機系統 <span class="icon">🛈</span></h3>
+<h3 class="caption">挑戰 13：果汁機系統 <span class="icon">🛈</span></h3>
 <p>請設計函式 make_juice(fruit)，只接受「蘋果」、「柳橙」、「葡萄」這三種水果。</p>
 <p>如果輸入不是這三種，請拋出並處理自訂例外 JuiceError，顯示：「⚠️ 無法製作這種果汁！」</p>
 <p>否則顯示：「🥤 已製作{fruit}果汁！」</p>
@@ -457,12 +458,12 @@ for fruit in fruits:
 </div>
 <!-- 聊天機器人按鈕 - 使用 data 屬性 -->
 					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-						💬 需要引導？找學習助手
+						💬
 					</button>
 				</div>
 
 <div class="challenge-item" id="challenge-14">
-<h3 class="caption">挑戰題 14：打瞌睡偵測器 <span class="icon">🛈</span></h3>
+<h3 class="caption">挑戰 14：打瞌睡偵測器 <span class="icon">🛈</span></h3>
 <p>老師正在上課，學生有 10 人，其中部分人會打瞌睡（隨機選學生）。</p>
 <p>每次檢查隨機抽一個學生名字（用名單），若該學生打瞌睡則顯示：「⚠️ {name} 正在打瞌睡！」</p>
 <p>否則顯示：「{name} 很專心。」</p>
@@ -488,12 +489,12 @@ while True:
 </div>
 <!-- 聊天機器人按鈕 - 使用 data 屬性 -->
 					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-						💬 需要引導？找學習助手
+						💬
 					</button>
 				</div>
 
 <div class="challenge-item" id="challenge-15">
-<h3 class="caption">挑戰題 15：煎蛋挑戰賽 <span class="icon">🛈</span></h3>
+<h3 class="caption">挑戰 15：煎蛋挑戰賽 <span class="icon">🛈</span></h3>
 <p>有 5 顆雞蛋（1~5），其中只有一顆是壞蛋（用 random 選定）。</p>
 <p>請你用迴圈一顆一顆「煎」蛋（顯示「正在煎第X顆蛋…」），直到遇到壞蛋。</p>
 <p>當煎到壞蛋時，顯示「💥 第X顆是壞蛋！整鍋報廢了！」然後結束程式。</p>
@@ -510,12 +511,12 @@ for i in range(1, 6):
 </div>
 <!-- 聊天機器人按鈕 - 使用 data 屬性 -->
 					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-						💬 需要引導？找學習助手
+						💬
 					</button>
 				</div>
 
 <div class="challenge-item" id="challenge-16">
-<h3 class="caption">挑戰題 16：猜天氣小助手 <span class="icon">🛈</span></h3>
+<h3 class="caption">挑戰 16：猜天氣小助手 <span class="icon">🛈</span></h3>
 <p>請寫一個程式，讓使用者猜今天的天氣（可能是：晴天、陰天、雨天、雷雨）。</p>
 <p>使用 random 模組隨機決定實際天氣，讓使用者最多猜三次。</p>
 <p>如果猜對，顯示「你猜對了！今天是{weather}！」</p>
@@ -536,12 +537,12 @@ else:
 </div>
 <!-- 聊天機器人按鈕 - 使用 data 屬性 -->
 					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-						💬 需要引導？找學習助手
+						💬
 					</button>
 				</div>
 
 <div class="challenge-item" id="challenge-17">
-<h3 class="caption">挑戰題 17：狗狗學名字 <span class="icon">🛈</span></h3>
+<h3 class="caption">挑戰 17：狗狗學名字 <span class="icon">🛈</span></h3>
 <p>設計函式 teach_name(dog_name)：</p>
 <p>每次呼叫時，將狗狗的新名字加入全域變數 dog_names（list）。</p>
 <p>若名字已經教過，顯示：「這個名字{dog_name}已經學過了喔！」</p>
@@ -564,12 +565,12 @@ print("學過的名字：", dog_names)</code></pre>
 </div>
 <!-- 聊天機器人按鈕 - 使用 data 屬性 -->
 					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-						💬 需要引導？找學習助手
+						💬
 					</button>
 				</div>
 
 <div class="challenge-item" id="challenge-18">
-<h3 class="caption">挑戰題 18：交通燈模擬器 <span class="icon">🛈</span></h3>
+<h3 class="caption">挑戰 18：交通燈模擬器 <span class="icon">🛈</span></h3>
 <p>設計一個交通燈系統，依照順序顯示：紅燈 → 綠燈 → 黃燈 → 紅燈...。</p>
 <p>每次顯示間隔 1 秒（可使用 time.sleep(1)）。</p>
 <p>讓系統重複循環 6 次，並顯示每個燈號：「🟥紅燈停」、「🟩綠燈行」、「🟨黃燈等一下」</p>
@@ -590,7 +591,7 @@ for i in range(6):
 </div>
 <!-- 聊天機器人按鈕 - 使用 data 屬性 -->
 					<button class="chatbot-toggle-btn" onclick="openChatbot(this)">
-						💬 需要引導？找學習助手
+						💬
 					</button>
 				</div>
 				
