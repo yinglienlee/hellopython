@@ -367,6 +367,7 @@ pgzrun.go()</code></pre>
 
             <section>
                 <h2>挑戰題目</h2>
+<div class="challenge-item" id="challenge-1">				
 				<h3 class="caption">挑戰 1：簡單計分機制 <span class="icon">🛈</span></h3>
     <p>設計一個遊戲，當角色碰撞到目標物時，計分增加 1 並將目標物移動到隨機位置。</p>
     <div class="answer">
@@ -401,7 +402,9 @@ def update():
         goal.pos = (random.randint(50, WIDTH - 50), random.randint(50, HEIGHT - 50))
 </code></pre>
     </div>
+</div>
 
+<div class="challenge-item" id="challenge-2">
     <h3 class="caption">挑戰 2：計時遊戲 <span class="icon">🛈</span></h3>
     <p>設計一個遊戲，在 30 秒內計算角色能碰撞目標物幾次，並在時間結束時顯示結果。</p>
     <div class="answer">
@@ -444,7 +447,9 @@ def update():
             goal.pos = (random.randint(50, WIDTH - 50), random.randint(50, HEIGHT - 50))
 </code></pre>
     </div>
+</div>
 
+<div class="challenge-item" id="challenge-3">
     <h3 class="caption">挑戰 3：避開敵人 <span class="icon">🛈</span></h3>
     <p>新增一個敵人角色，敵人會隨機移動，玩家需要在不碰到敵人的情況下盡可能碰撞目標物。</p>
     <div class="answer">
@@ -493,7 +498,7 @@ def update():
     enemy.y = max(0, min(HEIGHT, enemy.y))
 </code></pre>
     </div>
-
+</div>
 
             </section>
 

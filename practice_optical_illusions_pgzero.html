@@ -213,6 +213,7 @@ pgzrun.go()
 
             <section>
     <h2>挑戰題目</h2>
+<div class="challenge-item" id="challenge-1">	
     <h3 class="caption">挑戰 1：改變放射線顏色 <span class="icon">🛈</span></h3>
     <p>讓每條放射線根據角度有不同的顏色。</p>
     <div class="answer">
@@ -228,7 +229,9 @@ def draw_radiating_lines(center, spacing):
         screen.draw.line((x1, y1), (x2, y2), color)
 </code></pre>
     </div>
+</div>
 
+<div class="challenge-item" id="challenge-2">
     <h3 class="caption">挑戰 2：增加更多平行線 <span class="icon">🛈</span></h3>
     <p>讓畫面中顯示更多組平行線，觀察錯覺效果如何改變。</p>
     <div class="answer">
@@ -243,7 +246,9 @@ def draw_parallel_lines(center, offset, count):
         )
 </code></pre>
     </div>
+</div>
 
+<div class="challenge-item" id="challenge-3">
     <h3 class="caption">挑戰 3：添加動態背景 <span class="icon">🛈</span></h3>
     <p>設計一個背景，讓放射線隨時間旋轉，增加錯覺的動態視覺效果。</p>
     <div class="answer">
@@ -265,6 +270,7 @@ def update():
     angle_offset += 1  # 每幀旋轉
 </code></pre>
     </div>
+</div>
 </section>
 
 

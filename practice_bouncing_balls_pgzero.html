@@ -261,7 +261,7 @@ pgzrun.go()
 
             <section>
                 <h2>挑戰題目</h2>
-
+<div class="challenge-item" id="challenge-1">
     <h3 class="caption">挑戰 1：處理球重疊時產生的怪異現象 <span class="icon">🛈</span></h3>
     <p>如果生成球時距離很近，球會以怪異的方式移動，嘗試解決這個問題。</p>
     <div class="answer">
@@ -345,12 +345,11 @@ def update():
             </ul>
         </li>
     </ul>
-
-					
-					
+		
     </div>
+</div>
 
-
+<div class="challenge-item" id="challenge-2">
     <h3 class="caption">挑戰 2：增加重力效果 <span class="icon">🛈</span></h3>
     <p>在程式中加入重力，使小球在畫布內受到重力影響，並在碰到地面時反彈。</p>
     <div class="answer">
@@ -389,40 +388,43 @@ def update():
         </li>        
     </ul>
     </div>
+</div>
 
-    <h3 class="caption">挑戰 3：顯示速度向量 <span class="icon">🛈</span></h3>
-    <p>在小球上繪製其速度向量，顯示當前運動方向與速度大小。</p>
-    <div class="answer">
-        <pre class="line-numbers"><code class="language-python"># 解答
+<div class="challenge-item" id="challenge-3">
+	<h3 class="caption">挑戰 3：顯示速度向量 <span class="icon">🛈</span></h3>
+	<p>在小球上繪製其速度向量，顯示當前運動方向與速度大小。</p>
+	<div class="answer">
+		<pre class="line-numbers"><code class="language-python"># 解答
 def draw():
-    screen.fill("black")
-    for ball in balls:
-        # 繪製小球
-        screen.draw.filled_circle((ball["x"], ball["y"]), ball["radius"], ball["color"])
-        # 繪製速度向量
-        end_x = ball["x"] + ball["vx"] * 10
-        end_y = ball["y"] + ball["vy"] * 10
-        screen.draw.line((ball["x"], ball["y"]), (end_x, end_y), "white")
-    screen.draw.text(
-        "Click to add a ball. Drag mouse to set velocity.",
-        (10, 10),
-        fontsize=24,
-        color="white"
-    )
+	screen.fill("black")
+	for ball in balls:
+		# 繪製小球
+		screen.draw.filled_circle((ball["x"], ball["y"]), ball["radius"], ball["color"])
+		# 繪製速度向量
+		end_x = ball["x"] + ball["vx"] * 10
+		end_y = ball["y"] + ball["vy"] * 10
+		screen.draw.line((ball["x"], ball["y"]), (end_x, end_y), "white")
+	screen.draw.text(
+		"Click to add a ball. Drag mouse to set velocity.",
+		(10, 10),
+		fontsize=24,
+		color="white"
+	)
 </code></pre>
 
 	<p>在繪製過程中，以下變數用於顯示小球及其速度向量：</p>
-    <ul>
-        <li>
-            <strong>end_x, end_y：</strong>速度向量的終點座標，計算方式如下：
-            <ul>
-                <li><code>end_x = ball["x"] + ball["vx"] * 10</code></li>
-                <li><code>end_y = ball["y"] + ball["vy"] * 10</code></li>
-                <li>這些值決定了速度向量的長度，乘以 10 以提高可視化效果。</li>
-            </ul>
-        </li>
-    </ul>
-    </div>
+	<ul>
+		<li>
+			<strong>end_x, end_y：</strong>速度向量的終點座標，計算方式如下：
+			<ul>
+				<li><code>end_x = ball["x"] + ball["vx"] * 10</code></li>
+				<li><code>end_y = ball["y"] + ball["vy"] * 10</code></li>
+				<li>這些值決定了速度向量的長度，乘以 10 以提高可視化效果。</li>
+			</ul>
+		</li>
+	</ul>
+	</div>
+</div>
 
             </section>
 
