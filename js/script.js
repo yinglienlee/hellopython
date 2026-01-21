@@ -144,6 +144,7 @@ function navClick() {
 	}
 }
 
+/*
 function enableAnswerRevealer() {	
 	const urlParams = new URLSearchParams(window.location.search);
 	const overrideKey = parseInt(urlParams.get("override"));
@@ -257,7 +258,5 @@ function enableAnswerRevealer() {
 				}
 			});
 		});
-
-
-    
 }
+*/

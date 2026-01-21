@@ -71,7 +71,7 @@ function openChatbot(buttonElement) {
   }
   
   // 4. Update UI state
-  document.getElementById('chatbot-title').textContent = `🤖 Python 學習助手 - ${challengeTitle}`;
+  document.getElementById('chatbot-title').textContent = `🤖 Python 學長 - ${challengeTitle}`;
   document.getElementById('chatbot-container').style.display = 'block';
   applyChatbotDockPosition(chatbotDockPosition);
   initializeResizer();  
@@ -124,6 +124,9 @@ async function sendMessage() {
   };
 
   currentConversation.messages.push({ role: 'user', content: message });
+  const messagesToSend = currentConversation.messages.filter(msg => 
+      msg.provider !== 'gemini-summary' && msg.isSummary !== true
+  );
   input.value = '';
   resetTextareaHeight();
   
@@ -136,20 +139,27 @@ async function sendMessage() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         userInfo: userInfo, // Sending consolidated info
-        messages: currentConversation.messages,
+        messages: messagesToSend,
         challengeId: currentConversation.challengeId,
 		docId: docIdFromTitle,
         challengeContent: currentConversation.challengeContent,
         documentTitle: document.title,
         challengeTitle: currentConversation.challengeTitle,
-        answer: currentConversation.answer
+        answer: currentConversation.answer,
+		isStarter: false
       })
     });
+	
+	if (!response.ok) {
+		const text = await response.text(); // may not be JSON
+		throw new Error(`你的帳號尚未啟用，請聯繫老師。`);
+	}
+	
     const data = await response.json();
     currentConversation.messages.push({ role: 'assistant', content: data.content });
-  } catch (error) {
-    console.error('❌ Error:', error);
-    currentConversation.messages.push({ role: 'assistant', content: '抱歉，發生了錯誤。' });
+  } catch (e) {
+    console.error('❌ Error:', e);
+    currentConversation.messages.push({ role: 'assistant', content: '' + e.message });
   } finally {
     toggleUIState(false);
     renderMessages();
@@ -182,13 +192,20 @@ async function generateWelcomeMessage() {
 		docId: docIdFromTitle,
         documentTitle: document.title,		
         challengeContent: currentConversation.challengeContent,
-        isWelcome: true
+        isStarter: true
       })
     });
+
+	if (!response.ok) {
+		const text = await response.text(); // may not be JSON
+		throw new Error(`你的帳號尚未啟用，請聯繫老師。`);
+	}
+
     const data = await response.json();
     currentConversation.messages = [{ role: 'assistant', content: data.content }];
   } catch (e) {
-    currentConversation.messages = [{ role: 'assistant', content: '你好！我是 Python 學習助手 😊' }];
+	console.error('❌ Error:', e);
+    currentConversation.messages = [{ role: 'assistant', content: '你好！我是 Python 學長。' + e.message }];
   } finally {
     toggleUIState(false);
     renderMessages();
@@ -197,6 +214,8 @@ async function generateWelcomeMessage() {
 
 async function generateSummary() {
   const user = firebase.auth().currentUser;
+  const docIdFromTitle = document.querySelector('title')?.getAttribute('docid') || "none";
+
   if (!user || currentConversation.messages.length === 0) return;
 
   const userInfo = {
@@ -207,22 +226,39 @@ async function generateSummary() {
   };
 
   toggleUIState(true); // Assuming you have a loading spinner
+  
+  userMessages = currentConversation.messages.filter(msg => msg.role === 'user');
+
   try {
     const response = await fetch(SUMMARY_ENDPOINT, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        messages: currentConversation.messages,
-        userInfo: userInfo
+        messages: userMessages,
+        userInfo: userInfo,
+		docId: docIdFromTitle,                     
+        challengeId: currentConversation.challengeId 
       })
     });
+	
+	if (!response.ok) {
+		const text = await response.text(); // may not be JSON
+		throw new Error(`你的帳號尚未啟用，請聯繫老師。`);
+	}
+	
     const data = await response.json();
     
     // Display the summary in the chat UI
-    currentConversation.messages.push({ role: 'assistant', content: `### 學習小結\n${data.content}` });
+    currentConversation.messages.push({ 
+		role: 'assistant', 
+		content: `${data.content}`,
+		provider: 'gemini-summary',
+        isSummary: true
+	});
     renderMessages();
-  } catch (error) {
-    console.error('❌ Summary Error:', error);
+  } catch (e) {
+	console.error('❌ Error:', e);
+    currentConversation.messages.push({ role: 'assistant', content: '' + e.message, provider: 'gemini-summary', isSummary: true});
   } finally {
 	toggleUIState(false);
     renderMessages();
@@ -249,8 +285,8 @@ function showLoginPromptForChatbot() {
         <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.85); display: flex; align-items: center; justify-content: center; z-index: 9999; backdrop-filter: blur(4px);">
             <div style="background: white; padding: 3rem 2.5rem; border-radius: 16px; text-align: center; max-width: 420px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);">
                 <div style="font-size: 3rem; margin-bottom: 1rem;">🤖</div>
-                <h2 style="margin-bottom: 0.5rem; color: #1f2937; font-size: 1.5rem;">使用學習助手</h2>
-                <p style="color: #6b7280; margin-bottom: 2rem;">請先登入 Google 帳號以開始學習。</p>
+                <h2 style="margin-bottom: 0.5rem; color: #1f2937; font-size: 1.5rem;">找 Python 學長?</h2>
+                <p style="color: #6b7280; margin-bottom: 2rem;">請先登入 Google 帳號。</p>
                 <button onclick="loginWithFirebase()" style="width: 100%; padding: 1rem 2rem; background: #1a73e8; color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; margin-bottom: 0.75rem;">🔐 使用 Google 登入</button>
                 <button onclick="document.getElementById('login-prompt').remove()" style="width: 100%; padding: 0.75rem 1.5rem; background: transparent; color: #6b7280; border: 1px solid #d1d5db; border-radius: 8px; cursor: pointer;">稍後再說</button>
             </div>
@@ -336,4 +372,119 @@ function resize(e) {
     localStorage.setItem('chatbotSizeBottom', newSize);
   }
 }
-function stopResize() { isResizing = false; document.onmousemove = null; }
+
+// 停止調整大小
+function stopResize() {
+  if (isResizing) {
+    isResizing = false;
+    
+    document.removeEventListener('mousemove', resize);
+    document.removeEventListener('mouseup', stopResize);
+  }
+}
+
+// 跳轉到當前挑戰的位置
+function jumpToChallenge() {
+  if (!currentConversation.challengeId) {
+    console.warn('⚠️  沒有當前挑戰 ID');
+    return;
+  }
+  
+  const challengeElement = document.getElementById(currentConversation.challengeId);
+  
+  if (!challengeElement) {
+    console.error('❌ 找不到挑戰元素:', currentConversation.challengeId);
+    alert('找不到挑戰位置');
+    return;
+  }
+  
+  challengeElement.scrollIntoView({
+	behavior: 'smooth',
+	block: 'center',
+	inline: 'nearest'
+  });
+
+  // 高亮顯示挑戰(視覺回饋)
+  highlightChallenge(challengeElement);
+  
+  console.log('✅ 跳轉到挑戰:', currentConversation.challengeId);
+}
+
+// 高亮顯示挑戰(視覺回饋)
+function highlightChallenge(element) {
+  console.log(element);
+  // 儲存原始樣式
+  const originalBackground = element.style.background;
+  const originalTransition = element.style.transition;
+  
+  // 加入高亮效果
+  element.style.transition = 'background 0.3s ease';
+  element.style.background = 'rgba(102, 126, 234, 0.1)';
+  
+  // 1.5 秒後恢復
+  setTimeout(() => {
+    element.style.background = originalBackground;
+    
+    // 再過 0.3 秒後移除 transition
+    setTimeout(() => {
+      element.style.transition = originalTransition;
+    }, 300);
+  }, 1500);
+}
+
+// 切換停靠位置
+function dockChatbot(position) {
+  chatbotDockPosition = position;
+  localStorage.setItem('chatbotDockPosition', position);
+  applyChatbotDockPosition(position);
+}
+
+// 應用停靠位置
+function applyChatbotDockPosition(position) {
+  const container = document.getElementById('chatbot-container');
+  const body = document.body;
+  const dockRightBtn = document.getElementById('dock-right-btn');
+  const dockBottomBtn = document.getElementById('dock-bottom-btn');
+  
+  // 移除所有停靠類別
+  container.classList.remove('chatbot-docked-right', 'chatbot-docked-bottom', 'chatbot-docked-top');
+  
+  // 加入新的停靠類別
+  container.classList.add(`chatbot-docked-${position}`);
+  
+  // --- 新增:設定 CSS 變數並加入 body 類別 ---
+  body.classList.remove('chatbot-open-right', 'chatbot-open-bottom', 'chatbot-open-top', 'chatbot-open');
+  body.classList.add('chatbot-open'); 
+  
+  // 重置所有偏移量
+  body.style.setProperty('--chatbot-offset-right', '0px');
+  body.style.setProperty('--chatbot-offset-bottom', '0px');
+  body.style.setProperty('--chatbot-offset-top', '0px');
+  
+  // 應用儲存的大小
+  if (position === 'right') {
+    container.style.width = chatbotSize.right + 'px';
+    container.style.height = '100vh';
+	body.classList.add('chatbot-open-right');
+    // 設定右側偏移量
+    body.style.setProperty('--chatbot-offset-right', chatbotSize.right + 'px');
+	
+	// NEW: 停靠右側時,顯示底部按鈕,隱藏右側按鈕
+    if (dockBottomBtn) dockBottomBtn.style.display = 'inline-block';
+    if (dockRightBtn) dockRightBtn.style.display = 'none';
+  } else if (position === 'bottom') {
+    container.style.width = '100%';
+    container.style.height = chatbotSize.bottom + 'px';
+	body.classList.add('chatbot-open-bottom');
+    // 設定底部偏移量 (供 main/sidebar 使用 margin/padding-bottom)
+    body.style.setProperty('--chatbot-offset-bottom', chatbotSize.bottom + 'px');
+	
+	// NEW: 停靠底部時,顯示右側按鈕,隱藏底部按鈕
+    if (dockRightBtn) dockRightBtn.style.display = 'inline-block';
+    if (dockBottomBtn) dockBottomBtn.style.display = 'none';
+  }
+  
+  // 儲存新的位置
+  localStorage.setItem('chatbotDockPosition', position);
+  chatbotDockPosition = position;
+}
