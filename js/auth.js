@@ -1,3 +1,6 @@
+const REGISTER_API_BASE_ENDPOINT = 'https://chatbot-api-250975721717.asia-east1.run.app/api';
+const REGISTER_ENDPOINT = `${REGISTER_API_BASE_ENDPOINT}/student/register`; 
+
 // Function to inject the Auth UI into the header
 function injectAuthUI() {
     const header = document.querySelector('header');
@@ -577,6 +580,8 @@ async function handleTrophyClick(docId, challengeId, challengeTitle) {
             const progress = entry.metrics?.progress || 0;
             const quantity = entry.metrics?.quantity || 0;
             const quality = entry.metrics?.quality || 0;
+			const user_answer = entry.user_answer || "無內容";
+
 
             // 💬 特別樣式：最高分的高亮效果
             const boxStyle = isMax 
@@ -590,13 +595,20 @@ async function handleTrophyClick(docId, challengeId, challengeTitle) {
                 <div style="${boxStyle} border-radius: 12px; padding: 16px; margin-bottom: 16px; position: relative; transition: all 0.2s;">
                     ${isMax ? '<div style="position: absolute; top: -10px; right: 12px; background: #fbbf24; color: #92400e; padding: 2px 10px; border-radius: 20px; font-size: 10px; font-weight: bold; border: 2px solid white; z-index: 1;">最佳紀錄</div>' : ''}
                     
-                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px; align-items: center;">
+					<div style="display: flex; justify-content: space-between; margin-bottom: 10px; align-items: center;">
                         <span style="font-size: 12px; color: #94a3b8; font-family: monospace;">📅 ${date}</span>
                         <span style="background: ${isMax ? '#fef3c7' : '#f0f9ff'}; color: ${isMax ? '#b45309' : '#0369a1'}; padding: 4px 10px; border-radius: 6px; font-size: 13px; font-weight: bold; border: 1px solid ${isMax ? '#fcd34d' : '#e0f2fe'};">
                             ${isMax ? '🏆 ' : ''}進度 ${progress}%
                         </span>
                     </div>
-                    
+
+					<div style="margin-bottom: 14px;">
+						<div style="font-size: 11px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px; display: flex; align-items: center; gap: 4px;">
+							<span>📝 回答內容</span>
+						</div>
+						<div style="background: #1e293b; color: #e2e8f0; font-family: 'Fira Code', 'Consolas', monospace; font-size: 13px; padding: 12px; border-radius: 8px; border-left: 4px solid #10b981; white-space: pre-wrap; word-break: break-all; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);">${user_answer || '（未提供回答）'}</div>
+					</div>
+					                    
                     <div style="display: flex; gap: 10px; margin-bottom: 12px;">
                         <span style="font-size: 11px; color: #64748b;">📊 互動次數: ${'⭐'.repeat(quantity)}</span>
                         <span style="font-size: 11px; color: #64748b;">💬 互動品質: ${'⭐'.repeat(quality)}</span>

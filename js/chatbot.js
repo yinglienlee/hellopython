@@ -2,9 +2,9 @@
  * chatbot.js - Updated for Firebase Auth integration
  */
 
-const API_BASE_ENDPOINT = 'https://chatbot-api-250975721717.asia-east1.run.app/api/chat';
-const CHAT_ENDPOINT = `${API_BASE_ENDPOINT}/gemini`; 
-const SUMMARY_ENDPOINT = `${API_BASE_ENDPOINT}/summary`; 
+const CHAT_API_BASE_ENDPOINT = 'https://chatbot-api-250975721717.asia-east1.run.app/api/chat';
+const CHAT_ENDPOINT = `${CHAT_API_BASE_ENDPOINT}/gemini`; 
+const SUMMARY_ENDPOINT = `${CHAT_API_BASE_ENDPOINT}/summary`; 
 
 // State Management
 let chatbotDockPosition = localStorage.getItem('chatbotDockPosition') || 'right';
@@ -53,6 +53,12 @@ function openChatbot(buttonElement) {
     challengeTitle = clonedCaption.textContent.trim();
   }
 
+  const container = document.getElementById('chatbot-container');  
+  container.dataset.challengeTitle = "";
+  container.dataset.challengeContent = "";
+  container.dataset.challengeAnswer = "";
+  container.dataset.challengeId = "";
+
   // 3. Handle Conversation History
   if (!allConversations[challengeId]) {
     const c = extractChallengeContent(challengeElement);
@@ -65,11 +71,17 @@ function openChatbot(buttonElement) {
       answer: c.answer
     };
     currentConversation = allConversations[challengeId];
+	
+    container.dataset.challengeTitle = challengeTitle;
+    container.dataset.challengeContent = c.text;
+    container.dataset.challengeAnswer = c.answer;
+    container.dataset.challengeId = challengeId;
+
     generateWelcomeMessage(); // Auto-start the conversation
   } else {
     currentConversation = allConversations[challengeId];
   }
-  
+    
   // 4. Update UI state
   document.getElementById('chatbot-title').textContent = `🤖 Python 學長 - ${challengeTitle}`;
   document.getElementById('chatbot-container').style.display = 'block';
@@ -215,8 +227,9 @@ async function generateWelcomeMessage() {
 async function generateSummary() {
   const user = firebase.auth().currentUser;
   const docIdFromTitle = document.querySelector('title')?.getAttribute('docid') || "none";
+  const userMessages = currentConversation.messages.filter(msg => msg.role === 'user');
 
-  if (!user || currentConversation.messages.length === 0) return;
+  if (!user || userMessages.length === 0) return;
 
   const userInfo = {
       email: user.email,
@@ -225,9 +238,12 @@ async function generateSummary() {
       studentId: document.getElementById('user-student-id')?.textContent || ""
   };
 
-  toggleUIState(true); // Assuming you have a loading spinner
-  
-  userMessages = currentConversation.messages.filter(msg => msg.role === 'user');
+  toggleUIState(true); // Assuming you have a loading spinner  
+
+  const container = document.getElementById('chatbot-container');
+  const title = container.dataset.challengeTitle;
+  const text = container.dataset.challengeContent;
+  const ans = container.dataset.challengeAnswer;
 
   try {
     const response = await fetch(SUMMARY_ENDPOINT, {
@@ -235,6 +251,10 @@ async function generateSummary() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         messages: userMessages,
+		challengeTitle: title,
+		challengeContent: text,
+		refAnswer: ans,
+		userAnswer: userMessages.at(-1).content,
         userInfo: userInfo,
 		docId: docIdFromTitle,                     
         challengeId: currentConversation.challengeId 
