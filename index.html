@@ -14,19 +14,7 @@
 	<script type="text/javascript" src="js/script.js"></script>
 	<script>
 		document.addEventListener("DOMContentLoaded", (event) => {		
-			includeHTML(()=>{
-				// Remove the first item in a ul
-				const navList = document.querySelector(".nav");
-				if (navList && navList.firstElementChild) {
-					navList.removeChild(navList.firstElementChild);
-				}
-				
-				const navElement = document.querySelector('.nav');
-				if (navElement) {
-					navElement.classList.remove('flex-column');
-					navElement.classList.add('nav-column');
-				}
-			});	
+			includeHomeNav();
 		});
 	</script>	
 </head>
@@ -34,11 +22,6 @@
 	<header>
 		<h1>Python 學習指南</h1>
 	</header>
-	<main class="flex-grow-1" style="width: 100% !important;">
-		<section>
-			<h2 style="text-align: center; padding-bottom: 20px;">目錄</h2>
-			<div w3-include-html="navigation.html"></div>        
-		</section>
-	</main>
+	<div id="home-navigation" style="margin-top: 120px;"></div>
 </body>
 </html>

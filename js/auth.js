@@ -194,6 +194,7 @@ const auth = firebase.auth();
 const db = firebase.app().firestore('accounts');
 
 // --- Auth State Logic ---
+// --- Global Auth State Observer ---
 auth.onAuthStateChanged(async (user) => {
     const loginBtn = document.getElementById('login-btn');
     const userInfoArea = document.getElementById('user-info-area');
@@ -203,13 +204,16 @@ auth.onAuthStateChanged(async (user) => {
     const promptEl = document.getElementById('student-id-prompt');
 
     if (user) {
+		includeHTML(null); 
+        includeHomeNav(null);
+		
+        // UI: Show logged-in state
         if (loginBtn) loginBtn.style.display = 'none';
         if (userInfoArea) userInfoArea.style.display = 'flex';
         if (nameEl) nameEl.textContent = user.displayName;
 
-        // Check for existing Student ID and Name in Firestore
         try {
-            // NEW LOGIC: Query by ownerUid since doc ID is now the student ID
+            // 1. Fetch User Profile from Firestore
             const userQuery = await db.collection("users")
                 .where("ownerUid", "==", user.uid)
                 .limit(1)
@@ -217,36 +221,150 @@ auth.onAuthStateChanged(async (user) => {
 
             if (!userQuery.empty) {
                 const userData = userQuery.docs[0].data();
+                
+				await checkPageVisibility(userData);
+				
+                // Update Student Info UI
                 if (studentNameEl) studentNameEl.textContent = userData.studentName;
                 if (idEl) idEl.textContent = userData.studentId;
                 if (promptEl) promptEl.style.display = 'none';
+
+                // 2. Calculate Visibility Map based on the user's studentClass
+                const visibilityMap = await getDocVisibility(userData);
+                console.log("Access Map Generated:", visibilityMap);
+
+                // 3. Render Navigation Menus with the specific visibility map
+                await includeHTML(visibilityMap); 
+                await includeHomeNav(visibilityMap);
+                
+                // 4. Page-level Security Check
+                if (typeof checkPageVisibility === 'function') {
+                    checkPageVisibility(userData);
+                }
+
             } else {
+                // User logged in but has no student profile yet
                 if (studentNameEl) studentNameEl.textContent = "未設定學生資料";
-                if (idEl) idEl.textContent = "";
                 if (promptEl) promptEl.style.display = 'block';
+                
+                // Load empty visibility (everything locked)
+                await includeHTML({});
+                await includeHomeNav({});
             }
         } catch (err) {
-            console.error("Firestore error:", err);
-            if (studentNameEl) studentNameEl.textContent = "載入失敗";
+            console.error("Auth process error:", err);
+            // Fallback load
+            await includeHTML({});
+            await includeHomeNav({});
         }
 		
-		// 2. NEW: Auto-resume Chatbot if the login prompt was active
+        // Chatbot Resume Logic
         const loginPrompt = document.getElementById('login-prompt');
         if (loginPrompt) {
-            loginPrompt.remove(); // Close the modal
-            
-            // If a button was clicked previously, trigger openChatbot again
+            loginPrompt.remove(); 
             if (typeof pendingChatbotButton !== 'undefined' && pendingChatbotButton) {
                 openChatbot(pendingChatbotButton);
-                pendingChatbotButton = null; // Clear state
+                pendingChatbotButton = null; 
             }
         }
     } else {
+        // Logged out: Hide info and show login button
         if (loginBtn) loginBtn.style.display = 'flex';
         if (userInfoArea) userInfoArea.style.display = 'none';
         if (promptEl) promptEl.style.display = 'none';
+        
+        // Reset navigation to empty/locked state
+        const navContainer = document.querySelector("[w3-include-html]");
+        if (navContainer) navContainer.innerHTML = '<p class="p-4 text-xs text-slate-500">請登入後查看課程</p>';
     }
 });
+
+/**
+ * Helper: Calculates visibility by comparing student's class to doc permissions
+ */
+async function getDocVisibility(userData) {
+    try {
+        const studentClass = userData ? userData.studentClass : null;
+        const docSnap = await db.collection("system").doc("docs").get();
+        
+        if (!docSnap.exists) return {};
+        
+        const docs = docSnap.data().documents || [];
+        return docs.reduce((acc, d) => {
+            const fileName = d.url.split('/').pop();
+            const allowedClasses = d.visible_classes || [];
+            
+            // Access is TRUE if user's class is in the document's visible_classes array
+            acc[fileName] = !!(studentClass && allowedClasses.includes(studentClass));
+            return acc;
+        }, {});
+    } catch (e) {
+        console.error("Visibility Map Error:", e);
+        return {};
+    }
+}
+
+/**
+ * Gatekeeper: Blocks page access if student isn't in an allowed class
+ */
+async function checkPageVisibility(userData) {
+    // 1. Selection Check: Ensure we are looking at the right attribute
+    const titleEl = document.querySelector('title');
+    // Using .getAttribute is correct, but let's log it to debug
+    const rawDocId = titleEl ? titleEl.getAttribute('docid') : null;
+    
+    if (!rawDocId || !userData) {
+        console.log("Check skipped: No DocID on this page or no UserData.");
+        return; 
+    }
+
+    try {
+        const studentClass = userData.studentClass;
+        
+        // 2. Fetch the latest settings
+        const docSnap = await db.collection("system").doc("docs").get();
+        if (!docSnap.exists) return;
+
+        const docs = docSnap.data().documents || [];
+        
+        // Normalize IDs to strings and trim whitespace for the comparison
+        const currentDoc = docs.find(d => String(d.doc_id).trim() === String(rawDocId).trim());
+
+        // 3. Security Logic:
+        // - If the doc entry doesn't exist in the DB -> Lock it.
+        // - If the class list is empty -> Lock it.
+        // - If student's class isn't in the list -> Lock it.
+        const allowedClasses = currentDoc ? currentDoc.visible_classes || [] : [];
+        const hasAccess = studentClass && allowedClasses.includes(studentClass);
+		console.log(allowedClasses, studentClass);
+        if (!hasAccess) {
+            console.warn(`Access Denied for class: ${studentClass} on DocID: ${rawDocId}`);
+            
+            // Immediately stop any further scripts and hide content
+            window.stop(); 
+
+            document.body.innerHTML = `
+                <div style="height:100vh; display:flex; align-items:center; justify-content:center; background:#0f172a; color:white; font-family:sans-serif; text-align:center; padding:20px; position:fixed; top:0; left:0; width:100%; z-index:9999;">
+                    <div>
+                        <h1 style="font-size:3rem;">🔒</h1>
+                        <h2 style="margin-top:20px;">此關卡尚未對您的班級開放</h2>
+                        <p style="color:#64748b; margin-top:10px;">您的目前班級：<span style="color:#818cf8">${studentClass || '未設定'}</span></p>
+                        <p style="color:#475569; font-size:0.8rem; margin-top:5px;">如班級正確但無法進入，請聯繫老師。</p>
+                        <button onclick="window.location.href='index.html'" style="margin-top:30px; background:#4f46e5; color:white; border:none; padding:12px 28px; border-radius:8px; cursor:pointer; font-weight:bold;">回首頁</button>
+                    </div>
+                </div>`;
+            
+            // Block redirection loop protection
+            setTimeout(() => { 
+                if(window.location.pathname !== '/index.html') window.location.href = "index.html"; 
+            }, 4000);
+        } else {
+            console.log("Access Granted for class:", studentClass);
+        }
+    } catch (err) {
+        console.error("Critical visibility check error:", err);
+    }
+}
 
 // --- Actions ---
 function loginWithFirebase() {
@@ -787,3 +905,5 @@ async function enableAnswerRevealer() {
         });
     });
 }
+
+
