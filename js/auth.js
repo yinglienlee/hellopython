@@ -329,6 +329,10 @@ async function checkPageVisibility(userData) {
         
         // Normalize IDs to strings and trim whitespace for the comparison
         const currentDoc = docs.find(d => String(d.doc_id).trim() === String(rawDocId).trim());
+		if (!currentDoc) {
+            console.log(`DocID ${rawDocId} not found in DB: Granting default access.`);
+            return;
+        }
 
         // 3. Security Logic:
         // - If the doc entry doesn't exist in the DB -> Lock it.

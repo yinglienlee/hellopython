@@ -144,7 +144,7 @@ async function includeHTML(visibilityMap = null) {
     COURSE_TREE.forEach(group => {
         html += `<li class="nav-item"><details open><summary>${group.title}</summary><ul>`;
         group.chapters.forEach(ch => {
-            const isVisible = visibilityMap[ch.href] === true;
+            const isVisible = visibilityMap[ch.href] !== false;
             html += `
                 <li class="${isVisible ? '' : 'nav-locked'}">
                     <a href="${isVisible ? ch.href : 'javascript:void(0)'}">
@@ -191,7 +191,7 @@ async function includeHomeNav(visibilityMap = null) {
 
         group.chapters.forEach(ch => {
             // Check visibility against our class-based map
-            const isVisible = visibilityMap[ch.href] === true;
+            const isVisible = visibilityMap[ch.href] !== false;
             
             html += `
                 <a href="${isVisible ? ch.href : 'javascript:void(0)'}" 
