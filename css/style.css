@@ -1,3 +1,5 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css");
+
 body {
 	font-size: x-large;
 	font-family: Arial, sans-serif;
@@ -599,4 +601,44 @@ pre {
 /* Show answers when parent has 'active' class */
 .caption.active + .answer {
     display: block;
+}
+
+/* Container for the merged buttons */
+.tool-group {
+    display: inline-flex;
+    border: 1px solid #dadce0;
+    border-radius: 6px; /* Outer rounding */
+    overflow: hidden;   /* Ensures inner buttons don't leak out of corners */
+    background: #f8f9fa;
+}
+
+/* Individual buttons within the group */
+.group-btn {
+    background: transparent;
+    border: none;
+    color: #3c4043;
+    font-size: 0.85rem;
+    cursor: pointer;
+    font-weight: 500;
+    padding: 6px 12px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: background 0.2s;
+}
+
+/* Add a divider line between the first and second button */
+.group-btn:first-child {
+    border-right: 1px solid #dadce0;
+}
+
+/* Hover effect */
+.group-btn:hover {
+    background-color: #f1f3f4;
+}
+
+/* Icon style */
+.group-btn i {
+    font-size: 14px;
+    color: #5f6368;
 }

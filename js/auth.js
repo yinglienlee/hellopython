@@ -25,8 +25,15 @@ function injectAuthUI() {
                     <span id="user-student-id" style="color: #5f6368;"></span>
                     <span id="user-student-name" style="color: #5f6368;"></span>
                 </div>
-				<button onclick="openPythonLab()" style="background: #f8f9fa; border: 1px solid #dadce0; color: #3c4043; font-size: 0.85rem; cursor: pointer; font-weight: 500; padding: 4px 8px; border-radius: 4px; margin-left: 8px;">Python Lab</button>
-				<button onclick="toggleCourseMap()" style="background: #f8f9fa; border: 1px solid #dadce0; color: #3c4043; font-size: 0.85rem; cursor: pointer; font-weight: 500; padding: 4px 8px; border-radius: 4px; margin-left: 8px;">挑戰地圖</button>
+				<div class="tool-group">
+					<button onclick="openPythonLab()" class="group-btn" title="Python 實驗室">
+						<i class="fa-solid fa-flask"></i>
+					</button>
+					<button onclick="toggleCourseMap()" class="group-btn" title="挑戰地圖">
+						<i class="fa-regular fa-map"></i>
+					</button>
+				</div>
+				
                 <button onclick="logoutFromFirebase()" style="background: none; border: none; color: #1a73e8; font-size: 0.95rem; cursor: pointer; font-weight: 500; padding: 0; margin-left: 4px;">登出</button>
             </div>
 			
