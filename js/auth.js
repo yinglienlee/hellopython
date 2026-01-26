@@ -1,5 +1,5 @@
-const REGISTER_API_BASE_ENDPOINT = 'https://chatbot-api-250975721717.asia-east1.run.app/api';
-const REGISTER_ENDPOINT = `${REGISTER_API_BASE_ENDPOINT}/student/register`; 
+const API_BASE_ENDPOINT = 'https://chatbot-api-250975721717.asia-east1.run.app/api';
+const REGISTER_ENDPOINT = `${API_BASE_ENDPOINT}/student/register`; 
 
 // Function to inject the Auth UI into the header
 function injectAuthUI() {
@@ -25,6 +25,7 @@ function injectAuthUI() {
                     <span id="user-student-id" style="color: #5f6368;"></span>
                     <span id="user-student-name" style="color: #5f6368;"></span>
                 </div>
+				<button onclick="openPythonLab()" style="background: #f8f9fa; border: 1px solid #dadce0; color: #3c4043; font-size: 0.85rem; cursor: pointer; font-weight: 500; padding: 4px 8px; border-radius: 4px; margin-left: 8px;">Python Lab</button>
 				<button onclick="toggleCourseMap()" style="background: #f8f9fa; border: 1px solid #dadce0; color: #3c4043; font-size: 0.85rem; cursor: pointer; font-weight: 500; padding: 4px 8px; border-radius: 4px; margin-left: 8px;">挑戰地圖</button>
                 <button onclick="logoutFromFirebase()" style="background: none; border: none; color: #1a73e8; font-size: 0.95rem; cursor: pointer; font-weight: 500; padding: 0; margin-left: 4px;">登出</button>
             </div>
@@ -278,6 +279,20 @@ auth.onAuthStateChanged(async (user) => {
         if (navContainer) navContainer.innerHTML = '<p class="p-4 text-xs text-slate-500">請登入後查看課程</p>';
     }
 });
+
+// Add this to the end of auth.js
+function openPythonLab() {
+    const width = 1100;
+    const height = 850;
+    const left = (window.screen.width - width) / 2;
+    const top = (window.screen.height - height) / 2;
+
+    window.open(
+        '/python-lab', 
+        'PythonLabPopup', 
+        `width=${width},height=${height},top=${top},left=${left},resizable=yes,scrollbars=yes,status=no,location=no`
+    );
+}
 
 /**
  * Helper: Calculates visibility by comparing student's class to doc permissions

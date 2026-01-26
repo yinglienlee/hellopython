@@ -2,9 +2,9 @@
  * chatbot.js - Updated for Firebase Auth integration
  */
 
-const CHAT_API_BASE_ENDPOINT = 'https://chatbot-api-250975721717.asia-east1.run.app/api/chat';
-const CHAT_ENDPOINT = `${CHAT_API_BASE_ENDPOINT}/gemini`; 
-const SUMMARY_ENDPOINT = `${CHAT_API_BASE_ENDPOINT}/summary`; 
+const API_BASE_ENDPOINT = 'https://chatbot-api-250975721717.asia-east1.run.app/api';
+const CHAT_ENDPOINT = `${API_BASE_ENDPOINT}/chat/gemini`; 
+const SUMMARY_ENDPOINT = `${API_BASE_ENDPOINT}/chat/summary`; 
 
 // State Management
 let chatbotDockPosition = localStorage.getItem('chatbotDockPosition') || 'right';
