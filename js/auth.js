@@ -1,5 +1,5 @@
-const API_BASE_ENDPOINT = 'https://chatbot-api-250975721717.asia-east1.run.app/api';
-const REGISTER_ENDPOINT = `${API_BASE_ENDPOINT}/student/register`; 
+const AUTH_API_BASE_ENDPOINT = 'https://chatbot-api-250975721717.asia-east1.run.app/api';
+const REGISTER_ENDPOINT = `${AUTH_API_BASE_ENDPOINT}/student/register`; 
 
 // Function to inject the Auth UI into the header
 function injectAuthUI() {
