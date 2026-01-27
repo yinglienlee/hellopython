@@ -295,7 +295,7 @@ function openPythonLab() {
     const top = (window.screen.height - height) / 2;
 
     window.open(
-        '/python-lab', 
+        'python-lab/', 
         'PythonLabPopup', 
         `width=${width},height=${height},top=${top},left=${left},resizable=yes,scrollbars=yes,status=no,location=no`
     );
