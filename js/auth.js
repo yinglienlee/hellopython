@@ -291,42 +291,22 @@ auth.onAuthStateChanged(async (user) => {
 async function openPythonLab() {
 	const user = firebase.auth().currentUser;
     if (!user) {
-        alert("Please login first!");
+        alert("請先登入帳號再開啟實驗室。");
+        // You could also trigger your main login function here: loginWithFirebase();
         return;
     }
 
-    // Fetch the detailed user info from Firestore first
-    const userQuery = await db.collection("users")
-        .where("ownerUid", "==", user.uid)
-        .limit(1)
-        .get();
-
-    if (userQuery.empty) {
-        alert("User data not found!");
-        return;
-    }
-
-    const userData = userQuery.docs[0].data();
-	
     const width = 1100;
     const height = 850;
     const left = (window.screen.width - width) / 2;
     const top = (window.screen.height - height) / 2;
 
-    const popup = window.open(
+    // 2. Just open the window. The Lab will handle its own Auth.
+    window.open(
         'python-lab/', 
         'PythonLabPopup', 
         `width=${width},height=${height},top=${top},left=${left},resizable=yes,scrollbars=yes,status=no,location=no`
     );
-	
-	if (popup) {
-        popup.passedUserInfo = {
-            studentId: userData.studentId,
-            studentName: userData.studentName,
-            studentClass: userData.studentClass,
-            uid: user.uid
-        };
-    }
 }
 
 /**
