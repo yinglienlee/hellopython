@@ -642,3 +642,32 @@ pre {
     font-size: 14px;
     color: #5f6368;
 }
+
+/* 1. Default State: Hidden */
+.chatbot-toggle-btn {
+    opacity: 0;
+    visibility: hidden; /* Prevents clicking the button when it's invisible */
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    
+    /* Ensure your existing styles don't conflict */
+    background: #6366f1;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+/* 2. Hover State: Show button and icon */
+.challenge-item:hover .chatbot-toggle-btn,
+.challenge-item:hover .icon {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Optional: Subtle styling for the help icon */
+.challenge-item .icon {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    cursor: help;
+}
