@@ -288,7 +288,7 @@ auth.onAuthStateChanged(async (user) => {
 });
 
 // Add this to the end of auth.js
-function openPythonLab() {
+async function openPythonLab() {
 	const user = firebase.auth().currentUser;
     if (!user) {
         alert("Please login first!");
