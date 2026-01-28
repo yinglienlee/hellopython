@@ -299,13 +299,13 @@ async function openPythonLab() {
     const width = 1100;
     const height = 850;
     const left = (window.screen.width - width) / 2;
-    const top = (window.screen.height - height) / 2;
+    const top_ = (window.screen.height - height) / 2;
 
     // 2. Just open the window. The Lab will handle its own Auth.
     window.open(
         'python-lab/', 
         'PythonLabPopup', 
-        `width=${width},height=${height},top=${top},left=${left},resizable=yes,scrollbars=yes,status=no,location=no`
+        `width=${width},height=${height},top=${top_},left=${left},resizable=yes,scrollbars=yes,status=no,location=no`
     );
 }
 
