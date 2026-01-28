@@ -289,23 +289,24 @@ auth.onAuthStateChanged(async (user) => {
 
 // Add this to the end of auth.js
 async function openPythonLab() {
-	const user = firebase.auth().currentUser;
+    const user = firebase.auth().currentUser;
     if (!user) {
         alert("請先登入帳號再開啟實驗室。");
-        // You could also trigger your main login function here: loginWithFirebase();
         return;
     }
 
-    const width = 1100;
-    const height = 850;
-    const left = (window.screen.width - width) / 2;
-    const top_ = (window.screen.height - height) / 2;
+    // Calculate half width and full available height
+    const halfWidth = window.screen.width / 2;
+    const fullHeight = window.screen.availHeight;
+    
+    // Set 'left' to the start of the second half of the screen
+    const leftPosition = halfWidth; 
+    const topPosition = 0; 
 
-    // 2. Just open the window. The Lab will handle its own Auth.
     window.open(
         'python-lab/', 
         'PythonLabPopup', 
-        `width=${width},height=${height},top=${top_},left=${left},resizable=yes,scrollbars=yes,status=no,location=no`
+        `width=${halfWidth},height=${fullHeight},top=${topPosition},left=${leftPosition},resizable=yes,scrollbars=yes,status=no,location=no`
     );
 }
 
