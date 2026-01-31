@@ -304,7 +304,7 @@ async function openPythonLab() {
     const topPosition = 0; 
 
     window.open(
-        'python-lab/', 
+        'python-lab.html', 
         'PythonLabPopup', 
         `width=${halfWidth},height=${fullHeight},top=${topPosition},left=${leftPosition},resizable=yes,scrollbars=yes,status=no,location=no`
     );
