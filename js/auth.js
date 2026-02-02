@@ -199,9 +199,7 @@ if (!firebase.apps.length) {
 }
 const auth = firebase.auth();
 // Access the named database "accounts"
-const db = firebase.app().firestore();
-
-let currentUserInfo = null;
+const db = firebase.app().firestore('accounts');
 
 // --- Auth State Logic ---
 // --- Global Auth State Observer ---
@@ -231,7 +229,6 @@ auth.onAuthStateChanged(async (user) => {
 
             if (!userQuery.empty) {
                 const userData = userQuery.docs[0].data();
-				currentUserInfo = userData;
                 
 				await checkPageVisibility(userData);
 				
@@ -305,37 +302,12 @@ async function openPythonLab() {
     // Set 'left' to the start of the second half of the screen
     const leftPosition = halfWidth; 
     const topPosition = 0; 
-	
-	const popup = window.open(
-        `python-lab`, 
+
+    window.open(
+        'python-lab/', 
         'PythonLabPopup', 
         `width=${halfWidth},height=${fullHeight},top=${topPosition},left=${leftPosition},resizable=yes,scrollbars=yes,status=no,location=no`
     );
-	
-	if (popup) {
-        // Try sending immediately (in case popup loads fast)
-        popup.postMessage({
-            type: 'USER_INFO',
-            data: currentUserInfo
-        }, window.location.origin);
-        
-        // Also listen for ready message from popup
-        const messageHandler = (event) => {
-            if (event.origin !== window.location.origin) return;
-            
-            if (event.data.type === 'POPUP_READY') {
-                popup.postMessage({
-                    type: 'USER_INFO',
-                    data: currentUserInfo
-                }, window.location.origin);
-                
-                // Clean up listener after sending
-                window.removeEventListener('message', messageHandler);
-            }
-        };
-        
-        window.addEventListener('message', messageHandler);
-    }
 }
 
 /**
