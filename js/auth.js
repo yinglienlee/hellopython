@@ -199,11 +199,23 @@ if (!firebase.apps.length) {
 }
 const auth = firebase.auth();
 // Access the named database "accounts"
-const db = firebase.app().firestore('accounts');
+const db = firebase.app().firestore();
 
 let currentOwnerUid = null;
 
 // --- Auth State Logic ---
+// 1. Initialize Redirect Check immediately
+auth.getRedirectResult()
+    .then((result) => {
+        if (result.user) {
+            console.log("Redirect Login Successful:", result.user.displayName);
+        }
+    })
+    .catch((error) => {
+        console.error("Redirect Error:", error.code, error.message);
+        // If there's a specific error, you might want to alert the user here
+    });
+
 // --- Global Auth State Observer ---
 auth.onAuthStateChanged(async (user) => {
     const loginBtn = document.getElementById('login-btn');
@@ -307,7 +319,7 @@ async function openPythonLab() {
     const topPosition = 0; 
 	
 	window.open(
-        `python-lab/?uid=${encodeURIComponent(currentOwnerUid)}`, 
+        `python-lab`, 
         'PythonLabPopup', 
         `width=${halfWidth},height=${fullHeight},top=${topPosition},left=${leftPosition},resizable=yes,scrollbars=yes,status=no,location=no`
     );
@@ -407,7 +419,7 @@ async function checkPageVisibility(userData) {
 // --- Actions ---
 function loginWithFirebase() {
     const provider = new firebase.auth.GoogleAuthProvider();
-    auth.signInWithPopup(provider).catch(e => alert(e.message));
+    auth.signInWithRedirect(provider).catch(e => alert(e.message));
 }
 
 function logoutFromFirebase() {
