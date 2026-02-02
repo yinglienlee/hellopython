@@ -201,21 +201,9 @@ const auth = firebase.auth();
 // Access the named database "accounts"
 const db = firebase.app().firestore();
 
-let currentOwnerUid = null;
+let currentUserInfo = null;
 
 // --- Auth State Logic ---
-// 1. Initialize Redirect Check immediately
-auth.getRedirectResult()
-    .then((result) => {
-        if (result.user) {
-            console.log("Redirect Login Successful:", result.user.displayName);
-        }
-    })
-    .catch((error) => {
-        console.error("Redirect Error:", error.code, error.message);
-        // If there's a specific error, you might want to alert the user here
-    });
-
 // --- Global Auth State Observer ---
 auth.onAuthStateChanged(async (user) => {
     const loginBtn = document.getElementById('login-btn');
@@ -243,7 +231,7 @@ auth.onAuthStateChanged(async (user) => {
 
             if (!userQuery.empty) {
                 const userData = userQuery.docs[0].data();
-				currentOwnerUid = userData.ownerUid;
+				currentUserInfo = userData;
                 
 				await checkPageVisibility(userData);
 				
@@ -318,11 +306,36 @@ async function openPythonLab() {
     const leftPosition = halfWidth; 
     const topPosition = 0; 
 	
-	window.open(
+	const popup = window.open(
         `python-lab`, 
         'PythonLabPopup', 
         `width=${halfWidth},height=${fullHeight},top=${topPosition},left=${leftPosition},resizable=yes,scrollbars=yes,status=no,location=no`
     );
+	
+	if (popup) {
+        // Try sending immediately (in case popup loads fast)
+        popup.postMessage({
+            type: 'USER_INFO',
+            data: currentUserInfo
+        }, window.location.origin);
+        
+        // Also listen for ready message from popup
+        const messageHandler = (event) => {
+            if (event.origin !== window.location.origin) return;
+            
+            if (event.data.type === 'POPUP_READY') {
+                popup.postMessage({
+                    type: 'USER_INFO',
+                    data: currentUserInfo
+                }, window.location.origin);
+                
+                // Clean up listener after sending
+                window.removeEventListener('message', messageHandler);
+            }
+        };
+        
+        window.addEventListener('message', messageHandler);
+    }
 }
 
 /**
@@ -419,7 +432,7 @@ async function checkPageVisibility(userData) {
 // --- Actions ---
 function loginWithFirebase() {
     const provider = new firebase.auth.GoogleAuthProvider();
-    auth.signInWithRedirect(provider).catch(e => alert(e.message));
+    auth.signInWithPopup(provider).catch(e => alert(e.message));
 }
 
 function logoutFromFirebase() {
