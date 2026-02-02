@@ -198,11 +198,6 @@ if (!firebase.apps.length) {
     firebase.initializeApp(firebaseConfig);
 }
 const auth = firebase.auth();
-if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
-    // This tells Firebase: "Don't use the firebaseapp.com helper, use my local page"
-    auth.config.authDomain = location.host; 
-}
-
 // Access the named database "accounts"
 const db = firebase.app().firestore('accounts');
 
@@ -281,17 +276,6 @@ auth.onAuthStateChanged(async (user) => {
             }
         }
     } else {
-		try {
-            // CRITICAL: Check if we just returned from the Google Login Redirect
-            const result = await auth.getRedirectResult();
-            if (result && result.user) {
-                console.log("Redirect login successful, waiting for state refresh...");
-                return; // The listener will fire again automatically with the 'user' object
-            }
-        } catch (redirectError) {
-            console.error("Redirect Result Error:", redirectError.message);
-        }
-		
         // Logged out: Hide info and show login button
         if (loginBtn) loginBtn.style.display = 'flex';
         if (userInfoArea) userInfoArea.style.display = 'none';
@@ -420,7 +404,7 @@ async function checkPageVisibility(userData) {
 // --- Actions ---
 function loginWithFirebase() {
     const provider = new firebase.auth.GoogleAuthProvider();
-    auth.signInWithRedirect(provider);
+    auth.signInWithPopup(provider).catch(e => alert(e.message));
 }
 
 function logoutFromFirebase() {
