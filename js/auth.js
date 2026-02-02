@@ -201,6 +201,8 @@ const auth = firebase.auth();
 // Access the named database "accounts"
 const db = firebase.app().firestore('accounts');
 
+let currentOwnerUid = null;
+
 // --- Auth State Logic ---
 // --- Global Auth State Observer ---
 auth.onAuthStateChanged(async (user) => {
@@ -229,6 +231,7 @@ auth.onAuthStateChanged(async (user) => {
 
             if (!userQuery.empty) {
                 const userData = userQuery.docs[0].data();
+				currentOwnerUid = userData.ownerUid;
                 
 				await checkPageVisibility(userData);
 				
@@ -302,9 +305,9 @@ async function openPythonLab() {
     // Set 'left' to the start of the second half of the screen
     const leftPosition = halfWidth; 
     const topPosition = 0; 
-
-    window.open(
-        'python-lab/', 
+	
+	window.open(
+        `python-lab/?uid=${encodeURIComponent(currentOwnerUid)}`, 
         'PythonLabPopup', 
         `width=${halfWidth},height=${fullHeight},top=${topPosition},left=${leftPosition},resizable=yes,scrollbars=yes,status=no,location=no`
     );
