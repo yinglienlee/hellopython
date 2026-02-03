@@ -199,7 +199,9 @@ if (!firebase.apps.length) {
 }
 const auth = firebase.auth();
 // Access the named database "accounts"
-const db = firebase.app().firestore('accounts');
+const db = firebase.app().firestore();
+
+let currentUserInfo = null;
 
 // --- Auth State Logic ---
 // --- Global Auth State Observer ---
@@ -210,7 +212,7 @@ auth.onAuthStateChanged(async (user) => {
     const studentNameEl = document.getElementById('user-student-name');
     const idEl = document.getElementById('user-student-id');
     const promptEl = document.getElementById('student-id-prompt');
-
+	
     if (user) {
 		includeHTML(null); 
         includeHomeNav(null);
@@ -229,6 +231,7 @@ auth.onAuthStateChanged(async (user) => {
 
             if (!userQuery.empty) {
                 const userData = userQuery.docs[0].data();
+				currentUserInfo = userData;
                 
 				await checkPageVisibility(userData);
 				
@@ -275,6 +278,8 @@ auth.onAuthStateChanged(async (user) => {
                 pendingChatbotButton = null; 
             }
         }
+		
+		hideLoginModal();
     } else {
         // Logged out: Hide info and show login button
         if (loginBtn) loginBtn.style.display = 'flex';
@@ -284,6 +289,8 @@ auth.onAuthStateChanged(async (user) => {
         // Reset navigation to empty/locked state
         const navContainer = document.querySelector("[w3-include-html]");
         if (navContainer) navContainer.innerHTML = '<p class="p-4 text-xs text-slate-500">請登入後查看課程</p>';
+		
+		showLoginModal();
     }
 });
 
@@ -302,12 +309,41 @@ async function openPythonLab() {
     // Set 'left' to the start of the second half of the screen
     const leftPosition = halfWidth; 
     const topPosition = 0; 
-
-    window.open(
-        'python-lab/', 
+	
+	// Determine the correct path based on the environment
+	const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+	const labPath = isLocal ? 'python-lab' : 'python-lab/';
+	
+	const popup = window.open(
+        labPath, 
         'PythonLabPopup', 
         `width=${halfWidth},height=${fullHeight},top=${topPosition},left=${leftPosition},resizable=yes,scrollbars=yes,status=no,location=no`
     );
+	
+	if (popup) {
+        // Try sending immediately (in case popup loads fast)
+        popup.postMessage({
+            type: 'USER_INFO',
+            data: currentUserInfo
+        }, window.location.origin);
+        
+        // Also listen for ready message from popup
+        const messageHandler = (event) => {
+            if (event.origin !== window.location.origin) return;
+            
+            if (event.data.type === 'POPUP_READY') {
+                popup.postMessage({
+                    type: 'USER_INFO',
+                    data: currentUserInfo
+                }, window.location.origin);
+                
+                // Clean up listener after sending
+                window.removeEventListener('message', messageHandler);
+            }
+        };
+        
+        window.addEventListener('message', messageHandler);
+    }
 }
 
 /**

@@ -30,6 +30,15 @@
 	</script>	
 </head>
 <body>
+	<div id="login-modal-overlay" class="modal-backdrop">
+		<div class="modal-content">
+			<div class="modal-icon">🔐</div>
+			<h2 id="modal-message">請登入後查看課程</h2>
+			<button onclick="handleLoginClick()" class="login-confirm-btn">
+				🔑 登入系統
+			</button>
+		</div>
+	</div>
     <div class="d-flex">
         <button id="toggleNav" class="btn btn-primary">&#8212;</button>
         <nav id="sidebar" class="bg-light border-end" style="display: block;">

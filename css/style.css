@@ -671,3 +671,61 @@ pre {
     transition: opacity 0.3s ease;
     cursor: help;
 }
+
+/* Full-screen backdrop */
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(15, 23, 42, 0.8); /* Dark slate semi-transparent */
+    backdrop-filter: blur(8px);       /* Blurs the background content */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;                    /* Highest priority */
+    pointer-events: all;
+}
+
+/* Modal Box */
+.modal-content {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    width: 90%;
+}
+
+.modal-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+#modal-message {
+    color: #1e293b;
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+    font-weight: 600;
+}
+
+/* Login Button */
+.login-confirm-btn {
+    background: #3b82f6;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.2s;
+    width: 100%;
+}
+
+.login-confirm-btn:hover {
+    background: #2563eb;
+    transform: translateY(-2px);
+}

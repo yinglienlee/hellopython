@@ -90,6 +90,31 @@ const COURSE_TREE = [
   }
 ];
 
+function handleLoginClick() {
+    // Call your Firebase function
+    if (typeof loginWithFirebase === "function") {
+        loginWithFirebase();
+    } else {
+        console.error("loginWithFirebase function is not defined.");
+    }
+}
+
+// Function to hide the modal (call this after successful login)
+function hideLoginModal() {
+    const modal = document.getElementById('login-modal-overlay');
+    if (modal) {
+        modal.style.display = 'none';
+    }
+}
+
+// Function to show the modal (if needed dynamically)
+function showLoginModal() {
+    const modal = document.getElementById('login-modal-overlay');
+    if (modal) {
+        modal.style.display = 'flex';
+    }
+}
+
 // Helper updated to use class-based logic via your backend or Firestore auth state
 // Change: Add userData as a parameter
 async function getDocVisibility(userData) {

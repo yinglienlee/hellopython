@@ -19,9 +19,21 @@
 	</script>	
 </head>
 <body>
+	<div id="login-modal-overlay" class="modal-backdrop">
+		<div class="modal-content">
+			<div class="modal-icon">🔐</div>
+			<h2 id="modal-message">請登入後查看課程</h2>
+			<button onclick="handleLoginClick()" class="login-confirm-btn">
+				🔑 登入系統
+			</button>
+		</div>
+	</div>
 	<header>
 		<h1>Python 學習指南</h1>
 	</header>
 	<div id="home-navigation" style="margin-top: 120px;"></div>
+	<div style="text-align: center;">
+		<div w3-include-html="navigation.html"></div>
+	</div>
 </body>
 </html>
